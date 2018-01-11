@@ -23,7 +23,6 @@ please contact mla_licensing@microchip.com
 #include <xc.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include "adc.h"
 
 #include "io_mapping.h"
 

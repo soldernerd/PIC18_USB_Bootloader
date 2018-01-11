@@ -20,6 +20,7 @@ please contact mla_licensing@microchip.com
 #include <xc.h>
 #include "system.h"
 #include "usb.h"
+#include "os.h"
 
 /*
 // CONFIG1L

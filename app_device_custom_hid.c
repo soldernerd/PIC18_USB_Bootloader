@@ -28,7 +28,6 @@ please contact mla_licensing@microchip.com
 #include "i2c.h"
 #include "rtcc.h"
 #include "display.h"
-#include "buck.h"
 
 
 /** VARIABLES ******************************************************/
@@ -303,10 +302,7 @@ static void _fill_buffer_get_status(void)
     ToSendDataBuffer[21] = rtcc_get_minutes();
     ToSendDataBuffer[22] = rtcc_get_seconds();
     //Charger details
-    ToSendDataBuffer[23] = buck_get_mode();
-    ToSendDataBuffer[24] = buck_get_dutycycle();
-    ToSendDataBuffer[25] = buck_remote_get_status();
-    ToSendDataBuffer[26] = buck_remote_get_dutycycle();
+
     //Raw ADC data
     ToSendDataBuffer[27] = (uint8_t) os.temperature_onboard_adc; //LSB
     ToSendDataBuffer[28] = os.temperature_onboard_adc >> 8; //MSB
@@ -471,33 +467,6 @@ static void _parse_command_long(uint8_t cmd, uint8_t data)
             break;
         case 0x45:
             rtcc_set_seconds(data);
-            break;
-        case 0x46:
-            buck_remote_set_enable(1);
-            break;
-        case 0x47:
-            buck_remote_set_enable(0);
-            break;
-        case 0x48:
-            buck_remote_set_on(1);
-            break;
-        case 0x49:
-            buck_remote_set_on(0);
-            break;
-        case 0x4A:
-            buck_remote_set_synchronous(0);
-            break;
-        case 0x4B:
-            buck_remote_set_synchronous(1);
-            break;
-        case 0x4C:
-            buck_remote_change_dutycycle(-1);
-            break;
-        case 0x4D:
-            buck_remote_change_dutycycle(1);
-            break;
-        case 0x4E:
-            buck_remote_set_dutycycle(data);
             break;
     }    
 }

@@ -2,14 +2,11 @@
 #include <xc.h>
 #include <stdint.h>
 #include "os.h"
-#include "adc.h"
 #include "i2c.h"
 #include "rtcc.h"
-#include "buck.h"
 #include "ui.h"
 #include "flash.h"
 #include "fat16.h"
-#include "log.h"
 
 
  
@@ -360,9 +357,6 @@ void system_init(void)
     i2c_init();
     //Initialize display
     ui_init();
-
-    //Initialize internal ADC module
-    adc_init();
     
     //Initialize Real Time Clock
     rtcc_init();
@@ -427,67 +421,11 @@ void system_init(void)
 //        fat_delete_file(file_number);
 //    }
     
-    //Buck init
-    buck_init();
-    
-    //Start data logging
-    log_start_new();
+
 
 }
 
-/*
-void system_set_cpu_frequency(clockFrequency_t newFrequency)
-{
-    if(os.clockFrequency==newFrequency)
-    {
-        return;
-    }
-    switch(newFrequency)
-    {
-        case CPU_FREQUENCY_32kHz:
-            OSCCONbits.SCS1 = 0;
-            OSCCONbits.SCS0 = 1;
-            OSCTUNEbits.PLLEN = 0;
-            os.clockFrequency = CPU_FREQUENCY_32kHz;
-            break;
-        case CPU_FREQUENCY_8MHz:
-            OSCCONbits.SCS1 = 0;
-            OSCCONbits.SCS0 = 0; 
-            OSCTUNEbits.PLLEN = 0;
-            os.clockFrequency = CPU_FREQUENCY_8MHz;
-            break;
-        case CPU_FREQUENCY_48MHz:
-            OSCCONbits.SCS1 = 0;
-            OSCCONbits.SCS0 = 0; 
-            OSCTUNEbits.PLLEN = 1;
-            os.clockFrequency = CPU_FREQUENCY_48MHz;
-            break;
-    }        
-    i2c_set_frequency(i2c_get_frequency());
-}
 
-void system_power_save(void)
-{
-    //Lower CPU frequency and board voltage if buck and user interface are off
-    if(buck_get_mode()==BUCK_STATUS_OFF) //also check for USB later
-    {
-        if(ui_get_status()==USER_INTERFACE_STATUS_OFF)
-        {
-            //User interface is off, we can enter low power mode
-            i2c_expander_low(I2C_EXPANDER_BOARD_VOLTAGE);
-            system_set_cpu_frequency(CPU_FREQUENCY_32kHz);
-            TMR0H = TIMER0_LOAD_HIGH_32KHZ;
-            TMR0L = TIMER0_LOAD_LOW_32KHZ;
-            os.timeSlot = 0;
-        }
-        else
-        {
-            //User interface is on. We can only lower the CPU frequency to 8MHz
-            system_set_cpu_frequency(CPU_FREQUENCY_8MHz);
-        }
-    }
-}
-*/
 
 uint8_t system_output_is_on(outputs_t output)
 {

@@ -18,12 +18,10 @@
       <itemPath>ui.h</itemPath>
       <itemPath>display.h</itemPath>
       <itemPath>rtcc.h</itemPath>
-      <itemPath>buck.h</itemPath>
-      <itemPath>adc.h</itemPath>
       <itemPath>flash.h</itemPath>
       <itemPath>external_flash.h</itemPath>
       <itemPath>fat16.h</itemPath>
-      <itemPath>log.h</itemPath>
+      <itemPath>hex.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -48,12 +46,10 @@
       <itemPath>ui.c</itemPath>
       <itemPath>display.c</itemPath>
       <itemPath>rtcc.c</itemPath>
-      <itemPath>buck.c</itemPath>
-      <itemPath>adc.c</itemPath>
       <itemPath>flash.c</itemPath>
       <itemPath>external_flash.c</itemPath>
       <itemPath>fat16.c</itemPath>
-      <itemPath>log.c</itemPath>
+      <itemPath>hex.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

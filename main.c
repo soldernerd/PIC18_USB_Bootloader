@@ -25,11 +25,9 @@
 #include "display.h"
 #include "ui.h"
 #include "rtcc.h"
-#include "buck.h"
-#include "adc.h"
 #include "flash.h"
 #include "fat16.h"
-#include "log.h"
+#include "hex.h"
 
 
 /********************************************************************
@@ -109,11 +107,6 @@ MAIN_RETURN main(void)
             
             //Run user interface
             ui_run();
-            
-            //Measure temperature
-            os.temperature_onboard_adc += adc_read(ADC_CHANNEL_TEMPERATURE_ONBOARD);
-            os.temperature_external_1_adc += adc_read(ADC_CHANNEL_TEMPERATURE_EXTERNAL_1);
-            os.temperature_external_2_adc += adc_read(ADC_CHANNEL_TEMPERATURE_EXTERNAL_2);
 
             //Run periodic tasks
             switch(os.timeSlot&0b00001111)
@@ -128,13 +121,7 @@ MAIN_RETURN main(void)
                     //flash_page_read(5);
                     //flash_set_page_size(FLASH_PAGE_SIZE_512);
                     break;
-                    
-                    
-                case 3:
-                    os.output_voltage_adc[(os.timeSlot&0b00110000)>>4] = i2c_adc_read();
-                    i2c_adc_start(I2C_ADC_INPUT_VOLTAGE, I2C_ADC_RESOLUTION_14BIT, I2C_ADC_GAIN_1);
-                    system_calculate_output_voltage();
-                    break;
+
                     
                 case 4:
                     if(ui_get_status()==USER_INTERFACE_STATUS_ON)
@@ -150,68 +137,16 @@ MAIN_RETURN main(void)
                     }
                     break;
                     
-                case 6:
-                    os.input_voltage_adc[(os.timeSlot&0b00110000)>>4] = i2c_adc_read();
-                    if(1 || buck_get_mode()!=BUCK_STATUS_OFF)
-                    {
-                        i2c_adc_start(I2C_ADC_OUTPUT_CURRENT, I2C_ADC_RESOLUTION_14BIT, I2C_ADC_GAIN_1); 
-                    }
-                    system_calculate_input_voltage();
-                    break;
                     
                 case 8:
                     APP_DeviceCustomHIDTasks();
                     break;
-
-                case 9:
-                    if(1 || buck_get_mode()!=BUCK_STATUS_OFF)
-                    {
-                        os.output_current_adc[(os.timeSlot&0b00110000)>>4] = i2c_adc_read();
-                        i2c_adc_start(I2C_ADC_INPUT_CURRENT, I2C_ADC_RESOLUTION_14BIT, I2C_ADC_GAIN_1);
-                        system_calculate_output_current();    
-                    }
-                    break;
                     
                 case 11:
                     APP_DeviceCustomHIDTasks();
-                    log_collect_data();
-                    if(log_get_number_of_samples() == LOG_PERIOD)
-                    {
-                        log_write_to_disk();
-                        log_start_new();
-                    }
                     break;
-
-                case 12:
-                    if(1 || buck_get_mode()!=BUCK_STATUS_OFF)
-                    {
-                        os.input_current_adc[(os.timeSlot&0b00110000)>>4] = i2c_adc_read();
-                        system_calculate_input_current();    
-                    }
-                    break;
-
-                case 13:
-                    buck_operate();
-                    break;
-                        
-                
-                case 14:
-                    os.temperature_onboard = adc_calculate_temperature(os.temperature_onboard_adc, CALIBRATION_INDEX_ONBOARD_TEMPERATURE);
-                    os.temperature_onboard_adc = 0;
-                    os.temperature_external_1 = adc_calculate_temperature(os.temperature_external_1_adc, CALIBRATION_INDEX_EXTERNAL_TEMPERATURE_1);
-                    os.temperature_external_1_adc = 0;
-                    os.temperature_external_2 = adc_calculate_temperature(os.temperature_external_2_adc, CALIBRATION_INDEX_EXTERNAL_TEMPERATURE_2);
-                    os.temperature_external_2_adc = 0;  
-                    adc_calibrate();
                     
-                    if(os.temperature_onboard>3000)
-                    {
-                        FANOUT_PIN = 1;
-                    }
-                    else if(os.temperature_onboard<2500)
-                    {
-                        FANOUT_PIN = 0;
-                    }
+                case 12:
                     display_prepare(os.display_mode);
                     break;
                     
