@@ -77,7 +77,14 @@ typedef struct
     uint32_t fileSize;
 } rootEntry_t;
 
+typedef enum 
+{ 
+    DRIVE_NOT_FORMATED = 0x00,
+    DRIVE_FORMATED = 0x01       
+} formatStatus_t;
 
+void fat_init(void);
+formatStatus_t fat_get_format_status(void);
 void fat_format(void);
 uint8_t fat_find_file(char *name, char *extension);
 uint32_t fat_get_file_size(uint8_t file_number);

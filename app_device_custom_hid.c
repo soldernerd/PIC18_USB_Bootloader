@@ -224,7 +224,7 @@ void APP_DeviceCustomHIDTasks()
                         //Echo back to the host PC the command we are fulfilling in the first uint8_t
                         ToSendDataBuffer[0] = COMMAND_READ_POTENTIOMETER;
                         //We don't have a pot so we echo back the on-board temperature (in 0.01 degrees centigrade) divided by 8
-                        return_value = os.temperature_onboard >> 3;
+                        return_value = 0x1234;
                         ToSendDataBuffer[1] = (uint8_t) return_value; //LSB
                         ToSendDataBuffer[2] = return_value >> 8; //MSB
                         //Prepare the USB module to send the data packet to the host
@@ -270,28 +270,7 @@ static void _fill_buffer_get_status(void)
     //Echo back to the host PC the command we are fulfilling in the first uint8_t
     ToSendDataBuffer[0] = COMMAND_GET_STATUS;
     //Bytes 1-2: input voltage
-    ToSendDataBuffer[1] = (uint8_t) os.input_voltage; //LSB
-    ToSendDataBuffer[2] = os.input_voltage >> 8; //MSB
-    //Bytes 3-4: output voltage
-    ToSendDataBuffer[3] = (uint8_t) os.output_voltage; //LSB
-    ToSendDataBuffer[4] = os.output_voltage >> 8; //MSB
-    //Bytes 5-6: input current
-    ToSendDataBuffer[5] = (uint8_t) os.input_current; //LSB
-    ToSendDataBuffer[6] = os.input_current >> 8; //MSB
-    //Bytes 7-8: output current
-    ToSendDataBuffer[7] = (uint8_t) os.output_current; //LSB
-    ToSendDataBuffer[8] = os.output_current >> 8; //MSB
-    //Bytes 9-10: on-board temperature
-    ToSendDataBuffer[9] = (uint8_t) os.temperature_onboard; //LSB
-    ToSendDataBuffer[10] = os.temperature_onboard >> 8; //MSB
-    //Bytes 11-12: external temperature 1
-    ToSendDataBuffer[11] = (uint8_t) os.temperature_external_1; //LSB
-    ToSendDataBuffer[12] = os.temperature_external_1 >> 8; //MSB
-    //Bytes 13-14: external temperature 2
-    ToSendDataBuffer[13] = (uint8_t) os.temperature_external_2; //LSB
-    ToSendDataBuffer[14] = os.temperature_external_2 >> 8; //MSB
-    //Byte 15: Outputs
-    ToSendDataBuffer[15] = os.outputs;
+    
     //Byte 16: Display mode
     ToSendDataBuffer[16] = os.display_mode;
     //Byte 17-22: Date and time, all in 2-digit DCB
@@ -302,22 +281,7 @@ static void _fill_buffer_get_status(void)
     ToSendDataBuffer[21] = rtcc_get_minutes();
     ToSendDataBuffer[22] = rtcc_get_seconds();
     //Charger details
-
-    //Raw ADC data
-    ToSendDataBuffer[27] = (uint8_t) os.temperature_onboard_adc; //LSB
-    ToSendDataBuffer[28] = os.temperature_onboard_adc >> 8; //MSB
-    ToSendDataBuffer[29] = (uint8_t) os.temperature_external_1_adc; //LSB
-    ToSendDataBuffer[30] = os.temperature_external_1_adc >> 8; //MSB
-    ToSendDataBuffer[31] = (uint8_t) os.temperature_external_2_adc; //LSB
-    ToSendDataBuffer[32] = os.temperature_external_2_adc >> 8; //MSB
-    ToSendDataBuffer[33] = (uint8_t) os.input_voltage_adc[(os.timeSlot&0b00110000)>>4]; //LSB
-    ToSendDataBuffer[34] = os.input_voltage_adc[(os.timeSlot&0b00110000)>>4] >> 8; //MSB
-    ToSendDataBuffer[35] = (uint8_t) os.output_voltage_adc[(os.timeSlot&0b00110000)>>4]; //LSB
-    ToSendDataBuffer[36] = os.output_voltage_adc[(os.timeSlot&0b00110000)>>4] >> 8; //MSB
-    ToSendDataBuffer[37] = (uint8_t) os.input_current_adc[(os.timeSlot&0b00110000) >>4]; //LSB
-    ToSendDataBuffer[38] = os.input_current_adc[(os.timeSlot&0b00110000)>>4] >> 8; //MSB
-    ToSendDataBuffer[39] = (uint8_t) os.output_current_adc[(os.timeSlot&0b00110000)>>4]; //LSB
-    ToSendDataBuffer[40] = os.output_current_adc[(os.timeSlot&0b00110000)>>4]>> 8; //MSB    
+   
     //Display status, display off, startup etc
     ToSendDataBuffer[41] = ui_get_status();
     ToSendDataBuffer[42] = os.timeSlot;
@@ -395,42 +359,6 @@ static void _parse_command_short(uint8_t cmd)
 {
     switch(cmd)
     {
-        case 0x30:
-            system_output_off(OUTPUT_1);
-            break;
-        case 0x31:
-            system_output_on(OUTPUT_1);
-            break;
-        case 0x32:
-            system_output_off(OUTPUT_2);
-            break;
-        case 0x33:
-            system_output_on(OUTPUT_2);
-            break;
-        case 0x34:
-            system_output_off(OUTPUT_3);
-            break;
-        case 0x35:
-            system_output_on(OUTPUT_3);
-            break;
-        case 0x36:
-            system_output_off(OUTPUT_4);
-            break;
-        case 0x37:
-            system_output_on(OUTPUT_4);
-            break;
-        case 0x38:
-            system_output_off(OUTPUT_USB);
-            break;
-        case 0x39:
-            system_output_on(OUTPUT_USB);
-            break;
-        case 0x3A:
-            system_output_off(OUTPUT_FAN);
-            break;
-        case 0x3B:
-            system_output_on(OUTPUT_FAN);
-            break;
         case 0x3C:
             --os.encoderCount;
             break;

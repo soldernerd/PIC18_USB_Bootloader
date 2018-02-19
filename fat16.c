@@ -932,6 +932,34 @@ static uint8_t _get_data(uint16_t idx)
 	return 0X00;
 }
 
+formatStatus_t fat_get_format_status(void)
+{
+    uint16_t cntr;
+    
+    //Check Master Boot Record (sector 0)
+    flash_page_read(0, buffer);
+    for(cntr=0; cntr<512; ++cntr)
+    {
+        if(buffer[cntr] != _get_mbr(cntr))
+        {
+            return DRIVE_NOT_FORMATED;
+        }
+    }
+    
+    //Check First Boot Record (sector 1)
+    flash_page_read(1, buffer);
+    for(cntr=0; cntr<512; ++cntr)
+    {
+        if(buffer[cntr] != _get_fbr(cntr))
+        {
+            return DRIVE_NOT_FORMATED;
+        }
+    }
+    
+    //If we get here, the drive is formated
+    return DRIVE_FORMATED;
+}
+
 void fat_format(void)
 {
     uint16_t cntr;
@@ -990,5 +1018,13 @@ void fat_format(void)
         buffer[cntr] = _get_data(cntr);
     }
     flash_page_write(22, buffer);
-    
+}
+
+void fat_init(void)
+{
+    //Format flash if necessary
+    if(fat_get_format_status()==DRIVE_NOT_FORMATED)
+    {
+        fat_format();
+    }
 }

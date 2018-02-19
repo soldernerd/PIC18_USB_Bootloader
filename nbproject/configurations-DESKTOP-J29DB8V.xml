@@ -11,7 +11,6 @@
         <itemPath>fileio_config.h</itemPath>
       </logicalFolder>
       <itemPath>system.h</itemPath>
-      <itemPath>io_mapping.h</itemPath>
       <itemPath>app_device_custom_hid.h</itemPath>
       <itemPath>app_device_msd.h</itemPath>
       <itemPath>usb_config.h</itemPath>

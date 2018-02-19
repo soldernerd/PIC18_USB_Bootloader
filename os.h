@@ -72,21 +72,28 @@
 
 #define PPS_FUNCTION_CCP1_OUTPUT_A 14
 #define PPS_FUNCTION_CCP2_OUTPUT_B 15
+
+//PPS Input registers
+//SPI2 Data Input: RPINR21
+//SPI2 Clock Input: RPINR22
+//SPI2 Slave Select Input:RPINR23
+
+//PPS Output registers
+//SPI2 Data Output: 10
+//SPI2 Clock Output: 11
+//SPI DMA Slave Select: 12
+
 #define PPS_FUNCTION_SPI2_MISO_INPUT RPINR21
-#define PPS_FUNCTION_SPI2_MOSI_OUTPUT 9
-#define PPS_FUNCTION_SPI2_SCLK_OUTPUT 10
+#define PPS_FUNCTION_SPI2_MOSI_OUTPUT 10
+#define PPS_FUNCTION_SPI2_SCLK_OUTPUT 11
 #define PPS_FUNCTION_SPI2_SCLK_INPUT RPINR22
 #define PPS_FUNCTION_SPI2_SS_OUTPUT 12
 
-#define VCC_HIGH_TRIS TRISDbits.TRISD0
-#define VCC_HIGH_PORT LATDbits.LD0
-#define PWR_GOOD_TRIS TRISDbits.TRISD1
-#define PWR_GOOD_PORT PORTDbits.RD1
-#define DISP_EN_TRIS TRISCbits.TRISC2
-#define DISP_EN_PORT LATCbits.LC2
+#define DISP_EN_TRIS TRISDbits.TRISD0
+#define DISP_EN_PORT LATDbits.LD0
 
-#define FANOUT_TRIS TRISDbits.TRISD2
-#define FANOUT_PIN LATDbits.LD2
+#define VCC_HIGH_TRIS TRISCbits.TRISC2
+#define VCC_HIGH_PORT LATCbits.LC2
 
 #define BUCK_ENABLE_TRIS TRISBbits.TRISB1
 #define BUCK_ENABLE_PIN LATBbits.LB1
@@ -109,14 +116,14 @@
 #define PWROUT_CH4_PIN LATAbits.LA5
 
 #define USBCHARGER_EN_TRIS TRISDbits.TRISD3
-#define USBCHARGER_EN_PORT LATDbits.LD3
+#define USBCHARGER_EN_PIN LATDbits.LD3
 
-#define BOARD_REVISION_D
+#define BOARD_REVISION_E
 
-#ifdef BOARD_REVISION_D
-#define SPI_MISO_TRIS TRISDbits.TRISD7
-#define SPI_MISO_PORT PORTDbits.RD7
-#define SPI_MISO_PPS 24
+#ifdef BOARD_REVISION_F
+#define SPI_MISO_TRIS TRISDbits.TRISD6
+#define SPI_MISO_PORT PORTDbits.RD6
+#define SPI_MISO_PPS 23
 #define SPI_MOSI_TRIS TRISDbits.TRISD4
 #define SPI_MOSI_PORT LATDbits.LD4
 #define SPI_MOSI_PPS RPOR21
@@ -124,26 +131,37 @@
 #define SPI_SCLK_PORT LATDbits.LD5
 #define SPI_SCLK_PPS_OUT RPOR22
 #define SPI_SCLK_PPS_IN 22
+#define SPI_SS1_TRIS TRISDbits.TRISD7
+#define SPI_SS1_PIN LATDbits.LD7
+#define SPI_SS1_PPS RPOR24
+#define SPI_SS2_TRIS TRISDbits.TRISD2
+#define SPI_SS2_PIN LATDbits.LD2
+#define SPI_SS2_PPS RPOR19
 
-#define SPI_SS_TRIS TRISDbits.TRISD6
-#define SPI_SS_PIN LATDbits.LD6
-#define SPI_SS_PPS RPOR23
-#endif /* BOARD_REVISION_D */
+#define FANOUT_TRIS TRISDbits.TRISD1
+#define FANOUT_PIN LATDbits.LD1
+#endif /* BOARD_REVISION_F */
 
-#ifdef BOARD_REVISION_C
-#define SPI_MISO_TRIS TRISDbits.TRISD5
-#define SPI_MISO_PORT LATDbits.LD5
-#define SPI_MISO_PPS 22
-#define SPI_MOSI_TRIS TRISDbits.TRISD6
-#define SPI_MOSI_PORT LATDbits.LD6
-#define SPI_MOSI_PPS RPOR23
-#define SPI_SCLK_TRIS TRISDbits.TRISD7
-#define SPI_SCLK_PORT LATDbits.LD7
-#define SPI_SCLK_PPS RPOR24
-#define SPI_SS_TRIS TRISDbits.TRISD4
-#define SPI_SS_PIN LATDbits.LD4
-#define SPI_SS_PPS RPOR21
-#endif /* BOARD_REVISION_C */
+#ifdef BOARD_REVISION_E
+#define SPI_MISO_TRIS TRISDbits.TRISD6
+#define SPI_MISO_PORT PORTDbits.RD6
+#define SPI_MISO_PPS 23
+#define SPI_MOSI_TRIS TRISDbits.TRISD4
+#define SPI_MOSI_PORT LATDbits.LD4
+#define SPI_MOSI_PPS RPOR21
+#define SPI_SCLK_TRIS TRISDbits.TRISD5
+#define SPI_SCLK_PORT LATDbits.LD5
+#define SPI_SCLK_PPS_OUT RPOR22
+#define SPI_SCLK_PPS_IN 22
+#define SPI_SS1_TRIS TRISDbits.TRISD7
+#define SPI_SS1_PIN LATDbits.LD7
+#define SPI_SS1_PPS RPOR24
+#define SPI_SS2_TRIS TRISDbits.TRISD1
+#define SPI_SS2_PIN LATDbits.LD1
+
+#define FANOUT_TRIS TRISDbits.TRISD2
+#define FANOUT_PIN LATDbits.LD2
+#endif /* BOARD_REVISION_E */
 
 #define VOLTAGE_REFERENCE_TRIS TRISAbits.TRISA3
 #define VOLTAGE_REFERENCE_ANCON ANCON0bits.PCFG3
@@ -157,7 +175,7 @@
 #define TEMPERATURE3_ANCON ANCON0bits.PCFG2
 #define TEMPERATURE3_CHANNEL 0b0010
 
-#define NUMBER_OF_TIMESLOTS 16
+#define NUMBER_OF_TIMESLOTS 8
 
 #define PUSHBUTTON_BIT PORTAbits.RA0
 #define PUSHBUTTON_PPS 0
@@ -175,8 +193,6 @@
 
 #define EEPROM_RTCC_ADDRESS 0x0040
 
-#define OS_USER_INTERFACE_TIMEOUT 20000
-
 
 /*
  * Type definitions
@@ -184,24 +200,18 @@
 
 typedef enum 
 { 
-    DISPLAY_MODE_OVERVIEW = 0x00,
-    DISPLAY_MODE_DATETIME_OVERVIEW = 0x10,
-    DISPLAY_MODE_DATETIME_YEAR = 0x11,
-    DISPLAY_MODE_DATETIME_MONTH = 0x12,
-    DISPLAY_MODE_DATETIME_DAY = 0x13,
-    DISPLAY_MODE_DATETIME_HOURS = 0x14,
-    DISPLAY_MODE_DATETIME_MINUTES = 0x15,
-    DISPLAY_MODE_DATETIME_SECONDS = 0x16,
-    DISPLAY_MODE_USB_CHARGER = 0x20,
-    DISPLAY_MODE_OUTPUTS = 0x30,
-    DISPLAY_MODE_OUTPUTS_1 = 0x31,
-    DISPLAY_MODE_OUTPUTS_2 = 0x32,
-    DISPLAY_MODE_OUTPUTS_3 = 0x33,
-    DISPLAY_MODE_OUTPUTS_4 = 0x34,
-    DISPLAY_MODE_CHARGER_DETAILS = 0x40,
-    DISPLAY_MODE_EFFICIENCY = 0x50,
-    DISPLAY_MODE_TEMPERATURE = 0x60
+    DISPLAY_MODE_BOOTLOADER_START = 0x00,
+    DISPLAY_MODE_BOOTLOADER_FILE_FOUND = 0x10,
+    DISPLAY_MODE_BOOTLOADER_FILE_VERIFYING = 0x11
+            
 } displayMode_t;
+
+typedef enum 
+{ 
+    BOOTLOADER_MODE_START = 0x00,
+    BOOTLOADER_MODE_FILE_FOUND = 0x10,
+    BOOTLOADER_MODE_FILE_VERIFYING = 0x11
+} bootloaderMode_t;
 
 typedef enum 
 { 
@@ -260,39 +270,14 @@ typedef struct
 
 typedef struct
 {
-    clockFrequency_t clockFrequency;
-    boardVoltage_t boardVoltage;
-    buckFrequency_t buckFrequency;
-    uint8_t buckDutyCycle;
-    int8_t buckLastStep;
-    uint8_t outputs;
     volatile int8_t encoderCount;
     volatile int8_t buttonCount;
     volatile uint8_t timeSlot;
     volatile uint8_t done;
-    int16_t input_voltage_adc[4];
-    //int8_t input_voltage_calibration;
-    int16_t input_voltage;
-    //int16_t input_voltage_last;
-    int16_t input_current_adc[4];
-    int8_t input_current_calibration;
-    int16_t input_current;
-    //int16_t input_current_last;
-    int16_t output_voltage_adc[4];
-    //int8_t output_voltage_calibration;
-    int16_t output_voltage;
-    int16_t output_current_adc[4];
-    int8_t output_current_calibration;
-    int16_t output_current;
-    //Temperature measurement
-    int16_t temperature_onboard_adc;
-    int16_t temperature_onboard;
-    int16_t temperature_external_1_adc;
-    int16_t temperature_external_1;
-    int16_t temperature_external_2_adc;
-    int16_t temperature_external_2;
+    //Bootloader
+    bootloaderMode_t bootloader_mode;
     //Display
-    uint8_t display_mode;
+    displayMode_t display_mode;
 } os_t;
 
 
@@ -310,32 +295,9 @@ os_t os;
 
 void tmr_isr(void);
 void system_init(void);
-//void system_set_cpu_frequency(clockFrequency_t newFrequency);
 void system_delay_ms(uint8_t ms);
-//void system_power_save(void);
 void system_encoder_enable(void);
 void system_encoder_disable(void);
-
-
-
-uint8_t system_output_is_on(outputs_t output);
-void system_output_on(outputs_t output);
-void system_output_off(outputs_t output);
-void system_output_toggle(outputs_t output);
-
-/*
-void system_buck_set_frequency(buckFrequency_t buckFrequency);
-void system_buck_set_dutycycle(uint8_t dutyCycle);
-void system_buck_adjust_dutycycle(void);
-void system_buck_start(void);
-void system_buck_stop(void);
- *  * */
-
-void system_calculate_input_voltage();
-void system_calculate_output_voltage();
-void system_calculate_input_current();
-void system_calculate_output_current();
-
 
 #endif	/* OS_H */
 

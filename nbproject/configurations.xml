@@ -9,7 +9,6 @@
         <itemPath>fileio_media.h</itemPath>
       </logicalFolder>
       <itemPath>system.h</itemPath>
-      <itemPath>io_mapping.h</itemPath>
       <itemPath>app_device_custom_hid.h</itemPath>
       <itemPath>app_device_msd.h</itemPath>
       <itemPath>usb_config.h</itemPath>
@@ -22,6 +21,7 @@
       <itemPath>external_flash.h</itemPath>
       <itemPath>fat16.h</itemPath>
       <itemPath>hex.h</itemPath>
+      <itemPath>bootloader.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -50,6 +50,7 @@
       <itemPath>external_flash.c</itemPath>
       <itemPath>fat16.c</itemPath>
       <itemPath>hex.c</itemPath>
+      <itemPath>bootloader.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -172,6 +173,7 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>

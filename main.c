@@ -28,6 +28,7 @@
 #include "flash.h"
 #include "fat16.h"
 #include "hex.h"
+#include "bootloader.h"
 
 
 /********************************************************************
@@ -47,8 +48,6 @@
  *******************************************************************/
 MAIN_RETURN main(void)
 {
-    //uint8_t cntr;
-    
     //This is a user defined function
     system_init();
     
@@ -57,13 +56,8 @@ MAIN_RETURN main(void)
     USBDeviceInit();
     USBDeviceAttach();
     
-    
-
     while(1)
     {
-        
-        /*
-        SYSTEM_Tasks();
 
         #if defined(USB_POLLING)
             // Interrupt or polling method.  If using polling, must call
@@ -80,28 +74,13 @@ MAIN_RETURN main(void)
             // instruction cycles) before it returns.
             USBDeviceTasks();
         #endif
-        */
         
         //Do this as often as possible
         APP_DeviceMSDTasks();
+        APP_DeviceCustomHIDTasks();
         
         if(!os.done)
         {
-            //Do this every time
-            
-            //Shut down outputs when battery voltage drops too low
-            if(os.output_voltage<USB_CHARGING_VOLTAGE_MINIMUM)
-            {
-                system_output_off(OUTPUT_USB);
-            }
-            if(os.output_voltage<POWER_OUTPUTS_VOLTAGE_MINIMUM)
-            {
-                system_output_off(OUTPUT_1);
-                system_output_off(OUTPUT_2);
-                system_output_off(OUTPUT_3);
-                system_output_off(OUTPUT_4);
-            }
-            
             //Run scheduled EEPROM write tasks
             i2c_eeprom_tasks();
             
@@ -109,91 +88,28 @@ MAIN_RETURN main(void)
             ui_run();
 
             //Run periodic tasks
-            switch(os.timeSlot&0b00001111)
+            switch(os.timeSlot&0b00000111)
             {
                 case 0:
-                    i2c_adc_start(I2C_ADC_OUTPUT_VOLTAGE, I2C_ADC_RESOLUTION_14BIT, I2C_ADC_GAIN_1);
+                    bootloader_run();
                     break;
 
                 case 1:
-                    APP_DeviceCustomHIDTasks();
-                    //flash_page_read(0x1234);
-                    //flash_page_read(5);
-                    //flash_set_page_size(FLASH_PAGE_SIZE_512);
                     break;
 
-                    
-                case 4:
+                case 6:
+                    break;
+
+                case 7:
                     if(ui_get_status()==USER_INTERFACE_STATUS_ON)
                     {
                         display_prepare(os.display_mode);
-                    }
-                    break;
-
-                case 5:
-                    if(ui_get_status()==USER_INTERFACE_STATUS_ON)
-                    {
-                        //display_update();
-                    }
-                    break;
-                    
-                    
-                case 8:
-                    APP_DeviceCustomHIDTasks();
-                    break;
-                    
-                case 11:
-                    APP_DeviceCustomHIDTasks();
-                    break;
-                    
-                case 12:
-                    display_prepare(os.display_mode);
-                    break;
-                    
-                case 15:
-                    if(ui_get_status()==USER_INTERFACE_STATUS_ON)
-                    {
                         display_update();
                     }
-                    break;   
+                    break;
             }
             os.done = 1;
         }
-
-        /*
-        //Application specific tasks
-        APP_DeviceCustomHIDTasks();
-        APP_DeviceMSDTasks();
-        
-        for(cntr=0;cntr<16;++cntr)
-        {
-            ui_run();
-            flash_dummy_read();
-            
-            adc_calibrate();
-            os.temperature_onboard_adc += adc_read(ADC_CHANNEL_TEMPERATURE_ONBOARD);
-            os.temperature_external_1_adc += adc_read(ADC_CHANNEL_TEMPERATURE_EXTERNAL_1);
-            os.temperature_external_2_adc += adc_read(ADC_CHANNEL_TEMPERATURE_EXTERNAL_2);
-            
-            if(cntr==14)
-            {
-                os.temperature_onboard = adc_calculate_temperature(os.temperature_onboard_adc);
-                os.temperature_onboard_adc = 0;
-                os.temperature_external_1 = adc_calculate_temperature(os.temperature_external_1_adc);
-                os.temperature_external_1_adc = 0;
-                os.temperature_external_2 = adc_calculate_temperature(os.temperature_external_2_adc);
-                os.temperature_external_2_adc = 0;
-                display_prepare(os.display_mode);
-                
-                adc_calibrate();
-            }
-            if(cntr==15)
-            {
-                display_update();
-            }
-            system_delay_ms(8);
-        }
-        */
     }//end while(1)
 }//end main
 

@@ -7,12 +7,13 @@
 #include "i2c.h"
 #include "os.h"
 #include "rtcc.h"
+#include "bootloader.h"
 
 
 char display_content[4][20];
 
-static void _display_inout(void);
-static void _display_time(uint8_t mode);
+static void _display_start(void);
+static void _display_found(void);
 
 uint8_t display_get_character(uint8_t line, uint8_t position)
 {
@@ -29,6 +30,69 @@ static void _display_clear(void)
         {
             display_content[row][col] = ' ';
         }
+    }
+}
+
+static uint8_t _display_itoa_u32(uint32_t value,  char *text)
+{
+    if(value>100000000)
+    {
+        itoa(text, (uint16_t)(value/10000), 10);
+        itoa(text+5, (uint16_t)(value%10000), 10);
+        *(text+9) = ' ';
+        return 9;
+    }
+    else if(value>10000000)
+    {
+        itoa(text, (uint16_t)(value/10000), 10);
+        itoa(text+4, (uint16_t)(value%10000), 10);
+        *(text+8) = ' ';
+        return 8;
+    }
+    else if(value>1000000)
+    {
+        itoa(text, (uint16_t)(value/10000), 10);
+        itoa(text+3, (uint16_t)(value%10000), 10);
+        *(text+7) = ' ';
+        return 7;
+    }
+    else if(value>100000)
+    {
+        itoa(text, (uint16_t)(value/10000), 10);
+        itoa(text+2, (uint16_t)(value%10000), 10);
+        *(text+6) = ' ';
+        return 6;
+    }
+    else if(value>10000)
+    {
+        itoa(text, (uint16_t)(value/10000), 10);
+        itoa(text+1, (uint16_t)(value%10000), 10);
+        *(text+5) = ' ';
+        return 5;
+    }
+    else if(value>1000)
+    {
+        itoa(text, value, 10);
+        *(text+4) = ' ';
+        return 4;
+    }
+    else if(value>1000)
+    {
+        itoa(text, value, 10);
+        *(text+3) = ' ';
+        return 3;
+    }
+    else if(value>1000)
+    {
+        itoa(text, value, 10);
+        *(text+2) = ' ';
+        return 2;
+    }
+    else
+    {
+        itoa(text, value, 10);
+        *(text+1) = ' ';
+        return 1;
     }
 }
 
@@ -105,42 +169,71 @@ void display_prepare(uint8_t mode)
     
     switch(mode&0xF0)
     {
-        case DISPLAY_MODE_OVERVIEW:
-            _display_inout();
+        case DISPLAY_MODE_BOOTLOADER_START:
+            _display_start();
             break;
-        case DISPLAY_MODE_DATETIME_OVERVIEW:
-            _display_time(mode);
+            
+        case DISPLAY_MODE_BOOTLOADER_FILE_FOUND:
+            _display_found();
             break;
+            
         default:
-            _display_inout();
+            os.display_mode = DISPLAY_MODE_BOOTLOADER_START;
+            _display_start();
     }
 }
 
-static void _display_inout(void)
+static void _display_start(void)
 {
     uint8_t cntr;
-    const char line1[] = "Voltage & Current";
-    const char line2[] = "   Input   Output";
-    const char line3[] = "V:";
-    const char line4[] = "A: --      --";
+    const char line1[] = "Bootloader Mode:";
+    const char line2[] = "Looking for file";
+    const char line3[] = "FIRMWARE.HEX on USB";
+    const char line4[] = "drive...";
     
     cntr = 0;
     while(line1[cntr])
         display_content[0][cntr] = line1[cntr++];
-    
     cntr = 0;
     while(line2[cntr])
-        display_content[1][cntr] = line2[cntr++]; 
-    
+        display_content[1][cntr] = line2[cntr++];
     cntr = 0;
     while(line3[cntr])
-        display_content[2][cntr] = line3[cntr++]; 
-        _display_itoa(os.input_voltage, 3, &display_content[2][3]);
-        _display_itoa(os.output_voltage, 3, &display_content[2][11]);
-    
+        display_content[2][cntr] = line3[cntr++];
     cntr = 0;
     while(line4[cntr])
         display_content[3][cntr] = line4[cntr++];
+}
+
+static void _display_found(void)
+{
+    uint8_t cntr;
+    uint8_t start;
+    const char line1[] = "Bootloader Mode:";
+    const char line2[] = "FIRMWARE.HEX found";
+    const char line3[] = "Size: ";
+    const char line3b[] = " bytes";
+    const char line4[] = "Entries: ";
+    
+    cntr = 0;
+    while(line1[cntr])
+        display_content[0][cntr] = line1[cntr++];
+    cntr = 0;
+    while(line2[cntr])
+        display_content[1][cntr] = line2[cntr++];
+    cntr = 0;
+    while(line3[cntr])
+        display_content[2][cntr] = line3[cntr++];
+    start = cntr;
+    start += _display_itoa_u32(bootloader_get_file_size(), &display_content[2][cntr]);
+    cntr = 0;
+    while(line3b[cntr])
+        display_content[2][start+cntr] = line3b[cntr++];
+    cntr = 0;
+    while(line3b[cntr])
+        display_content[3][start+cntr] = line3b[cntr++];
+    start = cntr;
+    start += _display_itoa_u32(bootloader_get_entries(), &display_content[3][cntr]);
     
 }
 
@@ -154,121 +247,4 @@ void display_update(void)
     i2c_display_write_fixed(&display_content[2][0], 20);
     i2c_display_cursor(3, 0);
     i2c_display_write_fixed(&display_content[3][0], 20);
-}
-
-static void _display_time(uint8_t mode)
-{
-    const char tad[] = "Time and Date";
-    const char setyear[] = "Set year";
-    const char setmonth[] = "Set month";
-    const char setday[] = "Set day";
-    const char sethours[] = "Set hours";
-    const char setminutes[] = "Set minutes";
-    const char setseconds[] = "Set seconds";
-    const char pts[] = "->Press to set time";
-    const char pressmonth[] = "->Press for month";
-    const char pressday[] = "->Press for day";
-    const char presshours[] = "->Press for hours";
-    const char pressminutes[] = "->Press for minutes";
-    const char pressseconds[] = "->Press for seconds";
-    const char presssave[] = "->Press to save";
-    
-    uint8_t cntr;
-    uint8_t year = rtcc_get_year();
-    uint8_t month = rtcc_get_month();
-    uint8_t day = rtcc_get_day();
-    uint8_t hours = rtcc_get_hours();
-    uint8_t minutes = rtcc_get_minutes();
-    uint8_t seconds = rtcc_get_seconds();
-    
-    switch(mode)
-    {
-        case DISPLAY_MODE_DATETIME_OVERVIEW:
-            cntr = 0;
-            while(tad[cntr])
-                display_content[0][cntr] = tad[cntr++];
-            cntr = 0;
-            while(pts[cntr])
-                display_content[3][cntr] = pts[cntr++];    
-            break;
-            
-        case DISPLAY_MODE_DATETIME_YEAR:
-            cntr = 0;
-            while(setyear[cntr])
-                display_content[0][cntr] = setyear[cntr++];
-            cntr = 0;
-            while(pressmonth[cntr])
-                display_content[3][cntr] = pressmonth[cntr++];    
-            break;
-            
-        case DISPLAY_MODE_DATETIME_MONTH:
-            cntr = 0;
-            while(setmonth[cntr])
-                display_content[0][cntr] = setmonth[cntr++];
-            cntr = 0;
-            while(pressday[cntr])
-                display_content[3][cntr] = pressday[cntr++];    
-            break;
-            
-        case DISPLAY_MODE_DATETIME_DAY:
-            cntr = 0;
-            while(setday[cntr])
-                display_content[0][cntr] = setday[cntr++];
-            cntr = 0;
-            while(presshours[cntr])
-                display_content[3][cntr] = presshours[cntr++];    
-            break;
-            
-        case DISPLAY_MODE_DATETIME_HOURS:
-            cntr = 0;
-            while(sethours[cntr])
-                display_content[0][cntr] = sethours[cntr++];
-            cntr = 0;
-            while(pressminutes[cntr])
-                display_content[3][cntr] = pressminutes[cntr++];    
-            break;
-            
-        case DISPLAY_MODE_DATETIME_MINUTES:
-            cntr = 0;
-            while(setminutes[cntr])
-                display_content[0][cntr] = setminutes[cntr++];
-            cntr = 0;
-            while(pressseconds[cntr])
-                display_content[3][cntr] = pressseconds[cntr++];    
-            break;
-            
-        case DISPLAY_MODE_DATETIME_SECONDS:
-            cntr = 0;
-            while(setseconds[cntr])
-                display_content[0][cntr] = setseconds[cntr++];
-            cntr = 0;
-            while(presssave[cntr])
-                display_content[3][cntr] = presssave[cntr++];    
-            break;
-    }
-
-    //Year
-    display_content[1][0] = '2';
-    display_content[1][1] = '0';
-    display_content[1][2] = (year>>4) + 48;
-    display_content[1][3] = (year&0x0F) + 48;
-    //Month
-    display_content[1][4] = '-';
-    display_content[1][5] = (month>>4) + 48;
-    display_content[1][6] = (month&0x0F) + 48;
-    //Day
-    display_content[1][7] = '-';
-    display_content[1][8] = (day>>4) + 48;
-    display_content[1][9] = (day&0x0F) + 48;
-    //Hours
-    display_content[2][0] = (hours>>4) + 48;
-    display_content[2][1] = (hours&0x0F) + 48;
-    //Month
-    display_content[2][2] = ':';
-    display_content[2][3] = (minutes>>4) + 48;
-    display_content[2][4] = (minutes&0x0F) + 48;
-    //Day
-    display_content[2][5] = ':';
-    display_content[2][6] = (seconds>>4) + 48;
-    display_content[2][7] = (seconds&0x0F) + 48;  
 }

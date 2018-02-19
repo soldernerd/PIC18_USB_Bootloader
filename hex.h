@@ -48,7 +48,7 @@ typedef struct HexFileEntry
 
 //Functions
 uint32_t parseHexFileEntry(char *data, uint32_t offset, HexFileEntry_t *hexEntry);
-void checkFile(char *data, FileCheckResult_t *checkResult);
+//void checkFile(char *data, FileCheckResult_t *checkResult);
 
 #endif	/* HEX_H */
 

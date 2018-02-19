@@ -135,6 +135,7 @@ uint32_t parseHexFileEntry(char *data, uint32_t offset, HexFileEntry_t *hexEntry
 }
 
 //Parses an entire file determining the number of records and if the file is free of errors
+/*
 void checkFile(char *data, FileCheckResult_t *checkResult)
 {
 	HexFileEntry_t hex_entry;
@@ -161,4 +162,5 @@ void checkFile(char *data, FileCheckResult_t *checkResult)
 		}
 	}
 }
+ * */
 

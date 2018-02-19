@@ -1,6 +1,5 @@
 
-//#include <plib/i2c.h>
-//#include <pic18f46j50.h>
+
 #include <xc.h>
 #include "i2c.h"
 #include "os.h"
@@ -106,40 +105,18 @@ i2cFrequency_t i2c_get_frequency(void)
 
 void i2c_set_frequency(i2cFrequency_t frequency)
 {
-    switch(os.clockFrequency)
+    switch(frequency)
     {
-        case CPU_FREQUENCY_32kHz:
-            SSP1ADD = 0;     
+        case I2C_FREQUENCY_100kHz:
+            SSP1ADD = 119;
             break;
-        case CPU_FREQUENCY_8MHz:
-            switch(frequency)
-            {
-                case I2C_FREQUENCY_100kHz:
-                    SSP1ADD = 19;
-                    break;
-                case I2C_FREQUENCY_200kHz:
-                    SSP1ADD = 9;
-                    break;
-                case I2C_FREQUENCY_400kHz:
-                    SSP1ADD = 4;     
-                    break;
-            }
+        case I2C_FREQUENCY_200kHz:
+            SSP1ADD = 59;
             break;
-        case CPU_FREQUENCY_48MHz:
-            switch(frequency)
-            {
-                case I2C_FREQUENCY_100kHz:
-                    SSP1ADD = 119;
-                    break;
-                case I2C_FREQUENCY_200kHz:
-                    SSP1ADD = 59;
-                    break;
-                case I2C_FREQUENCY_400kHz:
-                    SSP1ADD = 29; 
-                    break;
-            }
+        case I2C_FREQUENCY_400kHz:
+            SSP1ADD = 29; 
             break;
-    } 
+    }
     //Save new frequency
     i2c_frequency = frequency;
 }
