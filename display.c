@@ -9,11 +9,26 @@
 #include "rtcc.h"
 #include "bootloader.h"
 
+const char start_line1[] = "Bootloader Mode:";
+const char start_line2[] = "Looking for file";
+const char start_line3[] = "FIRMWARE.HEX on USB";
+const char start_line4[] = "drive...";
+
+const char found_line1[] = "Bootloader Mode:";
+const char found_line2[] = "FIRMWARE.HEX found";
+const char found_line3[] = "Size: ";
+const char found_line3b[] = " bytes";
+const char found_line4[] = "Press to use file";
+
+const char verify_line1[] = "Bootloader Mode:";
+const char verify_line2[] = "Verifying";
+
 
 char display_content[4][20];
 
 static void _display_start(void);
 static void _display_found(void);
+static void _display_verify(void);
 
 uint8_t display_get_character(uint8_t line, uint8_t position)
 {
@@ -177,64 +192,86 @@ void display_prepare(uint8_t mode)
             _display_found();
             break;
             
-        default:
-            os.display_mode = DISPLAY_MODE_BOOTLOADER_START;
-            _display_start();
+        case DISPLAY_MODE_BOOTLOADER_FILE_VERIFYING:
+            _display_verify();
+            break;
+    }
+    
+    if(os.buttonCount>0)
+    {
+        display_content[3][19] = 'X';
     }
 }
 
 static void _display_start(void)
 {
     uint8_t cntr;
-    const char line1[] = "Bootloader Mode:";
-    const char line2[] = "Looking for file";
-    const char line3[] = "FIRMWARE.HEX on USB";
-    const char line4[] = "drive...";
-    
     cntr = 0;
-    while(line1[cntr])
-        display_content[0][cntr] = line1[cntr++];
+    while(start_line1[cntr])
+        display_content[0][cntr] = start_line1[cntr++];
     cntr = 0;
-    while(line2[cntr])
-        display_content[1][cntr] = line2[cntr++];
+    while(start_line2[cntr])
+        display_content[1][cntr] = start_line2[cntr++];
     cntr = 0;
-    while(line3[cntr])
-        display_content[2][cntr] = line3[cntr++];
+    while(start_line3[cntr])
+        display_content[2][cntr] = start_line3[cntr++];
     cntr = 0;
-    while(line4[cntr])
-        display_content[3][cntr] = line4[cntr++];
+    while(start_line4[cntr])
+        display_content[3][cntr] = start_line4[cntr++];
 }
 
 static void _display_found(void)
 {
     uint8_t cntr;
     uint8_t start;
-    const char line1[] = "Bootloader Mode:";
-    const char line2[] = "FIRMWARE.HEX found";
-    const char line3[] = "Size: ";
-    const char line3b[] = " bytes";
-    const char line4[] = "Entries: ";
-    
+    //First line
     cntr = 0;
-    while(line1[cntr])
-        display_content[0][cntr] = line1[cntr++];
+    while(found_line1[cntr])
+        display_content[0][cntr] = found_line1[cntr++];
+    //Second line
     cntr = 0;
-    while(line2[cntr])
-        display_content[1][cntr] = line2[cntr++];
+    while(found_line2[cntr])
+        display_content[1][cntr] = found_line2[cntr++];
+    //Third line (file size)
     cntr = 0;
-    while(line3[cntr])
-        display_content[2][cntr] = line3[cntr++];
+    while(found_line3[cntr])
+        display_content[2][cntr] = found_line3[cntr++];
     start = cntr;
     start += _display_itoa_u32(bootloader_get_file_size(), &display_content[2][cntr]);
     cntr = 0;
-    while(line3b[cntr])
-        display_content[2][start+cntr] = line3b[cntr++];
+    while(found_line3b[cntr])
+        display_content[2][start+cntr] = found_line3b[cntr++];
+    //Fourth line
     cntr = 0;
-    while(line3b[cntr])
-        display_content[3][start+cntr] = line3b[cntr++];
+    while(found_line4[cntr])
+        display_content[3][cntr] = found_line4[cntr++];
+}
+
+static void _display_verify(void)
+{
+    uint8_t cntr;
+    uint8_t start;
+    cntr = 0;
+    while(verify_line1[cntr])
+        display_content[0][cntr] = verify_line1[cntr++];
+    cntr = 0;
+    while(verify_line2[cntr])
+        display_content[1][cntr] = verify_line2[cntr++];
+    /*
+    cntr = 0;
+    while(found_line3[cntr])
+        display_content[2][cntr] = found_line3[cntr++];
     start = cntr;
-    start += _display_itoa_u32(bootloader_get_entries(), &display_content[3][cntr]);
-    
+    start += _display_itoa_u32(bootloader_get_file_size(), &display_content[2][cntr]);
+    cntr = 0;
+    while(found_line3b[cntr])
+        display_content[2][start+cntr] = found_line3b[cntr++];
+    cntr = 0;
+    while(found_line3b[cntr])
+        display_content[3][start+cntr] = found_line3b[cntr++];
+    start = cntr;
+    start += _display_itoa_u32(bootloader_get_entries(), &display_content[3][cntr]);  
+    */
 }
 
 void display_update(void)

@@ -2,6 +2,19 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/os.c</file>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/fat16.h</file>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/bootloader.h</file>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/hex.h</file>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/ui.c</file>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/flash.c</file>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/bootloader.c</file>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/hex.c</file>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/os.h</file>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/fat16.c</file>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/display.c</file>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/main.c</file>
+        </group>
     </open-files>
 </project-private>

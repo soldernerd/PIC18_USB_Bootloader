@@ -20,7 +20,20 @@ static void _ui_encoder(void)
     {
         case DISPLAY_MODE_BOOTLOADER_START:
             break;
+            
+        case DISPLAY_MODE_BOOTLOADER_FILE_FOUND:
+            if(os.buttonCount>0)
+            {
+                os.bootloader_mode = BOOTLOADER_MODE_FILE_VERIFYING;
+                os.display_mode = DISPLAY_MODE_BOOTLOADER_FILE_VERIFYING;
+                os.buttonCount = 0;
+            }
+            break;
+            
+        case DISPLAY_MODE_BOOTLOADER_FILE_VERIFYING:
+            break;
     }    
+    //os.buttonCount = 0;
 }
 
 void ui_init(void)

@@ -36,6 +36,10 @@ void bootloader_run(void)
            break;
            
         case BOOTLOADER_MODE_FILE_FOUND:
+            _bootloader_find_file();
+           break;
+            
+        case BOOTLOADER_MODE_FILE_VERIFYING:
             _bootloader_verify_file();
             break;
     }
@@ -43,11 +47,26 @@ void bootloader_run(void)
 
 void _bootloader_find_file(void)
 {
+    //Try to locate file
     file_number = fat_find_file(bootloader_filename, bootloader_extension);
+    
+    //File has been found
     if(file_number!=0xFF)
     {
+        //Find file size
+        hex_file_size = fat_get_file_size(file_number);
+        //Let user decide if the file is to be used
         os.bootloader_mode = BOOTLOADER_MODE_FILE_FOUND;
         os.display_mode = DISPLAY_MODE_BOOTLOADER_FILE_FOUND;
+    }
+    //File has not been found
+    else
+    {
+        //Reset hex file size
+        hex_file_size = 0;
+        //Return to (or remain in) startup state
+        os.bootloader_mode = BOOTLOADER_MODE_START;
+        os.display_mode = DISPLAY_MODE_BOOTLOADER_START;
     }
 }
 
@@ -55,6 +74,8 @@ void _bootloader_verify_file(void)
 {
     uint32_t offset = 0;
     uint32_t return_value = 0;
+    
+    /*
     
     //Find file size
     hex_file_size = fat_get_file_size(file_number);
@@ -89,7 +110,7 @@ void _bootloader_verify_file(void)
             offset += return_value;
         } 
     }
-    
+    */
 }
 
 uint32_t bootloader_get_file_size(void)
