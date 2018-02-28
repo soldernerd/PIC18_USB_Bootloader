@@ -33,7 +33,6 @@ static void _ui_encoder(void)
         case DISPLAY_MODE_BOOTLOADER_FILE_VERIFYING:
             break;
     }    
-    //os.buttonCount = 0;
 }
 
 void ui_init(void)

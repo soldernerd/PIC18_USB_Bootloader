@@ -79,6 +79,10 @@ MAIN_RETURN main(void)
         APP_DeviceMSDTasks();
         APP_DeviceCustomHIDTasks();
         
+        //Take care of timeslots, encoder and done flag
+        //Usually, this happens in a timer ISR but we can't use interrupts here
+        timer_pseudo_isr();
+        
         if(!os.done)
         {
             //Run scheduled EEPROM write tasks
@@ -95,15 +99,35 @@ MAIN_RETURN main(void)
                     break;
 
                 case 1:
+                    bootloader_run();
+                    break;
+                    
+                case 2:
+                    bootloader_run();
+                    break;
+                    
+                case 3:
+                    bootloader_run();
+                    break;
+                    
+                case 4:
+                    bootloader_run();
+                    break;
+                    
+                case 5:
+                    bootloader_run();
                     break;
 
                 case 6:
+                    if(ui_get_status()==USER_INTERFACE_STATUS_ON)
+                    {
+                        display_prepare(os.display_mode);
+                    }
                     break;
 
                 case 7:
                     if(ui_get_status()==USER_INTERFACE_STATUS_ON)
                     {
-                        display_prepare(os.display_mode);
                         display_update();
                     }
                     break;

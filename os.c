@@ -39,30 +39,23 @@ calibration_t calibrationParameters[7];
 
 
 
-//void interrupt _isr(void)
-void tmr_isr(void)
+//There are no interrupts but we still use the timer and interrupt flag
+void timer_pseudo_isr(void)
 {
-    //Timer 0
-    if(INTCONbits.T0IF)
+    //Do nothing if interrupt flat is not yet set
+    if(INTCONbits.T0IF==0)
     {
-        
-        if(os.done) 
-        {
-            //8ms until overflow
-            TMR0H = TIMER0_LOAD_HIGH_48MHZ;
-            TMR0L = TIMER0_LOAD_LOW_48MHZ;
-            ++os.timeSlot;
-            os.done = 0;
-        }
-        else //Clock stretching
-        {
-            //1ms until overflow
-            TMR0H = TIMER0_LOAD_SHORT_HIGH_48MHZ;
-            TMR0L = TIMER0_LOAD_SHORT_LOW_48MHZ;
-        }
-        INTCONbits.T0IF = 0;
+        return;
     }
-        
+    
+    //Timer 0
+    //8ms until overflow
+    TMR0H = TIMER0_LOAD_HIGH_48MHZ;
+    TMR0L = TIMER0_LOAD_LOW_48MHZ;
+    ++os.timeSlot;
+    os.done = 0;
+    INTCONbits.T0IF = 0;
+
     //Push button
     if(INTCON3bits.INT1IF)
     {
@@ -90,6 +83,7 @@ void tmr_isr(void)
 }
 
 
+
 void system_delay_ms(uint8_t ms)
 {
     uint8_t cntr;
@@ -112,20 +106,16 @@ static void _system_encoder_init(void)
     //PPSInput(PPS_INT3, PPS_RP9); //Encoder A
     //PPSInput(PPS_INT2, PPS_RP10); //Encoder B
 
+    //We can't use interrupts, just use the flags
     
     INTCON2bits.INTEDG1 = 0; //0=falling
     INTCON3bits.INT1IF = 0;
-    INTCON3bits.INT1IE = 1;
     
     INTCON2bits.INTEDG2 = 1; //1=rising
     INTCON3bits.INT2IF = 0;
-    //INTCON3bits.INT2IE = 1;
     
     INTCON2bits.INTEDG3 = 1; //1=rising
     INTCON3bits.INT3IF = 0;
-    //INTCON3bits.INT3IE = 1;
-    
-    INTCONbits.GIE = 1;
     
     os.encoderCount = 0;
     os.buttonCount = 0;
@@ -173,9 +163,10 @@ static void _system_timer0_init(void)
     T0CONbits.TMR0ON = 1;
             
     //Enable timer0 interrupts
+    //This is a boot loader, no interrupts allowed...
     INTCONbits.TMR0IF = 0;
-    INTCONbits.TMR0IE = 1;
-    INTCONbits.GIE = 1;
+    //INTCONbits.TMR0IE = 1;
+    //INTCONbits.GIE = 1;
     
     //Initialize timeSlot
     os.timeSlot = 0;

@@ -20,7 +20,7 @@ please contact mla_licensing@microchip.com
 #include <xc.h>
 #include "system.h"
 #include "usb.h"
-#include "os.h"
+//#include "os.h"
 
 /*
 // CONFIG1L
@@ -262,21 +262,16 @@ bool SYSTEM_UserSelfWriteUnlockVerification(void)
     //{
     //    return false;
     //}  
-
     return true;
 }
 			
 #if defined(__XC8)
-void interrupt SYS_InterruptHigh(void)
-{
-    #if defined(USB_INTERRUPT)
-        USBDeviceTasks();
-    #endif
-
-    //User-defined ISR
-    tmr_isr();
-        
-}
+//void interrupt SYS_InterruptHigh(void)
+//{
+//    #if defined(USB_INTERRUPT)
+//        USBDeviceTasks();
+//    #endif
+//}
 #else
     void YourHighPriorityISRCode();
     void YourLowPriorityISRCode();

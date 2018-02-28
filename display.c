@@ -197,6 +197,20 @@ void display_prepare(uint8_t mode)
             break;
     }
     
+    //Some debugging output
+    
+    //Warn if interrupts are enabled
+    if(INTCONbits.GIE)
+    {
+        display_content[0][18] = 'I';
+    }
+    
+    //Pulse
+    if(os.timeSlot&0b00010000)
+    {
+        display_content[0][19] = 'X';
+    }
+    
     if(os.buttonCount>0)
     {
         display_content[3][19] = 'X';

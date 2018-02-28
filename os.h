@@ -293,7 +293,7 @@ os_t os;
  */
 
 
-void tmr_isr(void);
+void timer_pseudo_isr(void);
 void system_init(void);
 void system_delay_ms(uint8_t ms);
 void system_encoder_enable(void);
