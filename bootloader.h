@@ -8,6 +8,8 @@
 #ifndef BOOTLOADER_H
 #define	BOOTLOADER_H
 
+#include "hex.h"
+
 typedef enum ShortRecordError
 {
 	ShortRecordErrorStartCode = 0xF,
@@ -24,6 +26,15 @@ void bootloader_run(void);
 uint32_t bootloader_get_file_size(void);
 uint16_t bootloader_get_entries(void);
 ShortRecordError_t bootloader_get_error(void);
+
+//Functions that give access to last record
+uint16_t bootloader_get_rec_dataLength(void);
+uint16_t bootloader_get_rec_address(void);
+RecordType_t bootloader_get_rec_recordType(void);
+uint8_t bootloader_get_rec_data(uint8_t index);
+uint8_t bootloader_get_rec_checksum(void);
+uint8_t bootloader_get_rec_checksumCheck(void);
+
 
 
 #endif	/* BOOTLOADER_H */

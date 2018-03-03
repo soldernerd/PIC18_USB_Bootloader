@@ -21,14 +21,27 @@ const char found_line3b[] = " bytes";
 const char found_line4[] = "Press to use file";
 
 const char verify_line1[] = "Bootloader Mode:";
-const char verify_line2[] = "Verifying";
+const char verify_line2[] = "Verifying...";
+const char verify_line3[] = "Record";
 
+const char checked_line1[] = "Bootloader Mode:";
+const char checked_line2[] = "File check completed";
+
+const char failed_line1[] = "Bootloader Mode:";
+const char failed_line2[] = "File check failed";
+const char failed_line3_startCode[] = "Missing start code";
+const char failed_line3_noNextRecord[] = "No next record";
+const char failed_line3_checksum[] = "Checksum error";
+const char failed_line3_dataTooLong[] = "Data too long";
+const char failed_line4[] = "Record ";
 
 char display_content[4][20];
 
 static void _display_start(void);
 static void _display_found(void);
 static void _display_verify(void);
+static void _display_checked(void);
+static void _display_failed(void);
 
 uint8_t display_get_character(uint8_t line, uint8_t position)
 {
@@ -195,6 +208,14 @@ void display_prepare(uint8_t mode)
         case DISPLAY_MODE_BOOTLOADER_FILE_VERIFYING:
             _display_verify();
             break;
+            
+        case DISPLAY_MODE_BOOTLOADER_CHECK_COMPLETE:
+            _display_checked();
+            break;
+            
+        case DISPLAY_MODE_BOOTLOADER_CHECK_FAILED:
+            _display_failed();
+            break;
     }
     
     //Some debugging output
@@ -271,6 +292,11 @@ static void _display_verify(void)
     cntr = 0;
     while(verify_line2[cntr])
         display_content[1][cntr] = verify_line2[cntr++];
+    cntr = 0;
+    while(verify_line3[cntr])
+        display_content[2][cntr] = verify_line3[cntr++];
+    start = cntr;
+    start += _display_itoa_u32(bootloader_get_entries(), &display_content[2][cntr]);  
     /*
     cntr = 0;
     while(found_line3[cntr])
@@ -286,6 +312,61 @@ static void _display_verify(void)
     start = cntr;
     start += _display_itoa_u32(bootloader_get_entries(), &display_content[3][cntr]);  
     */
+}
+
+static void _display_checked(void)
+{
+    uint8_t cntr;
+    uint8_t start;
+    cntr = 0;
+    while(checked_line1[cntr])
+        display_content[0][cntr] = checked_line1[cntr++];
+    cntr = 0;
+    while(checked_line2[cntr])
+        display_content[1][cntr] = checked_line2[cntr++];
+}
+
+static void _display_failed(void)
+{
+    uint8_t cntr;
+    uint8_t start;
+    cntr = 0;
+    while(failed_line1[cntr])
+        display_content[0][cntr] = failed_line1[cntr++];
+    cntr = 0;
+    while(failed_line2[cntr])
+        display_content[1][cntr] = failed_line2[cntr++];
+    //Display error
+    cntr = 0;
+    switch(bootloader_get_error())
+    {
+        case ShortRecordErrorStartCode:
+            while(failed_line3_startCode[cntr])
+            display_content[2][cntr] = failed_line3_startCode[cntr++];
+            break;
+            
+        case ShortRecordErrorChecksum:
+            while(failed_line3_checksum[cntr])
+            display_content[2][cntr] = failed_line3_checksum[cntr++];
+            itoa(&display_content[2][14], bootloader_get_rec_checksum(), 10);
+            itoa(&display_content[2][17], bootloader_get_rec_checksumCheck(), 10);
+            break;
+            
+        case ShortRecordErrorNoNextRecord:
+            while(failed_line3_noNextRecord[cntr])
+            display_content[2][cntr] = failed_line3_noNextRecord[cntr++];
+            break;
+            
+        case ShortRecordErrorDataTooLong:
+            while(failed_line3_dataTooLong[cntr])
+            display_content[2][cntr] = failed_line3_dataTooLong[cntr++];
+            break;
+    }
+    //Display record number
+    cntr = 0;
+    while(failed_line4[cntr])
+        display_content[3][cntr] = failed_line4[cntr++];
+    itoa(&display_content[3][cntr], bootloader_get_entries(), 10);
 }
 
 void display_update(void)
