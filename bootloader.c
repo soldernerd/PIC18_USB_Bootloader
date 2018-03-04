@@ -5,9 +5,15 @@
 #include "hex.h"
 
 #define BOOTLOADER_CHARACTER_BUFFER_SIZE 50
-#define BOOTLOADER_NUMBER_OF_RECORDS_PER_CALL 3
-#define BOOTLOADER_MINIMUM_ADDRESS_ALLOWED 0x8000
-#define BOOTLOADER_MAXIMUM_ADDRESS_ALLOWED (0x1FF8 - 16)
+#define BOOTLOADER_NUMBER_OF_RECORDS_PER_CALL 1
+#define BOOTLOADER_RESET_VECTOR_ADDRESS_MIN 0x00000
+#define BOOTLOADER_RESET_VECTOR_ADDRESS_MAX 0x00007
+#define BOOTLOADER_MINIMUM_ADDRESS_ALLOWED_1 0x00008
+#define BOOTLOADER_MAXIMUM_ADDRESS_ALLOWED_1 0x00199
+#define BOOTLOADER_MINIMUM_ADDRESS_ALLOWED_2 0x09000
+#define BOOTLOADER_MAXIMUM_ADDRESS_ALLOWED_2 0x1FFF7
+#define BOOTLOADER_CONFIGURATIONBITS_ADDRESS_MIN 0x1FFF8
+#define BOOTLOADER_CONFIGURATIONBITS_ADDRESS_MAX 0x1FFFF
 
 uint8_t file_number = 0xFF;
 uint8_t file_buffer[BOOTLOADER_CHARACTER_BUFFER_SIZE];
@@ -18,6 +24,7 @@ uint32_t hex_file_offset = 0;
 uint32_t hex_file_size = 0;
 HexFileEntry_t hex_file_entry;
 ShortRecordError_t last_error;
+uint32_t extended_linear_address;
 
 
 typedef enum
@@ -25,20 +32,21 @@ typedef enum
     FILE_CHECK_STATUS_IN_PROGRESS,
     FILE_CHECK_STATUS_COMPLETED
 } fileCheckStatus_t;
-/*
-typedef struct HexFileEntry
+
+typedef enum
 {
-	uint16_t dataLength;
-	uint16_t address;
-	RecordType_t recordType;
-	uint8_t data[16];
-	uint8_t checksum;
-	uint8_t checksumCheck;
-} HexFileEntry_t;
-*/
+    ADDRESS_CHECK_RESULT_UNDEFINED = 0x00,
+    ADDRESS_CHECK_RESULT_OK_LOW_RANGE = 0x01,
+    ADDRESS_CHECK_RESULT_OK_HIGH_RANGE = 0x02,
+    ADDRESS_CHECK_RESULT_RESET_VECTOR = 0x04,        
+    ADDRESS_CHECK_RESULT_CONFIGURATION_BITS = 0x08,
+    ADDRESS_CHECK_RESULT_ERROR = 0xFF
+} addressCheckResult_t;
+
+static addressCheckResult_t _bootloader_check_address(uint32_t address,  uint8_t dataLength);
   
-void _bootloader_find_file(void);
-void _bootloader_verify_file(void);
+static void _bootloader_find_file(void);
+static void _bootloader_verify_file(void);
 
 
 
@@ -66,7 +74,60 @@ void bootloader_run(void)
     }
 }
 
-void _bootloader_find_file(void)
+static addressCheckResult_t _bootloader_check_address(uint32_t address, uint8_t dataLength)
+{   
+    addressCheckResult_t byte_status;
+    addressCheckResult_t worst_case;
+    uint8_t cntr;
+    
+    worst_case = ADDRESS_CHECK_RESULT_UNDEFINED;
+    
+    //Check needs to pass for every byte in data range
+    for(cntr=0; cntr<dataLength; ++cntr)
+    {
+        byte_status = ADDRESS_CHECK_RESULT_ERROR;
+        
+        //Reset vector. Don't program but allowed in file
+        if(((address+cntr)>=BOOTLOADER_RESET_VECTOR_ADDRESS_MIN) && ((address+cntr)<=BOOTLOADER_RESET_VECTOR_ADDRESS_MAX))
+        {
+            byte_status = ADDRESS_CHECK_RESULT_RESET_VECTOR;
+        }
+        
+        //Configuration bits. Don't program but allowed in file
+        if(((address+cntr)>=BOOTLOADER_CONFIGURATIONBITS_ADDRESS_MIN) && ((address+cntr)<=BOOTLOADER_CONFIGURATIONBITS_ADDRESS_MAX))
+        {
+            byte_status = ADDRESS_CHECK_RESULT_CONFIGURATION_BITS;
+        }
+        
+        //Allowed range 1: At interrupt vectors and slightly beyond
+        if(((address+cntr)>=BOOTLOADER_MINIMUM_ADDRESS_ALLOWED_1) && ((address+cntr)<=BOOTLOADER_MAXIMUM_ADDRESS_ALLOWED_1))
+        {
+            byte_status = ADDRESS_CHECK_RESULT_OK_LOW_RANGE;
+        }
+        
+        //Allowed range 2: Bewteen bootloader and configuration bits
+        if(((address+cntr)>=BOOTLOADER_MINIMUM_ADDRESS_ALLOWED_2) && ((address+cntr)<=BOOTLOADER_MAXIMUM_ADDRESS_ALLOWED_2))
+        {
+            byte_status = ADDRESS_CHECK_RESULT_OK_HIGH_RANGE;
+        }
+        
+        //Immediately return if a byte falls outside the permitted range
+        if(byte_status == ADDRESS_CHECK_RESULT_ERROR)
+        {
+            return ADDRESS_CHECK_RESULT_ERROR;
+        }
+        
+        //Update worst case
+        if(byte_status > worst_case)
+        {
+            worst_case = byte_status;
+        }
+    }
+    
+    return worst_case;
+}
+
+static void _bootloader_find_file(void)
 {
     //Try to locate file
     file_number = fat_find_file(bootloader_filename, bootloader_extension);
@@ -81,6 +142,7 @@ void _bootloader_find_file(void)
         hex_file_offset = 0;
         file_minimum_address = 0xFFFFFFFF;
         file_maximum_address = 0x00000000;
+        extended_linear_address = 0x00000000;
         os.bootloader_mode = BOOTLOADER_MODE_FILE_FOUND;
         os.display_mode = DISPLAY_MODE_BOOTLOADER_FILE_FOUND;
     }
@@ -95,11 +157,11 @@ void _bootloader_find_file(void)
     }
 }
 
-void _bootloader_verify_file(void)
+static void _bootloader_verify_file(void)
 {
     uint8_t rec_counter;
-    //uint32_t offset = 0;
     uint32_t return_value = 0;
+    uint32_t address32;
     
     //Find file size
     hex_file_size = fat_get_file_size(file_number);
@@ -119,26 +181,45 @@ void _bootloader_verify_file(void)
         //Keep track of number of records
         ++hex_file_entries;
         
-        //Keep track of address range
-        if(hex_file_entry.address<file_minimum_address)
+        //Keep track of extended linear address
+        if(hex_file_entry.recordType==RecordTypeExtendedLinearAddress)
         {
-            file_minimum_address = hex_file_entry.address;
-        }
-        if(hex_file_entry.address>file_maximum_address)
-        {
-            file_maximum_address = hex_file_entry.address;
+            extended_linear_address = hex_file_entry.data[0];
+            extended_linear_address <<= 8;
+            extended_linear_address |= hex_file_entry.data[1];
+            extended_linear_address <<= 8;
+            extended_linear_address <<= 8;
         }
         
-        if((hex_file_entry.address>BOOTLOADER_MAXIMUM_ADDRESS_ALLOWED) || (hex_file_entry.address<BOOTLOADER_MINIMUM_ADDRESS_ALLOWED))
+        //Keep track of address range
+        if(hex_file_entry.recordType==RecordTypeData)
         {
-            //Address outside allowed range
-            last_error = ShortRecordErrorAddressRange;
-            //Change mode
-            os.bootloader_mode = BOOTLOADER_MODE_CHECK_FAILED;
-            os.display_mode = DISPLAY_MODE_BOOTLOADER_CHECK_FAILED;
-            break;
+            //Calculate 32-bit address
+            address32 = extended_linear_address + hex_file_entry.address;
+            
+            //Update ranges
+            if(address32<file_minimum_address)
+            {
+                file_minimum_address = address32;
+            }
+            if(address32>file_maximum_address)
+            {
+                file_maximum_address = address32;
+            }
+            
+            //Check if address is valid
+            if(_bootloader_check_address(address32, hex_file_entry.dataLength) == ADDRESS_CHECK_RESULT_ERROR)
+            {
+                //Address outside allowed range
+                last_error = ShortRecordErrorAddressRange;
+                //Change mode
+                os.bootloader_mode = BOOTLOADER_MODE_CHECK_FAILED;
+                os.display_mode = DISPLAY_MODE_BOOTLOADER_CHECK_FAILED;
+                break;
+            }
         }
-        else if(return_value==0)
+
+        if(return_value==0)
         {
             //Last record has been reached without an error
             os.bootloader_mode = BOOTLOADER_MODE_CHECK_COMPLETE;
@@ -184,6 +265,7 @@ uint16_t bootloader_get_rec_dataLength(void)
 
 uint16_t bootloader_get_rec_address(void)
 {
+    //return 12345;
     return hex_file_entry.address;
 }
 
