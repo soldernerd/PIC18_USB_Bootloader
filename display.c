@@ -26,6 +26,8 @@ const char verify_line3[] = "Record";
 
 const char checked_line1[] = "Bootloader Mode:";
 const char checked_line2[] = "File check completed";
+const char checked_line3[] = "records";
+const char checked_line4[] = "Press to program";
 
 const char failed_line1[] = "Bootloader Mode:";
 const char failed_line2[] = "File check failed";
@@ -33,6 +35,7 @@ const char failed_line3_startCode[] = "Missing start code";
 const char failed_line3_noNextRecord[] = "No next record";
 const char failed_line3_checksum[] = "Checksum error";
 const char failed_line3_dataTooLong[] = "Data too long";
+const char failed_line3_addressRange[] = "Addr. outside range";
 const char failed_line4[] = "Record ";
 
 char display_content[4][20];
@@ -58,6 +61,36 @@ static void _display_clear(void)
         {
             display_content[row][col] = ' ';
         }
+    }
+}
+
+static uint8_t _display_itoa_u16(uint32_t value,  char *text)
+{
+    itoa(text, value, 10);
+    if(value>9999)
+    {
+        *(text+5) = ' ';
+        return 5;
+    }
+    else if (value>999)
+    {
+        *(text+4) = ' ';
+        return 4;
+    }
+    else if (value>99)
+    {
+        *(text+3) = ' ';
+        return 3;
+    }
+    else if (value>9)
+    {
+        *(text+2) = ' ';
+        return 2;
+    }
+    else
+    {
+        *(text+1) = ' ';
+        return 1;
     }
 }
 
@@ -295,8 +328,7 @@ static void _display_verify(void)
     cntr = 0;
     while(verify_line3[cntr])
         display_content[2][cntr] = verify_line3[cntr++];
-    start = cntr;
-    start += _display_itoa_u32(bootloader_get_entries(), &display_content[2][cntr]);  
+    _display_itoa_u16(bootloader_get_entries(), &display_content[2][cntr+1]);
     /*
     cntr = 0;
     while(found_line3[cntr])
@@ -324,6 +356,16 @@ static void _display_checked(void)
     cntr = 0;
     while(checked_line2[cntr])
         display_content[1][cntr] = checked_line2[cntr++];
+    //Display number of records
+    start = _display_itoa_u16(bootloader_get_entries(), &display_content[2][0]);
+    start++;
+    cntr = 0;
+    while(checked_line3[cntr])
+        display_content[2][start+cntr] = checked_line3[cntr++];
+    //Display question
+    cntr = 0;
+    while(checked_line4[cntr])
+        display_content[3][cntr] = checked_line4[cntr++];
 }
 
 static void _display_failed(void)
@@ -348,8 +390,8 @@ static void _display_failed(void)
         case ShortRecordErrorChecksum:
             while(failed_line3_checksum[cntr])
             display_content[2][cntr] = failed_line3_checksum[cntr++];
-            itoa(&display_content[2][14], bootloader_get_rec_checksum(), 10);
-            itoa(&display_content[2][17], bootloader_get_rec_checksumCheck(), 10);
+            //_itoa(&display_content[2][14], bootloader_get_rec_checksum(), 10);
+            //itoa(&display_content[2][17], bootloader_get_rec_checksumCheck(), 10);
             break;
             
         case ShortRecordErrorNoNextRecord:
@@ -361,12 +403,18 @@ static void _display_failed(void)
             while(failed_line3_dataTooLong[cntr])
             display_content[2][cntr] = failed_line3_dataTooLong[cntr++];
             break;
+            
+        case ShortRecordErrorAddressRange:
+            while(failed_line3_addressRange[cntr])
+            display_content[2][cntr] = failed_line3_addressRange[cntr++];
+            break;
+            
     }
     //Display record number
     cntr = 0;
     while(failed_line4[cntr])
         display_content[3][cntr] = failed_line4[cntr++];
-    itoa(&display_content[3][cntr], bootloader_get_entries(), 10);
+    _display_itoa_u16(bootloader_get_entries(), &display_content[3][cntr]);
 }
 
 void display_update(void)

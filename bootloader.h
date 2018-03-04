@@ -16,6 +16,7 @@ typedef enum ShortRecordError
 	ShortRecordErrorChecksum = 0xE,
 	ShortRecordErrorNoNextRecord = 0xD,
 	ShortRecordErrorDataTooLong = 0xC,
+    ShortRecordErrorAddressRange = 0xB,        
 	ShortRecordErrorNoError = 0x0
 } ShortRecordError_t;
 

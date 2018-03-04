@@ -4,13 +4,21 @@
 #include "fat16.h"
 #include "hex.h"
 
+#define BOOTLOADER_CHARACTER_BUFFER_SIZE 50
+#define BOOTLOADER_NUMBER_OF_RECORDS_PER_CALL 3
+#define BOOTLOADER_MINIMUM_ADDRESS_ALLOWED 0x8000
+#define BOOTLOADER_MAXIMUM_ADDRESS_ALLOWED (0x1FF8 - 16)
+
 uint8_t file_number = 0xFF;
-uint8_t file_buffer[40];
+uint8_t file_buffer[BOOTLOADER_CHARACTER_BUFFER_SIZE];
+uint32_t file_minimum_address;
+uint32_t file_maximum_address;
 uint16_t hex_file_entries = 0;
 uint32_t hex_file_offset = 0;
 uint32_t hex_file_size = 0;
 HexFileEntry_t hex_file_entry;
 ShortRecordError_t last_error;
+
 
 typedef enum
 {
@@ -71,6 +79,8 @@ void _bootloader_find_file(void)
         //Let user decide if the file is to be used
         hex_file_entries = 0;
         hex_file_offset = 0;
+        file_minimum_address = 0xFFFFFFFF;
+        file_maximum_address = 0x00000000;
         os.bootloader_mode = BOOTLOADER_MODE_FILE_FOUND;
         os.display_mode = DISPLAY_MODE_BOOTLOADER_FILE_FOUND;
     }
@@ -96,17 +106,39 @@ void _bootloader_verify_file(void)
     
     
     //Loop through a pre-defined number of records
-    for(rec_counter=0; rec_counter<5; ++rec_counter)
+    for(rec_counter=0; rec_counter<BOOTLOADER_NUMBER_OF_RECORDS_PER_CALL; ++rec_counter)
     {
         //Read an entry
-        if((hex_file_size-hex_file_offset)>=40)
-            fat_read_from_file(file_number, hex_file_offset, 40, file_buffer);
+        if((hex_file_size-hex_file_offset)>=BOOTLOADER_CHARACTER_BUFFER_SIZE)
+            fat_read_from_file(file_number, hex_file_offset, BOOTLOADER_CHARACTER_BUFFER_SIZE, file_buffer);
         else
             fat_read_from_file(file_number, hex_file_offset, (hex_file_size-hex_file_offset), file_buffer);
         //Check that entry
         return_value = parseHexFileEntry(file_buffer, 0, &hex_file_entry);
         
-        if(return_value==0)
+        //Keep track of number of records
+        ++hex_file_entries;
+        
+        //Keep track of address range
+        if(hex_file_entry.address<file_minimum_address)
+        {
+            file_minimum_address = hex_file_entry.address;
+        }
+        if(hex_file_entry.address>file_maximum_address)
+        {
+            file_maximum_address = hex_file_entry.address;
+        }
+        
+        if((hex_file_entry.address>BOOTLOADER_MAXIMUM_ADDRESS_ALLOWED) || (hex_file_entry.address<BOOTLOADER_MINIMUM_ADDRESS_ALLOWED))
+        {
+            //Address outside allowed range
+            last_error = ShortRecordErrorAddressRange;
+            //Change mode
+            os.bootloader_mode = BOOTLOADER_MODE_CHECK_FAILED;
+            os.display_mode = DISPLAY_MODE_BOOTLOADER_CHECK_FAILED;
+            break;
+        }
+        else if(return_value==0)
         {
             //Last record has been reached without an error
             os.bootloader_mode = BOOTLOADER_MODE_CHECK_COMPLETE;
@@ -125,7 +157,6 @@ void _bootloader_verify_file(void)
         else
         {
             //No error but end of file has not yet been reached
-            ++hex_file_entries;
             hex_file_offset += return_value;
         } 
     }

@@ -32,6 +32,21 @@ static void _ui_encoder(void)
             
         case DISPLAY_MODE_BOOTLOADER_FILE_VERIFYING:
             break;
+            
+        case DISPLAY_MODE_BOOTLOADER_CHECK_FAILED:
+            break;
+            
+        case DISPLAY_MODE_BOOTLOADER_CHECK_COMPLETE:
+            if(os.buttonCount>0)
+            {
+                os.bootloader_mode = BOOTLOADER_MODE_PROGRAMMING;
+                os.display_mode = DISPLAY_MODE_BOOTLOADER_PROGRAMMING;
+                os.buttonCount = 0;
+            }
+            break;
+
+        case BOOTLOADER_MODE_PROGRAMMING:
+            break; 
     }    
 }
 
