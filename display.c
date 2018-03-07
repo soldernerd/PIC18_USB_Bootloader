@@ -9,27 +9,27 @@
 #include "rtcc.h"
 #include "bootloader.h"
 
-const char start_line1[] = "Bootloader Mode:";
-const char start_line2[] = "Looking for file";
-const char start_line3[] = "FIRMWARE.HEX on USB";
-const char start_line4[] = "drive...";
+const char start_line1[17] = "Bootloader Mode";
+const char start_line2[17] = "Looking for file";
+const char start_line3[20] = "FIRMWARE.HEX on USB";
+const char start_line4[9] = "drive...";
 
-const char found_line1[] = "Bootloader Mode:";
+const char found_line1[] = "Bootloader Mode";
 const char found_line2[] = "FIRMWARE.HEX found";
 const char found_line3[] = "Size: ";
 const char found_line3b[] = " bytes";
 const char found_line4[] = "Press to use file";
 
-const char verify_line1[] = "Bootloader Mode:";
+const char verify_line1[] = "Bootloader Mode";
 const char verify_line2[] = "Verifying...";
 const char verify_line3[] = "Record";
 
-const char checked_line1[] = "Bootloader Mode:";
+const char checked_line1[] = "Bootloader Mode";
 const char checked_line2[] = "File check completed";
 const char checked_line3[] = "records";
 const char checked_line4[] = "Press to program";
 
-const char failed_line1[] = "Bootloader Mode:";
+const char failed_line1[] = "Bootloader Mode";
 const char failed_line2[] = "File check failed";
 const char failed_line3_startCode[] = "Missing start code";
 const char failed_line3_noNextRecord[] = "No next record";
@@ -38,6 +38,12 @@ const char failed_line3_dataTooLong[] = "Data too long";
 const char failed_line3_addressRange[] = "Addr. outside range";
 const char failed_line4[] = "Record ";
 
+const char programming_line1[] = "Bootloader Mode";
+const char programming_line2[] = "Programming flash";
+
+const char done_line1[] = "Bootloader Mode";
+const char done_line2[] = "Done!";
+
 char display_content[4][20];
 
 static void _display_start(void);
@@ -45,6 +51,8 @@ static void _display_found(void);
 static void _display_verify(void);
 static void _display_checked(void);
 static void _display_failed(void);
+static void _display_programming(void);
+static void _display_done(void);
 
 uint8_t display_get_character(uint8_t line, uint8_t position)
 {
@@ -96,6 +104,13 @@ static uint8_t _display_itoa_u16(uint32_t value,  char *text)
 
 static uint8_t _display_itoa_u32(uint32_t value,  char *text)
 {
+    //Value can be handled by 16 bits
+    if(value<=0x7FFF) //32767
+    {
+        return _display_itoa_u16((uint16_t) value,  text);
+    }
+        
+    //We really need 32 bits
     if(value>100000000)
     {
         itoa(text, (uint16_t)(value/10000), 10);
@@ -124,36 +139,12 @@ static uint8_t _display_itoa_u32(uint32_t value,  char *text)
         *(text+6) = ' ';
         return 6;
     }
-    else if(value>10000)
+    else
     {
         itoa(text, (uint16_t)(value/10000), 10);
         itoa(text+1, (uint16_t)(value%10000), 10);
         *(text+5) = ' ';
         return 5;
-    }
-    else if(value>1000)
-    {
-        itoa(text, value, 10);
-        *(text+4) = ' ';
-        return 4;
-    }
-    else if(value>1000)
-    {
-        itoa(text, value, 10);
-        *(text+3) = ' ';
-        return 3;
-    }
-    else if(value>1000)
-    {
-        itoa(text, value, 10);
-        *(text+2) = ' ';
-        return 2;
-    }
-    else
-    {
-        itoa(text, value, 10);
-        *(text+1) = ' ';
-        return 1;
     }
 }
 
@@ -249,6 +240,28 @@ void display_prepare(uint8_t mode)
         case DISPLAY_MODE_BOOTLOADER_CHECK_FAILED:
             _display_failed();
             break;
+            
+        case DISPLAY_MODE_BOOTLOADER_PROGRAMMING:
+            _display_programming();
+            break;
+            
+        case DISPLAY_MODE_BOOTLOADER_DONE:
+            _display_done();
+            break;
+    }
+    
+    //Pulse
+    switch((os.timeSlot>>5)&0b11)
+    {
+        case 3:
+            display_content[0][17] = '.';
+            //fall through
+        case 2:
+            display_content[0][16] = '.';
+            //fall through
+        case 1:
+            display_content[0][15] = '.';
+            //fall through     
     }
     
     //Some debugging output
@@ -258,13 +271,7 @@ void display_prepare(uint8_t mode)
     {
         display_content[0][18] = 'I';
     }
-    
-    //Pulse
-    if(os.timeSlot&0b00010000)
-    {
-        display_content[0][19] = 'X';
-    }
-    
+
     if(os.buttonCount>0)
     {
         display_content[3][19] = 'X';
@@ -329,21 +336,6 @@ static void _display_verify(void)
     while(verify_line3[cntr])
         display_content[2][cntr] = verify_line3[cntr++];
     _display_itoa_u16(bootloader_get_entries(), &display_content[2][cntr+1]);
-    /*
-    cntr = 0;
-    while(found_line3[cntr])
-        display_content[2][cntr] = found_line3[cntr++];
-    start = cntr;
-    start += _display_itoa_u32(bootloader_get_file_size(), &display_content[2][cntr]);
-    cntr = 0;
-    while(found_line3b[cntr])
-        display_content[2][start+cntr] = found_line3b[cntr++];
-    cntr = 0;
-    while(found_line3b[cntr])
-        display_content[3][start+cntr] = found_line3b[cntr++];
-    start = cntr;
-    start += _display_itoa_u32(bootloader_get_entries(), &display_content[3][cntr]);  
-    */
 }
 
 static void _display_checked(void)
@@ -407,6 +399,7 @@ static void _display_failed(void)
         case ShortRecordErrorAddressRange:
             while(failed_line3_addressRange[cntr])
             display_content[2][cntr] = failed_line3_addressRange[cntr++];
+            _display_itoa_u32(bootloader_get_rec_address(), &display_content[3][14]);
             break;
             
     }
@@ -415,6 +408,28 @@ static void _display_failed(void)
     while(failed_line4[cntr])
         display_content[3][cntr] = failed_line4[cntr++];
     _display_itoa_u16(bootloader_get_entries(), &display_content[3][cntr]);
+}
+
+static void _display_programming(void)
+{
+    uint8_t cntr;
+    cntr = 0;
+    while(programming_line1[cntr])
+        display_content[0][cntr] = programming_line1[cntr++];
+    cntr = 0;
+    while(programming_line2[cntr])
+        display_content[1][cntr] = programming_line2[cntr++];
+}
+
+static void _display_done(void)
+{
+    uint8_t cntr;
+    cntr = 0;
+    while(done_line1[cntr])
+        display_content[0][cntr] = done_line1[cntr++];
+    cntr = 0;
+    while(done_line2[cntr])
+        display_content[1][cntr] = done_line2[cntr++];
 }
 
 void display_update(void)

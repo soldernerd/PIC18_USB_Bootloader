@@ -30,6 +30,33 @@
 #include "hex.h"
 #include "bootloader.h"
 
+/*
+//High priority ISR
+void interrupt_high(void) __at(0x108)
+{
+    //asm("MOVLW 0x43"); 
+    asm("goto 0x1008"); 
+    return;
+}
+
+//Low priority ISR
+//void interrupt low_priority interrupt_low(void)
+void interrupt_low(void) __at(0x118)
+{
+    //asm("MOVLW 0x76"); 
+    asm("goto 0x24");
+    return;
+}
+ * */
+
+#define PROG_START 0x8000
+#asm
+    PSECT intcode
+        goto    PROG_START + 0x08;
+    PSECT intcodelo
+        goto    PROG_START + 0x18;
+#endasm
+
 
 /********************************************************************
  * Function:        void main(void)
@@ -47,7 +74,7 @@
  * Note:            None
  *******************************************************************/
 MAIN_RETURN main(void)
-{
+{ 
     //This is a user defined function
     system_init();
     
@@ -82,7 +109,7 @@ MAIN_RETURN main(void)
         //Take care of timeslots, encoder and done flag
         //Usually, this happens in a timer ISR but we can't use interrupts here
         timer_pseudo_isr();
-        
+
         if(!os.done)
         {
             //Run scheduled EEPROM write tasks

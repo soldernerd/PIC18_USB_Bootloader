@@ -3,15 +3,12 @@
 #include "bootloader.h"
 #include "fat16.h"
 #include "hex.h"
+#include "internal_flash.h"
 
 #define BOOTLOADER_CHARACTER_BUFFER_SIZE 50
 #define BOOTLOADER_NUMBER_OF_RECORDS_PER_CALL 1
-#define BOOTLOADER_RESET_VECTOR_ADDRESS_MIN 0x00000
-#define BOOTLOADER_RESET_VECTOR_ADDRESS_MAX 0x00007
-#define BOOTLOADER_MINIMUM_ADDRESS_ALLOWED_1 0x00008
-#define BOOTLOADER_MAXIMUM_ADDRESS_ALLOWED_1 0x00199
-#define BOOTLOADER_MINIMUM_ADDRESS_ALLOWED_2 0x09000
-#define BOOTLOADER_MAXIMUM_ADDRESS_ALLOWED_2 0x1FFF7
+#define BOOTLOADER_MINIMUM_ADDRESS_ALLOWED 0x09000
+#define BOOTLOADER_MAXIMUM_ADDRESS_ALLOWED 0x1FFF7
 #define BOOTLOADER_CONFIGURATIONBITS_ADDRESS_MIN 0x1FFF8
 #define BOOTLOADER_CONFIGURATIONBITS_ADDRESS_MAX 0x1FFFF
 
@@ -35,11 +32,14 @@ typedef enum
 
 typedef enum
 {
-    ADDRESS_CHECK_RESULT_UNDEFINED = 0x00,
-    ADDRESS_CHECK_RESULT_OK_LOW_RANGE = 0x01,
-    ADDRESS_CHECK_RESULT_OK_HIGH_RANGE = 0x02,
-    ADDRESS_CHECK_RESULT_RESET_VECTOR = 0x04,        
-    ADDRESS_CHECK_RESULT_CONFIGURATION_BITS = 0x08,
+    COMPARE_RESULT_DATA_MATCHES,
+    COMPARE_RESULT_DATA_DOES_NOT_MATCH
+} compareResult_t;
+
+typedef enum
+{
+    ADDRESS_CHECK_RESULT_OK = 0x00,       
+    ADDRESS_CHECK_RESULT_CONFIGURATION_BITS = 0x01,
     ADDRESS_CHECK_RESULT_ERROR = 0xFF
 } addressCheckResult_t;
 
@@ -47,6 +47,10 @@ static addressCheckResult_t _bootloader_check_address(uint32_t address,  uint8_t
   
 static void _bootloader_find_file(void);
 static void _bootloader_verify_file(void);
+static void _bootloader_program(void);
+
+static compareResult_t _bootloader_verify_program_memory(uint32_t addressOffset, HexFileEntry_t *hexFileEntry);
+
 
 
 
@@ -71,6 +75,13 @@ void bootloader_run(void)
             
         case BOOTLOADER_MODE_CHECK_FAILED:
             break;
+            
+        case BOOTLOADER_MODE_PROGRAMMING:
+            _bootloader_program();
+            break;
+
+        case BOOTLOADER_MODE_DONE:
+            break;
     }
 }
 
@@ -80,35 +91,25 @@ static addressCheckResult_t _bootloader_check_address(uint32_t address, uint8_t 
     addressCheckResult_t worst_case;
     uint8_t cntr;
     
-    worst_case = ADDRESS_CHECK_RESULT_UNDEFINED;
+    worst_case = ADDRESS_CHECK_RESULT_OK;
     
     //Check needs to pass for every byte in data range
     for(cntr=0; cntr<dataLength; ++cntr)
     {
-        byte_status = ADDRESS_CHECK_RESULT_ERROR;
-        
-        //Reset vector. Don't program but allowed in file
-        if(((address+cntr)>=BOOTLOADER_RESET_VECTOR_ADDRESS_MIN) && ((address+cntr)<=BOOTLOADER_RESET_VECTOR_ADDRESS_MAX))
+        //Allowed range: At interrupt vectors and slightly beyond
+        if(((address+cntr)>=BOOTLOADER_MINIMUM_ADDRESS_ALLOWED) && ((address+cntr)<=BOOTLOADER_MAXIMUM_ADDRESS_ALLOWED))
         {
-            byte_status = ADDRESS_CHECK_RESULT_RESET_VECTOR;
+            byte_status = ADDRESS_CHECK_RESULT_OK;
         }
-        
         //Configuration bits. Don't program but allowed in file
-        if(((address+cntr)>=BOOTLOADER_CONFIGURATIONBITS_ADDRESS_MIN) && ((address+cntr)<=BOOTLOADER_CONFIGURATIONBITS_ADDRESS_MAX))
+        //These will be checked to ensure they match
+        else if(((address+cntr)>=BOOTLOADER_CONFIGURATIONBITS_ADDRESS_MIN) && ((address+cntr)<=BOOTLOADER_CONFIGURATIONBITS_ADDRESS_MAX))
         {
             byte_status = ADDRESS_CHECK_RESULT_CONFIGURATION_BITS;
         }
-        
-        //Allowed range 1: At interrupt vectors and slightly beyond
-        if(((address+cntr)>=BOOTLOADER_MINIMUM_ADDRESS_ALLOWED_1) && ((address+cntr)<=BOOTLOADER_MAXIMUM_ADDRESS_ALLOWED_1))
+        else
         {
-            byte_status = ADDRESS_CHECK_RESULT_OK_LOW_RANGE;
-        }
-        
-        //Allowed range 2: Bewteen bootloader and configuration bits
-        if(((address+cntr)>=BOOTLOADER_MINIMUM_ADDRESS_ALLOWED_2) && ((address+cntr)<=BOOTLOADER_MAXIMUM_ADDRESS_ALLOWED_2))
-        {
-            byte_status = ADDRESS_CHECK_RESULT_OK_HIGH_RANGE;
+            byte_status = ADDRESS_CHECK_RESULT_ERROR;
         }
         
         //Immediately return if a byte falls outside the permitted range
@@ -241,6 +242,38 @@ static void _bootloader_verify_file(void)
             hex_file_offset += return_value;
         } 
     }
+}
+
+static void _bootloader_program(void)
+{
+    internalFlash_erasePage(36);
+    internalFlash_writePage(36);
+    os.bootloader_mode = BOOTLOADER_MODE_DONE;
+    os.display_mode = DISPLAY_MODE_BOOTLOADER_DONE;
+}
+
+static compareResult_t _bootloader_verify_program_memory(uint32_t addressOffset, HexFileEntry_t *hexFileEntry)
+{
+    uint8_t buffer[16];
+    uint32_t address; 
+    uint8_t cntr;
+    
+    //Calculate address
+    address = addressOffset + hexFileEntry->address;
+    
+    //Read from internal flash into buffer
+    internalFlash_read(address, hexFileEntry->dataLength, buffer);
+    
+    for(cntr=0; cntr<hexFileEntry->dataLength; ++cntr)
+    {
+        if(hexFileEntry->data[cntr] != buffer[cntr])
+        {
+            return COMPARE_RESULT_DATA_DOES_NOT_MATCH;
+        }
+    }
+    
+    //If we get to here, all bytes match
+    return COMPARE_RESULT_DATA_MATCHES;
 }
 
 uint32_t bootloader_get_file_size(void)
