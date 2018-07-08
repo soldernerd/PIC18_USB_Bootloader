@@ -17,12 +17,15 @@ uint8_t file_buffer[BOOTLOADER_CHARACTER_BUFFER_SIZE];
 uint32_t file_minimum_address;
 uint32_t file_maximum_address;
 uint16_t hex_file_entries = 0;
+uint16_t total_hex_file_entries = 0;
 uint32_t hex_file_offset = 0;
 uint32_t hex_file_size = 0;
 HexFileEntry_t hex_file_entry;
 ShortRecordError_t last_error;
 uint32_t extended_linear_address;
+uint8_t start_from_byte_next = 0;
 
+uint16_t flash_pages_written;
 
 typedef enum
 {
@@ -167,7 +170,6 @@ static void _bootloader_verify_file(void)
     //Find file size
     hex_file_size = fat_get_file_size(file_number);
     
-    
     //Loop through a pre-defined number of records
     for(rec_counter=0; rec_counter<BOOTLOADER_NUMBER_OF_RECORDS_PER_CALL; ++rec_counter)
     {
@@ -223,6 +225,14 @@ static void _bootloader_verify_file(void)
         if(return_value==0)
         {
             //Last record has been reached without an error
+            //Prepare variables for programming and change mode
+            total_hex_file_entries = hex_file_entries;
+            hex_file_entries = 0;
+            hex_file_offset = 0;
+            extended_linear_address = 0;
+            flash_pages_written = 0;
+            start_from_byte_next = 0;
+            
             os.bootloader_mode = BOOTLOADER_MODE_CHECK_COMPLETE;
             os.display_mode = DISPLAY_MODE_BOOTLOADER_CHECK_COMPLETE;
             break;
@@ -246,10 +256,157 @@ static void _bootloader_verify_file(void)
 
 static void _bootloader_program(void)
 {
-    internalFlash_erasePage(36);
-    internalFlash_writePage(36);
-    os.bootloader_mode = BOOTLOADER_MODE_DONE;
-    os.display_mode = DISPLAY_MODE_BOOTLOADER_DONE;
+    uint16_t cntr;
+    uint8_t* buffer;
+    uint16_t entry_page;
+    uint16_t page_to_write = 0;
+    uint8_t start_from_byte;
+    uint32_t address32;
+    uint32_t return_value = 0;
+    uint16_t address_within_page;
+
+    //Loop through records
+    //for(rec_counter=0; rec_counter<5; ++rec_counter)
+    while(1)
+    {
+        //Read an entry
+        if((hex_file_size-hex_file_offset)>=BOOTLOADER_CHARACTER_BUFFER_SIZE)
+        {
+            fat_read_from_file(file_number, hex_file_offset, BOOTLOADER_CHARACTER_BUFFER_SIZE, file_buffer);
+        }
+        else
+        {
+            fat_read_from_file(file_number, hex_file_offset, (hex_file_size-hex_file_offset), file_buffer);
+        }
+        
+        //Parse that entry
+        return_value = parseHexFileEntry(file_buffer, 0, &hex_file_entry);
+        
+        //Keep track of number of records
+        ++hex_file_entries;
+        
+        //Handle return value
+        if(return_value>RecordErrorNoError)
+        {
+            //An error has occurred
+            os.bootloader_mode = BOOTLOADER_MODE_CHECK_FAILED;
+            os.display_mode = DISPLAY_MODE_BOOTLOADER_CHECK_FAILED;
+            return;
+        }
+//        else if(return_value==0)
+//        {
+//            //Last record has been reached without an error
+//            //Don't return, just break. We still need to write that data to flash
+//            break;
+//        }
+        else
+        {
+            //No error and end of file has not yet been reached
+            hex_file_offset += return_value;
+        } 
+        
+        switch(hex_file_entry.recordType)
+        {
+            //Extended linear address
+            case RecordTypeExtendedLinearAddress:
+                //Keep track of extended linear address
+                //After that we are done with this record
+                extended_linear_address = hex_file_entry.data[0];
+                extended_linear_address <<= 8;
+                extended_linear_address |= hex_file_entry.data[1];
+                extended_linear_address <<= 8;
+                extended_linear_address <<= 8;
+                continue;
+                break;
+                
+            //Data
+            case RecordTypeData:                
+                //Recall where we should start
+                start_from_byte = start_from_byte_next;
+                //Remember where to start from next time (default, may be changed below)
+                start_from_byte_next = 0;
+                
+                //Calculate 32-bit address and corresponding page
+                address32 = extended_linear_address + hex_file_entry.address;
+                entry_page = internalFlash_pageFromAddress(address32 + start_from_byte);
+                
+                //Check address range
+                if(_bootloader_check_address(address32+start_from_byte, hex_file_entry.dataLength-start_from_byte) != ADDRESS_CHECK_RESULT_OK)
+                {
+                    break;
+                }
+                
+                if(page_to_write==0)
+                {
+                    //This is the first data record
+                    //Prepare the buffer
+                    //Obtain a handle to a 1024 byte buffer
+                    page_to_write = entry_page;
+                    internalFlash_readPage(page_to_write);
+                    buffer = internalFlash_getBuffer();
+                }
+
+//                if(entry_page==page_to_write)
+//                {     
+//                    //The data of this entry belongs to the same page. Write it to buffer
+//                    address_within_page = internalFlash_addressWithinPage(address32 + start_from_byte, page_to_write);
+                    for(cntr=start_from_byte; cntr<hex_file_entry.dataLength; ++cntr)
+                    {
+                        //Make sure that byte is still on the same page
+                        //Hex file entries often span across page boundaries
+                        if(internalFlash_pageFromAddress(address32+cntr) == page_to_write)
+                        {
+                            address_within_page = internalFlash_addressWithinPage(address32+cntr, page_to_write);
+                            buffer[address_within_page] = hex_file_entry.data[cntr];
+                        }
+                        else
+                        {
+                            //Make sure we re-visit this hex file entry
+                            hex_file_offset -= return_value;
+                            --hex_file_entries;
+                            //Remember where to start from next time
+                            start_from_byte_next = cntr;
+                            //Write data to flash
+                            internalFlash_erasePage(page_to_write);
+                            internalFlash_writePage(page_to_write);
+                            ++flash_pages_written;
+                            //Return from function
+                            return;
+                        }
+                    }
+//                }
+//                else
+//                {
+//                    //Make sure we re-visit this hex file entry
+//                    hex_file_offset -= return_value;
+//                    --hex_file_entries;
+//                    //Write data to flash
+//                    internalFlash_erasePage(page_to_write);
+//                    internalFlash_writePage(page_to_write);
+//                    ++flash_pages_written;
+//                    //Return from function
+//                    return;
+//                }
+                    
+                break;
+                
+            case RecordTypeEndOfFile:
+                //Only write if data has been prepared before
+                if(page_to_write!=0)
+                {
+                    //Write data to flash
+                    internalFlash_erasePage(page_to_write);
+                    internalFlash_writePage(page_to_write);
+                    ++flash_pages_written;
+                    //Change mode
+                    os.bootloader_mode = BOOTLOADER_MODE_DONE;
+                    os.display_mode = DISPLAY_MODE_BOOTLOADER_DONE;
+                }
+                //Return from function
+                return;
+                break;
+        }
+    }
 }
 
 static compareResult_t _bootloader_verify_program_memory(uint32_t addressOffset, HexFileEntry_t *hexFileEntry)
@@ -276,6 +433,12 @@ static compareResult_t _bootloader_verify_program_memory(uint32_t addressOffset,
     return COMPARE_RESULT_DATA_MATCHES;
 }
 
+//static uint16_t _bootloader_pageFromAddress(uint32_t address)
+//{
+//    address >>= 10;
+//    return (uint16_t) address;
+//}
+
 uint32_t bootloader_get_file_size(void)
 {
     return hex_file_size;
@@ -284,6 +447,11 @@ uint32_t bootloader_get_file_size(void)
 uint16_t bootloader_get_entries(void)
 {
     return hex_file_entries;
+}
+
+uint16_t bootloader_get_total_entries(void)
+{
+    return total_hex_file_entries;
 }
 
 ShortRecordError_t bootloader_get_error(void)
@@ -320,4 +488,9 @@ uint8_t bootloader_get_rec_checksum(void)
 uint8_t bootloader_get_rec_checksumCheck(void)
 {
     return hex_file_entry.checksumCheck;
+}
+
+uint16_t bootloader_get_flashPagesWritten(void)
+{
+    return flash_pages_written;
 }

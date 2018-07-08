@@ -40,6 +40,8 @@ const char failed_line4[] = "Record ";
 
 const char programming_line1[] = "Bootloader Mode";
 const char programming_line2[] = "Programming flash";
+const char programming_line3[] = "Entry ";
+const char programming_line4[] = "Pages written: ";
 
 const char done_line1[] = "Bootloader Mode";
 const char done_line2[] = "Done!";
@@ -349,7 +351,7 @@ static void _display_checked(void)
     while(checked_line2[cntr])
         display_content[1][cntr] = checked_line2[cntr++];
     //Display number of records
-    start = _display_itoa_u16(bootloader_get_entries(), &display_content[2][0]);
+    start = _display_itoa_u16(bootloader_get_total_entries(), &display_content[2][0]);
     start++;
     cntr = 0;
     while(checked_line3[cntr])
@@ -416,9 +418,22 @@ static void _display_programming(void)
     cntr = 0;
     while(programming_line1[cntr])
         display_content[0][cntr] = programming_line1[cntr++];
+    
     cntr = 0;
     while(programming_line2[cntr])
         display_content[1][cntr] = programming_line2[cntr++];
+    
+    cntr = 0;
+    while(programming_line3[cntr])
+        display_content[2][cntr] = programming_line3[cntr++];
+    cntr += _display_itoa_u16(bootloader_get_entries(), &display_content[2][cntr]);
+    display_content[2][cntr++] = '/';
+    _display_itoa_u16(bootloader_get_total_entries(), &display_content[2][cntr]);
+    
+    cntr = 0;
+    while(programming_line4[cntr])
+        display_content[3][cntr] = programming_line4[cntr++];
+    _display_itoa_u16(bootloader_get_flashPagesWritten(), &display_content[3][cntr]);
 }
 
 static void _display_done(void)
@@ -430,6 +445,18 @@ static void _display_done(void)
     cntr = 0;
     while(done_line2[cntr])
         display_content[1][cntr] = done_line2[cntr++];
+    
+    cntr = 0;
+    while(programming_line3[cntr])
+        display_content[2][cntr] = programming_line3[cntr++];
+    cntr += _display_itoa_u16(bootloader_get_entries(), &display_content[2][cntr]);
+    display_content[2][cntr++] = '/';
+    _display_itoa_u16(bootloader_get_total_entries(), &display_content[2][cntr]);
+    
+    cntr = 0;
+    while(programming_line4[cntr])
+        display_content[3][cntr] = programming_line4[cntr++];
+    _display_itoa_u16(bootloader_get_flashPagesWritten(), &display_content[3][cntr]);
 }
 
 void display_update(void)

@@ -29,9 +29,16 @@ const uint8_t *FileAddress = 0;
 
 uint8_t pageBuffer[1024];
 
+uint8_t* internalFlash_getBuffer(void)
+{
+    return pageBuffer;
+}
+
 void internalFlash_readPage(uint16_t page)
 {
-    
+    uint32_t address;
+    address = internalFlash_addressFromPage(page);
+    internalFlash_read(address, 1024, pageBuffer);
 }
 
 void internalFlash_erasePage(uint16_t page)
@@ -61,12 +68,6 @@ void internalFlash_writePage(uint16_t page)
     uint8_t i;
     uint8_t block_cntr;
     uint8_t byte_cntr;
-    
-    //generate some dummy data
-    for(cntr=0; cntr<1024; ++cntr)
-    {
-        pageBuffer[cntr] = (cntr & 0xFF);
-    }
     
     //Calculate address and set it
     address = page;
@@ -159,7 +160,7 @@ uint8_t internalFlash_read(uint32_t address, uint8_t data_length, uint8_t* buffe
     );
 
 	return true;
-}//end SectorRead
+}
 
 
 uint8_t internalFlash_write(uint32_t address, uint8_t data_length, uint8_t* buffer)
@@ -304,5 +305,26 @@ uint8_t internalFlash_write(uint32_t address, uint8_t data_length, uint8_t* buff
     return true;
 } //end SectorWrite
 
+uint16_t internalFlash_pageFromAddress(uint32_t address)
+{
+    address >>= 10;
+    return (uint16_t) address;
+}
+
+uint32_t internalFlash_addressFromPage(uint16_t page)
+{
+    uint32_t address;
+    address = (uint32_t) page;
+    address <<= 10;
+    return (uint16_t) address;
+}
+
+uint16_t internalFlash_addressWithinPage(uint32_t address, uint16_t page)
+{
+    uint32_t page_start_address;
+    page_start_address = internalFlash_addressFromPage(page);
+    address = address - page_start_address;
+    return (uint16_t) address;
+}
 
 

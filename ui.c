@@ -47,6 +47,14 @@ static void _ui_encoder(void)
 
         case BOOTLOADER_MODE_PROGRAMMING:
             break; 
+            
+        case DISPLAY_MODE_BOOTLOADER_DONE:
+            if(os.buttonCount>0)
+            {
+                asm("GOTO 0x9000");
+            }
+            
+            break; 
     }    
 }
 

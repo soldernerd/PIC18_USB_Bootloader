@@ -26,7 +26,9 @@ const char bootloader_extension[4] = "HEX";
 void bootloader_run(void);
 uint32_t bootloader_get_file_size(void);
 uint16_t bootloader_get_entries(void);
+uint16_t bootloader_get_total_entries(void);
 ShortRecordError_t bootloader_get_error(void);
+uint16_t bootloader_get_flashPagesWritten(void);
 
 //Functions that give access to last record
 uint16_t bootloader_get_rec_dataLength(void);
@@ -35,6 +37,8 @@ RecordType_t bootloader_get_rec_recordType(void);
 uint8_t bootloader_get_rec_data(uint8_t index);
 uint8_t bootloader_get_rec_checksum(void);
 uint8_t bootloader_get_rec_checksumCheck(void);
+
+
 
 
 

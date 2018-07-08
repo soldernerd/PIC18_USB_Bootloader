@@ -74,7 +74,7 @@ void interrupt_low(void) __at(0x118)
  * Note:            None
  *******************************************************************/
 MAIN_RETURN main(void)
-{ 
+{
     //This is a user defined function
     system_init();
     
