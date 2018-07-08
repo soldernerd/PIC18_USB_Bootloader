@@ -2912,17 +2912,17 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v _internalFlash_readPage internalFlash_readPage `(v  1 e 1 0 ]
 {
 "39
-[v internalFlash_readPage@address address `ul  1 a 4 22 ]
+[v internalFlash_readPage@address address `ul  1 a 4 23 ]
 "37
-[v internalFlash_readPage@page page `ui  1 p 2 20 ]
+[v internalFlash_readPage@page page `ui  1 p 2 21 ]
 "42
 } 0
 "144
 [v _internalFlash_read internalFlash_read `(uc  1 e 1 0 ]
 {
 [v internalFlash_read@address address `ul  1 p 4 13 ]
-[v internalFlash_read@data_length data_length `uc  1 p 1 17 ]
-[v internalFlash_read@buffer buffer `*.39uc  1 p 2 18 ]
+[v internalFlash_read@data_length data_length `ui  1 p 2 17 ]
+[v internalFlash_read@buffer buffer `*.39uc  1 p 2 19 ]
 "163
 } 0
 "308

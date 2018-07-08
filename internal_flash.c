@@ -141,7 +141,7 @@ void EraseBlock(const uint8_t* dest)
     _internalFlash_unlockAndActivate(INTERNAL_FLASH_UNLOCK_KEY);
 }
 
-uint8_t internalFlash_read(uint32_t address, uint8_t data_length, uint8_t* buffer)
+uint8_t internalFlash_read(uint32_t address, uint16_t data_length, uint8_t* buffer)
 {
     //Error check.  Make sure the host is trying to read from a legitimate
     //address, which corresponds to the MSD volume (and not some other program
@@ -316,7 +316,7 @@ uint32_t internalFlash_addressFromPage(uint16_t page)
     uint32_t address;
     address = (uint32_t) page;
     address <<= 10;
-    return (uint16_t) address;
+    return address;
 }
 
 uint16_t internalFlash_addressWithinPage(uint32_t address, uint16_t page)

@@ -49,7 +49,7 @@ void interrupt_low(void) __at(0x118)
 }
  * */
 
-#define PROG_START 0x8000
+#define PROG_START 0x9000
 #asm
     PSECT intcode
         goto    PROG_START + 0x08;
