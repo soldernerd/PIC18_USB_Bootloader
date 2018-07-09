@@ -29,6 +29,9 @@
 #include "fat16.h"
 #include "hex.h"
 #include "bootloader.h"
+#include "internal_flash.h"
+
+static uint8_t normal_mode(void);
 
 /*
 //High priority ISR
@@ -49,7 +52,6 @@ void interrupt_low(void) __at(0x118)
 }
  * */
 
-#define PROG_START 0x9000
 #asm
     PSECT intcode
         goto    PROG_START + 0x08;
@@ -77,6 +79,15 @@ MAIN_RETURN main(void)
 {
     //This is a user defined function
     system_init();
+    
+    //Check if we should jump to normal software (i.e. not run bootloader)
+    if(normal_mode())
+    {
+        //Start normal program. We're already done...
+        #asm
+            goto PROG_START;
+        #endasm
+    }
     
     SYSTEM_Initialize(SYSTEM_STATE_USB_START);
 
@@ -122,27 +133,27 @@ MAIN_RETURN main(void)
             switch(os.timeSlot&0b00000111)
             {
                 case 0:
-                    bootloader_run();
+                    bootloader_run(0);
                     break;
 
                 case 1:
-                    bootloader_run();
+                    bootloader_run(1);
                     break;
                     
                 case 2:
-                    bootloader_run();
+                    bootloader_run(2);
                     break;
                     
                 case 3:
-                    bootloader_run();
+                    bootloader_run(3);
                     break;
                     
                 case 4:
-                    bootloader_run();
+                    bootloader_run(4);
                     break;
                     
                 case 5:
-                    bootloader_run();
+                    bootloader_run(5);
                     break;
 
                 case 6:
@@ -164,6 +175,32 @@ MAIN_RETURN main(void)
     }//end while(1)
 }//end main
 
-/*******************************************************************************
- End of File
-*/
+//This function decides if we should start in bootloader mode or not.
+//Returns 0 for bootloader mode, 1 for normal program
+static uint8_t normal_mode(void)
+{
+    if(i2c_eeprom_readByte(EEPROM_BOOTLOADER_BYTE_ADDRESS)==BOOTLOADER_BYTE_FORCE_BOOTLOADER_MODE)
+    {
+        //Change value so we don't start in bootloader mode indefinitely
+        i2c_eeprom_writeByte(EEPROM_BOOTLOADER_BYTE_ADDRESS, 0x00);
+        //But start in bootloader mode this time
+        return 0;
+    }
+    else if(i2c_eeprom_readByte(EEPROM_BOOTLOADER_BYTE_ADDRESS)==BOOTLOADER_BYTE_FORCE_NORMAL_MODE)
+    {
+        //Change value so we don't start in normal mode indefinitely
+        i2c_eeprom_writeByte(EEPROM_BOOTLOADER_BYTE_ADDRESS, 0x00);
+        //But start in normal mode this time
+        return 1;
+    }
+    else if(!PUSHBUTTON_BIT) //Button is pressed
+    {
+        //Bootloader mode if pushbutton is pressed
+        return 0;
+    }
+    else
+    {
+        //Normal program
+        return 1;
+    }
+}

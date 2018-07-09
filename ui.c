@@ -5,6 +5,7 @@
 #include "i2c.h"
 #include "rtcc.h"
 #include "ui.h"
+#include "internal_flash.h"
 
 userInterfaceStatus_t userInterfaceStatus;
 uint16_t system_ui_inactive_count;
@@ -51,7 +52,10 @@ static void _ui_encoder(void)
         case DISPLAY_MODE_BOOTLOADER_DONE:
             if(os.buttonCount>0)
             {
-                asm("GOTO 0x9000");
+                i2c_eeprom_writeByte(EEPROM_BOOTLOADER_BYTE_ADDRESS, BOOTLOADER_BYTE_FORCE_NORMAL_MODE);
+                #asm
+                    goto PROG_START;
+                #endasm
             }
             
             break; 

@@ -11,6 +11,7 @@
 #include <stdint.h>
 
 #define INTERNAL_FLASH_SIZE 0x1FFFF
+#define PROG_START 0x9000
 
 uint8_t* internalFlash_getBuffer(void);
 

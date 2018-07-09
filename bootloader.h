@@ -23,7 +23,7 @@ typedef enum ShortRecordError
 const char bootloader_filename[9] = "FIRMWARE";
 const char bootloader_extension[4] = "HEX";
 
-void bootloader_run(void);
+void bootloader_run(uint8_t timeslot);
 uint32_t bootloader_get_file_size(void);
 uint16_t bootloader_get_entries(void);
 uint16_t bootloader_get_total_entries(void);

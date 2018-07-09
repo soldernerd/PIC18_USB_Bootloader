@@ -57,7 +57,7 @@ static compareResult_t _bootloader_verify_program_memory(uint32_t addressOffset,
 
 
 
-void bootloader_run(void)
+void bootloader_run(uint8_t timeslot)
 {
     switch(os.bootloader_mode)
     {
@@ -80,7 +80,10 @@ void bootloader_run(void)
             break;
             
         case BOOTLOADER_MODE_PROGRAMMING:
-            _bootloader_program();
+            if(timeslot==0)
+            {
+                _bootloader_program();
+            }
             break;
 
         case BOOTLOADER_MODE_DONE:
@@ -346,47 +349,30 @@ static void _bootloader_program(void)
                     buffer = internalFlash_getBuffer();
                 }
 
-//                if(entry_page==page_to_write)
-//                {     
-//                    //The data of this entry belongs to the same page. Write it to buffer
-//                    address_within_page = internalFlash_addressWithinPage(address32 + start_from_byte, page_to_write);
-                    for(cntr=start_from_byte; cntr<hex_file_entry.dataLength; ++cntr)
+                for(cntr=start_from_byte; cntr<hex_file_entry.dataLength; ++cntr)
+                {
+                    //Make sure that byte is still on the same page
+                    //Hex file entries often span across page boundaries
+                    if(internalFlash_pageFromAddress(address32+cntr) == page_to_write)
                     {
-                        //Make sure that byte is still on the same page
-                        //Hex file entries often span across page boundaries
-                        if(internalFlash_pageFromAddress(address32+cntr) == page_to_write)
-                        {
-                            address_within_page = internalFlash_addressWithinPage(address32+cntr, page_to_write);
-                            buffer[address_within_page] = hex_file_entry.data[cntr];
-                        }
-                        else
-                        {
-                            //Make sure we re-visit this hex file entry
-                            hex_file_offset -= return_value;
-                            --hex_file_entries;
-                            //Remember where to start from next time
-                            start_from_byte_next = cntr;
-                            //Write data to flash
-                            internalFlash_erasePage(page_to_write);
-                            internalFlash_writePage(page_to_write);
-                            ++flash_pages_written;
-                            //Return from function
-                            return;
-                        }
+                        address_within_page = internalFlash_addressWithinPage(address32+cntr, page_to_write);
+                        buffer[address_within_page] = hex_file_entry.data[cntr];
                     }
-//                }
-//                else
-//                {
-//                    //Make sure we re-visit this hex file entry
-//                    hex_file_offset -= return_value;
-//                    --hex_file_entries;
-//                    //Write data to flash
-//                    internalFlash_erasePage(page_to_write);
-//                    internalFlash_writePage(page_to_write);
-//                    ++flash_pages_written;
-//                    //Return from function
-//                    return;
-//                }
+                    else
+                    {
+                        //Make sure we re-visit this hex file entry
+                        hex_file_offset -= return_value;
+                        --hex_file_entries;
+                        //Remember where to start from next time
+                        start_from_byte_next = cntr;
+                        //Write data to flash
+                        internalFlash_erasePage(page_to_write);
+                        internalFlash_writePage(page_to_write);
+                        ++flash_pages_written;
+                        //Return from function
+                        return;
+                    }
+                }
                     
                 break;
                 
@@ -432,12 +418,6 @@ static compareResult_t _bootloader_verify_program_memory(uint32_t addressOffset,
     //If we get to here, all bytes match
     return COMPARE_RESULT_DATA_MATCHES;
 }
-
-//static uint16_t _bootloader_pageFromAddress(uint32_t address)
-//{
-//    address >>= 10;
-//    return (uint16_t) address;
-//}
 
 uint32_t bootloader_get_file_size(void)
 {

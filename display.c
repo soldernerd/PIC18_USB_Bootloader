@@ -45,6 +45,8 @@ const char programming_line4[] = "Pages written: ";
 
 const char done_line1[] = "Bootloader Mode";
 const char done_line2[] = "Done!";
+const char done_line3[] = "Pages written: ";
+const char done_line4[] = "Press to reboot";
 
 char display_content[4][20];
 
@@ -445,18 +447,13 @@ static void _display_done(void)
     cntr = 0;
     while(done_line2[cntr])
         display_content[1][cntr] = done_line2[cntr++];
-    
     cntr = 0;
-    while(programming_line3[cntr])
-        display_content[2][cntr] = programming_line3[cntr++];
-    cntr += _display_itoa_u16(bootloader_get_entries(), &display_content[2][cntr]);
-    display_content[2][cntr++] = '/';
-    _display_itoa_u16(bootloader_get_total_entries(), &display_content[2][cntr]);
-    
+    while(done_line3[cntr])
+        display_content[2][cntr] = done_line3[cntr++];
+    _display_itoa_u16(bootloader_get_flashPagesWritten(), &display_content[2][cntr]);
     cntr = 0;
-    while(programming_line4[cntr])
-        display_content[3][cntr] = programming_line4[cntr++];
-    _display_itoa_u16(bootloader_get_flashPagesWritten(), &display_content[3][cntr]);
+    while(done_line4[cntr])
+        display_content[3][cntr] = done_line4[cntr++];
 }
 
 void display_update(void)

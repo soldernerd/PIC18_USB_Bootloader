@@ -129,7 +129,7 @@ EVENT_EP0_REQUEST 3
 EVENT_ATTACH 4
 EVENT_TRANSFER_TERMINATED 5
 ]
-"295 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
+"299 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
 [e E9257 . `uc
 BOOTLOADER_MODE_START 0
 BOOTLOADER_MODE_FILE_FOUND 16
@@ -148,13 +148,13 @@ DISPLAY_MODE_BOOTLOADER_CHECK_FAILED 64
 DISPLAY_MODE_BOOTLOADER_PROGRAMMING 80
 DISPLAY_MODE_BOOTLOADER_DONE 96
 ]
-"81 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\main.c
+"92 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\main.c
 [e E8100 . `uc
 SYSTEM_STATE_USB_START 0
 SYSTEM_STATE_USB_SUSPEND 1
 SYSTEM_STATE_USB_RESUME 2
 ]
-"149
+"160
 [e E9440 . `uc
 USER_INTERFACE_STATUS_OFF 0
 USER_INTERFACE_STATUS_STARTUP_1 1
@@ -169,7 +169,7 @@ SYSTEM_STATE_USB_START 0
 SYSTEM_STATE_USB_SUSPEND 1
 SYSTEM_STATE_USB_RESUME 2
 ]
-"295 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
+"299 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
 [e E8729 . `uc
 BOOTLOADER_MODE_START 0
 BOOTLOADER_MODE_FILE_FOUND 16
@@ -257,7 +257,7 @@ ADR_PENDING_STATE 8
 ADDRESS_STATE 16
 CONFIGURED_STATE 32
 ]
-"295 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
+"299 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
 [e E8108 . `uc
 BOOTLOADER_MODE_START 0
 BOOTLOADER_MODE_FILE_FOUND 16
@@ -342,7 +342,7 @@ CALIBRATION_INDEX_EXTERNAL_TEMPERATURE_1 5
 CALIBRATION_INDEX_EXTERNAL_TEMPERATURE_2 6
 CALIBRATION_INDEX_COUNT 7
 ]
-"295 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
+"299 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
 [e E8108 . `uc
 BOOTLOADER_MODE_START 0
 BOOTLOADER_MODE_FILE_FOUND 16
@@ -361,7 +361,7 @@ DISPLAY_MODE_BOOTLOADER_CHECK_FAILED 64
 DISPLAY_MODE_BOOTLOADER_PROGRAMMING 80
 DISPLAY_MODE_BOOTLOADER_DONE 96
 ]
-"9 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\ui.c
+"10 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\ui.c
 [e E8352 . `uc
 USER_INTERFACE_STATUS_OFF 0
 USER_INTERFACE_STATUS_STARTUP_1 1
@@ -370,7 +370,7 @@ USER_INTERFACE_STATUS_STARTUP_3 3
 USER_INTERFACE_STATUS_STARTUP_4 4
 USER_INTERFACE_STATUS_ON 5
 ]
-"295 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
+"299 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
 [e E8319 . `uc
 BOOTLOADER_MODE_START 0
 BOOTLOADER_MODE_FILE_FOUND 16
@@ -389,7 +389,7 @@ DISPLAY_MODE_BOOTLOADER_CHECK_FAILED 64
 DISPLAY_MODE_BOOTLOADER_PROGRAMMING 80
 DISPLAY_MODE_BOOTLOADER_DONE 96
 ]
-"377 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
+"379 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
 [e E8594 ShortRecordError `uc
 ShortRecordErrorStartCode 15
 ShortRecordErrorChecksum 14
@@ -398,7 +398,7 @@ ShortRecordErrorDataTooLong 12
 ShortRecordErrorAddressRange 11
 ShortRecordErrorNoError 0
 ]
-"295 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
+"299 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
 [e E100 . `uc
 BOOTLOADER_MODE_START 0
 BOOTLOADER_MODE_FILE_FOUND 16
@@ -456,7 +456,7 @@ FLASH_BUFFER_2 1
 DATA_DOES_MATCH 0
 DATA_DOES_NOT_MATCH 1
 ]
-"295 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
+"299 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
 [e E8193 . `uc
 BOOTLOADER_MODE_START 0
 BOOTLOADER_MODE_FILE_FOUND 16
@@ -481,7 +481,7 @@ MEDIA_NO_ERROR 0
 MEDIA_DEVICE_NOT_PRESENT 1
 MEDIA_CANNOT_INITIALIZE 2
 ]
-"295 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
+"299 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
 [e E8193 . `uc
 BOOTLOADER_MODE_START 0
 BOOTLOADER_MODE_FILE_FOUND 16
@@ -522,7 +522,7 @@ RecordErrorNoNextRecord -3
 RecordErrorDataTooLong -4
 RecordErrorNoError -16
 ]
-"295 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
+"299 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
 [e E8108 . `uc
 BOOTLOADER_MODE_START 0
 BOOTLOADER_MODE_FILE_FOUND 16
@@ -559,13 +559,13 @@ ShortRecordErrorDataTooLong 12
 ShortRecordErrorAddressRange 11
 ShortRecordErrorNoError 0
 ]
-"92
+"95
 [e E8339 . `uc
 ADDRESS_CHECK_RESULT_OK 0
 ADDRESS_CHECK_RESULT_CONFIGURATION_BITS 1
 ADDRESS_CHECK_RESULT_ERROR 255
 ]
-"289
+"292
 [e E8187 RecordError `c
 RecordErrorStartCode -1
 RecordErrorChecksum -2
@@ -573,7 +573,7 @@ RecordErrorNoNextRecord -3
 RecordErrorDataTooLong -4
 RecordErrorNoError -16
 ]
-"413
+"399
 [e E8335 . `uc
 COMPARE_RESULT_DATA_MATCHES 0
 COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
@@ -604,25 +604,25 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v _APP_DeviceMSDTasks APP_DeviceMSDTasks `(v  1 e 1 0 ]
 "60 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\bootloader.c
 [v _bootloader_run bootloader_run `(v  1 e 1 0 ]
-"91
+"94
 [v __bootloader_check_address _bootloader_check_address `(E8339  1 s 1 _bootloader_check_address ]
-"134
+"137
 [v __bootloader_find_file _bootloader_find_file `(v  1 s 1 _bootloader_find_file ]
-"164
+"167
 [v __bootloader_verify_file _bootloader_verify_file `(v  1 s 1 _bootloader_verify_file ]
-"257
+"260
 [v __bootloader_program _bootloader_program `(v  1 s 1 _bootloader_program ]
-"442
+"422
 [v _bootloader_get_file_size bootloader_get_file_size `(ul  1 e 4 0 ]
-"447
+"427
 [v _bootloader_get_entries bootloader_get_entries `(ui  1 e 2 0 ]
-"452
+"432
 [v _bootloader_get_total_entries bootloader_get_total_entries `(ui  1 e 2 0 ]
-"457
+"437
 [v _bootloader_get_error bootloader_get_error `(E8594  1 e 1 0 ]
-"467
+"447
 [v _bootloader_get_rec_address bootloader_get_rec_address `(ui  1 e 2 0 ]
-"493
+"473
 [v _bootloader_get_flashPagesWritten bootloader_get_flashPagesWritten `(ui  1 e 2 0 ]
 "62 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\float.c
 [v ___ftpack __ftpack `(f  1 e 3 0 ]
@@ -664,31 +664,31 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v _strncmp strncmp `(i  1 e 2 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
-"59 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
+"61 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
 [v _display_get_character display_get_character `(uc  1 e 1 0 ]
-"64
+"66
 [v __display_clear _display_clear `(v  1 s 1 _display_clear ]
-"77
+"79
 [v __display_itoa_u16 _display_itoa_u16 `(uc  1 s 1 _display_itoa_u16 ]
-"107
+"109
 [v __display_itoa_u32 _display_itoa_u32 `(uc  1 s 1 _display_itoa_u32 ]
-"220
+"222
 [v _display_prepare display_prepare `(v  1 e 1 0 ]
-"283
+"285
 [v __display_start _display_start `(v  1 s 1 _display_start ]
-"300
+"302
 [v __display_found _display_found `(v  1 s 1 _display_found ]
-"327
+"329
 [v __display_verify _display_verify `(v  1 s 1 _display_verify ]
-"343
+"345
 [v __display_checked _display_checked `(v  1 s 1 _display_checked ]
-"365
+"367
 [v __display_failed _display_failed `(v  1 s 1 _display_failed ]
-"415
+"417
 [v __display_programming _display_programming `(v  1 s 1 _display_programming ]
-"439
+"441
 [v __display_done _display_done `(v  1 s 1 _display_done ]
-"462
+"459
 [v _display_update display_update `(v  1 e 1 0 ]
 "35 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fileio_media.h
 "39
@@ -840,6 +840,10 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v _i2c_digipot_reset_off i2c_digipot_reset_off `(v  1 e 1 0 ]
 "427
 [v _i2c_digipot_backlight i2c_digipot_backlight `(v  1 e 1 0 ]
+"488
+[v _i2c_eeprom_writeByte i2c_eeprom_writeByte `(v  1 e 1 0 ]
+"503
+[v _i2c_eeprom_readByte i2c_eeprom_readByte `(uc  1 e 1 0 ]
 "519
 [v _i2c_eeprom_write i2c_eeprom_write `(v  1 e 1 0 ]
 "540
@@ -874,8 +878,10 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v _internalFlash_addressFromPage internalFlash_addressFromPage `(ul  1 e 4 0 ]
 "322
 [v _internalFlash_addressWithinPage internalFlash_addressWithinPage `(ui  1 e 2 0 ]
-"76 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\main.c
+"78 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\main.c
 [v _main main `(v  1 e 1 0 ]
+"180
+[v _normal_mode normal_mode `(uc  1 s 1 normal_mode ]
 "43 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.c
 [v _timer_pseudo_isr timer_pseudo_isr `(v  1 e 1 0 ]
 "87
@@ -944,13 +950,13 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v _rtcc_write_eeprom rtcc_write_eeprom `(v  1 e 1 0 ]
 "147 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\system.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
-"12 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\ui.c
+"13 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\ui.c
 [v _ui_get_status ui_get_status `(E9440  1 e 1 0 ]
-"17
+"18
 [v __ui_encoder _ui_encoder `(v  1 s 1 _ui_encoder ]
-"61
+"65
 [v _ui_init ui_init `(v  1 e 1 0 ]
-"70
+"74
 [v _ui_run ui_run `(v  1 e 1 0 ]
 "277 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\usb_device.c
 [v _USBDeviceInit USBDeviceInit `(v  1 e 1 0 ]
@@ -1065,9 +1071,9 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v _hex_file_offset hex_file_offset `ul  1 e 4 0 ]
 "22
 [v _hex_file_size hex_file_size `ul  1 e 4 0 ]
-[s S6042 HexFileEntry 23 `ui 1 dataLength 2 0 `ui 1 address 2 2 `E23 1 recordType 1 4 `[16]uc 1 data 16 5 `uc 1 checksum 1 21 `uc 1 checksumCheck 1 22 ]
+[s S6133 HexFileEntry 23 `ui 1 dataLength 2 0 `ui 1 address 2 2 `E23 1 recordType 1 4 `[16]uc 1 data 16 5 `uc 1 checksum 1 21 `uc 1 checksumCheck 1 22 ]
 "23
-[v _hex_file_entry hex_file_entry `S6042  1 e 23 0 ]
+[v _hex_file_entry hex_file_entry `S6133  1 e 23 0 ]
 "24
 [v _last_error last_error `E8210  1 e 1 0 ]
 "25
@@ -1080,11 +1086,11 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v _bootloader_filename bootloader_filename `C[9]uc  1 e 9 0 ]
 "24
 [v _bootloader_extension bootloader_extension `C[4]uc  1 e 4 0 ]
-[s S3524 . 1 `uc 1 IOLOCK 1 0 :1:0 
+[s S3612 . 1 `uc 1 IOLOCK 1 0 :1:0 
 ]
 "1108 C:\Program Files (x86)\Microchip\xc8\v1.42\include\pic18f47j53.h
-[u S3526 . 1 `S3524 1 . 1 0 ]
-[v _PPSCONbits PPSCONbits `VES3526  1 e 1 @3775 ]
+[u S3614 . 1 `S3612 1 . 1 0 ]
+[v _PPSCONbits PPSCONbits `VES3614  1 e 1 @3775 ]
 "1244
 [v _RPOR21 RPOR21 `VEuc  1 e 1 @3797 ]
 "1251
@@ -1149,7 +1155,7 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v _RTCVALH RTCVALH `VEuc  1 e 1 @3899 ]
 "5016
 [v _RTCCAL RTCCAL `VEuc  1 e 1 @3902 ]
-[s S5055 . 1 `uc 1 RTCPTR0 1 0 :1:0 
+[s S5146 . 1 `uc 1 RTCPTR0 1 0 :1:0 
 `uc 1 RTCPTR1 1 0 :1:1 
 `uc 1 RTCOE 1 0 :1:2 
 `uc 1 HALFSEC 1 0 :1:3 
@@ -1159,9 +1165,9 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 RTCEN 1 0 :1:7 
 ]
 "5103
-[u S5064 . 1 `S5055 1 . 1 0 ]
-[v _RTCCFGbits RTCCFGbits `VES5064  1 e 1 @3903 ]
-[s S3743 . 1 `uc 1 PCFG0 1 0 :1:0 
+[u S5155 . 1 `S5146 1 . 1 0 ]
+[v _RTCCFGbits RTCCFGbits `VES5155  1 e 1 @3903 ]
+[s S3831 . 1 `uc 1 PCFG0 1 0 :1:0 
 `uc 1 PCFG1 1 0 :1:1 
 `uc 1 PCFG2 1 0 :1:2 
 `uc 1 PCFG3 1 0 :1:3 
@@ -1171,9 +1177,9 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 PCFG7 1 0 :1:7 
 ]
 "5472
-[u S3752 . 1 `S3743 1 . 1 0 ]
-[v _ANCON0bits ANCON0bits `VES3752  1 e 1 @3912 ]
-[s S3764 . 1 `uc 1 PCFG8 1 0 :1:0 
+[u S3840 . 1 `S3831 1 . 1 0 ]
+[v _ANCON0bits ANCON0bits `VES3840  1 e 1 @3912 ]
+[s S3852 . 1 `uc 1 PCFG8 1 0 :1:0 
 `uc 1 PCFG9 1 0 :1:1 
 `uc 1 PCFG10 1 0 :1:2 
 `uc 1 PCFG11 1 0 :1:3 
@@ -1182,11 +1188,11 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 VBGEN 1 0 :1:7 
 ]
 "5537
-[s S3772 . 1 `uc 1 . 1 0 :7:0 
+[s S3860 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 PCFG15 1 0 :1:7 
 ]
-[u S3775 . 1 `S3764 1 . 1 0 `S3772 1 . 1 0 ]
-[v _ANCON1bits ANCON1bits `VES3775  1 e 1 @3913 ]
+[u S3863 . 1 `S3852 1 . 1 0 `S3860 1 . 1 0 ]
+[v _ANCON1bits ANCON1bits `VES3863  1 e 1 @3913 ]
 "6734
 [v _UIR UIR `VEuc  1 e 1 @3938 ]
 [s S324 . 1 `uc 1 URSTIF 1 0 :1:0 
@@ -1229,19 +1235,19 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v _TXADDRH TXADDRH `VEuc  1 e 1 @3946 ]
 "7052
 [v _TXADDRL TXADDRL `VEuc  1 e 1 @3947 ]
-[s S4378 . 1 `uc 1 SSPM 1 0 :4:0 
+[s S4466 . 1 `uc 1 SSPM 1 0 :4:0 
 `uc 1 CKP 1 0 :1:4 
 `uc 1 SSPEN 1 0 :1:5 
 `uc 1 SSPOV 1 0 :1:6 
 `uc 1 WCOL 1 0 :1:7 
 ]
 "7468
-[s S4384 . 1 `uc 1 SSPM0 1 0 :1:0 
+[s S4472 . 1 `uc 1 SSPM0 1 0 :1:0 
 `uc 1 SSPM1 1 0 :1:1 
 `uc 1 SSPM2 1 0 :1:2 
 `uc 1 SSPM3 1 0 :1:3 
 ]
-[s S5491 . 1 `uc 1 SSPM02 1 0 :1:0 
+[s S5582 . 1 `uc 1 SSPM02 1 0 :1:0 
 `uc 1 SSPM12 1 0 :1:1 
 `uc 1 SSPM22 1 0 :1:2 
 `uc 1 SSPM32 1 0 :1:3 
@@ -1250,16 +1256,16 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 SSPOV2 1 0 :1:6 
 `uc 1 WCOL2 1 0 :1:7 
 ]
-[u S5500 . 1 `S4378 1 . 1 0 `S4384 1 . 1 0 `S5491 1 . 1 0 ]
-[v _SSP2CON1bits SSP2CON1bits `VES5500  1 e 1 @3954 ]
-[s S4214 . 1 `uc 1 . 1 0 :2:0 
+[u S5591 . 1 `S4466 1 . 1 0 `S4472 1 . 1 0 `S5582 1 . 1 0 ]
+[v _SSP2CON1bits SSP2CON1bits `VES5591  1 e 1 @3954 ]
+[s S4302 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_NOT_W 1 0 :1:2 
 ]
 "7655
-[s S4217 . 1 `uc 1 . 1 0 :5:0 
+[s S4305 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 D_NOT_A 1 0 :1:5 
 ]
-[s S4220 . 1 `uc 1 BF 1 0 :1:0 
+[s S4308 . 1 `uc 1 BF 1 0 :1:0 
 `uc 1 UA 1 0 :1:1 
 `uc 1 R_nW 1 0 :1:2 
 `uc 1 S 1 0 :1:3 
@@ -1268,7 +1274,7 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 CKE 1 0 :1:6 
 `uc 1 SMP 1 0 :1:7 
 ]
-[s S5329 . 1 `uc 1 BF2 1 0 :1:0 
+[s S5420 . 1 `uc 1 BF2 1 0 :1:0 
 `uc 1 UA2 1 0 :1:1 
 `uc 1 I2C_READ2 1 0 :1:2 
 `uc 1 I2C_START2 1 0 :1:3 
@@ -1277,59 +1283,59 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 CKE2 1 0 :1:6 
 `uc 1 SMP2 1 0 :1:7 
 ]
-[s S5338 . 1 `uc 1 . 1 0 :2:0 
+[s S5429 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 READ_WRITE2 1 0 :1:2 
 `uc 1 S2 1 0 :1:3 
 `uc 1 P2 1 0 :1:4 
 `uc 1 DATA_ADDRESS2 1 0 :1:5 
 ]
-[s S5344 . 1 `uc 1 . 1 0 :2:0 
+[s S5435 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 RW2 1 0 :1:2 
 `uc 1 START2 1 0 :1:3 
 `uc 1 STOP2 1 0 :1:4 
 `uc 1 D_A2 1 0 :1:5 
 ]
-[s S5350 . 1 `uc 1 . 1 0 :5:0 
+[s S5441 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 D_NOT_A2 1 0 :1:5 
 ]
-[s S5353 . 1 `uc 1 . 1 0 :2:0 
+[s S5444 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_W2 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 D_nA2 1 0 :1:5 
 ]
-[s S5358 . 1 `uc 1 . 1 0 :2:0 
+[s S5449 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_NOT_W2 1 0 :1:2 
 ]
-[s S5361 . 1 `uc 1 . 1 0 :2:0 
+[s S5452 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_nW2 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 I2C_DAT2 1 0 :1:5 
 ]
-[s S5366 . 1 `uc 1 . 1 0 :2:0 
+[s S5457 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_W2 1 0 :1:2 
 ]
-[s S5369 . 1 `uc 1 . 1 0 :5:0 
+[s S5460 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 NOT_A2 1 0 :1:5 
 ]
-[s S5372 . 1 `uc 1 . 1 0 :2:0 
+[s S5463 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nW2 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nA2 1 0 :1:5 
 ]
-[s S5377 . 1 `uc 1 . 1 0 :2:0 
+[s S5468 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_WRITE2 1 0 :1:2 
 ]
-[s S5380 . 1 `uc 1 . 1 0 :5:0 
+[s S5471 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 NOT_ADDRESS2 1 0 :1:5 
 ]
-[s S5383 . 1 `uc 1 . 1 0 :2:0 
+[s S5474 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nWRITE2 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nADDRESS2 1 0 :1:5 
 ]
-[u S5388 . 1 `S4214 1 . 1 0 `S4217 1 . 1 0 `S4220 1 . 1 0 `S5329 1 . 1 0 `S5338 1 . 1 0 `S5344 1 . 1 0 `S5350 1 . 1 0 `S5353 1 . 1 0 `S5358 1 . 1 0 `S5361 1 . 1 0 `S5366 1 . 1 0 `S5369 1 . 1 0 `S5372 1 . 1 0 `S5377 1 . 1 0 `S5380 1 . 1 0 `S5383 1 . 1 0 ]
-[v _SSP2STATbits SSP2STATbits `VES5388  1 e 1 @3955 ]
-[s S2782 . 1 `uc 1 RA0 1 0 :1:0 
+[u S5479 . 1 `S4302 1 . 1 0 `S4305 1 . 1 0 `S4308 1 . 1 0 `S5420 1 . 1 0 `S5429 1 . 1 0 `S5435 1 . 1 0 `S5441 1 . 1 0 `S5444 1 . 1 0 `S5449 1 . 1 0 `S5452 1 . 1 0 `S5457 1 . 1 0 `S5460 1 . 1 0 `S5463 1 . 1 0 `S5468 1 . 1 0 `S5471 1 . 1 0 `S5474 1 . 1 0 ]
+[v _SSP2STATbits SSP2STATbits `VES5479  1 e 1 @3955 ]
+[s S2630 . 1 `uc 1 RA0 1 0 :1:0 
 `uc 1 RA1 1 0 :1:1 
 `uc 1 RA2 1 0 :1:2 
 `uc 1 RA3 1 0 :1:3 
@@ -1339,7 +1345,7 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 RA7 1 0 :1:7 
 ]
 "9045
-[s S2791 . 1 `uc 1 AN0 1 0 :1:0 
+[s S2639 . 1 `uc 1 AN0 1 0 :1:0 
 `uc 1 AN1 1 0 :1:1 
 `uc 1 AN2 1 0 :1:2 
 `uc 1 AN3 1 0 :1:3 
@@ -1348,10 +1354,10 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 OSC2 1 0 :1:6 
 `uc 1 OSC1 1 0 :1:7 
 ]
-[s S2800 . 1 `uc 1 . 1 0 :5:0 
+[s S2648 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 NOT_SS1 1 0 :1:5 
 ]
-[s S2803 . 1 `uc 1 C1INA 1 0 :1:0 
+[s S2651 . 1 `uc 1 C1INA 1 0 :1:0 
 `uc 1 C2INA 1 0 :1:1 
 `uc 1 VREF_MINUS 1 0 :1:2 
 `uc 1 VREF_PLUS 1 0 :1:3 
@@ -1360,39 +1366,39 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 CLKO 1 0 :1:6 
 `uc 1 CLKI 1 0 :1:7 
 ]
-[s S2812 . 1 `uc 1 PMA6 1 0 :1:0 
+[s S2660 . 1 `uc 1 PMA6 1 0 :1:0 
 `uc 1 PMA7 1 0 :1:1 
 `uc 1 CVREF 1 0 :1:2 
 `uc 1 C1INB 1 0 :1:3 
 `uc 1 . 1 0 :1:4 
 `uc 1 HLVDIN 1 0 :1:5 
 ]
-[s S2819 . 1 `uc 1 RP0 1 0 :1:0 
+[s S2667 . 1 `uc 1 RP0 1 0 :1:0 
 `uc 1 RP1 1 0 :1:1 
 `uc 1 C2INB 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 RCV 1 0 :1:5 
 ]
-[s S2825 . 1 `uc 1 ULPWU 1 0 :1:0 
+[s S2673 . 1 `uc 1 ULPWU 1 0 :1:0 
 `uc 1 VBG 1 0 :1:1 
 `uc 1 C1IND 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 RP2 1 0 :1:5 
 ]
-[s S2831 . 1 `uc 1 . 1 0 :2:0 
+[s S2679 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 C3INB 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 C1INC 1 0 :1:5 
 ]
-[s S2836 . 1 `uc 1 ULPWUIN 1 0 :1:0 
+[s S2684 . 1 `uc 1 ULPWUIN 1 0 :1:0 
 `uc 1 . 1 0 :4:1 
 `uc 1 LVDIN 1 0 :1:5 
 `uc 1 . 1 0 :1:6 
 `uc 1 RJPU 1 0 :1:7 
 ]
-[u S2842 . 1 `S2782 1 . 1 0 `S2791 1 . 1 0 `S2800 1 . 1 0 `S2803 1 . 1 0 `S2812 1 . 1 0 `S2819 1 . 1 0 `S2825 1 . 1 0 `S2831 1 . 1 0 `S2836 1 . 1 0 ]
-[v _PORTAbits PORTAbits `VES2842  1 e 1 @3968 ]
-[s S3376 . 1 `uc 1 RB0 1 0 :1:0 
+[u S2690 . 1 `S2630 1 . 1 0 `S2639 1 . 1 0 `S2648 1 . 1 0 `S2651 1 . 1 0 `S2660 1 . 1 0 `S2667 1 . 1 0 `S2673 1 . 1 0 `S2679 1 . 1 0 `S2684 1 . 1 0 ]
+[v _PORTAbits PORTAbits `VES2690  1 e 1 @3968 ]
+[s S3464 . 1 `uc 1 RB0 1 0 :1:0 
 `uc 1 RB1 1 0 :1:1 
 `uc 1 RB2 1 0 :1:2 
 `uc 1 RB3 1 0 :1:3 
@@ -1402,7 +1408,7 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 RB7 1 0 :1:7 
 ]
 "9331
-[s S3385 . 1 `uc 1 AN12 1 0 :1:0 
+[s S3473 . 1 `uc 1 AN12 1 0 :1:0 
 `uc 1 AN10 1 0 :1:1 
 `uc 1 AN8 1 0 :1:2 
 `uc 1 AN9 1 0 :1:3 
@@ -1411,7 +1417,7 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 KBI2 1 0 :1:6 
 `uc 1 KBI3 1 0 :1:7 
 ]
-[s S3394 . 1 `uc 1 INT0 1 0 :1:0 
+[s S3482 . 1 `uc 1 INT0 1 0 :1:0 
 `uc 1 PMPBE 1 0 :1:1 
 `uc 1 CTED1 1 0 :1:2 
 `uc 1 CTED2 1 0 :1:3 
@@ -1420,7 +1426,7 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 PGC 1 0 :1:6 
 `uc 1 PGD 1 0 :1:7 
 ]
-[s S3403 . 1 `uc 1 RP3 1 0 :1:0 
+[s S3491 . 1 `uc 1 RP3 1 0 :1:0 
 `uc 1 RTCC 1 0 :1:1 
 `uc 1 PMA3 1 0 :1:2 
 `uc 1 PMA2 1 0 :1:3 
@@ -1429,20 +1435,20 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 RP9 1 0 :1:6 
 `uc 1 RP10 1 0 :1:7 
 ]
-[s S3412 . 1 `uc 1 . 1 0 :1:0 
+[s S3500 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 RP4 1 0 :1:1 
 `uc 1 VMO 1 0 :1:2 
 `uc 1 VPO 1 0 :1:3 
 `uc 1 SCL1 1 0 :1:4 
 `uc 1 SDA1 1 0 :1:5 
 ]
-[s S3419 . 1 `uc 1 . 1 0 :2:0 
+[s S3507 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 REFO 1 0 :1:2 
 `uc 1 RP6 1 0 :1:3 
 `uc 1 RP7 1 0 :1:4 
 `uc 1 RP8 1 0 :1:5 
 ]
-[s S3425 . 1 `uc 1 . 1 0 :1:0 
+[s S3513 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 C3INC 1 0 :1:1 
 `uc 1 RP5 1 0 :1:2 
 `uc 1 C3INA 1 0 :1:3 
@@ -1451,20 +1457,20 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 CCP6 1 0 :1:6 
 `uc 1 CCP7 1 0 :1:7 
 ]
-[s S3434 . 1 `uc 1 C3IND 1 0 :1:0 
+[s S3522 . 1 `uc 1 C3IND 1 0 :1:0 
 `uc 1 PMBE 1 0 :1:1 
 `uc 1 C2INC 1 0 :1:2 
 ]
-[s S3438 . 1 `uc 1 . 1 0 :3:0 
+[s S3526 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 CCP2_PA2 1 0 :1:3 
 ]
-[u S3441 . 1 `S3376 1 . 1 0 `S3385 1 . 1 0 `S3394 1 . 1 0 `S3403 1 . 1 0 `S3412 1 . 1 0 `S3419 1 . 1 0 `S3425 1 . 1 0 `S3434 1 . 1 0 `S3438 1 . 1 0 ]
-[v _PORTBbits PORTBbits `VES3441  1 e 1 @3969 ]
-[s S5232 . 1 `uc 1 INTLVL 1 0 :4:0 
+[u S3529 . 1 `S3464 1 . 1 0 `S3473 1 . 1 0 `S3482 1 . 1 0 `S3491 1 . 1 0 `S3500 1 . 1 0 `S3507 1 . 1 0 `S3513 1 . 1 0 `S3522 1 . 1 0 `S3526 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES3529  1 e 1 @3969 ]
+[s S5323 . 1 `uc 1 INTLVL 1 0 :4:0 
 `uc 1 DLYCYC 1 0 :4:4 
 ]
 "10265
-[s S5235 . 1 `uc 1 INTLVL0 1 0 :1:0 
+[s S5326 . 1 `uc 1 INTLVL0 1 0 :1:0 
 `uc 1 INTLVL1 1 0 :1:1 
 `uc 1 INTLVL2 1 0 :1:2 
 `uc 1 INTLVL3 1 0 :1:3 
@@ -1473,9 +1479,9 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 DLYCYC2 1 0 :1:6 
 `uc 1 DLYCYC3 1 0 :1:7 
 ]
-[u S5244 . 1 `S5232 1 . 1 0 `S5235 1 . 1 0 ]
-[v _DMACON2bits DMACON2bits `VES5244  1 e 1 @3974 ]
-[s S5211 . 1 `uc 1 DMAEN 1 0 :1:0 
+[u S5335 . 1 `S5323 1 . 1 0 `S5326 1 . 1 0 ]
+[v _DMACON2bits DMACON2bits `VES5335  1 e 1 @3974 ]
+[s S5302 . 1 `uc 1 DMAEN 1 0 :1:0 
 `uc 1 DLYINTEN 1 0 :1:1 
 `uc 1 DUPLEX0 1 0 :1:2 
 `uc 1 DUPLEX1 1 0 :1:3 
@@ -1485,9 +1491,9 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 SSCON1 1 0 :1:7 
 ]
 "10377
-[u S5220 . 1 `S5211 1 . 1 0 ]
-[v _DMACON1bits DMACON1bits `VES5220  1 e 1 @3976 ]
-[s S3859 . 1 `uc 1 LATA0 1 0 :1:0 
+[u S5311 . 1 `S5302 1 . 1 0 ]
+[v _DMACON1bits DMACON1bits `VES5311  1 e 1 @3976 ]
+[s S3947 . 1 `uc 1 LATA0 1 0 :1:0 
 `uc 1 LATA1 1 0 :1:1 
 `uc 1 LATA2 1 0 :1:2 
 `uc 1 LATA3 1 0 :1:3 
@@ -1497,7 +1503,7 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 LATA7 1 0 :1:7 
 ]
 "10449
-[s S3868 . 1 `uc 1 LA0 1 0 :1:0 
+[s S3956 . 1 `uc 1 LA0 1 0 :1:0 
 `uc 1 LA1 1 0 :1:1 
 `uc 1 LA2 1 0 :1:2 
 `uc 1 LA3 1 0 :1:3 
@@ -1506,9 +1512,9 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 LA6 1 0 :1:6 
 `uc 1 LA7 1 0 :1:7 
 ]
-[u S3877 . 1 `S3859 1 . 1 0 `S3868 1 . 1 0 ]
-[v _LATAbits LATAbits `VES3877  1 e 1 @3977 ]
-[s S3661 . 1 `uc 1 LATB0 1 0 :1:0 
+[u S3965 . 1 `S3947 1 . 1 0 `S3956 1 . 1 0 ]
+[v _LATAbits LATAbits `VES3965  1 e 1 @3977 ]
+[s S3749 . 1 `uc 1 LATB0 1 0 :1:0 
 `uc 1 LATB1 1 0 :1:1 
 `uc 1 LATB2 1 0 :1:2 
 `uc 1 LATB3 1 0 :1:3 
@@ -1518,7 +1524,7 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 LATB7 1 0 :1:7 
 ]
 "10551
-[s S3670 . 1 `uc 1 LB0 1 0 :1:0 
+[s S3758 . 1 `uc 1 LB0 1 0 :1:0 
 `uc 1 LB1 1 0 :1:1 
 `uc 1 LB2 1 0 :1:2 
 `uc 1 LB3 1 0 :1:3 
@@ -1527,9 +1533,9 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 LB6 1 0 :1:6 
 `uc 1 LB7 1 0 :1:7 
 ]
-[u S3679 . 1 `S3661 1 . 1 0 `S3670 1 . 1 0 ]
-[v _LATBbits LATBbits `VES3679  1 e 1 @3978 ]
-[s S3790 . 1 `uc 1 LATC0 1 0 :1:0 
+[u S3767 . 1 `S3749 1 . 1 0 `S3758 1 . 1 0 ]
+[v _LATBbits LATBbits `VES3767  1 e 1 @3978 ]
+[s S3878 . 1 `uc 1 LATC0 1 0 :1:0 
 `uc 1 LATC1 1 0 :1:1 
 `uc 1 LATC2 1 0 :1:2 
 `uc 1 . 1 0 :3:3 
@@ -1537,16 +1543,16 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 LATC7 1 0 :1:7 
 ]
 "10659
-[s S3797 . 1 `uc 1 LC0 1 0 :1:0 
+[s S3885 . 1 `uc 1 LC0 1 0 :1:0 
 `uc 1 LC1 1 0 :1:1 
 `uc 1 LC2 1 0 :1:2 
 `uc 1 . 1 0 :3:3 
 `uc 1 LC6 1 0 :1:6 
 `uc 1 LC7 1 0 :1:7 
 ]
-[u S3804 . 1 `S3790 1 . 1 0 `S3797 1 . 1 0 ]
-[v _LATCbits LATCbits `VES3804  1 e 1 @3979 ]
-[s S2733 . 1 `uc 1 LATD0 1 0 :1:0 
+[u S3892 . 1 `S3878 1 . 1 0 `S3885 1 . 1 0 ]
+[v _LATCbits LATCbits `VES3892  1 e 1 @3979 ]
+[s S2889 . 1 `uc 1 LATD0 1 0 :1:0 
 `uc 1 LATD1 1 0 :1:1 
 `uc 1 LATD2 1 0 :1:2 
 `uc 1 LATD3 1 0 :1:3 
@@ -1556,7 +1562,7 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 LATD7 1 0 :1:7 
 ]
 "10741
-[s S2742 . 1 `uc 1 LD0 1 0 :1:0 
+[s S2898 . 1 `uc 1 LD0 1 0 :1:0 
 `uc 1 LD1 1 0 :1:1 
 `uc 1 LD2 1 0 :1:2 
 `uc 1 LD3 1 0 :1:3 
@@ -1565,20 +1571,20 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 LD6 1 0 :1:6 
 `uc 1 LD7 1 0 :1:7 
 ]
-[u S2751 . 1 `S2733 1 . 1 0 `S2742 1 . 1 0 ]
-[v _LATDbits LATDbits `VES2751  1 e 1 @3980 ]
-[s S3822 . 1 `uc 1 LATE0 1 0 :1:0 
+[u S2907 . 1 `S2889 1 . 1 0 `S2898 1 . 1 0 ]
+[v _LATDbits LATDbits `VES2907  1 e 1 @3980 ]
+[s S3910 . 1 `uc 1 LATE0 1 0 :1:0 
 `uc 1 LATE1 1 0 :1:1 
 `uc 1 LATE2 1 0 :1:2 
 ]
 "10843
-[s S3826 . 1 `uc 1 LE0 1 0 :1:0 
+[s S3914 . 1 `uc 1 LE0 1 0 :1:0 
 `uc 1 LE1 1 0 :1:1 
 `uc 1 LE2 1 0 :1:2 
 ]
-[u S3830 . 1 `S3822 1 . 1 0 `S3826 1 . 1 0 ]
-[v _LATEbits LATEbits `VES3830  1 e 1 @3981 ]
-[s S3722 . 1 `uc 1 TRISA0 1 0 :1:0 
+[u S3918 . 1 `S3910 1 . 1 0 `S3914 1 . 1 0 ]
+[v _LATEbits LATEbits `VES3918  1 e 1 @3981 ]
+[s S3810 . 1 `uc 1 TRISA0 1 0 :1:0 
 `uc 1 TRISA1 1 0 :1:1 
 `uc 1 TRISA2 1 0 :1:2 
 `uc 1 TRISA3 1 0 :1:3 
@@ -1588,9 +1594,9 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 TRISA7 1 0 :1:7 
 ]
 "11139
-[u S3731 . 1 `S3722 1 . 1 0 ]
-[v _TRISAbits TRISAbits `VES3731  1 e 1 @3986 ]
-[s S3701 . 1 `uc 1 TRISB0 1 0 :1:0 
+[u S3819 . 1 `S3810 1 . 1 0 ]
+[v _TRISAbits TRISAbits `VES3819  1 e 1 @3986 ]
+[s S3789 . 1 `uc 1 TRISB0 1 0 :1:0 
 `uc 1 TRISB1 1 0 :1:1 
 `uc 1 TRISB2 1 0 :1:2 
 `uc 1 TRISB3 1 0 :1:3 
@@ -1600,9 +1606,9 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 TRISB7 1 0 :1:7 
 ]
 "11196
-[u S3710 . 1 `S3701 1 . 1 0 ]
-[v _TRISBbits TRISBbits `VES3710  1 e 1 @3987 ]
-[s S3601 . 1 `uc 1 TRISC0 1 0 :1:0 
+[u S3798 . 1 `S3789 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES3798  1 e 1 @3987 ]
+[s S3689 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 . 1 0 :3:3 
@@ -1610,9 +1616,9 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "11256
-[u S3608 . 1 `S3601 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES3608  1 e 1 @3988 ]
-[s S3618 . 1 `uc 1 TRISD0 1 0 :1:0 
+[u S3696 . 1 `S3689 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES3696  1 e 1 @3988 ]
+[s S3706 . 1 `uc 1 TRISD0 1 0 :1:0 
 `uc 1 TRISD1 1 0 :1:1 
 `uc 1 TRISD2 1 0 :1:2 
 `uc 1 TRISD3 1 0 :1:3 
@@ -1622,9 +1628,9 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 TRISD7 1 0 :1:7 
 ]
 "11303
-[u S3627 . 1 `S3618 1 . 1 0 ]
-[v _TRISDbits TRISDbits `VES3627  1 e 1 @3989 ]
-[s S3842 . 1 `uc 1 TRISE0 1 0 :1:0 
+[u S3715 . 1 `S3706 1 . 1 0 ]
+[v _TRISDbits TRISDbits `VES3715  1 e 1 @3989 ]
+[s S3930 . 1 `uc 1 TRISE0 1 0 :1:0 
 `uc 1 TRISE1 1 0 :1:1 
 `uc 1 TRISE2 1 0 :1:2 
 `uc 1 . 1 0 :3:3 
@@ -1632,23 +1638,23 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 RDPU 1 0 :1:7 
 ]
 "11363
-[u S3849 . 1 `S3842 1 . 1 0 ]
-[v _TRISEbits TRISEbits `VES3849  1 e 1 @3990 ]
-[s S2633 . 1 `uc 1 TUN 1 0 :6:0 
+[u S3937 . 1 `S3930 1 . 1 0 ]
+[v _TRISEbits TRISEbits `VES3937  1 e 1 @3990 ]
+[s S2789 . 1 `uc 1 TUN 1 0 :6:0 
 `uc 1 PLLEN 1 0 :1:6 
 `uc 1 INTSRC 1 0 :1:7 
 ]
 "11736
-[s S2637 . 1 `uc 1 TUN0 1 0 :1:0 
+[s S2793 . 1 `uc 1 TUN0 1 0 :1:0 
 `uc 1 TUN1 1 0 :1:1 
 `uc 1 TUN2 1 0 :1:2 
 `uc 1 TUN3 1 0 :1:3 
 `uc 1 TUN4 1 0 :1:4 
 `uc 1 TUN5 1 0 :1:5 
 ]
-[u S2644 . 1 `S2633 1 . 1 0 `S2637 1 . 1 0 ]
-[v _OSCTUNEbits OSCTUNEbits `VES2644  1 e 1 @3995 ]
-[s S3899 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[u S2800 . 1 `S2789 1 . 1 0 `S2793 1 . 1 0 ]
+[v _OSCTUNEbits OSCTUNEbits `VES2800  1 e 1 @3995 ]
+[s S3987 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
 `uc 1 SSP1IF 1 0 :1:3 
@@ -1658,16 +1664,16 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 PMPIF 1 0 :1:7 
 ]
 "12041
-[s S3908 . 1 `uc 1 . 1 0 :3:0 
+[s S3996 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 SSPIF 1 0 :1:3 
 `uc 1 TXIF 1 0 :1:4 
 `uc 1 RCIF 1 0 :1:5 
 ]
-[s S3913 . 1 `uc 1 . 1 0 :7:0 
+[s S4001 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 PSPIF 1 0 :1:7 
 ]
-[u S3916 . 1 `S3899 1 . 1 0 `S3908 1 . 1 0 `S3913 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES3916  1 e 1 @3998 ]
+[u S4004 . 1 `S3987 1 . 1 0 `S3996 1 . 1 0 `S4001 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES4004  1 e 1 @3998 ]
 [s S253 . 1 `uc 1 CCP2IE 1 0 :1:0 
 `uc 1 TMR3IE 1 0 :1:1 
 `uc 1 LVDIE 1 0 :1:2 
@@ -1708,7 +1714,7 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v _PIR2bits PIR2bits `VES360  1 e 1 @4001 ]
 "12722
 [v _EECON1 EECON1 `VEuc  1 e 1 @4006 ]
-[s S6270 . 1 `uc 1 . 1 0 :1:0 
+[s S6362 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 WR 1 0 :1:1 
 `uc 1 WREN 1 0 :1:2 
 `uc 1 WRERR 1 0 :1:3 
@@ -1716,11 +1722,11 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 WPROG 1 0 :1:5 
 ]
 "12737
-[u S6277 . 1 `S6270 1 . 1 0 ]
-[v _EECON1bits EECON1bits `VES6277  1 e 1 @4006 ]
+[u S6369 . 1 `S6362 1 . 1 0 ]
+[v _EECON1bits EECON1bits `VES6369  1 e 1 @4006 ]
 "12767
 [v _EECON2 EECON2 `VEuc  1 e 1 @4007 ]
-[s S4423 . 1 `uc 1 SEN 1 0 :1:0 
+[s S4511 . 1 `uc 1 SEN 1 0 :1:0 
 `uc 1 RSEN 1 0 :1:1 
 `uc 1 PEN 1 0 :1:2 
 `uc 1 RCEN 1 0 :1:3 
@@ -1730,14 +1736,14 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 GCEN 1 0 :1:7 
 ]
 "15532
-[s S4432 . 1 `uc 1 . 1 0 :1:0 
+[s S4520 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 ADMSK1 1 0 :1:1 
 `uc 1 ADMSK2 1 0 :1:2 
 `uc 1 ADMSK3 1 0 :1:3 
 `uc 1 ADMSK4 1 0 :1:4 
 `uc 1 ADMSK5 1 0 :1:5 
 ]
-[s S4439 . 1 `uc 1 SEN1 1 0 :1:0 
+[s S4527 . 1 `uc 1 SEN1 1 0 :1:0 
 `uc 1 ADMSK11 1 0 :1:1 
 `uc 1 ADMSK21 1 0 :1:2 
 `uc 1 ADMSK31 1 0 :1:3 
@@ -1746,17 +1752,17 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 ACKSTAT1 1 0 :1:6 
 `uc 1 GCEN1 1 0 :1:7 
 ]
-[s S4448 . 1 `uc 1 . 1 0 :1:0 
+[s S4536 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 RSEN1 1 0 :1:1 
 `uc 1 PEN1 1 0 :1:2 
 `uc 1 RCEN1 1 0 :1:3 
 `uc 1 ADMSK41 1 0 :1:4 
 `uc 1 ADMSK51 1 0 :1:5 
 ]
-[u S4455 . 1 `S4423 1 . 1 0 `S4432 1 . 1 0 `S4439 1 . 1 0 `S4448 1 . 1 0 ]
-[v _SSP1CON2bits SSP1CON2bits `VES4455  1 e 1 @4037 ]
+[u S4543 . 1 `S4511 1 . 1 0 `S4520 1 . 1 0 `S4527 1 . 1 0 `S4536 1 . 1 0 ]
+[v _SSP1CON2bits SSP1CON2bits `VES4543  1 e 1 @4037 ]
 "15873
-[s S4389 . 1 `uc 1 SSPM01 1 0 :1:0 
+[s S4477 . 1 `uc 1 SSPM01 1 0 :1:0 
 `uc 1 SSPM11 1 0 :1:1 
 `uc 1 SSPM21 1 0 :1:2 
 `uc 1 SSPM31 1 0 :1:3 
@@ -1765,47 +1771,47 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 SSPOV1 1 0 :1:6 
 `uc 1 WCOL1 1 0 :1:7 
 ]
-[u S4398 . 1 `S4378 1 . 1 0 `S4384 1 . 1 0 `S4389 1 . 1 0 ]
-[v _SSP1CON1bits SSP1CON1bits `VES4398  1 e 1 @4038 ]
+[u S4486 . 1 `S4466 1 . 1 0 `S4472 1 . 1 0 `S4477 1 . 1 0 ]
+[v _SSP1CON1bits SSP1CON1bits `VES4486  1 e 1 @4038 ]
 "16176
-[s S4229 . 1 `uc 1 . 1 0 :2:0 
+[s S4317 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 D 1 0 :1:5 
 ]
-[s S4234 . 1 `uc 1 . 1 0 :2:0 
+[s S4322 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_W 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 D_A 1 0 :1:5 
 ]
-[s S4239 . 1 `uc 1 . 1 0 :2:0 
+[s S4327 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nW 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nA 1 0 :1:5 
 ]
-[s S4244 . 1 `uc 1 . 1 0 :2:0 
+[s S4332 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_WRITE 1 0 :1:2 
 ]
-[s S4247 . 1 `uc 1 . 1 0 :5:0 
+[s S4335 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 NOT_ADDRESS 1 0 :1:5 
 ]
-[s S4250 . 1 `uc 1 . 1 0 :2:0 
+[s S4338 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nWRITE 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nADDRESS 1 0 :1:5 
 ]
-[s S4255 . 1 `uc 1 . 1 0 :2:0 
+[s S4343 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 READ_WRITE 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 DATA_ADDRESS 1 0 :1:5 
 ]
-[s S4260 . 1 `uc 1 . 1 0 :2:0 
+[s S4348 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 I2C_READ 1 0 :1:2 
 `uc 1 I2C_START 1 0 :1:3 
 `uc 1 I2C_STOP 1 0 :1:4 
 `uc 1 I2C_DAT 1 0 :1:5 
 ]
-[s S4266 . 1 `uc 1 BF1 1 0 :1:0 
+[s S4354 . 1 `uc 1 BF1 1 0 :1:0 
 `uc 1 UA1 1 0 :1:1 
 `uc 1 RW 1 0 :1:2 
 `uc 1 START 1 0 :1:3 
@@ -1814,55 +1820,55 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 CKE1 1 0 :1:6 
 `uc 1 SMP1 1 0 :1:7 
 ]
-[s S4275 . 1 `uc 1 . 1 0 :2:0 
+[s S4363 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 RW1 1 0 :1:2 
 `uc 1 START1 1 0 :1:3 
 `uc 1 STOP1 1 0 :1:4 
 `uc 1 DA1 1 0 :1:5 
 ]
-[s S4281 . 1 `uc 1 . 1 0 :2:0 
+[s S4369 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_W 1 0 :1:2 
 ]
-[s S4284 . 1 `uc 1 . 1 0 :5:0 
+[s S4372 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 NOT_A 1 0 :1:5 
 ]
-[u S4287 . 1 `S4214 1 . 1 0 `S4217 1 . 1 0 `S4220 1 . 1 0 `S4229 1 . 1 0 `S4234 1 . 1 0 `S4239 1 . 1 0 `S4244 1 . 1 0 `S4247 1 . 1 0 `S4250 1 . 1 0 `S4255 1 . 1 0 `S4260 1 . 1 0 `S4266 1 . 1 0 `S4275 1 . 1 0 `S4281 1 . 1 0 `S4284 1 . 1 0 ]
-[v _SSP1STATbits SSP1STATbits `VES4287  1 e 1 @4039 ]
+[u S4375 . 1 `S4302 1 . 1 0 `S4305 1 . 1 0 `S4308 1 . 1 0 `S4317 1 . 1 0 `S4322 1 . 1 0 `S4327 1 . 1 0 `S4332 1 . 1 0 `S4335 1 . 1 0 `S4338 1 . 1 0 `S4343 1 . 1 0 `S4348 1 . 1 0 `S4354 1 . 1 0 `S4363 1 . 1 0 `S4369 1 . 1 0 `S4372 1 . 1 0 ]
+[v _SSP1STATbits SSP1STATbits `VES4375  1 e 1 @4039 ]
 "16674
 [v _SSP1ADD SSP1ADD `VEuc  1 e 1 @4040 ]
 "16974
 [v _SSP1BUF SSP1BUF `VEuc  1 e 1 @4041 ]
-[s S3940 . 1 `uc 1 . 1 0 :2:0 
+[s S4028 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_T1SYNC 1 0 :1:2 
 ]
 "17261
-[s S3943 . 1 `uc 1 TMR1ON 1 0 :1:0 
+[s S4031 . 1 `uc 1 TMR1ON 1 0 :1:0 
 `uc 1 RD16 1 0 :1:1 
 `uc 1 nT1SYNC 1 0 :1:2 
 `uc 1 T1OSCEN 1 0 :1:3 
 `uc 1 T1CKPS 1 0 :2:4 
 `uc 1 TMR1CS 1 0 :2:6 
 ]
-[s S3950 . 1 `uc 1 . 1 0 :4:0 
+[s S4038 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 T1CKPS0 1 0 :1:4 
 `uc 1 T1CKPS1 1 0 :1:5 
 `uc 1 TMR1CS0 1 0 :1:6 
 `uc 1 TMR1CS1 1 0 :1:7 
 ]
-[s S3956 . 1 `uc 1 . 1 0 :3:0 
+[s S4044 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 SOSCEN 1 0 :1:3 
 `uc 1 . 1 0 :3:4 
 `uc 1 T1RD16 1 0 :1:7 
 ]
-[u S3961 . 1 `S3940 1 . 1 0 `S3943 1 . 1 0 `S3950 1 . 1 0 `S3956 1 . 1 0 ]
-[v _T1CONbits T1CONbits `VES3961  1 e 1 @4045 ]
+[u S4049 . 1 `S4028 1 . 1 0 `S4031 1 . 1 0 `S4038 1 . 1 0 `S4044 1 . 1 0 ]
+[v _T1CONbits T1CONbits `VES4049  1 e 1 @4045 ]
 "17338
 [v _TMR1L TMR1L `VEuc  1 e 1 @4046 ]
 "17358
 [v _TMR1H TMR1H `VEuc  1 e 1 @4047 ]
 "18058
 [v _OSCCON OSCCON `VEuc  1 e 1 @4051 ]
-[s S3575 . 1 `uc 1 T0PS 1 0 :3:0 
+[s S3663 . 1 `uc 1 T0PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 T0SE 1 0 :1:4 
 `uc 1 T0CS 1 0 :1:5 
@@ -1870,17 +1876,17 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 TMR0ON 1 0 :1:7 
 ]
 "18155
-[s S3582 . 1 `uc 1 T0PS0 1 0 :1:0 
+[s S3670 . 1 `uc 1 T0PS0 1 0 :1:0 
 `uc 1 T0PS1 1 0 :1:1 
 `uc 1 T0PS2 1 0 :1:2 
 ]
-[u S3586 . 1 `S3575 1 . 1 0 `S3582 1 . 1 0 ]
-[v _T0CONbits T0CONbits `VES3586  1 e 1 @4053 ]
+[u S3674 . 1 `S3663 1 . 1 0 `S3670 1 . 1 0 ]
+[v _T0CONbits T0CONbits `VES3674  1 e 1 @4053 ]
 "18212
 [v _TMR0L TMR0L `VEuc  1 e 1 @4054 ]
 "18232
 [v _TMR0H TMR0H `VEuc  1 e 1 @4055 ]
-[s S3336 . 1 `uc 1 INT1IF 1 0 :1:0 
+[s S3424 . 1 `uc 1 INT1IF 1 0 :1:0 
 `uc 1 INT2IF 1 0 :1:1 
 `uc 1 INT3IF 1 0 :1:2 
 `uc 1 INT1IE 1 0 :1:3 
@@ -1890,7 +1896,7 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 INT2IP 1 0 :1:7 
 ]
 "18779
-[s S3345 . 1 `uc 1 INT1F 1 0 :1:0 
+[s S3433 . 1 `uc 1 INT1F 1 0 :1:0 
 `uc 1 INT2F 1 0 :1:1 
 `uc 1 INT3F 1 0 :1:2 
 `uc 1 INT1E 1 0 :1:3 
@@ -1899,13 +1905,13 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 INT1P 1 0 :1:6 
 `uc 1 INT2P 1 0 :1:7 
 ]
-[u S3354 . 1 `S3336 1 . 1 0 `S3345 1 . 1 0 ]
-[v _INTCON3bits INTCON3bits `VES3354  1 e 1 @4080 ]
-[s S3534 . 1 `uc 1 . 1 0 :7:0 
+[u S3442 . 1 `S3424 1 . 1 0 `S3433 1 . 1 0 ]
+[v _INTCON3bits INTCON3bits `VES3442  1 e 1 @4080 ]
+[s S3622 . 1 `uc 1 . 1 0 :7:0 
 `uc 1 NOT_RBPU 1 0 :1:7 
 ]
 "18892
-[s S3537 . 1 `uc 1 RBIP 1 0 :1:0 
+[s S3625 . 1 `uc 1 RBIP 1 0 :1:0 
 `uc 1 INT3IP 1 0 :1:1 
 `uc 1 TMR0IP 1 0 :1:2 
 `uc 1 INTEDG3 1 0 :1:3 
@@ -1914,17 +1920,17 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 INTEDG0 1 0 :1:6 
 `uc 1 nRBPU 1 0 :1:7 
 ]
-[s S3546 . 1 `uc 1 . 1 0 :1:0 
+[s S3634 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 INT3P 1 0 :1:1 
 `uc 1 T0IP 1 0 :1:2 
 `uc 1 . 1 0 :4:3 
 `uc 1 RBPU 1 0 :1:7 
 ]
-[u S3552 . 1 `S3534 1 . 1 0 `S3537 1 . 1 0 `S3546 1 . 1 0 ]
-[v _INTCON2bits INTCON2bits `VES3552  1 e 1 @4081 ]
+[u S3640 . 1 `S3622 1 . 1 0 `S3625 1 . 1 0 `S3634 1 . 1 0 ]
+[v _INTCON2bits INTCON2bits `VES3640  1 e 1 @4081 ]
 "18957
 [v _INTCON INTCON `VEuc  1 e 1 @4082 ]
-[s S3285 . 1 `uc 1 RBIF 1 0 :1:0 
+[s S3373 . 1 `uc 1 RBIF 1 0 :1:0 
 `uc 1 INT0IF 1 0 :1:1 
 `uc 1 TMR0IF 1 0 :1:2 
 `uc 1 RBIE 1 0 :1:3 
@@ -1934,7 +1940,7 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 GIE_GIEH 1 0 :1:7 
 ]
 "18989
-[s S3294 . 1 `uc 1 . 1 0 :1:0 
+[s S3382 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 INT0F 1 0 :1:1 
 `uc 1 T0IF 1 0 :1:2 
 `uc 1 . 1 0 :1:3 
@@ -1943,12 +1949,12 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
-[s S3303 . 1 `uc 1 . 1 0 :6:0 
+[s S3391 . 1 `uc 1 . 1 0 :6:0 
 `uc 1 GIEL 1 0 :1:6 
 `uc 1 GIEH 1 0 :1:7 
 ]
-[u S3307 . 1 `S3285 1 . 1 0 `S3294 1 . 1 0 `S3303 1 . 1 0 ]
-[v _INTCONbits INTCONbits `VES3307  1 e 1 @4082 ]
+[u S3395 . 1 `S3373 1 . 1 0 `S3382 1 . 1 0 `S3391 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES3395  1 e 1 @4082 ]
 "19121
 [v _TABLAT TABLAT `VEuc  1 e 1 @4085 ]
 "19142
@@ -2013,7 +2019,11 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v _done_line1 done_line1 `C[16]uc  1 e 16 0 ]
 "47
 [v _done_line2 done_line2 `C[6]uc  1 e 6 0 ]
+"48
+[v _done_line3 done_line3 `C[16]uc  1 e 16 0 ]
 "49
+[v _done_line4 done_line4 `C[16]uc  1 e 16 0 ]
+"51
 [v _display_content display_content `[4][20]uc  1 e 80 0 ]
 "8 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\external_flash.c
 [v _mediaInformation mediaInformation `S1956  1 s 5 mediaInformation ]
@@ -2035,15 +2045,15 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v _task_list_write_index task_list_write_index `uc  1 e 1 0 ]
 "30 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\internal_flash.c
 [v _pageBuffer pageBuffer `[1024]uc  1 e 1024 0 ]
-[s S2972 . 12 `i 1 NeutralOffset 2 0 `i 1 NeutralMultiplier 2 2 `c 1 NeutralShift 1 4 `i 1 Offset 2 5 `i 1 Multiplier 2 7 `c 1 Shift 1 9 `i 1 AutoCalibration 2 10 ]
+[s S3068 . 12 `i 1 NeutralOffset 2 0 `i 1 NeutralMultiplier 2 2 `c 1 NeutralShift 1 4 `i 1 Offset 2 5 `i 1 Multiplier 2 7 `c 1 Shift 1 9 `i 1 AutoCalibration 2 10 ]
 "38 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.c
-[v _calibrationParameters calibrationParameters `[7]S2972  1 e 84 0 ]
+[v _calibrationParameters calibrationParameters `[7]S3068  1 e 84 0 ]
 [s S2552 . 6 `VEc 1 encoderCount 1 0 `VEc 1 buttonCount 1 1 `VEuc 1 timeSlot 1 2 `VEuc 1 done 1 3 `E9257 1 bootloader_mode 1 4 `E9248 1 display_mode 1 5 ]
-"295 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
+"299 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.h
 [v _os os `VES2552  1 e 6 0 ]
-"9 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\ui.c
+"10 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\ui.c
 [v _userInterfaceStatus userInterfaceStatus `E8352  1 e 1 0 ]
-"10
+"11
 [v _system_ui_inactive_count system_ui_inactive_count `ui  1 e 2 0 ]
 [s S485 _USB_DEVICE_DESCRIPTOR 18 `uc 1 bLength 1 0 `uc 1 bDescriptorType 1 1 `ui 1 bcdUSB 2 2 `uc 1 bDeviceClass 1 4 `uc 1 bDeviceSubClass 1 5 `uc 1 bDeviceProtocol 1 6 `uc 1 bMaxPacketSize0 1 7 `ui 1 idVendor 2 8 `ui 1 idProduct 2 10 `ui 1 bcdDevice 2 12 `uc 1 iManufacturer 1 14 `uc 1 iProduct 1 15 `uc 1 iSerialNumber 1 16 `uc 1 bNumConfigurations 1 17 ]
 "153 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\usb_descriptors.c
@@ -2303,15 +2313,15 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 "90
 [v _gblNumBLKS gblNumBLKS `S1862  1 e 4 0 ]
 [v _gblBLKLen gblBLKLen `S1862  1 e 4 0 ]
-"76 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\main.c
+"78 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"165
+"176
 } 0
-"70 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\ui.c
+"74 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\ui.c
 [v _ui_run ui_run `(v  1 e 1 0 ]
 {
-"138
+"142
 } 0
 "131 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.c
 [v _system_encoder_enable system_encoder_enable `(v  1 e 1 0 ]
@@ -2353,10 +2363,10 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v i2c_digipot_backlight@level level `uc  1 a 1 10 ]
 "437
 } 0
-"17 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\ui.c
+"18 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\ui.c
 [v __ui_encoder _ui_encoder `(v  1 s 1 _ui_encoder ]
 {
-"59
+"63
 } 0
 "43 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.c
 [v _timer_pseudo_isr timer_pseudo_isr `(v  1 e 1 0 ]
@@ -2388,10 +2398,10 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v system_init@F8467 F8467 `[104]uc  1 s 104 F8467 ]
 "286
 } 0
-"61 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\ui.c
+"65 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\ui.c
 [v _ui_init ui_init `(v  1 e 1 0 ]
 {
-"67
+"71
 } 0
 "81 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\rtcc.c
 [v _rtcc_init rtcc_init `(v  1 e 1 0 ]
@@ -2439,40 +2449,11 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v i2c_eeprom_read@length length `uc  1 p 1 21 ]
 "554
 } 0
-"144
-[v __i2c_read _i2c_read `(v  1 s 1 _i2c_read ]
-{
-[v __i2c_read@slave_address slave_address `uc  1 a 1 wreg ]
-"146
-[v __i2c_read@cntr cntr `uc  1 a 1 16 ]
-"144
-[v __i2c_read@slave_address slave_address `uc  1 a 1 wreg ]
-[v __i2c_read@data data `*.39uc  1 p 2 5 ]
-[v __i2c_read@length length `uc  1 p 1 7 ]
-"148
-[v __i2c_read@slave_address slave_address `uc  1 a 1 15 ]
-"171
-} 0
-"86
-[v __i2c_not_acknowledge _i2c_not_acknowledge `(v  1 s 1 _i2c_not_acknowledge ]
-{
-"91
-} 0
-"63
-[v __i2c_get _i2c_get `(uc  1 s 1 _i2c_get ]
-{
-"68
-} 0
-"78
-[v __i2c_acknowledge _i2c_acknowledge `(v  1 s 1 _i2c_acknowledge ]
-{
-"83
-} 0
 "622
 [v __i2c_eeprom_load_default_calibration _i2c_eeprom_load_default_calibration `(v  1 e 1 0 ]
 {
-[s S2972 . 12 `i 1 NeutralOffset 2 0 `i 1 NeutralMultiplier 2 2 `c 1 NeutralShift 1 4 `i 1 Offset 2 5 `i 1 Multiplier 2 7 `c 1 Shift 1 9 `i 1 AutoCalibration 2 10 ]
-[v __i2c_eeprom_load_default_calibration@buffer buffer `*.39S2972  1 p 2 0 ]
+[s S3068 . 12 `i 1 NeutralOffset 2 0 `i 1 NeutralMultiplier 2 2 `c 1 NeutralShift 1 4 `i 1 Offset 2 5 `i 1 Multiplier 2 7 `c 1 Shift 1 9 `i 1 AutoCalibration 2 10 ]
+[v __i2c_eeprom_load_default_calibration@buffer buffer `*.39S3068  1 p 2 0 ]
 [v __i2c_eeprom_load_default_calibration@index index `E8141  1 p 1 2 ]
 "690
 } 0
@@ -2551,7 +2532,64 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 {
 "122
 } 0
-"756 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\i2c.c
+"180 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\main.c
+[v _normal_mode normal_mode `(uc  1 s 1 normal_mode ]
+{
+"206
+} 0
+"488 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\i2c.c
+[v _i2c_eeprom_writeByte i2c_eeprom_writeByte `(v  1 e 1 0 ]
+{
+"491
+[v i2c_eeprom_writeByte@dat dat `[2]uc  1 a 2 16 ]
+"490
+[v i2c_eeprom_writeByte@slave_address slave_address `uc  1 a 1 18 ]
+"488
+[v i2c_eeprom_writeByte@address address `ui  1 p 2 10 ]
+[v i2c_eeprom_writeByte@data data `uc  1 p 1 12 ]
+"501
+} 0
+"503
+[v _i2c_eeprom_readByte i2c_eeprom_readByte `(uc  1 e 1 0 ]
+{
+"506
+[v i2c_eeprom_readByte@addr addr `uc  1 a 1 23 ]
+"505
+[v i2c_eeprom_readByte@slave_address slave_address `uc  1 a 1 22 ]
+"503
+[v i2c_eeprom_readByte@address address `ui  1 p 2 17 ]
+"516
+} 0
+"144
+[v __i2c_read _i2c_read `(v  1 s 1 _i2c_read ]
+{
+[v __i2c_read@slave_address slave_address `uc  1 a 1 wreg ]
+"146
+[v __i2c_read@cntr cntr `uc  1 a 1 16 ]
+"144
+[v __i2c_read@slave_address slave_address `uc  1 a 1 wreg ]
+[v __i2c_read@data data `*.39uc  1 p 2 5 ]
+[v __i2c_read@length length `uc  1 p 1 7 ]
+"148
+[v __i2c_read@slave_address slave_address `uc  1 a 1 15 ]
+"171
+} 0
+"86
+[v __i2c_not_acknowledge _i2c_not_acknowledge `(v  1 s 1 _i2c_not_acknowledge ]
+{
+"91
+} 0
+"63
+[v __i2c_get _i2c_get `(uc  1 s 1 _i2c_get ]
+{
+"68
+} 0
+"78
+[v __i2c_acknowledge _i2c_acknowledge `(v  1 s 1 _i2c_acknowledge ]
+{
+"83
+} 0
+"756
 [v _i2c_eeprom_tasks i2c_eeprom_tasks `(v  1 e 1 0 ]
 {
 "784
@@ -2581,10 +2619,10 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v __write_calibration@index index `E8141  1 a 1 59 ]
 "710
 } 0
-"462 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
+"459 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
 [v _display_update display_update `(v  1 e 1 0 ]
 {
-"472
+"469
 } 0
 "341 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\i2c.c
 [v _i2c_display_write_fixed i2c_display_write_fixed `(v  1 e 1 0 ]
@@ -2621,73 +2659,78 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v __ic2_display_set_address@address address `uc  1 a 1 10 ]
 "299
 } 0
-"220 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
+"222 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
 [v _display_prepare display_prepare `(v  1 e 1 0 ]
 {
 [v display_prepare@mode mode `uc  1 a 1 wreg ]
 [v display_prepare@mode mode `uc  1 a 1 wreg ]
-"222
+"224
 [v display_prepare@mode mode `uc  1 a 1 42 ]
-"281
+"283
 } 0
-"327
+"329
 [v __display_verify _display_verify `(v  1 s 1 _display_verify ]
 {
-"329
+"331
 [v __display_verify@cntr cntr `uc  1 a 1 32 ]
-"341
+"343
 } 0
-"283
+"285
 [v __display_start _display_start `(v  1 s 1 _display_start ]
 {
-"285
+"287
 [v __display_start@cntr cntr `uc  1 a 1 0 ]
-"298
+"300
 } 0
-"415
+"417
 [v __display_programming _display_programming `(v  1 s 1 _display_programming ]
 {
-"417
+"419
 [v __display_programming@cntr cntr `uc  1 a 1 30 ]
-"437
+"439
 } 0
-"300
+"302
 [v __display_found _display_found `(v  1 s 1 _display_found ]
 {
-"302
+"304
 [v __display_found@cntr cntr `uc  1 a 1 39 ]
-"303
+"305
 [v __display_found@start start `uc  1 a 1 38 ]
-"325
+"327
 } 0
-"442 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\bootloader.c
+"422 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\bootloader.c
 [v _bootloader_get_file_size bootloader_get_file_size `(ul  1 e 4 0 ]
 {
-"445
+"425
 } 0
-"365 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
+"367 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
 [v __display_failed _display_failed `(v  1 s 1 _display_failed ]
 {
-"367
+"369
 [v __display_failed@cntr cntr `uc  1 a 1 36 ]
-"413
+"415
 } 0
-"467 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\bootloader.c
+"447 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\bootloader.c
 [v _bootloader_get_rec_address bootloader_get_rec_address `(ui  1 e 2 0 ]
 {
-"471
+"451
 } 0
-"457
+"437
 [v _bootloader_get_error bootloader_get_error `(E8594  1 e 1 0 ]
 {
-"460
+"440
 } 0
-"107 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
+"427
+[v _bootloader_get_entries bootloader_get_entries `(ui  1 e 2 0 ]
+{
+"430
+} 0
+"109 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
 [v __display_itoa_u32 _display_itoa_u32 `(uc  1 s 1 _display_itoa_u32 ]
 {
 [v __display_itoa_u32@value value `ul  1 p 4 30 ]
 [v __display_itoa_u32@text text `*.39uc  1 p 2 34 ]
-"151
+"153
 } 0
 "8 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\llmod.c
 [v ___llmod __llmod `(ul  1 e 4 0 ]
@@ -2711,52 +2754,47 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v ___lldiv@divisor divisor `ul  1 p 4 4 ]
 "31
 } 0
-"439 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
+"441 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
 [v __display_done _display_done `(v  1 s 1 _display_done ]
 {
-"441
+"443
 [v __display_done@cntr cntr `uc  1 a 1 30 ]
-"460
+"457
 } 0
-"493 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\bootloader.c
+"473 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\bootloader.c
 [v _bootloader_get_flashPagesWritten bootloader_get_flashPagesWritten `(ui  1 e 2 0 ]
 {
-"496
+"476
 } 0
-"447
-[v _bootloader_get_entries bootloader_get_entries `(ui  1 e 2 0 ]
-{
-"450
-} 0
-"64 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
+"66 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
 [v __display_clear _display_clear `(v  1 s 1 _display_clear ]
 {
-"67
+"69
 [v __display_clear@col col `uc  1 a 1 3 ]
-"66
+"68
 [v __display_clear@row row `uc  1 a 1 2 ]
-"75
+"77
 } 0
-"343
+"345
 [v __display_checked _display_checked `(v  1 s 1 _display_checked ]
 {
-"345
+"347
 [v __display_checked@cntr cntr `uc  1 a 1 33 ]
-"346
+"348
 [v __display_checked@start start `uc  1 a 1 32 ]
-"363
+"365
 } 0
-"452 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\bootloader.c
+"432 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\bootloader.c
 [v _bootloader_get_total_entries bootloader_get_total_entries `(ui  1 e 2 0 ]
 {
-"455
+"435
 } 0
-"77 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
+"79 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
 [v __display_itoa_u16 _display_itoa_u16 `(uc  1 s 1 _display_itoa_u16 ]
 {
 [v __display_itoa_u16@value value `ul  1 p 4 24 ]
 [v __display_itoa_u16@text text `*.39uc  1 p 2 28 ]
-"105
+"107
 } 0
 "4 C:\Program Files (x86)\Microchip\xc8\v1.42\sources\common\itoa.c
 [v _itoa itoa `(*.39uc  1 e 2 0 ]
@@ -2807,39 +2845,42 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 "60 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\bootloader.c
 [v _bootloader_run bootloader_run `(v  1 e 1 0 ]
 {
-"89
+[v bootloader_run@timeslot timeslot `uc  1 a 1 wreg ]
+[v bootloader_run@timeslot timeslot `uc  1 a 1 wreg ]
+[v bootloader_run@timeslot timeslot `uc  1 a 1 86 ]
+"92
 } 0
-"164
+"167
 [v __bootloader_verify_file _bootloader_verify_file `(v  1 s 1 _bootloader_verify_file ]
 {
-"168
+"171
 [v __bootloader_verify_file@address32 address32 `ul  1 a 4 82 ]
-"167
+"170
 [v __bootloader_verify_file@return_value return_value `ul  1 a 4 78 ]
-"166
+"169
 [v __bootloader_verify_file@rec_counter rec_counter `uc  1 a 1 77 ]
-"255
+"258
 } 0
-"257
+"260
 [v __bootloader_program _bootloader_program `(v  1 s 1 _bootloader_program ]
 {
-"264
+"267
 [v __bootloader_program@address32 address32 `ul  1 a 4 55 ]
-"265
+"268
 [v __bootloader_program@return_value return_value `ul  1 a 4 51 ]
-"262
+"265
 [v __bootloader_program@page_to_write page_to_write `ui  1 a 2 62 ]
-"259
+"262
 [v __bootloader_program@cntr cntr `ui  1 a 2 60 ]
-"266
+"269
 [v __bootloader_program@address_within_page address_within_page `ui  1 a 2 49 ]
-"261
+"264
 [v __bootloader_program@entry_page entry_page `ui  1 a 2 47 ]
-"260
-[v __bootloader_program@buffer buffer `*.39uc  1 a 2 45 ]
 "263
+[v __bootloader_program@buffer buffer `*.39uc  1 a 2 45 ]
+"266
 [v __bootloader_program@start_from_byte start_from_byte `uc  1 a 1 59 ]
-"410
+"396
 } 0
 "59 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\hex.c
 [v _parseHexFileEntry parseHexFileEntry `(ul  1 e 4 0 ]
@@ -2849,8 +2890,8 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 "59
 [v parseHexFileEntry@data data `*.39uc  1 p 2 11 ]
 [v parseHexFileEntry@offset offset `ul  1 p 4 13 ]
-[s S6042 HexFileEntry 23 `ui 1 dataLength 2 0 `ui 1 address 2 2 `E23 1 recordType 1 4 `[16]uc 1 data 16 5 `uc 1 checksum 1 21 `uc 1 checksumCheck 1 22 ]
-[v parseHexFileEntry@hexEntry hexEntry `*.39S6042  1 p 2 17 ]
+[s S6133 HexFileEntry 23 `ui 1 dataLength 2 0 `ui 1 address 2 2 `E23 1 recordType 1 4 `[16]uc 1 data 16 5 `uc 1 checksum 1 21 `uc 1 checksumCheck 1 22 ]
+[v parseHexFileEntry@hexEntry hexEntry `*.39S6133  1 p 2 17 ]
 "135
 } 0
 "42
@@ -2980,9 +3021,9 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v _fat_read_from_file fat_read_from_file `(uc  1 e 1 0 ]
 {
 [v fat_read_from_file@file_number file_number `uc  1 a 1 wreg ]
-[s S5754 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
+[s S5845 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
 "573
-[v fat_read_from_file@root root `S5754  1 a 32 3 ]
+[v fat_read_from_file@root root `S5845  1 a 32 3 ]
 "574
 [v fat_read_from_file@position position `ul  1 a 4 41 ]
 "578
@@ -3018,8 +3059,8 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v __read_root@root_sector root_sector `ui  1 a 2 42 ]
 "194
 [v __read_root@slot slot `uc  1 a 1 wreg ]
-[s S5754 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
-[v __read_root@data data `*.39S5754  1 p 2 39 ]
+[s S5845 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
+[v __read_root@data data `*.39S5845  1 p 2 39 ]
 "198
 [v __read_root@slot slot `uc  1 a 1 46 ]
 "202
@@ -3037,24 +3078,24 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v __read_fat@cluster cluster `ui  1 p 2 39 ]
 "182
 } 0
-"91 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\bootloader.c
+"94 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\bootloader.c
 [v __bootloader_check_address _bootloader_check_address `(E8339  1 s 1 _bootloader_check_address ]
 {
-"95
+"98
 [v __bootloader_check_address@cntr cntr `uc  1 a 1 11 ]
-"93
+"96
 [v __bootloader_check_address@byte_status byte_status `E8339  1 a 1 10 ]
-"94
+"97
 [v __bootloader_check_address@worst_case worst_case `E8339  1 a 1 9 ]
-"91
+"94
 [v __bootloader_check_address@address address `ul  1 p 4 0 ]
 [v __bootloader_check_address@dataLength dataLength `uc  1 p 1 4 ]
-"132
+"135
 } 0
-"134
+"137
 [v __bootloader_find_file _bootloader_find_file `(v  1 s 1 _bootloader_find_file ]
 {
-"162
+"165
 } 0
 "306 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 [v _fat_get_file_size fat_get_file_size `(ul  1 e 4 0 ]
@@ -3274,7 +3315,7 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 {
 [v SYSTEM_Initialize@state state `E8100  1 a 1 wreg ]
 "193
-[v SYSTEM_Initialize@pll_startup_counter_2666 pll_startup_counter `ui  1 a 2 2 ]
+[v SYSTEM_Initialize@pll_startup_counter_2822 pll_startup_counter `ui  1 a 2 2 ]
 "159
 [v SYSTEM_Initialize@pll_startup_counter pll_startup_counter `ui  1 a 2 0 ]
 "147
@@ -3870,10 +3911,10 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 {
 "288
 } 0
-"12 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\ui.c
+"13 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\ui.c
 [v _ui_get_status ui_get_status `(E9440  1 e 1 0 ]
 {
-"15
+"16
 } 0
 "103 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\rtcc.c
 [v _rtcc_get_year rtcc_get_year `(uc  1 e 1 0 ]
@@ -3927,15 +3968,15 @@ COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 [v __fill_buffer_get_display1@cntr cntr `uc  1 a 1 5 ]
 "310
 } 0
-"59 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
+"61 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\display.c
 [v _display_get_character display_get_character `(uc  1 e 1 0 ]
 {
 [v display_get_character@line line `uc  1 a 1 wreg ]
 [v display_get_character@line line `uc  1 a 1 wreg ]
 [v display_get_character@position position `uc  1 p 1 0 ]
-"61
+"63
 [v display_get_character@line line `uc  1 a 1 3 ]
-"62
+"64
 } 0
 "348 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\app_device_custom_hid.c
 [v __fill_buffer_get_calibration2 _fill_buffer_get_calibration2 `(v  1 s 1 _fill_buffer_get_calibration2 ]
