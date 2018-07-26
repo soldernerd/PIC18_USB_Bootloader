@@ -5,7 +5,6 @@
 #include "os.h"
 #include "fat16.h"
 #include "flash.h"
-#include "rtcc.h"
 
 static uint8_t _get_mbr(uint16_t idx);
 static uint8_t _get_fbr(uint16_t idx);
@@ -19,7 +18,6 @@ static uint16_t _get_empty_cluster(uint16_t first_cluster);
 static void _write_fat(uint16_t cluster, uint16_t value);
 static uint16_t _read_fat(uint16_t cluster);
 static void _write_root(uint8_t slot, rootEntry_t *data);
-static void _read_root(uint8_t slot, rootEntry_t *data);
 static void _delete_root(uint8_t slot);
 static uint16_t _get_first_cluster(uint8_t slot);
 static uint32_t _get_file_size(uint8_t slot);
@@ -31,24 +29,24 @@ uint8_t buffer[512];
 static uint16_t _get_time(void)
 {
     uint16_t time;
-    uint8_t hours = rtcc_get_hours_decimal();
-    uint8_t minutes = rtcc_get_minutes_decimal();
-    uint8_t seconds = rtcc_get_seconds_decimal();
-    time = ((hours&0b11111) << 11);
-    time |= ((minutes&0b111111) << 5);
-    time |= ((seconds>>1)&0b11111);
+//    uint8_t hours = rtcc_get_hours_decimal();
+//    uint8_t minutes = rtcc_get_minutes_decimal();
+//    uint8_t seconds = rtcc_get_seconds_decimal();
+//    time = ((hours&0b11111) << 11);
+//    time |= ((minutes&0b111111) << 5);
+//    time |= ((seconds>>1)&0b11111);
     return time;
 };
 
 static uint16_t _get_date(void)
 {
     uint16_t date;
-    uint8_t year = rtcc_get_year_decimal();
-    uint8_t month = rtcc_get_month_decimal();
-    uint8_t day = rtcc_get_day_decimal();
-    date = (((year+20)&0b1111111) << 9);
-    date |= ((month&0b1111) << 5);
-    date |= (day&0b11111);
+//    uint8_t year = rtcc_get_year_decimal();
+//    uint8_t month = rtcc_get_month_decimal();
+//    uint8_t day = rtcc_get_day_decimal();
+//    date = (((year+20)&0b1111111) << 9);
+//    date |= ((month&0b1111) << 5);
+//    date |= (day&0b11111);
     return date;
 }
 
@@ -191,16 +189,6 @@ static void _write_root(uint8_t slot, rootEntry_t *data)
     flash_partial_write(root_sector, offset, 32, data);
 }
 
-static void _read_root(uint8_t slot, rootEntry_t *data)
-{
-    uint16_t root_sector;
-    uint16_t offset;
-    root_sector = (slot >> 4) + ROOT_FIRST_SECTOR;
-    offset = (slot & 0b1111);
-    offset <<= 5;
-    flash_partial_read(root_sector, offset, 32, data);
-}
-
 static void _delete_root(uint8_t slot)
 {
     uint16_t root_sector;
@@ -300,7 +288,7 @@ uint8_t fat_find_file(char *name, char *extension)
            ++slot;
         }
     }
-    return 0xFF; //Indicating an error, i.e there are no available slots    
+    return 0xFF; //Indicating an error, i.e file not found  
 }
 
 uint32_t fat_get_file_size(uint8_t file_number)
@@ -483,7 +471,7 @@ uint8_t fat_append_to_file(uint8_t file_number, uint16_t number_of_bytes, uint8_
     }
 
     //Collect data from the root entry
-    _read_root(file_number, &root);
+    fat_get_file_information(file_number, &root);
     file_size = root.fileSize;
     fat_cluster = root.firstCluster;
     
@@ -551,7 +539,7 @@ void fat_rename_file(uint8_t file_number, char *name, char *extension)
     uint8_t cntr;
     
     //Obtain a copy of root entry
-    _read_root(file_number, &root);
+    fat_get_file_information(file_number, &root);
     
     //Change file name
     for(cntr=0; cntr<8; ++cntr)
@@ -578,7 +566,7 @@ uint8_t fat_read_from_file(uint8_t file_number, uint32_t start_byte, uint32_t le
     uint16_t read_length;
     
     //Read root entry
-    _read_root(file_number, &root);
+    fat_get_file_information(file_number, &root);
     cluster = root.firstCluster;
     
     //Check file size
@@ -1027,4 +1015,29 @@ void fat_init(void)
     {
         fat_format();
     }
+}
+
+uint8_t fat_get_file_information(uint8_t file_number, rootEntry_t *data)
+{
+    uint16_t root_sector;
+    uint16_t offset;
+    
+    if(file_number>=FBR_ROOT_ENTRIES)
+    {
+        //Error: invalid file_number
+        return 0x01;
+    }
+    if(_root_is_available(file_number))
+    {
+        //Error: there is no file in that location
+        return 0x02;
+    }
+
+    root_sector = (file_number >> 4) + ROOT_FIRST_SECTOR;
+    offset = (file_number & 0b1111);
+    offset <<= 5;
+    flash_partial_read(root_sector, offset, 32, data);
+    
+    //Indicate success
+    return 0x00;
 }

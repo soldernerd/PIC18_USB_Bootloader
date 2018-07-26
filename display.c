@@ -6,7 +6,6 @@
 #include "display.h"
 #include "i2c.h"
 #include "os.h"
-#include "rtcc.h"
 #include "bootloader.h"
 
 const char start_line1[17] = "Bootloader Mode";

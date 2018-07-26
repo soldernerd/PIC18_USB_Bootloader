@@ -5,28 +5,32 @@
 #include "os.h"
 
 
-#define _XTAL_FREQ 8000000
+//#define _XTAL_FREQ 8000000
 
+/*
+ * I2C read and write flags
+ */
 #define I2C_WRITE 0x00
 #define I2C_READ 0x01
 
+/*
+ * I2C addresses
+ */
 #define I2C_DISPLAY_SLAVE_ADDRESS 0b01111000
 #define I2C_DIGIPOT_SLAVE_ADDRESS 0b01011100
-#define I2C_ADC_SLAVE_ADDRESS 0b11010000
 #define I2C_EEPROM_SLAVE_ADDRESS 0b10100000
 
-i2cFrequency_t i2c_frequency = I2C_FREQUENCY_100kHz;
-extern calibration_t calibrationParameters[7];
-
-eeprom_write_task_t task_list[16];
-uint8_t task_list_read_index = 0;
-uint8_t task_list_write_index = 0;
 
 /* ****************************************************************************
- * General I2C functionality
+ * Variable definitions
  * ****************************************************************************/
 
-//Replacements for the PLIB functions
+i2cFrequency_t i2c_frequency;
+
+
+/* ****************************************************************************
+ * Replacements for depreciated PLIB functions
+ * ****************************************************************************/
 
 //Replaces OpenI2C1();
 static void _i2c_open_1(void)
@@ -90,12 +94,17 @@ static void _i2c_not_acknowledge(void)
     while(SSP1CON2bits.ACKEN){}
 }
 
+
+/* ****************************************************************************
+ * General I2C functionality
+ * ****************************************************************************/
+
 void i2c_init(void)
 {
+    //Initialize I2C module
     _i2c_open_1();
     //Set baud rate to 100kHz
     i2c_set_frequency(I2C_FREQUENCY_100kHz);
-    //SSP1ADDbits.SSPADD = 4;
 }
 
 i2cFrequency_t i2c_get_frequency(void)
@@ -150,14 +159,6 @@ static void _i2c_read(uint8_t slave_address, uint8_t *data, uint8_t length)
     _i2c_wait_idle();
     _i2c_send(slave_address | I2C_READ);
     _i2c_wait_idle();
-    /*
-    for(cntr=0; cntr<length; ++cntr)
-    {
-        data[cntr] = _i2c_get();
-        _i2c_acknowledge();      
-    } 
-    _i2c_not_acknowledge();
-    */
     
     for(cntr=0; cntr<length-1; ++cntr)
     {
@@ -182,45 +183,18 @@ static void _i2c_read(uint8_t slave_address, uint8_t *data, uint8_t length)
 #define DISPLAY_CLEAR 0b00000001
 #define DISPLAY_SET_ADDRESS 0b10000000
 
-
-//void i2c_display_init(void)
-//{
-//    uint8_t init_sequence[9] = {
-//        0x3A, /* 8bit, 4line, RE=1 */
-//        //0x1E, /* Set BS1 (1/6 bias) */
-//        0b00011110, //0b00011110,
-//        0x39, /* 8bit, 4line, IS=1, RE=0 */
-//        //0x1C, /* Set BS0 (1/6 bias) + osc */
-//        0b00001100, //0b00011100
-//        0b1110000, /* Set contrast lower 4 bits */
-//        0b1011100, /* Set ION, BON, contrast bits 4&5 */
-//        0x6d, /* Set DON and amp ratio */
-//        0x0c, /* Set display on */
-//        0x01  /* Clear display */
-//    };
-//    
-//    i2c_expander_high(I2C_EXPANDER_USER_INTERFACE);
-//    
-//    //Open I2C mux port
-//    i2c_mux_open(I2C_MUX_DISPLAY);
-//    
-//    //Let voltage stabilize
-//    __delay_ms(50);
-//    
-//    LATBbits.LATB0 = 0; //Backlight off, reset display
-//    
-//    //The display needs some start-up time
-//    __delay_ms(10);
-//    
-//    LATBbits.LATB0 = 1; //Backlight on, start up display
-//    
-//    //The display needs some start-up time again
-//    __delay_ms(5); 
-//    
-//    //Write initialization sequence
-//    _i2c_write(I2C_DISPLAY_SLAVE_ADDRESS, &init_sequence[0], 9);
-//}
-
+static void _ic2_display_set_address(uint8_t address)
+{
+    uint8_t data_array[2];
+    data_array[0] = DISPLAY_INSTRUCTION_REGISTER;
+    data_array[1] = DISPLAY_SET_ADDRESS | address;
+    
+    //Set I2C frequency to 400kHz
+    i2c_set_frequency(I2C_FREQUENCY_400kHz);
+    
+    //Set address
+    _i2c_write(I2C_DISPLAY_SLAVE_ADDRESS, &data_array[0], 2);
+}
 
 void i2c_display_send_init_sequence(void)
 {
@@ -238,64 +212,11 @@ void i2c_display_send_init_sequence(void)
         0x01  // Clear display
     };
     
-    //Set I2C frequency to 200kHz (display doesn't like 400kHz at startup)
+    //Set I2C frequency to 100kHz (display doesn't like 400kHz at startup)
     i2c_set_frequency(I2C_FREQUENCY_100kHz);
 
     //Write initialization sequence
     _i2c_write(I2C_DISPLAY_SLAVE_ADDRESS, &init_sequence[0], 9);
-}
-
-void i2c_display_init(void)
-{
-    uint8_t init_sequence[9] = {
-        0x3A, // 8bit, 4line, RE=1
-        //0x1E, // Set BS1 (1/6 bias)
-        0b00011110, //0b00011110,
-        0x39, // 8bit, 4line, IS=1, RE=0
-        //0x1C, // Set BS0 (1/6 bias) + osc
-        0b00001100, //0b00011100
-        0x74, //0b1110000, // Set contrast lower 4 bits
-        0b1011100, // Set ION, BON, contrast bits 4&5
-        0x6d, // Set DON and amp ratio
-        0x0c, // Set display on
-        0x01  // Clear display
-    };
-    
-    //Power UI on
-    //i2c_expander_high(I2C_EXPANDER_USER_INTERFACE);
-    system_delay_ms(10);
-    //Enable on
-
-    LATBbits.LATB0 = 1; 
-    system_delay_ms(2);
-    
-    //Talk to digipot to pull display reset signal low
-    i2c_digipot_reset_on();
-    system_delay_ms(10);
-    i2c_digipot_reset_off();
-    system_delay_ms(5);
-    
-    //Set I2C frequency to 200kHz (display doesn't like 400kHz at startup)
-    i2c_set_frequency(I2C_FREQUENCY_100kHz);
-
-    //Write initialization sequence
-    _i2c_write(I2C_DISPLAY_SLAVE_ADDRESS, &init_sequence[0], 9);
-    
-    //Turn backlight on
-    i2c_digipot_backlight(30); 
-}
-
-void _ic2_display_set_address(uint8_t address)
-{
-    uint8_t data_array[2];
-    data_array[0] = DISPLAY_INSTRUCTION_REGISTER;
-    data_array[1] = DISPLAY_SET_ADDRESS | address;
-    
-    //Set I2C frequency to 400kHz
-    i2c_set_frequency(I2C_FREQUENCY_100kHz);
-    
-    //Set address
-    _i2c_write(I2C_DISPLAY_SLAVE_ADDRESS, &data_array[0], 2);
 }
 
 void i2c_display_cursor(uint8_t line, uint8_t position)
@@ -309,7 +230,7 @@ void i2c_display_cursor(uint8_t line, uint8_t position)
     address |= position;
     
     //Set I2C frequency to 400kHz
-    i2c_set_frequency(I2C_FREQUENCY_100kHz);
+    i2c_set_frequency(I2C_FREQUENCY_400kHz);
     
     //Set address
     _ic2_display_set_address(address);
@@ -318,7 +239,7 @@ void i2c_display_cursor(uint8_t line, uint8_t position)
 void i2c_display_write(char *data)
 {
     //Set I2C frequency to 400kHz
-    i2c_set_frequency(I2C_FREQUENCY_100kHz);
+    i2c_set_frequency(I2C_FREQUENCY_400kHz);
 
     _i2c_wait_idle();
     _i2c_start();
@@ -343,7 +264,7 @@ void i2c_display_write_fixed(char *data, uint8_t length)
     uint8_t pos;
     
     //Set I2C frequency to 400kHz
-    i2c_set_frequency(I2C_FREQUENCY_100kHz);
+    i2c_set_frequency(I2C_FREQUENCY_400kHz);
 
     _i2c_wait_idle();
     _i2c_start();
@@ -368,7 +289,6 @@ void i2c_display_write_fixed(char *data, uint8_t length)
  * I2C Dual Digipot Functionality
  * ****************************************************************************/
 
-
 #define DIGIPOT_MEMORY_ADDRESS_VOLATILE_WIPER_0 0x00
 #define DIGIPOT_MEMORY_ADDRESS_VOLATILE_WIPER_1 0x10
 #define DIGIPOT_MEMORY_ADDRESS_NONVOLATILE_WIPER_0 0x20
@@ -378,26 +298,6 @@ void i2c_display_write_fixed(char *data, uint8_t length)
 #define DIGIPOT_COMMAND_INCREMENT 0x01
 #define DIGIPOT_COMMAND_DECREMENT 0x02
 #define DIGIPOT_COMMAND_READ 0x03
-
-void i2c_digipot_set_defaults(void)
-{
-    uint8_t data_array[2];
-    
-    //Set I2C frequency to 400kHz
-    i2c_set_frequency(I2C_FREQUENCY_400kHz);
-    
-    data_array[0] = DIGIPOT_MEMORY_ADDRESS_NONVOLATILE_WIPER_0 | DIGIPOT_COMMAND_WRITE;
-    data_array[1] = 0x00;
-    
-    _i2c_write(I2C_DIGIPOT_SLAVE_ADDRESS, &data_array[0], 2);
-    
-    system_delay_ms(10);
-
-    data_array[0] = DIGIPOT_MEMORY_ADDRESS_NONVOLATILE_WIPER_1 | DIGIPOT_COMMAND_WRITE;
-    data_array[1] = 0x00;
-    
-    _i2c_write(I2C_DIGIPOT_SLAVE_ADDRESS, &data_array[0], 2);  
-}
 
 void i2c_digipot_reset_on(void)
 {
@@ -437,53 +337,9 @@ void i2c_digipot_backlight(uint8_t level)
 }
 
 /* ****************************************************************************
- * I2C ADC Functionality
- * ****************************************************************************/
-
-
-void i2c_adc_start(i2cAdcPort_t channel, i2cAdcResolution_t resolution, i2cAdcGain_t gain)
- {
-     uint8_t configuration_byte;
-     configuration_byte = 0b10000000;
-     configuration_byte |= (channel<<5);
-     configuration_byte |= (resolution<<2);
-     configuration_byte |= gain;
-     
-    //Set I2C frequency to 400kHz
-    i2c_set_frequency(I2C_FREQUENCY_400kHz);
-     
-     _i2c_write(I2C_ADC_SLAVE_ADDRESS, &configuration_byte, 1);
- }
- 
- int16_t i2c_adc_read(void)
- {
-    int16_t result;
-
-    //Set I2C frequency to 400kHz
-    i2c_set_frequency(I2C_FREQUENCY_400kHz);
-
-    _i2c_wait_idle();
-    _i2c_start();
-    _i2c_wait_idle();
-    _i2c_send(I2C_ADC_SLAVE_ADDRESS | I2C_READ);
-    _i2c_wait_idle();
-    result = _i2c_get();
-    result <<= 8;
-    _i2c_acknowledge();
-    result |= _i2c_get();
-    _i2c_not_acknowledge();
-    _i2c_stop(); 
-    
-    return result;
- };
- 
-/* ****************************************************************************
  * I2C EEPROM Functionality
  * ****************************************************************************/
- 
-#define EEPROM_CALIBRATION_ADDRESS 0x0100
- 
-void _i2c_eeprom_load_default_calibration(calibration_t *buffer, calibrationIndex_t index);
+
  
 void i2c_eeprom_writeByte(uint16_t address, uint8_t data)
 {
@@ -514,7 +370,6 @@ uint8_t i2c_eeprom_readByte(uint16_t address)
     _i2c_read(slave_address, &addr, 1);
     return addr;
 }
-
 
 void i2c_eeprom_write(uint16_t address, uint8_t *data, uint8_t length)
 {
@@ -552,234 +407,3 @@ void i2c_eeprom_read(uint16_t address, uint8_t *data, uint8_t length)
     _i2c_write(slave_address, &addr, 1);
     _i2c_read(slave_address, &data[0], length);
 }
-
-void i2c_eeprom_read_calibration(void)
-{
-    uint8_t buffer[4];
-    uint8_t cntr;
-    uint16_t addr;
-
-    for(cntr=0; cntr<CALIBRATION_INDEX_COUNT; ++cntr)
-    {
-        //Read 4 byte signature
-        addr = EEPROM_CALIBRATION_ADDRESS + (cntr<<4);
-        i2c_eeprom_read(addr, &buffer[0], 4);
-        //Check signature
-        if((buffer[0]==0x77) && (buffer[1]==0x55) && (buffer[2]==0x33) && (buffer[3]==cntr))
-        {
-            //Valid data in EEPROM -> read data
-            addr += 4;
-            i2c_eeprom_read(addr, (uint8_t*) &calibrationParameters[cntr], 12);
-        }
-        else
-        {
-            //No valid data in EEPROM -> write default data
-            _i2c_eeprom_load_default_calibration(&calibrationParameters[cntr], cntr);
-            //Schedule data to be written
-            switch((calibrationIndex_t) cntr)
-            {
-                case CALIBRATION_INDEX_INPUT_VOLTAGE:
-                    schedule_eeprom_write_task(EEPROM_WRITE_TASK_CALIBRATION_INPUT_VOLTAGE);
-                    break;
-                case CALIBRATION_INDEX_OUTPUT_VOLTAGE:
-                    schedule_eeprom_write_task(EEPROM_WRITE_TASK_CALIBRATION_OUTPUT_VOLTAGE);
-                    break;
-                case CALIBRATION_INDEX_INPUT_CURRENT:
-                    schedule_eeprom_write_task(EEPROM_WRITE_TASK_CALIBRATION_INPUT_CURRENT);
-                    break;
-                case CALIBRATION_INDEX_OUTPUT_CURRENT:
-                    schedule_eeprom_write_task(EEPROM_WRITE_TASK_CALIBRATION_OUTPUT_CURRENT);
-                    break;
-                case CALIBRATION_INDEX_ONBOARD_TEMPERATURE:
-                    schedule_eeprom_write_task(EEPROM_WRITE_TASK_CALIBRATION_ONBOARD_TEMPERATURE);
-                    break;
-                case CALIBRATION_INDEX_EXTERNAL_TEMPERATURE_1:
-                    schedule_eeprom_write_task(EEPROM_WRITE_TASK_CALIBRATION_EXTERNAL_TEMPERATURE_1);
-                    break;
-                case CALIBRATION_INDEX_EXTERNAL_TEMPERATURE_2:
-                    schedule_eeprom_write_task(EEPROM_WRITE_TASK_CALIBRATION_EXTERNAL_TEMPERATURE_2);
-                    break;
-            }
-            /*
-            addr += 4;
-            i2c_eeprom_write(addr, (uint8_t*) &calibrationParameters[cntr], 12);
-            //Wait for a while
-            system_delay_ms(7);
-            //Update signature to indicate that data is now valid
-            addr -= 4;
-            buffer[0] = 0x77;
-            buffer[1] = 0x55;
-            buffer[2] = 0x33;
-            buffer[3] = cntr;
-            i2c_eeprom_write(addr, &buffer[0], 4);
-            //Wait for a while
-            system_delay_ms(7);
-             * */
-        }
-    }   
-}
-
-void _i2c_eeprom_load_default_calibration(calibration_t *buffer, calibrationIndex_t index)
-{
-    switch(index)
-    {
-        case CALIBRATION_INDEX_INPUT_VOLTAGE:
-            (*buffer).NeutralOffset = 0;
-            (*buffer).NeutralMultiplier = 11;
-            (*buffer).NeutralShift = 4;
-            (*buffer).Offset = 0;
-            (*buffer).Multiplier = 11;
-            (*buffer).Shift = 4;
-            (*buffer).AutoCalibration = 0;
-            break;
-        case CALIBRATION_INDEX_OUTPUT_VOLTAGE:   
-            (*buffer).NeutralOffset = 0;
-            (*buffer).NeutralMultiplier = 17;
-            (*buffer).NeutralShift = 5;
-            (*buffer).Offset = 0;
-            (*buffer).Multiplier = 17;
-            (*buffer).Shift = 5;
-            (*buffer).AutoCalibration = 0;
-            break;
-        case CALIBRATION_INDEX_INPUT_CURRENT:
-            (*buffer).NeutralOffset = 0;
-            (*buffer).NeutralMultiplier = 5851;
-            (*buffer).NeutralShift = 15;
-            (*buffer).Offset = 0;
-            (*buffer).Multiplier = 5851;
-            (*buffer).Shift = 15;
-            (*buffer).AutoCalibration = 0;
-            break;
-        case CALIBRATION_INDEX_OUTPUT_CURRENT:   
-            (*buffer).NeutralOffset = 0;
-            (*buffer).NeutralMultiplier = 5851;
-            (*buffer).NeutralShift = 15;
-            (*buffer).Offset = 0;
-            (*buffer).Multiplier = 5851;
-            (*buffer).Shift = 15;
-            (*buffer).AutoCalibration = 0;
-            break;
-        case CALIBRATION_INDEX_ONBOARD_TEMPERATURE:   
-            (*buffer).NeutralOffset = -13769;
-            (*buffer).NeutralMultiplier = -11479;
-            (*buffer).NeutralShift = 13;
-            (*buffer).Offset = -13769;
-            (*buffer).Multiplier = -11479;
-            (*buffer).Shift = 13;
-            (*buffer).AutoCalibration = 0;
-            break;
-        case CALIBRATION_INDEX_EXTERNAL_TEMPERATURE_1:   
-            (*buffer).NeutralOffset = -13769;
-            (*buffer).NeutralMultiplier = -11479;
-            (*buffer).NeutralShift = 13;
-            (*buffer).Offset = -13769;
-            (*buffer).Multiplier = -11479;
-            (*buffer).Shift = 13;
-            (*buffer).AutoCalibration = 0;
-            break;
-        case CALIBRATION_INDEX_EXTERNAL_TEMPERATURE_2:   
-            (*buffer).NeutralOffset = -13769;
-            (*buffer).NeutralMultiplier = -11479;
-            (*buffer).NeutralShift = 13;
-            (*buffer).Offset = -13769;
-            (*buffer).Multiplier = -11479;
-            (*buffer).Shift = 13;
-            (*buffer).AutoCalibration = 0;
-            break;
-    }
-}
-
-void _write_calibration(calibrationIndex_t index)
-{
-    uint8_t buffer[16];
-    uint8_t *ptr;
-    uint8_t cntr;
-    uint16_t addr;
-    buffer[0] = 0x77;
-    buffer[1] = 0x55;
-    buffer[2] = 0x33;
-    buffer[3] = (uint8_t) index;
-    ptr = (uint8_t*) &calibrationParameters[index];
-    for(cntr=4; cntr<16; ++cntr)
-    {
-        buffer[cntr] = *ptr;
-        ++ptr;
-    }
-    addr = EEPROM_CALIBRATION_ADDRESS + (index<<4);
-    i2c_eeprom_write(addr, &buffer[0], 16);
-}
-
-
-uint8_t get_eeprom_write_task_count(void)
-{
-       return (task_list_write_index - task_list_read_index) & 0x0F;
-}
-
-void schedule_eeprom_write_task(eeprom_write_task_t task)
-{
-       uint8_t idx;
-       //Check if task is already scheduled
-       for(idx=task_list_read_index; idx!=task_list_write_index; idx=(idx+1) & 0x0F)
-       {
-             if (task_list[idx] == task)
-             {
-                    //Return (i.e. do nothing) if task is already scheduled
-                    return;
-             }
-       }
-       //Add task to list
-       task_list[task_list_write_index] = task;
-       ++task_list_write_index;
-       task_list_write_index &= 0x0F;
-}
-
-eeprom_write_task_t get_next_eeprom_write_task(void)
-{
-       eeprom_write_task_t task;
-       if (task_list_read_index == task_list_write_index)
-       {
-             //Buffer is empty
-             return EEPROM_WRITE_TASK_NONE;
-       }
-       else
-       {
-             //Save task to return
-             task = task_list[task_list_read_index];
-             //Increment read index
-             ++task_list_read_index;
-             task_list_read_index &= 0x0F;
-             //Return first task
-             return task;
-       }
-}
-
-void i2c_eeprom_tasks()
-{
-    switch(get_next_eeprom_write_task())
-    {
-        case EEPROM_WRITE_TASK_REAL_TIME_CLOCK:
-            break;
-        case EEPROM_WRITE_TASK_CALIBRATION_INPUT_VOLTAGE:
-            _write_calibration(CALIBRATION_INDEX_INPUT_VOLTAGE);
-            break;
-        case EEPROM_WRITE_TASK_CALIBRATION_OUTPUT_VOLTAGE:
-            _write_calibration(CALIBRATION_INDEX_OUTPUT_VOLTAGE);
-            break;
-        case EEPROM_WRITE_TASK_CALIBRATION_INPUT_CURRENT:
-            _write_calibration(CALIBRATION_INDEX_INPUT_CURRENT);
-            break;
-        case EEPROM_WRITE_TASK_CALIBRATION_OUTPUT_CURRENT:
-            _write_calibration(CALIBRATION_INDEX_OUTPUT_CURRENT);
-            break;
-        case EEPROM_WRITE_TASK_CALIBRATION_ONBOARD_TEMPERATURE:
-            _write_calibration(CALIBRATION_INDEX_ONBOARD_TEMPERATURE);
-            break;
-        case EEPROM_WRITE_TASK_CALIBRATION_EXTERNAL_TEMPERATURE_1:
-            _write_calibration(CALIBRATION_INDEX_EXTERNAL_TEMPERATURE_1);
-            break;
-        case EEPROM_WRITE_TASK_CALIBRATION_EXTERNAL_TEMPERATURE_2:
-            _write_calibration(CALIBRATION_INDEX_EXTERNAL_TEMPERATURE_2);
-            break;
-    }
-}
-

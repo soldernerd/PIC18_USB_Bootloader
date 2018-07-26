@@ -28,8 +28,6 @@ please contact mla_licensing@microchip.com
 #define DRV_FILEIO_INTERNAL_FLASH_CONFIG_ERASE_BLOCK_SIZE 1024
 #define DRV_FILEIO_INTERNAL_FLASH_CONFIG_WRITE_BLOCK_SIZE 64
 
-#define MAIN_RETURN void
-
 /*** System States **************************************************/
 typedef enum
 {

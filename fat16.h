@@ -87,6 +87,7 @@ void fat_init(void);
 formatStatus_t fat_get_format_status(void);
 void fat_format(void);
 uint8_t fat_find_file(char *name, char *extension);
+uint8_t fat_get_file_information(uint8_t file_number, rootEntry_t *data);
 uint32_t fat_get_file_size(uint8_t file_number);
 uint8_t fat_create_file(char *name, char *extension, uint32_t size);
 void fat_delete_file(uint8_t file_number);

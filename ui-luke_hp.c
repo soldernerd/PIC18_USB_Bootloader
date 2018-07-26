@@ -3,21 +3,17 @@
 
 #include "os.h"
 #include "i2c.h"
+#include "rtcc.h"
 #include "ui.h"
-#include "internal_flash.h"
-
-/* ****************************************************************************
- * Variables definitions
- * ****************************************************************************/
 
 userInterfaceStatus_t userInterfaceStatus;
 uint16_t system_ui_inactive_count;
 
-/* ****************************************************************************
- * Static functions
- * ****************************************************************************/
+userInterfaceStatus_t ui_get_status(void)
+{
+    return userInterfaceStatus;
+}
 
-//React if the push button has been pressed
 static void _ui_encoder(void)
 {
     switch(os.display_mode)
@@ -51,55 +47,37 @@ static void _ui_encoder(void)
 
         case BOOTLOADER_MODE_PROGRAMMING:
             break; 
-            
-        case DISPLAY_MODE_BOOTLOADER_DONE:
-            if(os.buttonCount>0)
-            {
-                //Jump to normal code
-                #asm
-                    goto PROG_START;
-                #endasm
-            }
-            break; 
     }    
 }
 
-/* ****************************************************************************
- * Public functions
- * ****************************************************************************/
-
-//Return current UI status
-userInterfaceStatus_t ui_get_status(void)
-{
-    return userInterfaceStatus;
-}
-
-//Start initialization of the display
 void ui_init(void)
 {
     system_ui_inactive_count = 0;
     //Enable high (3.3volts) board voltage
-    VCC_HIGH_PIN = 1;
+    VCC_HIGH_PORT = 1;
     userInterfaceStatus = USER_INTERFACE_STATUS_STARTUP_1;
 }
 
-//This function is periodically called to keep the user interface alive
+
 void ui_run(void)
 {
 	switch(userInterfaceStatus)
 	{
 		case USER_INTERFACE_STATUS_OFF:
-            //Wake up if button has been pressed
 			if (os.buttonCount!=0)
 			{
-                ui_init();
+				//Enable high (3.3volts) board voltage
+                VCC_HIGH_PORT = 1;
                 os.buttonCount = 0;
+                //Proceed to next state
+                system_ui_inactive_count = 0;
+				userInterfaceStatus = USER_INTERFACE_STATUS_STARTUP_1;
 			}
 			break;
 
 		case USER_INTERFACE_STATUS_STARTUP_1:
             //Enable the user interface
-            DISP_EN_PIN = 0;
+            DISP_EN_PORT = 0;
             //Proceed to next state
 			system_ui_inactive_count = 0;
 			userInterfaceStatus = USER_INTERFACE_STATUS_STARTUP_2;
@@ -115,7 +93,7 @@ void ui_run(void)
 
 		case USER_INTERFACE_STATUS_STARTUP_3:
 			++system_ui_inactive_count;
-            //Turn off reset after 32ms
+            //Turn off reset after 16ms
 			if (system_ui_inactive_count>3)
 			{
 				i2c_digipot_reset_off();

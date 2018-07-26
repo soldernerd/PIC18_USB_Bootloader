@@ -5,52 +5,30 @@
  * Created on 26. December 2016, 21:31
  */
 
-
-/** INCLUDES *******************************************************/
+/* ****************************************************************************
+ * Includes
+ * ****************************************************************************/
 
 #include "system.h"
-
 #include "usb.h"
 #include "usb_device_hid.h"
 #include "usb_device_msd.h"
-//
-//#include "internal_flash.h"
-//
 #include "app_device_custom_hid.h"
 #include "app_device_msd.h"
-
-//User defined code
 #include "os.h"
 #include "i2c.h"
 #include "display.h"
 #include "ui.h"
-#include "rtcc.h"
 #include "flash.h"
 #include "fat16.h"
 #include "hex.h"
 #include "bootloader.h"
 #include "internal_flash.h"
 
-static uint8_t normal_mode(void);
 
-/*
-//High priority ISR
-void interrupt_high(void) __at(0x108)
-{
-    //asm("MOVLW 0x43"); 
-    asm("goto 0x1008"); 
-    return;
-}
-
-//Low priority ISR
-//void interrupt low_priority interrupt_low(void)
-void interrupt_low(void) __at(0x118)
-{
-    //asm("MOVLW 0x76"); 
-    asm("goto 0x24");
-    return;
-}
- * */
+/* ****************************************************************************
+ * Re-direct interrupts
+ * ****************************************************************************/
 
 #asm
     PSECT intcode
@@ -60,28 +38,26 @@ void interrupt_low(void) __at(0x118)
 #endasm
 
 
-/********************************************************************
- * Function:        void main(void)
- *
- * PreCondition:    None
- *
- * Input:           None
- *
- * Output:          None
- *
- * Side Effects:    None
- *
- * Overview:        Main program entry point.
- *
- * Note:            None
- *******************************************************************/
-MAIN_RETURN main(void)
+/* ****************************************************************************
+ * Static function prototypes
+ * ****************************************************************************/
+
+//This function decides if we should start in bootloader mode or not.
+//Returns 0 for bootloader mode, 1 for normal program
+static uint8_t _normal_mode(void);
+
+
+/* ****************************************************************************
+ * Main function definition
+ * ****************************************************************************/
+void main(void)
 {
-    //This is a user defined function
+    //Initialize low level hardware so that we have a functional system
+    //We need that in order to decide in which mode to run (bootloader or normal)
     system_init();
     
     //Check if we should jump to normal software (i.e. not run bootloader)
-    if(normal_mode())
+    if(_normal_mode())
     {
         //Start normal program. We're already done...
         #asm
@@ -89,31 +65,20 @@ MAIN_RETURN main(void)
         #endasm
     }
     
+    //We will run in bootloader mode
+    //Now we need to get USB running as well
     SYSTEM_Initialize(SYSTEM_STATE_USB_START);
-
     USBDeviceInit();
     USBDeviceAttach();
     
+    //System is now fully up and running
+    //We can enter an endless loop
     while(1)
     {
-
-        #if defined(USB_POLLING)
-            // Interrupt or polling method.  If using polling, must call
-            // this function periodically.  This function will take care
-            // of processing and responding to SETUP transactions
-            // (such as during the enumeration process when you first
-            // plug in).  USB hosts require that USB devices should accept
-            // and process SETUP packets in a timely fashion.  Therefore,
-            // when using polling, this function should be called
-            // regularly (such as once every 1.8ms or faster** [see
-            // inline code comments in usb_device.c for explanation when
-            // "or faster" applies])  In most cases, the USBDeviceTasks()
-            // function does not take very long to execute (ex: <100
-            // instruction cycles) before it returns.
-            USBDeviceTasks();
-        #endif
-        
-        //Do this as often as possible
+        //We don't have interrupts
+        //So we need to keep USB alive by regularly calling these functions
+        //This should be done every 1.8ms
+        USBDeviceTasks();
         APP_DeviceMSDTasks();
         APP_DeviceCustomHIDTasks();
         
@@ -121,16 +86,17 @@ MAIN_RETURN main(void)
         //Usually, this happens in a timer ISR but we can't use interrupts here
         timer_pseudo_isr();
 
+        //Time is divided into 8 timeslots of 8ms each before starting again
+        //This can be used to schedule tasks
         if(!os.done)
         {
-            //Run scheduled EEPROM write tasks
-            i2c_eeprom_tasks();
-            
-            //Run user interface
+            //Run user interface every time (i.e every 8ms)
             ui_run();
 
-            //Run periodic tasks
-            switch(os.timeSlot&0b00000111)
+            //Run the following tasks only in certain time slots
+            //All the actual work happens in time slots 0 to 5
+            //Time slots 6 and 7 are used to update the user interface
+            switch(os.timeSlot)
             {
                 case 0:
                     bootloader_run(0);
@@ -175,9 +141,14 @@ MAIN_RETURN main(void)
     }//end while(1)
 }//end main
 
+
+/* ****************************************************************************
+ * Static function implementations
+ * ****************************************************************************/
+
 //This function decides if we should start in bootloader mode or not.
 //Returns 0 for bootloader mode, 1 for normal program
-static uint8_t normal_mode(void)
+static uint8_t _normal_mode(void)
 {
     if(i2c_eeprom_readByte(EEPROM_BOOTLOADER_BYTE_ADDRESS)==BOOTLOADER_BYTE_FORCE_BOOTLOADER_MODE)
     {
@@ -193,7 +164,7 @@ static uint8_t normal_mode(void)
         //But start in normal mode this time
         return 1;
     }
-    else if(!PUSHBUTTON_BIT) //Button is pressed
+    else if(!PUSHBUTTON_PIN) //Button is pressed
     {
         //Bootloader mode if pushbutton is pressed
         return 0;

@@ -8,6 +8,10 @@
 #ifndef UI_H
 #define	UI_H
 
+/* ****************************************************************************
+ * Type definitions
+ * ****************************************************************************/
+
 typedef enum
 {
 	USER_INTERFACE_STATUS_OFF,
@@ -18,6 +22,11 @@ typedef enum
 	USER_INTERFACE_STATUS_ON
 } userInterfaceStatus_t;
 
+
+/* ****************************************************************************
+ * Function prototypes
+ * ****************************************************************************/
+        
 void ui_init(void);
 void ui_run(void);
 userInterfaceStatus_t ui_get_status(void);
