@@ -3,6 +3,13 @@
  * Author: Luke
  *
  * Created on 8. Januar 2017, 17:13
+ * 
+ * Implements the communication with our AT45DB321E flash chip
+ * This module needs to make sure we are the SPI_CONFIGURATION_INTERNAL configuration
+ * Since this module is the only one using that configuration, it always sets the configuration back to SPI_CONFIGURATION_EXTERNAL
+ * Configuration switching is implemented at the public function level, i.e the functions defined here
+ * Static functions may safely assume that the configuration is already set correctly
+ * 
  */
 
 #ifndef FLASH_H
@@ -12,8 +19,7 @@
 
 
 #define FLASH_PAGE_SIZE 512
-//True value is 4096. We have to cheat a bit so windows accepts it as a FAT16, not FAT12
-#define FLASH_NUMBER_OF_PAGES 4114
+#define FLASH_NUMBER_OF_PAGES 8196
 
 typedef enum 
 { 

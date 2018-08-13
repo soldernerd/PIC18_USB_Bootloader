@@ -8,13 +8,10 @@
 /*****************************************************************************
  * Global Variables                                                          *
  *****************************************************************************/
+spiConfigurationDetails_t config_internal;
+spiConfigurationDetails_t config_external;
+spiConfiguration_t active_configuration;
 
-spiMode_t spi_mode;
-spiFrequency_t spi_speed;
-
-//Need to know:
-// - SPI mode: master / slave
-// - External baud rate
 
 /*****************************************************************************
  * Utility functions                                                         *
@@ -22,8 +19,11 @@ spiFrequency_t spi_speed;
  * flash functionality                                                       *
  *****************************************************************************/
 
-static void _spi_init_pps(void)
+static void _spi_init(spiConfigurationDetails_t details)
 {
+    //This function needs to be adapted...
+    //Needs to depend on the details provided...
+    
     //Associate pins with MSSP module
     PPSUnLock();
     PPS_FUNCTION_SPI2_MISO_INPUT = SPI_MISO_PPS;
@@ -33,16 +33,18 @@ static void _spi_init_pps(void)
     PPS_FUNCTION_SPI2_SCLK_INPUT = SPI_SCLK_PPS_IN;
     //SPI_SS_PPS = PPS_FUNCTION_SPI2_SS_OUTPUT;
     PPSLock();
-}
-
-static void _spi_init_master(void)
-{
+    
     //Configure and enable MSSP module in master mode
     SSP2STATbits.SMP = 1; //Sample at end
     SSP2STATbits.CKE = 1; //Active to idle
     SSP2CON1bits.CKP = 0; //Idle clock is low
     SSP2CON1bits.SSPM =0b0000; //SPI master mode, Fosc/4
     SSP2CON1bits.SSPEN = 1; //Enable SPI module
+}
+
+static void _spi_init_master(void)
+{
+
 }
 
 static void _spi_init_slave(void)
@@ -65,44 +67,83 @@ static void _switch_slavemode(void)
  * Only these functions are made accessible via spi.h                        *  
  *****************************************************************************/
 
-//Set up PPS pin mappings
-//Initialize the SPI
-void spi_init(spiMode_t mode)
+void spi_set_configurationDetails(spiConfiguration_t configuration, spiConfigurationDetails_t details)
 {
-    //Return immediately if there is nothing to do
-    if(spi_mode == mode)
+    switch(configuration)
     {
-        return;
-    }
-    
-    //Set up PPS if necessary
-    if(spi_mode == SPI_MODE_UNINITIALIZED)
-    {
-        _spi_init_pps();
-    }
-    
-    switch(mode)
-    {
-        case SPI_MODE_MASTER:
-            _spi_init_master();
-            spi_mode = mode;
+        case SPI_CONFIGURATION_INTERNAL:
+            config_internal.mode = details.mode;
+            config_internal.frequency = details.frequency;
+            config_internal.polarity = details.polarity;
             break;
            
-        case SPI_MODE_SLAVE:
-            _spi_init_slave();
-            spi_mode = mode;
+        case SPI_CONFIGURATION_EXTERNAL:
+            config_external.mode = details.mode;
+            config_external.frequency = details.frequency;
+            config_external.polarity = details.polarity;
             break;
     }
 }
 
-spiMode_t spi_get_mode()
+void spi_get_configurationDetails(spiConfiguration_t configuration, spiConfigurationDetails_t details)
 {
-    return spi_mode;
+    switch(configuration)
+    {
+        case SPI_CONFIGURATION_INTERNAL:
+            details.mode = config_internal.mode;
+            details.frequency = config_internal.frequency;
+            details.polarity = config_internal.polarity;
+            break;
+           
+        case SPI_CONFIGURATION_EXTERNAL:
+            details.mode = config_external.mode;
+            details.frequency = config_external.frequency;
+            details.polarity = config_external.polarity;
+            break;
+    }
 }
 
-/*****************************************************************************
- * SPI / DMA Functions                                                       *
- *****************************************************************************/
+//Set up PPS pin mappings and initialize the SPI module
+void spi_init(spiConfiguration_t configuration)
+{
+    switch(configuration)
+    {
+        case SPI_CONFIGURATION_INTERNAL:
+            _spi_init(config_internal);
+            break;
+           
+        case SPI_CONFIGURATION_EXTERNAL:
+            _spi_init(config_external);
+            break;
+    }
+    
+    active_configuration = configuration;
+}
+
+//Switch between internal and external configuration
+void spi_set_configuration(spiConfiguration_t configuration)
+{
+    if(active_configuration != configuration)
+    {
+        //To be implemented
+        //Do whatever it takes to switch between the two
+        switch(configuration)
+        {
+            case SPI_CONFIGURATION_INTERNAL:
+                //Whatever
+                break;
+
+            case SPI_CONFIGURATION_EXTERNAL:
+                //Whatever
+                break;
+        }   
+    }
+}
+
+spiConfiguration_t spi_get_configuration(void)
+{
+    return active_configuration;
+}
 
 //Transmits a number of bytes via SPI using the DMA module
 //Typically used to send a command

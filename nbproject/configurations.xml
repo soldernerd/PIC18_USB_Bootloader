@@ -54,13 +54,13 @@
       <itemPath>bootloader.c</itemPath>
       <itemPath>internal_flash.c</itemPath>
       <itemPath>api.c</itemPath>
+      <itemPath>spi.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
-    <itemPath>spi.c</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>

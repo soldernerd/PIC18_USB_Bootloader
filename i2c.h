@@ -9,7 +9,6 @@
 #define	I2C_H
 
 #include <stdint.h>
-#include "os.h"
 
 /* ****************************************************************************
  * Type definitions

@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/spi.h</file>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/flash.c</file>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/spi.c</file>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/os.h</file>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/flash.h</file>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/i2c.h</file>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/app_device_msd.c</file>
+        </group>
     </open-files>
 </project-private>

@@ -9,8 +9,9 @@
 #define	OS_H
 
 #include <stdint.h>
-#include "spi.h"
 #include "i2c.h"
+#include "spi.h"
+
 
 /*
  * Define your board revision here
