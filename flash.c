@@ -335,6 +335,7 @@ void flash_init(void)
 {
     //Configure and enable MSSP module
     spi_init(SPI_CONFIGURATION_INTERNAL);
+    spi_set_configuration(SPI_CONFIGURATION_INTERNAL);
     
     //Configure flash to operate in 512byte page size mode
     _flash_set_page_size(FLASH_PAGE_SIZE_512);

@@ -130,11 +130,63 @@ void spi_set_configuration(spiConfiguration_t configuration)
         switch(configuration)
         {
             case SPI_CONFIGURATION_INTERNAL:
-                //Whatever
+                
+                SSP2CON1bits.SSPEN = 0; //Disable SPI module
+                
+                //Set pin directions
+                SPI_MISO_TRIS = PIN_INPUT;
+                SPI_MOSI_TRIS = PIN_OUTPUT;
+                SPI_SCLK_TRIS = PIN_OUTPUT;
+                SPI_SS1_TRIS = PIN_OUTPUT;
+                SPI_SS1_PIN = 1;
+                
+                //Associate pins with MSSP module
+                PPSUnLock();
+                PPS_FUNCTION_SPI2_MISO_INPUT = SPI_MISO_PPS;
+                SPI_MOSI_PPS = PPS_FUNCTION_SPI2_MOSI_OUTPUT;
+                //Careful: Clock needs to be mapped as an output AND an input
+                SPI_SCLK_PPS_OUT = PPS_FUNCTION_SPI2_SCLK_OUTPUT;
+                PPS_FUNCTION_SPI2_SCLK_INPUT = SPI_SCLK_PPS_IN;
+                PPSLock();
+
+                //Configure and enable MSSP module in master mode
+                SSP2STATbits.SMP = 1; //Sample at end
+                SSP2STATbits.CKE = 1; //Active to idle
+                SSP2CON1bits.CKP = 0; //Idle clock is low
+                SSP2CON1bits.SSPM =0b0000; //SPI master mode, Fosc/4
+                
+                SSP2CON1bits.SSPEN = 1; //Enable SPI module
+                
                 break;
 
             case SPI_CONFIGURATION_EXTERNAL:
-                //Whatever
+                
+                //SSP2CON1bits.SSPEN = 0; //Disable SPI module
+//                
+//                //Set pin directions
+//                SPI_MISO_TRIS = PIN_OUTPUT;
+//                SPI_MOSI_TRIS = PIN_INPUT;
+//                SPI_SCLK_TRIS = PIN_INPUT;
+//                SPI_SS2_TRIS = PIN_INPUT;
+                
+                
+                
+                //Associate pins with MSSP module
+//                PPSUnLock();
+//                PPS_FUNCTION_SPI2_MISO_INPUT = SPI_MISO_PPS;
+//                SPI_MOSI_PPS = PPS_FUNCTION_SPI2_MOSI_OUTPUT;
+//                //Careful: Clock needs to be mapped as an output AND an input
+//                SPI_SCLK_PPS_OUT = PPS_FUNCTION_SPI2_SCLK_OUTPUT;
+//                PPS_FUNCTION_SPI2_SCLK_INPUT = SPI_SCLK_PPS_IN;
+//                PPSLock();
+//
+//                //Configure and enable MSSP module in master mode
+//                SSP2STATbits.SMP = 1; //Sample at end
+//                SSP2STATbits.CKE = 1; //Active to idle
+//                SSP2CON1bits.CKP = 0; //Idle clock is low
+//                SSP2CON1bits.SSPM =0b0000; //SPI master mode, Fosc/4
+//                SSP2CON1bits.SSPEN = 1; //Enable SPI module
+                
                 break;
         }   
     }

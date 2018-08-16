@@ -96,7 +96,7 @@ void main(void)
             //Run the following tasks only in certain time slots
             //All the actual work happens in time slots 0 to 5
             //Time slots 6 and 7 are used to update the user interface
-            switch(os.timeSlot)
+            switch(os.timeSlot&TIMESLOT_MASK)
             {
                 case 0:
                     bootloader_run(0);

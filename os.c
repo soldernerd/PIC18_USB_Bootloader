@@ -27,7 +27,7 @@ void timer_pseudo_isr(void)
     TMR0H = TIMER0_LOAD_HIGH_48MHZ;
     TMR0L = TIMER0_LOAD_LOW_48MHZ;
     ++os.timeSlot;
-    os.timeSlot &= TIMESLOT_MASK;
+    //os.timeSlot &= TIMESLOT_MASK;
     os.done = 0;
     INTCONbits.T0IF = 0;
 
@@ -171,6 +171,7 @@ void system_init(void)
     SPI_SCLK_TRIS = PIN_OUTPUT;
     SPI_SS1_TRIS = PIN_OUTPUT;
     SPI_SS1_PIN = 1;
+    SPI_SS2_TRIS = PIN_INPUT;
     
     //Disable supply for power outputs
     PWROUT_ENABLE_TRIS = PIN_OUTPUT;
