@@ -112,6 +112,11 @@ void api_prepare(uint8_t *inBuffer, uint8_t *outBuffer)
                 //Call function to fill the buffer with configuration details
                 _fill_buffer_get_configuration(outBuffer);
                 break;
+                
+            case DATAREQUEST_GET_ECHO:
+                //Copy received data to outBuffer
+                memcpy(outBuffer, inBuffer, 64);
+                break;
         }
     }
 }
@@ -174,8 +179,9 @@ static void _fill_buffer_get_status(uint8_t *outBuffer)
     outBuffer[0] = DATAREQUEST_GET_STATUS;
     
     //Bootloader signature
-    outBuffer[1] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
-    outBuffer[2] = BOOTLOADER_SIGNATURE >> 8; //MSB
+    outBuffer[1] = BOOTLOADER_SIGNATURE >> 8; //MSB
+    outBuffer[2] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
+    
     
     //Flash busy or not
     outBuffer[3] = (uint8_t) flash_is_busy();
@@ -216,8 +222,8 @@ static void _fill_buffer_get_display(uint8_t *outBuffer, uint8_t secondHalf)
     }
    
     //Bootloader signature
-    outBuffer[1] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
-    outBuffer[2] = BOOTLOADER_SIGNATURE >> 8; //MSB
+    outBuffer[1] = BOOTLOADER_SIGNATURE >> 8; //MSB
+    outBuffer[2] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
    
     //Get display data
     cntr = 3;
@@ -247,11 +253,11 @@ static void _fill_buffer_get_bootloader_details(uint8_t *outBuffer)
     uint32_t buffer_large;
     
     //Echo back to the host PC the command we are fulfilling in the first uint8_t
-    outBuffer[0] = DATAREQUEST_GET_STATUS;
+    outBuffer[0] = DATAREQUEST_GET_BOOTLOADER_DETAILS;
     
     //Bootloader signature
-    outBuffer[1] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
-    outBuffer[2] = BOOTLOADER_SIGNATURE >> 8; //MSB
+    outBuffer[1] = BOOTLOADER_SIGNATURE >> 8; //MSB
+    outBuffer[2] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
    
     //Bootloader information (high level)
     buffer_large = bootloader_get_file_size();
@@ -301,17 +307,12 @@ static void _fill_buffer_get_bootloader_details(uint8_t *outBuffer)
 
 static void _fill_buffer_get_configuration(uint8_t *outBuffer)
 {
-    uint8_t cntr;
-    uint8_t data_length;
-    uint16_t buffer_small;
-    uint32_t buffer_large;
-    
     //Echo back to the host PC the command we are fulfilling in the first uint8_t
     outBuffer[0] = DATAREQUEST_GET_STATUS;
     
     //Bootloader signature
-    outBuffer[1] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
-    outBuffer[2] = BOOTLOADER_SIGNATURE >> 8; //MSB
+    outBuffer[1] = BOOTLOADER_SIGNATURE >> 8; //MSB
+    outBuffer[2] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
    
     //SPI settings
     outBuffer[3] = communicationSettings.spiMode;
@@ -333,8 +334,8 @@ static void _fill_buffer_get_file_details(uint8_t *inBuffer, uint8_t *outBuffer)
     outBuffer[0] = DATAREQUEST_GET_FILE_DETAILS;
    
     //Bootloader signature
-    outBuffer[1] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
-    outBuffer[2] = BOOTLOADER_SIGNATURE >> 8; //MSB
+    outBuffer[1] = BOOTLOADER_SIGNATURE >> 8; //MSB
+    outBuffer[2] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
     
     //Echo file number
     outBuffer[3] = file_number;
@@ -351,8 +352,8 @@ static void _fill_buffer_find_file(uint8_t *inBuffer, uint8_t *outBuffer)
     outBuffer[0] = DATAREQUEST_FIND_FILE;
    
     //Bootloader signature
-    outBuffer[1] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
-    outBuffer[2] = BOOTLOADER_SIGNATURE >> 8; //MSB
+    outBuffer[1] = BOOTLOADER_SIGNATURE >> 8; //MSB
+    outBuffer[2] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
     
     //Find and return file number
     outBuffer[3] = fat_find_file(&inBuffer[1], &inBuffer[9]);
@@ -374,8 +375,8 @@ static void _fill_buffer_read_file(uint8_t *inBuffer, uint8_t *outBuffer)
     outBuffer[0] = DATAREQUEST_FIND_FILE;
    
     //Bootloader signature
-    outBuffer[1] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
-    outBuffer[2] = BOOTLOADER_SIGNATURE >> 8; //MSB
+    outBuffer[1] = BOOTLOADER_SIGNATURE >> 8; //MSB
+    outBuffer[2] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
     
     //Echo file number
     outBuffer[3] = inBuffer[1];
@@ -417,25 +418,23 @@ static void _parse_command_short(uint8_t cmd)
     switch(cmd)
     {
         case COMMAND_REBOT:
-            #asm
-                goto 0x0000;
-            #endasm
+            jump_to_zero();
             break;
             
         case COMMAND_REBOT_BOOTLOADER_MODE:
             i2c_eeprom_writeByte(EEPROM_BOOTLOADER_BYTE_ADDRESS, BOOTLOADER_BYTE_FORCE_BOOTLOADER_MODE);
             system_delay_ms(10); //ensure data has been written before rebooting
-            #asm
-                goto 0x0000;
-            #endasm
+            jump_to_zero();
             break;
                 
         case COMMAND_REBOT_NORMAL_MODE:
             i2c_eeprom_writeByte(EEPROM_BOOTLOADER_BYTE_ADDRESS, BOOTLOADER_BYTE_FORCE_NORMAL_MODE);
             system_delay_ms(10); //ensure data has been written before rebooting
-            #asm
-                goto 0x0000;
-            #endasm
+            jump_to_zero();
+            break;
+            
+        case COMMAND_JUMP_TO_MAIN_PROGRAM:
+            jump_to_main_program();
             break;
                 
         case COMMAND_ENCODER_CCW:

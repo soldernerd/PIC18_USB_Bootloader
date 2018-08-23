@@ -6,6 +6,7 @@
 #include "display.h"
 #include "i2c.h"
 #include "os.h"
+#include "spi.h"
 #include "bootloader.h"
 
 const char start_line1[17] = "Bootloader Mode";
@@ -105,6 +106,60 @@ static uint8_t _display_itoa_u16(uint32_t value,  char *text)
     }
 }
 
+static uint8_t _get_hex_char(uint8_t value)
+{
+    if(value&0xF0)
+    {
+        value >>= 4;
+    }
+    else
+    {
+        value &= 0x0F;
+    }    
+    switch(value)
+    {
+        case 0x00:
+            return '0';
+        case 0x01:
+            return '1';
+        case 0x02:
+            return '2';
+        case 0x03:
+            return '3';
+        case 0x04:
+            return '4';         
+        case 0x05:
+            return '5';       
+        case 0x06:
+            return '6';  
+        case 0x07:
+            return '7'; 
+        case 0x08:
+            return '8';      
+        case 0x09:
+            return '9';         
+        case 0x0A:
+            return 'A'; 
+        case 0x0B:
+            return 'B';       
+        case 0x0C:
+            return 'C';          
+        case 0x0D:
+            return 'D';       
+        case 0x0E:
+            return 'E';         
+        case 0x0F:
+            return 'F'; 
+    }
+    return 'G';
+}
+
+static void _display_itoa_u8(uint8_t value,  char *text)
+{
+    *(text+0) = _get_hex_char(value & 0xF0);
+    *(text+1) = _get_hex_char(value & 0x0F);
+}
+
 static uint8_t _display_itoa_u32(uint32_t value,  char *text)
 {
     //Value can be handled by 16 bits
@@ -159,6 +214,7 @@ static void _display_itoa(int16_t value, uint8_t decimals, char *text)
     char tmp[10];
     itoa(tmp, value, 10);
     len = strlen(tmp);
+    
     
     if(value<0) //negative values
     {
@@ -268,16 +324,10 @@ void display_prepare(uint8_t mode)
     }
     
     //Some debugging output
-    
     //Warn if interrupts are enabled
     if(INTCONbits.GIE)
     {
         display_content[0][18] = 'I';
-    }
-
-    if(os.buttonCount>0)
-    {
-        display_content[3][19] = 'X';
     }
 }
 

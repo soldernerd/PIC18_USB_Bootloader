@@ -276,6 +276,8 @@ static void _flash_write_page_from_buffer(uint16_t page, flashBuffer_t buffer)
 //Do not confuse with: uint8_t flash_is_busy(void)
 static uint8_t _flash_is_busy(void)
 {
+    uint16_t status;
+    
     //Wake flash up if it is powered down
     if(power_state!=FLASH_POWER_STATE_NORMAL)
     {
@@ -283,7 +285,8 @@ static uint8_t _flash_is_busy(void)
     }
     
     //Get and check status bytes
-    uint16_t status = _flash_get_status();
+    status = _flash_get_status();
+    
 
     if(status & FLASH_STATUS_FLAG_BUSY)
     {
@@ -305,7 +308,7 @@ void _flash_partial_read(uint16_t page, uint16_t start, uint16_t length, uint8_t
     uint8_t command[4];
 
     //Wait for flash to be ready
-    while(flash_is_busy());
+    while(_flash_is_busy());
     
     //Calculate address from page and start
     address = page;

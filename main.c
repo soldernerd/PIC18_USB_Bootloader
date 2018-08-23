@@ -24,6 +24,7 @@
 #include "hex.h"
 #include "bootloader.h"
 #include "internal_flash.h"
+#include "api.h"
 
 
 /* ****************************************************************************
@@ -52,17 +53,24 @@ static uint8_t _normal_mode(void);
  * ****************************************************************************/
 void main(void)
 {
+    uint16_t bytes_transmitted;
+    uint16_t tx_start_addr;
+    
+    uint8_t *rx_buffer;
+    uint8_t *tx_buffer;
+    
+    rx_buffer = spi_get_external_rx_buffer();
+    tx_buffer = spi_get_external_tx_buffer();
+    tx_start_addr = (uint16_t) tx_buffer;
+    
     //Initialize low level hardware so that we have a functional system
     //We need that in order to decide in which mode to run (bootloader or normal)
     system_init();
-    
+
     //Check if we should jump to normal software (i.e. not run bootloader)
     if(_normal_mode())
     {
-        //Start normal program. We're already done...
-        #asm
-            goto PROG_START;
-        #endasm
+        jump_to_main_program();
     }
     
     //We will run in bootloader mode
@@ -85,6 +93,46 @@ void main(void)
         //Take care of timeslots, encoder and done flag
         //Usually, this happens in a timer ISR but we can't use interrupts here
         timer_pseudo_isr();
+        
+        //Check for data received via external SPI
+        if(SPI_SS2_PORT)
+        {
+            //There is not communication in progress
+            //Calculate the number of bytes transmitted
+            bytes_transmitted = TXADDRH;
+            bytes_transmitted <<= 8;
+            bytes_transmitted |= TXADDRL;
+            --bytes_transmitted;
+            bytes_transmitted -= (uint16_t) spi_get_external_tx_buffer();
+            
+            //If data has been transmitted process that data and reset connection
+            if(bytes_transmitted>0)
+            {
+                //Disable DMA module
+                DMACON1bits.DMAEN = 0;
+
+                //Process data
+                api_prepare(rx_buffer, tx_buffer);
+                api_parse(rx_buffer, (uint8_t) bytes_transmitted);
+                
+                //Set TX buffer address
+                TXADDRH =  HIGH_BYTE((uint16_t) tx_buffer);
+                TXADDRL =  LOW_BYTE((uint16_t) tx_buffer);
+
+                //Set RX buffer address
+                RXADDRH =  HIGH_BYTE((uint16_t) rx_buffer);
+                RXADDRL =  LOW_BYTE((uint16_t) rx_buffer);
+
+                //Set number of bytes to transmit
+                DMABCH = HIGH_BYTE((uint16_t) (64-1));
+                DMABCL = LOW_BYTE((uint16_t) (64-1));
+
+                //Clear interrupt flag
+                PIR3bits.SSP2IF = 0;
+                //Re-enable DMA module
+                DMACON1bits.DMAEN = 1;
+            }
+        }
 
         //Time is divided into 8 timeslots of 8ms each before starting again
         //This can be used to schedule tasks

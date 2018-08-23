@@ -62,11 +62,17 @@ void bootloader_run(uint8_t timeslot)
     switch(os.bootloader_mode)
     {
         case BOOTLOADER_MODE_START:
-           _bootloader_find_file();
+           if(timeslot==0)
+            { 
+                _bootloader_find_file();
+            }
            break;
            
         case BOOTLOADER_MODE_FILE_FOUND:
-            _bootloader_find_file();
+            if(timeslot==0)
+            { 
+                _bootloader_find_file();
+            }
            break;
             
         case BOOTLOADER_MODE_FILE_VERIFYING:

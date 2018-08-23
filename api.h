@@ -18,6 +18,7 @@
  *  0x12: Last 2 lines of display content
  *  0x13: Bootloader details
  *  0x14: External communication configuration
+ *  0x20: Echo (i.e. send back) all data received. Used to test connection.
  * 
  * Extended data requests. Only parameters may follow
  *  0x80: Get information for a specific file. Parameter: uint8_t FileNumber
@@ -28,6 +29,7 @@
  *  0x20: Reboot
  *  0x21: Reboot in bootloader mode
  *  0x22: Reboot in normal mode
+ *  0x23: Jump to main program
  *  0x3C: Turn encoder CCW
  *  0x3D: Turn encoder CW
  *  0x3E: Press push button
@@ -61,6 +63,7 @@ typedef enum
     DATAREQUEST_GET_DISPLAY_2 = 0x12,
     DATAREQUEST_GET_BOOTLOADER_DETAILS = 0x13,
     DATAREQUEST_GET_CONFIGURATION = 0x14,
+    DATAREQUEST_GET_ECHO = 0x20,
     DATAREQUEST_GET_FILE_DETAILS = 0x80,
     DATAREQUEST_FIND_FILE = 0x81,
     DATAREQUEST_READ_FILE = 0x82
@@ -71,6 +74,7 @@ typedef enum
     COMMAND_REBOT = 0x20,
     COMMAND_REBOT_BOOTLOADER_MODE = 0x21,
     COMMAND_REBOT_NORMAL_MODE = 0x22,
+    COMMAND_JUMP_TO_MAIN_PROGRAM = 0x23,
     COMMAND_ENCODER_CCW = 0x3C,
     COMMAND_ENCODER_CW = 0x3D,
     COMMAND_ENCODER_PUSH = 0x3E,

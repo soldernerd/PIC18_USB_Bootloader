@@ -5,6 +5,7 @@
 #include "i2c.h"
 #include "ui.h"
 #include "flash.h"
+#include "internal_flash.h"
 #include "fat16.h"
 
 
@@ -214,4 +215,46 @@ void system_init(void)
 
     //Set up timer0 for timeSlots
     _system_timer0_init();
+}
+
+void jump_to_main_program(void)
+{
+    //We don't do a proper reset. Hence we should set some registers back to their original values
+    DMACON1bits.DMAEN = 0; //Disable DMA module
+    SSP2CON1bits.SSPEN = 0; //Disable SPI module
+    PPSUnLock();
+    SPI_MISO_RP_OUTPUT_REGISTER = 0b00000;
+    PPS_FUNCTION_SPI2_DATA_INPUT_REGISTER = 0b11111;
+    PPS_FUNCTION_SPI2_CHIPSELECT_INPUT_REGISTER = 0b11111;
+    PPS_FUNCTION_SPI2_DATA_INPUT_REGISTER = 0b11111;
+    SPI_MOSI_RP_OUTPUT_REGISTER = 0b00000;
+    SPI_SCLK_RP_OUTPUT_REGISTER = 0b00000;
+    PPS_FUNCTION_SPI2_CLOCK_INPUT_REGISTER = 0b11111;
+    PPSLock();
+
+    //Start normal program. We're already done...
+    #asm
+        goto PROG_START;
+    #endasm
+}
+
+void jump_to_zero(void)
+{
+    //We don't do a proper reset. Hence we should set some registers back to their original values
+    DMACON1bits.DMAEN = 0; //Disable DMA module
+    SSP2CON1bits.SSPEN = 0; //Disable SPI module
+    PPSUnLock();
+    SPI_MISO_RP_OUTPUT_REGISTER = 0b00000;
+    PPS_FUNCTION_SPI2_DATA_INPUT_REGISTER = 0b11111;
+    PPS_FUNCTION_SPI2_CHIPSELECT_INPUT_REGISTER = 0b11111;
+    PPS_FUNCTION_SPI2_DATA_INPUT_REGISTER = 0b11111;
+    SPI_MOSI_RP_OUTPUT_REGISTER = 0b00000;
+    SPI_SCLK_RP_OUTPUT_REGISTER = 0b00000;
+    PPS_FUNCTION_SPI2_CLOCK_INPUT_REGISTER = 0b11111;
+    PPSLock();
+
+    //Start normal program. We're already done...
+    #asm
+        goto 0x0000;
+    #endasm
 }

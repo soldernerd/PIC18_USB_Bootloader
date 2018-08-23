@@ -23,6 +23,10 @@ static void _ui_encoder(void)
     switch(os.display_mode)
     {
         case DISPLAY_MODE_BOOTLOADER_START:
+            if(os.buttonCount>0)
+            {
+                os.buttonCount = 0;
+            }
             break;
             
         case DISPLAY_MODE_BOOTLOADER_FILE_FOUND:
@@ -35,9 +39,17 @@ static void _ui_encoder(void)
             break;
             
         case DISPLAY_MODE_BOOTLOADER_FILE_VERIFYING:
+            if(os.buttonCount>0)
+            {
+                os.buttonCount = 0;
+            }
             break;
             
         case DISPLAY_MODE_BOOTLOADER_CHECK_FAILED:
+            if(os.buttonCount>0)
+            {
+                os.buttonCount = 0;
+            }
             break;
             
         case DISPLAY_MODE_BOOTLOADER_CHECK_COMPLETE:
@@ -50,15 +62,16 @@ static void _ui_encoder(void)
             break;
 
         case BOOTLOADER_MODE_PROGRAMMING:
+            if(os.buttonCount>0)
+            {
+                os.buttonCount = 0;
+            }
             break; 
             
         case DISPLAY_MODE_BOOTLOADER_DONE:
             if(os.buttonCount>0)
             {
-                //Jump to normal code
-                #asm
-                    goto PROG_START;
-                #endasm
+                jump_to_main_program();
             }
             break; 
     }    
