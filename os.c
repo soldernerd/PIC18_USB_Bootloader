@@ -207,6 +207,8 @@ void system_init(void)
     //Initialize FAT16 file system on flash
     fat_init();
     
+    fat_format();
+    
     //Set up encoder
     _system_encoder_init();
     
@@ -215,6 +217,10 @@ void system_init(void)
 
     //Set up timer0 for timeSlots
     _system_timer0_init();
+    
+    //Make sure we reboot in bootloader mode if WDT reset occurs
+    //i2c_eeprom_writeByte(EEPROM_BOOTLOADER_BYTE_ADDRESS, BOOTLOADER_BYTE_FORCE_BOOTLOADER_MODE);
+    
 }
 
 void jump_to_main_program(void)
@@ -238,23 +244,29 @@ void jump_to_main_program(void)
     #endasm
 }
 
-void jump_to_zero(void)
+void reboot(void)
 {
-    //We don't do a proper reset. Hence we should set some registers back to their original values
-    DMACON1bits.DMAEN = 0; //Disable DMA module
-    SSP2CON1bits.SSPEN = 0; //Disable SPI module
-    PPSUnLock();
-    SPI_MISO_RP_OUTPUT_REGISTER = 0b00000;
-    PPS_FUNCTION_SPI2_DATA_INPUT_REGISTER = 0b11111;
-    PPS_FUNCTION_SPI2_CHIPSELECT_INPUT_REGISTER = 0b11111;
-    PPS_FUNCTION_SPI2_DATA_INPUT_REGISTER = 0b11111;
-    SPI_MOSI_RP_OUTPUT_REGISTER = 0b00000;
-    SPI_SCLK_RP_OUTPUT_REGISTER = 0b00000;
-    PPS_FUNCTION_SPI2_CLOCK_INPUT_REGISTER = 0b11111;
-    PPSLock();
-
-    //Start normal program. We're already done...
-    #asm
-        goto 0x0000;
-    #endasm
+//    //We don't do a proper reset. Hence we should set some registers back to their original values
+//    DMACON1bits.DMAEN = 0; //Disable DMA module
+//    SSP2CON1bits.SSPEN = 0; //Disable SPI module
+//    PPSUnLock();
+//    SPI_MISO_RP_OUTPUT_REGISTER = 0b00000;
+//    PPS_FUNCTION_SPI2_DATA_INPUT_REGISTER = 0b11111;
+//    PPS_FUNCTION_SPI2_CHIPSELECT_INPUT_REGISTER = 0b11111;
+//    PPS_FUNCTION_SPI2_DATA_INPUT_REGISTER = 0b11111;
+//    SPI_MOSI_RP_OUTPUT_REGISTER = 0b00000;
+//    SPI_SCLK_RP_OUTPUT_REGISTER = 0b00000;
+//    PPS_FUNCTION_SPI2_CLOCK_INPUT_REGISTER = 0b11111;
+//    PPSLock();
+//
+//    //Start normal program. We're already done...
+//    #asm
+//        goto 0;
+//    #endasm
+//    #asm
+//        reset;
+//    #endasm
+    
+    //Just wait 2 seconds until the WDT resets the device
+    while(1);
 }

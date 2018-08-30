@@ -234,7 +234,7 @@ void system_init(void);
 void system_delay_ms(uint8_t ms);
 void system_encoder_enable(void);
 void jump_to_main_program(void);
-void jump_to_zero(void);
+void reboot(void);
 
 #endif	/* OS_H */
 

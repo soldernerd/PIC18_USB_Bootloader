@@ -19,7 +19,7 @@
 
 
 #define FLASH_PAGE_SIZE 512
-#define FLASH_NUMBER_OF_PAGES 8196
+#define FLASH_NUMBER_OF_PAGES 8192
 
 typedef enum 
 { 

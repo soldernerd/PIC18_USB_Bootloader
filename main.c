@@ -83,6 +83,9 @@ void main(void)
     //We can enter an endless loop
     while(1)
     {
+        //Clear watchdog timer
+        ClrWdt();
+        
         //We don't have interrupts
         //So we need to keep USB alive by regularly calling these functions
         //This should be done every 1.8ms

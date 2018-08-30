@@ -146,7 +146,8 @@ void spi_set_configuration(spiConfiguration_t configuration)
         case SPI_CONFIGURATION_INTERNAL:
             
             //Wait while an external communication is in progress
-            while(!SPI_SS2_PORT);
+            //while(!SPI_SS2_PORT); This may fail if no external pull up/down resistors are present
+            
 
             DMACON1bits.DMAEN = 0; //Disable DMA module
             SSP2CON1bits.SSPEN = 0; //Disable SPI module

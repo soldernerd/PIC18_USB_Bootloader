@@ -275,9 +275,11 @@ static void _bootloader_program(void)
     uint16_t address_within_page;
 
     //Loop through records
-    //for(rec_counter=0; rec_counter<5; ++rec_counter)
     while(1)
     {
+        //This may take a while. Clear WDT first
+        ClrWdt();
+        
         //Read an entry
         if((hex_file_size-hex_file_offset)>=BOOTLOADER_CHARACTER_BUFFER_SIZE)
         {
@@ -302,12 +304,6 @@ static void _bootloader_program(void)
             os.display_mode = DISPLAY_MODE_BOOTLOADER_CHECK_FAILED;
             return;
         }
-//        else if(return_value==0)
-//        {
-//            //Last record has been reached without an error
-//            //Don't return, just break. We still need to write that data to flash
-//            break;
-//        }
         else
         {
             //No error and end of file has not yet been reached

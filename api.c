@@ -256,38 +256,38 @@ static void _fill_buffer_get_bootloader_details(uint8_t *outBuffer)
     outBuffer[0] = DATAREQUEST_GET_BOOTLOADER_DETAILS;
     
     //Bootloader signature
-    outBuffer[1] = BOOTLOADER_SIGNATURE >> 8; //MSB
-    outBuffer[2] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
+    outBuffer[1] = HIGH_BYTE(BOOTLOADER_SIGNATURE); //MSB
+    outBuffer[2] = LOW_BYTE(BOOTLOADER_SIGNATURE); //LSB
    
     //Bootloader information (high level)
     buffer_large = bootloader_get_file_size();
-    outBuffer[3] = (uint8_t) buffer_large; //LSB
-    outBuffer[4] = (uint8_t) (buffer_large>>8);
-    outBuffer[5] = (uint8_t) (buffer_large>>16);
-    outBuffer[6] = (uint8_t) (buffer_large>>32); //MSB
+    outBuffer[3] = HIGH_BYTE(HIGH_WORD(buffer_large));
+    outBuffer[4] = LOW_BYTE(HIGH_WORD(buffer_large));
+    outBuffer[5] = HIGH_BYTE(LOW_WORD(buffer_large));
+    outBuffer[6] = LOW_BYTE(LOW_WORD(buffer_large));
     
     buffer_small = bootloader_get_entries();
-    outBuffer[7] = (uint8_t) buffer_small; //LSB
-    outBuffer[8] = (uint8_t) (buffer_small>>8); //LSB
+    outBuffer[7] = HIGH_BYTE(buffer_small);
+    outBuffer[8] = LOW_BYTE(buffer_small);
     
     buffer_small = bootloader_get_total_entries();
-    outBuffer[9] = (uint8_t) buffer_small; //LSB
-    outBuffer[10] = (uint8_t) (buffer_small>>8); //LSB
+    outBuffer[9] = HIGH_BYTE(buffer_small);
+    outBuffer[10] = LOW_BYTE(buffer_small);
     
     outBuffer[11] = (uint8_t) bootloader_get_error();
     
     buffer_small = bootloader_get_flashPagesWritten();
-    outBuffer[12] = (uint8_t) buffer_small; //LSB
-    outBuffer[13] = (uint8_t) (buffer_small>>8); //LSB
+    outBuffer[12] = HIGH_BYTE(buffer_small);
+    outBuffer[13] = LOW_BYTE(buffer_small);
     
     //Bootloader information (last record)
     buffer_small = bootloader_get_rec_dataLength();
-    outBuffer[14] = (uint8_t) buffer_small; //LSB
-    outBuffer[15] = (uint8_t) (buffer_small>>8); //LSB
+    outBuffer[14] = HIGH_BYTE(buffer_small);
+    outBuffer[15] = LOW_BYTE(buffer_small);
     
     buffer_small = bootloader_get_rec_address();
-    outBuffer[16] = (uint8_t) buffer_small; //LSB
-    outBuffer[17] = (uint8_t) (buffer_small>>8); //LSB
+    outBuffer[16] = HIGH_BYTE(buffer_small);
+    outBuffer[17] = LOW_BYTE(buffer_small);
     
     outBuffer[18] = (uint8_t) bootloader_get_rec_recordType();
     outBuffer[19] = bootloader_get_rec_checksum();
@@ -328,7 +328,7 @@ static void _fill_buffer_get_configuration(uint8_t *outBuffer)
 
 static void _fill_buffer_get_file_details(uint8_t *inBuffer, uint8_t *outBuffer)
 {
-    uint8_t file_number = inBuffer[2];
+    uint8_t file_number = inBuffer[1];
     
     //Echo command
     outBuffer[0] = DATAREQUEST_GET_FILE_DETAILS;
@@ -418,19 +418,21 @@ static void _parse_command_short(uint8_t cmd)
     switch(cmd)
     {
         case COMMAND_REBOT:
-            jump_to_zero();
+            i2c_eeprom_writeByte(EEPROM_BOOTLOADER_BYTE_ADDRESS, 0x00); //0x00 is a neutral value
+            system_delay_ms(10); //ensure data has been written before rebooting
+            reboot();
             break;
             
         case COMMAND_REBOT_BOOTLOADER_MODE:
             i2c_eeprom_writeByte(EEPROM_BOOTLOADER_BYTE_ADDRESS, BOOTLOADER_BYTE_FORCE_BOOTLOADER_MODE);
             system_delay_ms(10); //ensure data has been written before rebooting
-            jump_to_zero();
+            reboot();
             break;
                 
         case COMMAND_REBOT_NORMAL_MODE:
             i2c_eeprom_writeByte(EEPROM_BOOTLOADER_BYTE_ADDRESS, BOOTLOADER_BYTE_FORCE_NORMAL_MODE);
             system_delay_ms(10); //ensure data has been written before rebooting
-            jump_to_zero();
+            reboot();
             break;
             
         case COMMAND_JUMP_TO_MAIN_PROGRAM:

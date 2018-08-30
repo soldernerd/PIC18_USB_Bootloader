@@ -626,37 +626,22 @@ static uint8_t _get_mbr(uint16_t idx)
 {
 	switch (idx)
 	{
-//        case 0x1B8:
-//            return 0xF5;
-//        case 0x1B9:
-//            return 0x8B;
-//        case 0x1BA:
-//            return 0x16;
-//        case 0x1BB:
-//            return 0xEA;
 		case 0x1BE:
 			return MRB_PARTITION_STATUS;
 		case 0x1BF:
-			return MBR_PARTITION_START_SECTOR;
-            //return 0x01;
+            return MBR_PARTITION_START_HEAD;
 		case 0x1C0:
-			return ((MBR_PARTITION_START_CYLINDER & 0b00000011)<<6) | (MBR_PARTITION_START_HEAD & 0b00111111);
-            //return 0x01;
+            return MBR_PARTITION_START_SECTOR;
 		case 0x1C1:
-			return MBR_PARTITION_START_CYLINDER >> 2;
-            //return 0x00;
+            return MBR_PARTITION_START_CYLINDER;
 		case 0x1C2:
 			return MBR_PARTITION_TYPE;
-            //return 0x01;
 		case 0x1C3:
-			return MBR_PARTITION_END_SECTOR;
-            //return 0x07;
+            return MBR_PARTITION_END_HEAD;
 		case 0x1C4:
-			return ((MBR_PARTITION_END_CYLINDER & 0b00000011) << 6) | (MBR_PARTITION_END_HEAD & 0b00111111);
-            //return 0xFF;
+            return MBR_PARTITION_END_SECTOR;
 		case 0x1C5:
-			return MBR_PARTITION_END_CYLINDER >> 2;
-            //return 0xE6;
+			return MBR_PARTITION_END_CYLINDER;
 		case 0x1C6:
             return LOW_BYTE(LOW_WORD(((uint32_t)MBR_FIRST_PARTITION_SECTOR)));
 		case 0x1C7:
@@ -674,9 +659,9 @@ static uint8_t _get_mbr(uint16_t idx)
 		case 0x1CD:
 			return HIGH_BYTE(HIGH_WORD(((uint32_t)MBR_PARTITION_SIZE)));
 		case 0x1FE:
-			return MBR_SIGNATURE >> 8;
+			return HIGH_BYTE((uint16_t)MBR_SIGNATURE);
 		case 0x1FF:
-			return MBR_SIGNATURE & 0XFF;
+			return LOW_BYTE((uint16_t)MBR_SIGNATURE);
 		default:
 			return 0X00;
 	}
@@ -716,74 +701,52 @@ static uint8_t _get_fbr(uint16_t idx)
 			return FBR_SECTORS_PER_CLUSTER;
 		case 0x0E:
             return LOW_BYTE(((uint16_t)FBR_RESERVED_SECTORS));
-			//return FBR_RESERVED_SECTORS & 0XFF;
 		case 0x0F:
             return HIGH_BYTE(((uint16_t)FBR_RESERVED_SECTORS));
-			//return FBR_RESERVED_SECTORS >> 8;
 		case 0x10:
 			return FBR_NUMBER_OF_FATS;
 		case 0x11:
             return LOW_BYTE(((uint16_t)FBR_ROOT_ENTRIES));
-			//return FBR_ROOT_ENTRIES & 0XFF;
 		case 0x12:
             return HIGH_BYTE(((uint16_t)FBR_ROOT_ENTRIES));
-			//return FBR_ROOT_ENTRIES >> 8;
 		case 0x13:
             return LOW_BYTE(((uint16_t)FBR_NUMBER_OF_SECTORS));
-			//return FBR_NUMBER_OF_SECTORS & 0XFF;
 		case 0x14:
             return HIGH_BYTE(((uint16_t)FBR_NUMBER_OF_SECTORS));
-			//return FBR_NUMBER_OF_SECTORS >> 8;
 		case 0x15:
 			return FBR_MEDIA_DESCRIPTOR;
 		case 0x16:
             return LOW_BYTE(((uint16_t)FBR_SECTORS_PER_FAT));
-			//return FBR_SECTORS_PER_FAT & 0XFF;
 		case 0x17:
             return HIGH_BYTE(((uint16_t)FBR_SECTORS_PER_FAT));
-			//return FBR_SECTORS_PER_FAT >> 8;
 		case 0x18:
             return LOW_BYTE(((uint16_t)FBR_SECTORS_PER_HEAD));
-			//return FBR_SECTORS_PER_HEAD & 0XFF;
 		case 0x19:
             return HIGH_BYTE(((uint16_t)FBR_SECTORS_PER_HEAD));
-			//return FBR_SECTORS_PER_HEAD >> 8;
 		case 0x1A:
             return LOW_BYTE(((uint16_t)FBR_HEADS_PER_CYLINDER));
-			//return FBR_HEADS_PER_CYLINDER & 0XFF;
 		case 0x1B:
             return HIGH_BYTE(((uint16_t)FBR_HEADS_PER_CYLINDER));
-			//return FBR_HEADS_PER_CYLINDER >> 8;
 		case 0x1C:
             return LOW_BYTE(LOW_WORD(((uint32_t)FBR_HIDDEN_SECTORS)));
-			//return FBR_HIDDEN_SECTORS & 0XFF;
 		case 0x1D:
             return HIGH_BYTE(LOW_WORD(((uint32_t)FBR_HIDDEN_SECTORS)));
-			//return (FBR_HIDDEN_SECTORS >> 8) & 0XFF;
 		case 0x1E:
             return LOW_BYTE(HIGH_WORD(((uint32_t)FBR_HIDDEN_SECTORS)));
-			//return (FBR_HIDDEN_SECTORS >> 16) & 0XFF;
 		case 0x1F:
             return HIGH_BYTE(HIGH_WORD(((uint32_t)FBR_HIDDEN_SECTORS)));
-			//return (FBR_HIDDEN_SECTORS >> 24) & 0XFF;
 		case 0x28:
             return LOW_BYTE(((uint16_t)FBR_EXT_FLAGS));
-			//return FBR_EXT_FLAGS & 0XFF;
 		case 0x29:
             return HIGH_BYTE(((uint16_t)FBR_EXT_FLAGS));
-			//return FBR_EXT_FLAGS >> 8;
 		case 0x2C:
             return LOW_BYTE(LOW_WORD(((uint32_t)FBR_ROOT_DIRECTORY_START)));
-			//return FBR_ROOT_DIRECTORY_START & 0XFF;
 		case 0x2D:
             return HIGH_BYTE(LOW_WORD(((uint32_t)FBR_ROOT_DIRECTORY_START)));
-			//return (FBR_ROOT_DIRECTORY_START >> 8) & 0XFF;
 		case 0x2E:
-            return LOW_BYTE(HIGH_WORD(((uint32_t)FBR_ROOT_DIRECTORY_START)));
-			//return (FBR_ROOT_DIRECTORY_START >> 16) & 0XFF;
+            LOW_BYTE(HIGH_WORD(((uint32_t)FBR_ROOT_DIRECTORY_START)));
 		case 0x2F:
             return HIGH_BYTE(HIGH_WORD(((uint32_t)FBR_ROOT_DIRECTORY_START)));
-			//return (FBR_ROOT_DIRECTORY_START >> 24) & 0XFF;
         case 0x36:
             return 'F';
         case 0x37:
@@ -802,10 +765,8 @@ static uint8_t _get_fbr(uint16_t idx)
             return ' ';
 		case 0x1FE:
             return HIGH_BYTE(((uint16_t)FBR_SIGNATURE));
-			//return FBR_SIGNATURE >> 8;
 		case 0x1FF:
             return LOW_BYTE(((uint16_t)FBR_SIGNATURE));
-			//return FBR_SIGNATURE & 0XFF;
 		default:
 			return 0X00;
 	}
@@ -952,60 +913,60 @@ void fat_format(void)
 {
     uint16_t cntr;
     
-    //Write MBR to sector 0
+    //Write MBR
     for(cntr=0; cntr<512; ++cntr)
     {
         buffer[cntr] = _get_mbr(cntr);
     }
-    flash_page_write(0, buffer);
+    flash_page_write(MBR_SECTOR, buffer);
     
-    //Write FBR to sector 1
+    //Write FBR
     for(cntr=0; cntr<512; ++cntr)
     {
         buffer[cntr] = _get_fbr(cntr);
     }
     flash_page_write(1, buffer);
     
-    //Write first FAT page to sector 2
+    //Write first FAT sector
     for(cntr=0; cntr<512; ++cntr)
     {
         buffer[cntr] = _get_fat(cntr);
     }
-    flash_page_write(2, buffer);
+    flash_page_write(FAT_FIRST_SECTOR, buffer);
     
-    //Fill remaining FAT pages to sectors 3-17 (all zeros)
+    //Fill remaining FAT sectors (all zeros)
     for(cntr=0; cntr<512; ++cntr)
     {
         buffer[cntr] = 0x00;
     }
-    for(cntr=3; cntr<=17; ++cntr)
+    for(cntr=FAT_FIRST_SECTOR+1; cntr<=FAT_LAST_SECTOR; ++cntr)
     {
         flash_page_write(cntr, buffer);
     }
     
-    //Write beginning of root to sector 18
+    //Write first root sector
     for(cntr=0; cntr<512; ++cntr)
     {
         buffer[cntr] = _get_root(cntr);
     }
-    flash_page_write(18, buffer);
+    flash_page_write(ROOT_FIRST_SECTOR, buffer);
     
-    //Fill remaining ROOT pages to sectors 19-21 (all zeros)
+    //Fill remaining root sectors (all zeros)
     for(cntr=0; cntr<512; ++cntr)
     {
         buffer[cntr] = 0x00;
     }
-    for(cntr=19; cntr<=21; ++cntr)
+    for(cntr=ROOT_FIRST_SECTOR+1; cntr<=ROOT_LAST_SECTOR; ++cntr)
     {
         flash_page_write(cntr, buffer);
     }
     
-    //Write Data to sector 22
+    //Write Data of hello world file
     for(cntr=0; cntr<512; ++cntr)
     {
         buffer[cntr] = _get_data(cntr);
     }
-    flash_page_write(22, buffer);
+    flash_page_write(DATA_FIRST_SECTOR, buffer);
 }
 
 void fat_init(void)

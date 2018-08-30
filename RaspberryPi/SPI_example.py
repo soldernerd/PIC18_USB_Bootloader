@@ -87,53 +87,212 @@ def spi_send_receive(data_to_send, number_of_bytes=None):
     if not number_of_bytes:
         number_of_bytes = len(data_to_send)    
     #print('Sending {0} bytes of data: {1}'.format(number_of_bytes, list_to_string(data_to_send)))
-    receive_data =ctypes.create_string_buffer(bytes(data_to_send), number_of_bytes)
+    receive_data =ctypes.create_string_buffer(bytes(data_to_send[:number_of_bytes]), number_of_bytes)
+    
+    #Wait until there is not activity on the bus
+    io.bcm2835_gpio_fsel(pin_sclk, dir_input)
+    count = 0
+    sclk_state = io.bcm2835_gpio_lev(pin_sclk)
+    while(True):
+        last_sclk_state = sclk_state
+        sclk_state = io.bcm2835_gpio_lev(pin_sclk)
+        if last_sclk_state == sclk_state:
+            count += 1
+        else:
+            count = 0
+        if count == 50:
+            break
+        
+    
+    io.bcm2835_spi_begin()
     io.bcm2835_spi_transfern(receive_data, number_of_bytes)
+    io.bcm2835_spi_end()
+    
     receive_data = list(receive_data)
     receive_data = [int.from_bytes(x, byteorder='big') for x in receive_data]
     return receive_data
 
+def reboot():
+    tx_data = [0x10, 0x20]
+    spi_send_receive(tx_data)
+    print('Reboot command sent')
+
+def reboot_bootloader_mode():
+    tx_data = [0x10, 0x21]
+    spi_send_receive(tx_data)
+    print('Reboot in bootloader mode command sent')
+
+def reboot_normal_mode():
+    tx_data = [0x10, 0x22]
+    spi_send_receive(tx_data)
+    print('Reboot in normal mode command sent')
+
+def jump_to_main_program():
+    tx_data = [0x10, 0x23]
+    spi_send_receive(tx_data)
+    print('Jump to main program command sent')
+
+def turn_counter_clockwise():
+    tx_data = [0x10, 0x3C]
+    spi_send_receive(tx_data)
+    print('Encoder turned counter-clockwise')
+
+def turn_clockwise():
+    tx_data = [0x10, 0x3D]
+    spi_send_receive(tx_data)
+    print('Encoder turned clockwise')
+
+def press_pushbutton():
+    tx_data = [0x10, 0x3E]
+    spi_send_receive(tx_data)
+    print('Pushbutton pressed')
+
+def get_file_info(file_number):
+    tx_data = [0x80, (file_number & 0b00111111)]
+    spi_send_receive(tx_data)
+    tx_data = [0x10]
+    received_data = spi_send_receive(tx_data, 37)
+    if not received_data[:3] == [0x80, 0xC1, 0x25]:
+        print('Signature of data package is incorrect:', received_data[:3])
+    print(received_data)
+    print('File number: {0}'.format(received_data[3]))
+    print('Return code: {0}'.format(received_data[4]))
+    file_name = ''.join([chr(x) for x in received_data[5:13] if not x==0x20])
+    extention = ''.join([chr(x) for x in received_data[13:16] if not x==0x20])
+    print('File name: {0}.{1}'.format(file_name, extention))
+    file_size = 2**24*received_data[36] + 2**16*received_data[35] + 2**8*received_data[34] + received_data[33]
+    print('File size: {0} bytes'.format(file_size))
+    
+def list_files():
+    for file_number in range(1, 63):
+        tx_data = [0x80, (file_number & 0b00111111)]
+        spi_send_receive(tx_data)
+        tx_data = [0x10]
+        received_data = spi_send_receive(tx_data, 37)
+        if received_data[4] == 0:
+            file_name = ''.join([chr(x) for x in received_data[5:13] if not x==0x20])
+            extention = ''.join([chr(x) for x in received_data[13:16] if not x==0x20])
+            file_size = 2**24*received_data[36] + 2**16*received_data[35] + 2**8*received_data[34] + received_data[33]
+            print('File #{0}: {1}.{2}, {3} bytes'.format(file_number, file_name, extention, file_size))
+
+
+
 def test_spi_communication(buffer_size, trials):
+    print('\nTesting SPI Communication')
+    print('-------------------------')
     fails = 0
     tx_data = [0x20]
     for i in range(buffer_size-1):
         tx_data.append(random.randint(0,255))
     spi_send_receive(tx_data)
     delay_ms(50)
-    
     for t in range(trials):
         last_tx_data = tx_data
         tx_data = [0x20]
         for i in range(buffer_size-1):
             tx_data.append(random.randint(0,255))
         rx_data = spi_send_receive(tx_data)
-        print(t)
-        print('Sent:    ', list_to_string(last_tx_data))
-        print('Received:', list_to_string(rx_data))
         if(rx_data==last_tx_data):
-            print('Status: Success')
+            print(t, 'Status: Success')
         else:
-            print('Status: FAILED')
+            print(t, 'Status: FAILED')
             fails += 1
-        delay_ms(50)
-        
-    print('Statistics: {0} trials, {1} successful, {2} failed'.format(trials, trials-fails, fails))
+        delay_ms(50)  
+    print('Statistics: {0} trials, {1} successful, {2} failed\n'.format(trials, trials-fails, fails))
     
         
 def finish():
     io.bcm2835_spi_end() 
     io.bcm2835_close()
     
-send_data = [0xDE, 0x19, 0x34, 0x77, 0x11, 0xFF, 0x33, 0x3D]
+def get_status():
+    print('\nStatus Information')
+    print('------------------')
+    send_data = [0x10]
+    spi_send_receive(send_data)
+    received_data = spi_send_receive(send_data, 44)
+    if not received_data[:3] == [0x10, 0xC1, 0x25]:
+        print('Signature of data package is incorrect:', received_data[:3])
+    print('Flash is busy:', bool(received_data[3]))
+    print('Bootloader version: {0}.{1}.{2}'.format(received_data[4], received_data[5], received_data[6]))
+    print('User interface status: {0}'.format(received_data[7]))
+    print('Encoder count: {0}'.format(received_data[8]))
+    print('Push button count: {0}'.format(received_data[9]))
+    print('Time slot: {0}'.format(received_data[10]))
+    print('Done: {0}'.format(bool(received_data[11])))
+    print('Bootloader mode: {0}'.format(received_data[12]))
+    print('Display mode {0}\n'.format(received_data[13]))
+    
+def get_bootloader_details():
+    print('\nBootloader Details')
+    print('------------------')
+    send_data = [0x13]
+    spi_send_receive(send_data)
+    received_data = spi_send_receive(send_data, 64)
+    if not received_data[:3] == [0x13, 0xC1, 0x25]:
+        print('Signature of data package is incorrect:', received_data[:3])
+    file_size = 2**24*received_data[3] + 2**16*received_data[4] + 2**8*received_data[5] + received_data[6]
+    print('File size: {0}'.format(file_size))
+    entries = 2**8*received_data[7] + received_data[8]
+    print('Current record: {0}'.format(entries))
+    total_entries = 2**8*received_data[9] + received_data[10]
+    print('Total number of records: {0}'.format(total_entries))
+    print('Error: {0}'.format(received_data[11]))
+    pages = 2**8*received_data[12] + received_data[13]
+    print('Flash pages written: {0}'.format(pages))
+    pages = 2**8*received_data[12] + received_data[13]
+    print('Flash pages written: {0}'.format(pages))
+    data_length = 2**8*received_data[14] + received_data[15]
+    print('Length of last record: {0}'.format(data_length))
+    address = 2**8*received_data[16] + received_data[17]
+    print('Address of last record: {0}'.format(data_length))
+    print('Record type of last record: {0}'.format(received_data[18]))
+    print('Checksum of last record: {0}'.format(received_data[19]))
+    print('Checksum check of last record: {0}'.format(received_data[20]))
+    if data_length>43:
+        data_length = 43
+    print('Data or last record: {0}'.format(received_data[21:21+data_length]))
+    
+def read_display():
+    send_data = [0x11]
+    spi_send_receive(send_data)
+    send_data = [0x12]
+    received_data_1 = spi_send_receive(send_data, 44)
+    if not received_data_1[:3] == [0x11, 0xC1, 0x25]:
+        print('Signature of first data package is incorrect:', received_data_1[:3])
+    received_data_2 = spi_send_receive(send_data, 44)
+    if not received_data_2[:3] == [0x12, 0xC1, 0x25]:
+        print('Signature of second data package is incorrect:', received_data_2[:3])    
+    line_1 = ''.join([chr(x) for x in received_data_1[3:23]])
+    line_2 = ''.join([chr(x) for x in received_data_1[23:43]])
+    line_3 = ''.join([chr(x) for x in received_data_2[3:23]])
+    line_4 = ''.join([chr(x) for x in received_data_2[23:43]])
+    print('\n+----------------------+')
+    print('| ' + line_1 + ' |')
+    print('| ' + line_2 + ' |')
+    print('| ' + line_3 + ' |')
+    print('| ' + line_4 + ' |')
+    print('+----------------------+\n')
+              
 
 init()
-spi_init()
-#test_spi()
-#receive_data = spi_send_receive(send_data)
-#print(list_to_string(receive_data))
-test_spi_communication(64,100)
+
+#test_spi_communication(64,5)
+#get_status()
+
+read_display()
+#press_pushbutton()
+#get_bootloader_details()
+#reboot()
+#reboot_bootloader_mode()
+#reboot_normal_mode()
+
+#get_file_info(1);
+list_files();
+
+#test_spi_communication(64,100)
 #spi_send_receive([1,2,,4,5,6,7,8])
-finish()
+#finish()
 
 #Configure pin 24 as input
 #io.bcm2835_gpio_fsel(io.RPI_GPIO_P1_24, io.BCM2835_GPIO_FSEL_INPT)

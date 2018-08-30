@@ -13,7 +13,7 @@
  ******************************************************************************
  * 
  * Data requests. These must be sent as the first byte. Any commands may follow
- *  0x01: General status information
+ *  0x10: General status information
  *  0x11: First 2 lines of display content
  *  0x12: Last 2 lines of display content
  *  0x13: Bootloader details

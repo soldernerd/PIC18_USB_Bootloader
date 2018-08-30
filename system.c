@@ -24,7 +24,7 @@ please contact mla_licensing@microchip.com
 /** CONFIGURATION Bits **********************************************/
 
 // CONFIG1L
-#pragma config WDTEN = OFF      // Watchdog Timer (Disabled - Controlled by SWDTEN bit)
+#pragma config WDTEN = ON       // Watchdog Timer (Enabled)
 #pragma config PLLDIV = 2       // PLL Prescaler Selection (Divide by 2 (8 MHz oscillator input))
 #pragma config CFGPLLEN = ON    // PLL Enable Configuration Bit (PLL Enabled)
 #pragma config STVREN = ON      // Stack Overflow/Underflow Reset (Enabled)
@@ -42,14 +42,14 @@ please contact mla_licensing@microchip.com
 #pragma config IESO = ON        // Internal External Oscillator Switch Over Mode (Enabled)
 
 // CONFIG2H
-#pragma config WDTPS = 32768    // Watchdog Postscaler (1:32768)
+#pragma config WDTPS = 512       // Watchdog Postscaler (1:512)
 
 // CONFIG3L
-#pragma config DSWDTOSC = INTOSCREF// DSWDT Clock Select (DSWDT uses INTRC)
-#pragma config RTCOSC = T1OSCREF// RTCC Clock Select (RTCC uses T1OSC/T1CKI)
-#pragma config DSBOREN = OFF    // Deep Sleep BOR (Disabled)
-#pragma config DSWDTEN = OFF    // Deep Sleep Watchdog Timer (Disabled)
-#pragma config DSWDTPS = 8192   // Deep Sleep Watchdog Postscaler (1:8,192 (8.5 seconds))
+#pragma config DSWDTOSC = T1OSCREF  // DSWDT Clock Select (DSWDT uses T1OSC/T1CKI)
+#pragma config RTCOSC = T1OSCREF    // RTCC Clock Select (RTCC uses T1OSC/T1CKI)
+#pragma config DSBOREN = OFF        // Deep Sleep BOR (Disabled)
+#pragma config DSWDTEN = OFF        // Deep Sleep Watchdog Timer (Disabled)
+#pragma config DSWDTPS = 8192       // Deep Sleep Watchdog Postscaler (1:8,192 (8.5 seconds))
 
 // CONFIG3H
 #pragma config IOL1WAY = OFF    // IOLOCK One-Way Set Enable bit (The IOLOCK bit (PPSCON<0>) can be set and cleared as needed)
