@@ -218,7 +218,16 @@ static uint8_t _normal_mode(void)
         //But start in normal mode this time
         return 1;
     }
-    else if(!PUSHBUTTON_PIN) //Button is pressed
+    
+    //A poor man's pull-up resistor
+    //Force the pushbutton pin high for just an instant before reading it
+    //This has no effect if a display unit is connected 
+    //But it makes sure we start in normal mode if the pin is left floating
+    PUSHBUTTON_LAT = 1;
+    PUSHBUTTON_TRIS = PIN_OUTPUT;
+    PUSHBUTTON_TRIS = PIN_INPUT;
+    
+    if(!PUSHBUTTON_PIN) //Button is pressed
     {
         //Bootloader mode if pushbutton is pressed
         return 0;

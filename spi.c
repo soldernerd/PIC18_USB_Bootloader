@@ -145,8 +145,15 @@ void spi_set_configuration(spiConfiguration_t configuration)
     {
         case SPI_CONFIGURATION_INTERNAL:
             
+            //A poor man's pull-up resistor
+            //Force the slave-select pin high for just an instant before reading it
+            //This has no effect if a SPI master is present controlling the signal
+            //But it makes sure the software does not hang if the pin is left floating
+            SPI_SS2_LAT = 1;
+            SPI_SS2_TRIS = PIN_OUTPUT;
+            SPI_SS2_TRIS = PIN_INPUT;
             //Wait while an external communication is in progress
-            //while(!SPI_SS2_PORT); This may fail if no external pull up/down resistors are present
+            while(!SPI_SS2_PORT); //This may fail if no external pull up/down resistors are present
             
 
             DMACON1bits.DMAEN = 0; //Disable DMA module
