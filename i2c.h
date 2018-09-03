@@ -27,6 +27,7 @@ typedef enum
  * ****************************************************************************/
 
 void i2c_init(void);
+void i2c_reset(void);
 i2cFrequency_t i2c_get_frequency(void);
 void i2c_set_frequency(i2cFrequency_t frequency);
 

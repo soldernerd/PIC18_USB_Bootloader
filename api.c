@@ -436,7 +436,10 @@ static void _parse_command_short(uint8_t cmd)
             break;
             
         case COMMAND_JUMP_TO_MAIN_PROGRAM:
-            jump_to_main_program();
+            //We can't just jump there. We need a proper reset first
+            i2c_eeprom_writeByte(EEPROM_BOOTLOADER_BYTE_ADDRESS, BOOTLOADER_BYTE_FORCE_NORMAL_MODE);
+            system_delay_ms(10); //ensure data has been written before rebooting
+            reboot();
             break;
                 
         case COMMAND_ENCODER_CCW:

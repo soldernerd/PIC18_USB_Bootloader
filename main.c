@@ -63,15 +63,21 @@ void main(void)
     tx_buffer = spi_get_external_tx_buffer();
     tx_start_addr = (uint16_t) tx_buffer;
     
-    //Initialize low level hardware so that we have a functional system
+    //Initialize low level hardware so that we have a (minimally) functional system
     //We need that in order to decide in which mode to run (bootloader or normal)
-    system_init();
+    system_minimal_init();
 
     //Check if we should jump to normal software (i.e. not run bootloader)
     if(_normal_mode())
     {
+        //Undo any initialization prior to starting main program
+        system_minimal_init_undo();
         jump_to_main_program();
     }
+    
+    //If we are still here, we will operate in bootloader mode
+    //Initialize low level hardware so that we have a (fully) functional system
+    system_full_init();
     
     //We will run in bootloader mode
     //Now we need to get USB running as well
@@ -174,10 +180,7 @@ void main(void)
                     break;
 
                 case 6:
-                    if(ui_get_status()==USER_INTERFACE_STATUS_ON)
-                    {
-                        display_prepare(os.display_mode);
-                    }
+                    display_prepare(os.display_mode);
                     break;
 
                 case 7:

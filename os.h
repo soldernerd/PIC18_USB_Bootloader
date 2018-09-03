@@ -172,7 +172,8 @@ typedef enum
     DISPLAY_MODE_BOOTLOADER_CHECK_COMPLETE = 0x40,
     DISPLAY_MODE_BOOTLOADER_CHECK_FAILED= 0x50,
     DISPLAY_MODE_BOOTLOADER_PROGRAMMING= 0x60,
-    DISPLAY_MODE_BOOTLOADER_DONE = 0x70      
+    DISPLAY_MODE_BOOTLOADER_DONE = 0x70,
+    DISPLAY_MODE_BOOTLOADER_REBOOTING = 0x80   
 } displayMode_t;
 
 typedef enum 
@@ -231,7 +232,9 @@ communicationSettings_t communicationSettings;
 
 
 void timer_pseudo_isr(void);
-void system_init(void);
+void system_minimal_init(void);
+void system_minimal_init_undo(void);
+void system_full_init(void);
 void system_delay_ms(uint8_t ms);
 void system_encoder_enable(void);
 void jump_to_main_program(void);

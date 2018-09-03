@@ -53,6 +53,8 @@ const char done_line2[] = "Done!";
 const char done_line3[] = "Pages written: ";
 const char done_line4[] = "Press to reboot";
 
+const char reboot_line1[] = "Rebooting...";
+
 char display_content[4][20];
 
 static void _display_start(void);
@@ -63,6 +65,7 @@ static void _display_checked(void);
 static void _display_failed(void);
 static void _display_programming(void);
 static void _display_done(void);
+static void _display_rebooting(void);
 
 uint8_t display_get_character(uint8_t line, uint8_t position)
 {
@@ -317,6 +320,10 @@ void display_prepare(uint8_t mode)
         case DISPLAY_MODE_BOOTLOADER_DONE:
             _display_done();
             break;
+            
+        case DISPLAY_MODE_BOOTLOADER_REBOOTING:
+            _display_rebooting();
+            break;
     }
     
     //Pulse
@@ -535,6 +542,14 @@ static void _display_done(void)
     cntr = 0;
     while(done_line4[cntr])
         display_content[3][cntr] = done_line4[cntr++];
+}
+
+static void _display_rebooting(void)
+{
+    uint8_t cntr;
+    cntr = 0;
+    while(reboot_line1[cntr])
+        display_content[0][cntr] = reboot_line1[cntr++];
 }
 
 void display_update(void)

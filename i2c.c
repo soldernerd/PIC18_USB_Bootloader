@@ -107,6 +107,14 @@ void i2c_init(void)
     i2c_set_frequency(I2C_FREQUENCY_100kHz);
 }
 
+void i2c_reset(void)
+{
+    SSP1STATbits.SMP = 0; //Enable slew rate control
+    SSP1STATbits.CKE = 0; //Disable SMBus inputs
+    SSP1CON1 = 0x00;
+    SSP1ADD = 0x00;
+}
+
 i2cFrequency_t i2c_get_frequency(void)
 {
     return i2c_frequency;

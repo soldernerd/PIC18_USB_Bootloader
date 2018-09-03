@@ -30,6 +30,13 @@ static void _ui_encoder(void)
             }
             break;
             
+        case DISPLAY_MODE_BOOTLOADER_SEARCH:
+            if(os.buttonCount>0)
+            {
+                os.buttonCount = 0;
+            }
+            break;
+            
         case DISPLAY_MODE_BOOTLOADER_FILE_FOUND:
             if(os.buttonCount>0)
             {
@@ -72,9 +79,11 @@ static void _ui_encoder(void)
         case DISPLAY_MODE_BOOTLOADER_DONE:
             if(os.buttonCount>0)
             {
-                jump_to_main_program();
+                i2c_eeprom_writeByte(EEPROM_BOOTLOADER_BYTE_ADDRESS, BOOTLOADER_BYTE_FORCE_NORMAL_MODE);
+                system_delay_ms(10); //ensure data has been written before rebooting
+                reboot();
             }
-            break; 
+            break;             
     }    
 }
 

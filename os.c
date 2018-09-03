@@ -5,6 +5,7 @@
 #include "i2c.h"
 #include "ui.h"
 #include "flash.h"
+#include "display.h"
 #include "internal_flash.h"
 #include "fat16.h"
 
@@ -134,15 +135,42 @@ static void _system_timer0_init(void)
     os.timeSlot = 0;
 }
 
-void system_init(void)
+//Just configure the bare minimum needed to determine if we should jump to main program
+void system_minimal_init(void)
+{
+    //Set board voltage high
+    VCC_HIGH_TRIS = PIN_OUTPUT;
+    VCC_HIGH_PIN = 1;
+    
+    //Configure pushbutton pin as digital input
+    PUSHBUTTON_TRIS = PIN_INPUT;
+    PUSHBUTTON_ANCON = PIN_DIGITAL;
+    
+    //Initialize I2C
+    i2c_init();
+}
+
+//Undo everything the system_minimal_init() did)
+void system_minimal_init_undo(void)
+{
+    //Reset and disable I2C module
+    i2c_reset();
+    
+    //Undo pushbutton configuration
+    PUSHBUTTON_TRIS = PIN_INPUT;
+    PUSHBUTTON_ANCON = PIN_ANALOG;
+    
+    //Undo board voltage configuration
+    VCC_HIGH_PIN = 0;
+    VCC_HIGH_TRIS = PIN_INPUT;
+}
+
+
+void system_full_init(void)
 {
     //Configure ports
     //Most pins will never be used in bootloader mode
     //Just make sure everything is in a safe and well-defined state
-    
-    //Set board voltage high
-    VCC_HIGH_TRIS = PIN_OUTPUT;
-    VCC_HIGH_PIN = 1;
     
     //Enable display (display is active low)
     DISP_EN_TRIS = PIN_OUTPUT;
@@ -189,8 +217,6 @@ void system_init(void)
     PWROUT_CH4_PIN = 1;
   
     //Configure encoder pins as digital inputs
-    PUSHBUTTON_TRIS = PIN_INPUT;
-    PUSHBUTTON_ANCON = PIN_DIGITAL;
     ENCODER_A_TRIS = PIN_INPUT;
     ENCODER_B_TRIS = PIN_INPUT;
     
@@ -198,16 +224,11 @@ void system_init(void)
     os.bootloader_mode = BOOTLOADER_MODE_SEARCH;
     os.display_mode = DISPLAY_MODE_BOOTLOADER_START;
     
-    //Initialize I2C
-    i2c_init();
-    
     //Initialize SPI / flash
     flash_init();
     
     //Initialize FAT16 file system on flash
     fat_init();
-    
-    fat_format();
     
     //Set up encoder
     _system_encoder_init();
@@ -223,21 +244,9 @@ void system_init(void)
     
 }
 
+//This function must only be called after all initialization has been undone
 void jump_to_main_program(void)
 {
-    //We don't do a proper reset. Hence we should set some registers back to their original values
-    DMACON1bits.DMAEN = 0; //Disable DMA module
-    SSP2CON1bits.SSPEN = 0; //Disable SPI module
-    PPSUnLock();
-    SPI_MISO_RP_OUTPUT_REGISTER = 0b00000;
-    PPS_FUNCTION_SPI2_DATA_INPUT_REGISTER = 0b11111;
-    PPS_FUNCTION_SPI2_CHIPSELECT_INPUT_REGISTER = 0b11111;
-    PPS_FUNCTION_SPI2_DATA_INPUT_REGISTER = 0b11111;
-    SPI_MOSI_RP_OUTPUT_REGISTER = 0b00000;
-    SPI_SCLK_RP_OUTPUT_REGISTER = 0b00000;
-    PPS_FUNCTION_SPI2_CLOCK_INPUT_REGISTER = 0b11111;
-    PPSLock();
-
     //Start normal program. We're already done...
     #asm
         goto PROG_START;
@@ -246,26 +255,13 @@ void jump_to_main_program(void)
 
 void reboot(void)
 {
-//    //We don't do a proper reset. Hence we should set some registers back to their original values
-//    DMACON1bits.DMAEN = 0; //Disable DMA module
-//    SSP2CON1bits.SSPEN = 0; //Disable SPI module
-//    PPSUnLock();
-//    SPI_MISO_RP_OUTPUT_REGISTER = 0b00000;
-//    PPS_FUNCTION_SPI2_DATA_INPUT_REGISTER = 0b11111;
-//    PPS_FUNCTION_SPI2_CHIPSELECT_INPUT_REGISTER = 0b11111;
-//    PPS_FUNCTION_SPI2_DATA_INPUT_REGISTER = 0b11111;
-//    SPI_MOSI_RP_OUTPUT_REGISTER = 0b00000;
-//    SPI_SCLK_RP_OUTPUT_REGISTER = 0b00000;
-//    PPS_FUNCTION_SPI2_CLOCK_INPUT_REGISTER = 0b11111;
-//    PPSLock();
-//
-//    //Start normal program. We're already done...
-//    #asm
-//        goto 0;
-//    #endasm
-//    #asm
-//        reset;
-//    #endasm
+    //Display message if display is on
+    os.display_mode = DISPLAY_MODE_BOOTLOADER_REBOOTING;
+    display_prepare(os.display_mode);
+    if(ui_get_status()==USER_INTERFACE_STATUS_ON)
+    {
+        display_update();
+    }
     
     //Just wait 2 seconds until the WDT resets the device
     while(1);
