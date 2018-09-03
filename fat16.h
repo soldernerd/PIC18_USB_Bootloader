@@ -104,6 +104,7 @@ uint16_t fat_get_empty_clusters(uint16_t maximum);
 uint8_t fat_append_to_file(uint8_t file_number, uint16_t number_of_bytes, uint8_t *data);
 void fat_rename_file(uint8_t file_number, char *name, char *extension);
 uint8_t fat_read_from_file(uint8_t file_number, uint32_t start_byte, uint32_t length, uint8_t *data);
+uint8_t fat_read_from_file_fast(uint32_t start_byte, uint32_t length, uint8_t *data, uint16_t *cluster, uint16_t *cluster_number);
 
 #endif	/* FAT16_H */
 

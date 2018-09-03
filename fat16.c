@@ -559,15 +559,13 @@ void fat_rename_file(uint8_t file_number, char *name, char *extension)
 uint8_t fat_read_from_file(uint8_t file_number, uint32_t start_byte, uint32_t length, uint8_t *data)
 {
     rootEntry_t root;
-    uint32_t position;
     uint16_t cluster;
-    uint16_t offset;
-    uint16_t sector;
-    uint16_t read_length;
+    uint16_t cluster_number;
     
     //Read root entry
     fat_get_file_information(file_number, &root);
     cluster = root.firstCluster;
+    cluster_number = 0;
     
     //Check file size
     if(start_byte+length > root.fileSize)
@@ -576,13 +574,36 @@ uint8_t fat_read_from_file(uint8_t file_number, uint32_t start_byte, uint32_t le
         return 0xFF;
     }
     
+    //Now we know where to start, call fast function
+    return fat_read_from_file_fast(start_byte, length, data, &cluster, &cluster_number);
+}
+
+uint8_t fat_read_from_file_fast(uint32_t start_byte, uint32_t length, uint8_t *data, uint16_t *cluster, uint16_t *cluster_number)
+{
+    uint32_t position;
+    uint16_t offset;
+    uint16_t sector;
+    uint16_t read_length;
+    uint16_t working_cluster;
+    
     //First, find right cluster, sector and offset
-    position = 0;
+    position = (*cluster_number);
+    position *= 512;
+    if(position > start_byte)
+    {
+        //Indicate an error
+        return 0xFF;
+    }
     while((start_byte-position) >= 512)
     {
-        cluster = _read_fat(cluster);
+        (*cluster) = _read_fat((*cluster));
+        ++(*cluster_number);
         position += 512;
     }
+    
+    //Only use working cluster from now on
+    //Do no longer update pointers *cluster and *cluster_number
+    working_cluster = (*cluster);
     
     //Calculate offset
     offset = start_byte - position;
@@ -595,12 +616,12 @@ uint8_t fat_read_from_file(uint8_t file_number, uint32_t start_byte, uint32_t le
         if(offset==512)
         {
             //Need to get the next cluster cluster
-            cluster = _read_fat(cluster);
+            working_cluster  = _read_fat(working_cluster);
             offset = 0;
         }
         
         //Get physical flash sector from logical cluster address
-        sector = _sector_from_cluster(cluster);
+        sector = _sector_from_cluster(working_cluster);
         
         //How much data can we/should we write to the current cluster?
         read_length = 512 - offset; //Maximum we can read from this cluster

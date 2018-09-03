@@ -6,7 +6,7 @@
 #include "internal_flash.h"
 
 #define BOOTLOADER_CHARACTER_BUFFER_SIZE 50
-#define BOOTLOADER_NUMBER_OF_RECORDS_PER_CALL 1
+#define BOOTLOADER_NUMBER_OF_RECORDS_PER_CALL 16
 #define BOOTLOADER_MINIMUM_ADDRESS_ALLOWED 0x09000
 #define BOOTLOADER_MAXIMUM_ADDRESS_ALLOWED 0x1FFF7
 #define BOOTLOADER_CONFIGURATIONBITS_ADDRESS_MIN 0x1FFF8
@@ -24,6 +24,9 @@ HexFileEntry_t hex_file_entry;
 ShortRecordError_t last_error;
 uint32_t extended_linear_address;
 uint8_t start_from_byte_next = 0;
+
+uint16_t fast_read_cluster;
+uint16_t fast_read_cluster_number;
 
 uint16_t flash_pages_written;
 
@@ -178,6 +181,15 @@ static void _bootloader_verify_file(void)
     uint8_t rec_counter;
     uint32_t return_value = 0;
     uint32_t address32;
+    rootEntry_t root;
+    
+    if(hex_file_offset==0)
+    {
+        //We are just getting started with this file
+        fat_get_file_information(file_number, &root);
+        fast_read_cluster = root.firstCluster;
+        fast_read_cluster_number = 0;
+    }
     
     //Find file size
     hex_file_size = fat_get_file_size(file_number);
@@ -187,9 +199,16 @@ static void _bootloader_verify_file(void)
     {
         //Read an entry
         if((hex_file_size-hex_file_offset)>=BOOTLOADER_CHARACTER_BUFFER_SIZE)
-            fat_read_from_file(file_number, hex_file_offset, BOOTLOADER_CHARACTER_BUFFER_SIZE, file_buffer);
+        {
+            //fat_read_from_file(file_number, hex_file_offset, BOOTLOADER_CHARACTER_BUFFER_SIZE, file_buffer);
+            fat_read_from_file_fast(hex_file_offset, BOOTLOADER_CHARACTER_BUFFER_SIZE, file_buffer, &fast_read_cluster, &fast_read_cluster_number);
+        }
         else
-            fat_read_from_file(file_number, hex_file_offset, (hex_file_size-hex_file_offset), file_buffer);
+        {
+            //fat_read_from_file(file_number, hex_file_offset, (hex_file_size-hex_file_offset), file_buffer);
+            fat_read_from_file_fast(hex_file_offset, (hex_file_size-hex_file_offset), file_buffer, &fast_read_cluster, &fast_read_cluster_number);
+        }
+            
         //Check that entry
         return_value = parseHexFileEntry(file_buffer, 0, &hex_file_entry);
         
@@ -276,21 +295,32 @@ static void _bootloader_program(void)
     uint32_t address32;
     uint32_t return_value = 0;
     uint16_t address_within_page;
+    rootEntry_t root;
+    
+    if(hex_file_offset==0)
+    {
+        //We are just getting started with this file
+        fat_get_file_information(file_number, &root);
+        fast_read_cluster = root.firstCluster;
+        fast_read_cluster_number = 0;
+    }
 
     //Loop through records
     while(1)
     {
         //This may take a while. Clear WDT first
-        ClrWdt();
+        //ClrWdt();
         
         //Read an entry
         if((hex_file_size-hex_file_offset)>=BOOTLOADER_CHARACTER_BUFFER_SIZE)
         {
-            fat_read_from_file(file_number, hex_file_offset, BOOTLOADER_CHARACTER_BUFFER_SIZE, file_buffer);
+            //fat_read_from_file(file_number, hex_file_offset, BOOTLOADER_CHARACTER_BUFFER_SIZE, file_buffer);
+            fat_read_from_file_fast(hex_file_offset, BOOTLOADER_CHARACTER_BUFFER_SIZE, file_buffer, &fast_read_cluster, &fast_read_cluster_number);
         }
         else
         {
-            fat_read_from_file(file_number, hex_file_offset, (hex_file_size-hex_file_offset), file_buffer);
+            //fat_read_from_file(file_number, hex_file_offset, (hex_file_size-hex_file_offset), file_buffer);
+            fat_read_from_file_fast(hex_file_offset, (hex_file_size-hex_file_offset), file_buffer, &fast_read_cluster, &fast_read_cluster_number);
         }
         
         //Parse that entry
