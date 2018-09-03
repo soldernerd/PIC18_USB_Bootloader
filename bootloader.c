@@ -61,7 +61,7 @@ void bootloader_run(uint8_t timeslot)
 {
     switch(os.bootloader_mode)
     {
-        case BOOTLOADER_MODE_START:
+        case BOOTLOADER_MODE_SEARCH:
            if(timeslot==0)
             { 
                 _bootloader_find_file();
@@ -164,9 +164,12 @@ static void _bootloader_find_file(void)
     {
         //Reset hex file size
         hex_file_size = 0;
-        //Return to (or remain in) startup state
-        os.bootloader_mode = BOOTLOADER_MODE_START;
-        os.display_mode = DISPLAY_MODE_BOOTLOADER_START;
+        //Return to (or remain in) search state
+        os.bootloader_mode = BOOTLOADER_MODE_SEARCH;
+        if(os.display_mode != DISPLAY_MODE_BOOTLOADER_START)
+        {
+            os.display_mode = DISPLAY_MODE_BOOTLOADER_SEARCH;
+        }
     }
 }
 

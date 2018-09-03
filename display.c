@@ -9,10 +9,15 @@
 #include "spi.h"
 #include "bootloader.h"
 
-const char start_line1[17] = "Bootloader Mode";
-const char start_line2[17] = "Looking for file";
-const char start_line3[20] = "FIRMWARE.HEX on USB";
-const char start_line4[9] = "drive...";
+const char start_line1[] = "Bootloader Mode";
+const char start_line2[] = "Version ";
+const char start_line3[] = "";
+const char start_line4[] = "soldernerd.com";
+
+const char search_line1[] = "Bootloader Mode";
+const char search_line2[] = "Looking for file";
+const char search_line3[] = "FIRMWARE.HEX on USB";
+const char search_line4[] = "drive...";
 
 const char found_line1[] = "Bootloader Mode";
 const char found_line2[] = "FIRMWARE.HEX found";
@@ -51,6 +56,7 @@ const char done_line4[] = "Press to reboot";
 char display_content[4][20];
 
 static void _display_start(void);
+static void _display_search(void);
 static void _display_found(void);
 static void _display_verify(void);
 static void _display_checked(void);
@@ -284,6 +290,10 @@ void display_prepare(uint8_t mode)
             _display_start();
             break;
             
+        case DISPLAY_MODE_BOOTLOADER_SEARCH:
+            _display_search();
+            break;
+            
         case DISPLAY_MODE_BOOTLOADER_FILE_FOUND:
             _display_found();
             break;
@@ -340,12 +350,34 @@ static void _display_start(void)
     cntr = 0;
     while(start_line2[cntr])
         display_content[1][cntr] = start_line2[cntr++];
+    cntr += _display_itoa_u32(FIRMWARE_VERSION_MAJOR, &display_content[1][cntr]);
+    display_content[1][cntr++] = '.';
+    cntr += _display_itoa_u32(FIRMWARE_VERSION_MINOR, &display_content[1][cntr]);
+    display_content[1][cntr++] = '.';
+    cntr += _display_itoa_u32(FIRMWARE_VERSION_FIX, &display_content[1][cntr]);
     cntr = 0;
     while(start_line3[cntr])
         display_content[2][cntr] = start_line3[cntr++];
     cntr = 0;
     while(start_line4[cntr])
         display_content[3][cntr] = start_line4[cntr++];
+}
+
+static void _display_search(void)
+{
+    uint8_t cntr;
+    cntr = 0;
+    while(search_line1[cntr])
+        display_content[0][cntr] = search_line1[cntr++];
+    cntr = 0;
+    while(search_line2[cntr])
+        display_content[1][cntr] = search_line2[cntr++];
+    cntr = 0;
+    while(search_line3[cntr])
+        display_content[2][cntr] = search_line3[cntr++];
+    cntr = 0;
+    while(search_line4[cntr])
+        display_content[3][cntr] = search_line4[cntr++];
 }
 
 static void _display_found(void)

@@ -12,6 +12,7 @@
 
 userInterfaceStatus_t userInterfaceStatus;
 uint16_t system_ui_inactive_count;
+uint16_t startup_timer;
 
 /* ****************************************************************************
  * Static functions
@@ -146,10 +147,19 @@ void ui_run(void)
             system_encoder_enable();
             //User interface is now up and running
             system_ui_inactive_count = 0;
+            startup_timer = 0;
             userInterfaceStatus = USER_INTERFACE_STATUS_ON;
 			break;
 
 		case USER_INTERFACE_STATUS_ON:
+            if(os.display_mode==DISPLAY_MODE_BOOTLOADER_START)
+            {
+                ++startup_timer;
+                if(startup_timer==250)
+                {
+                    os.display_mode = DISPLAY_MODE_BOOTLOADER_SEARCH;
+                }
+            }
 			if (os.encoderCount==0 && os.buttonCount==0)
 			{
                 if(system_ui_inactive_count<0xFFFF)

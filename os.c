@@ -195,7 +195,7 @@ void system_init(void)
     ENCODER_B_TRIS = PIN_INPUT;
     
     //Initialize variables
-    os.bootloader_mode = BOOTLOADER_MODE_START;
+    os.bootloader_mode = BOOTLOADER_MODE_SEARCH;
     os.display_mode = DISPLAY_MODE_BOOTLOADER_START;
     
     //Initialize I2C
