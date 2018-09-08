@@ -36,12 +36,13 @@
  *  0x99: Stop parsing (there are no more commands in this buffer)
  * 
  * Multi byte commands (followed by a 16 bit constant to prevent unintended use)
- *  0x50: Truncate file. Parameters: uint8_t FileNumber, uint32_t newFileSize, 0x4CEA
+ *  0x50: Resize file. Parameters: uint8_t FileNumber, uint32_t newFileSize, 0x4CEA
  *  0x51: Delete file. Parameters: uint8_t FileNumber, 0x66A0
- *  0x52: Create file. Parameters: char[8] FileName, char[3] FileExtention, 0xBD4F
+ *  0x52: Create file. Parameters: char[8] FileName, char[3] FileExtention, uint32_t FileSize, 0xBD4F
  *  0x53: Rename file. Parameters: uint8_t FileNumber, char[8] NewFileName, char[3] NewFileExtention, 0x7E18
  *  0x54: Append to file. Parameters: uint8_t FileNumber, uint8_t NumberOfBytes, 0xFE4B, DATA
  *  0x55: Modify file. Parameters: uint8_t FileNumber, uint32_t StartByte, uint8_t NumerOfBytes, 0x0F9B, DATA
+ *  0x56: Format drive. Parameters: none, 0xDA22
  *  0x60: Change SPI mode. Parameters: uint8_t NewMode, 0x88E2
  *  0x61: Change SPI frequency. Parameters: uint8_t NewFrequency, 0xAEA8
  *  0x62: Change SPI polarity. Parameters: uint8_t NewPolarity, 0x0DBB
@@ -79,12 +80,13 @@ typedef enum
     COMMAND_ENCODER_CW = 0x3D,
     COMMAND_ENCODER_PUSH = 0x3E,
     COMMAND_STOP_PARSING = 0x99,
-    COMMAND_FILE_TRUNCATE = 0x50,
+    COMMAND_FILE_RESIZE = 0x50,
     COMMAND_FILE_DELETE = 0x51,
     COMMAND_FILE_CREATE = 0x52,
     COMMAND_FILE_RENAME = 0x53,
     COMMAND_FILE_APPEND = 0x54,
-    COMMAND_FILE_MODIFY = 0x55
+    COMMAND_FILE_MODIFY = 0x55,
+    COMMAND_FORMAT_DRIVE = 0x56
 } apiCommand_t;
 
 

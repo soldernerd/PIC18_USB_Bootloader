@@ -29,12 +29,13 @@ static void _fill_buffer_read_file(uint8_t *inBuffer, uint8_t *outBuffer);
 static void _parse_command_short(uint8_t cmd);
 static uint8_t _parse_command_long(uint8_t *data);
 
-static uint8_t _parse_file_truncate(uint8_t *data);
+static uint8_t _parse_file_resize(uint8_t *data);
 static uint8_t _parse_file_delete(uint8_t *data);
 static uint8_t _parse_file_create(uint8_t *data);
 static uint8_t _parse_file_rename(uint8_t *data);
 static uint8_t _parse_file_append(uint8_t *data);
 static uint8_t _parse_file_modify(uint8_t *data);
+static uint8_t _parse_format_drive(uint8_t *data);
 
 static uint8_t _parse_settings_spi_mode(uint8_t *data);
 static uint8_t _parse_settings_spi_frequency(uint8_t *data);
@@ -57,12 +58,12 @@ void api_prepare(uint8_t *inBuffer, uint8_t *outBuffer)
     {
         //Extended data request, may be followed by parameters (no commands allowed to follow)
         
-        //Only allowed if flash is not busy, return normal status if flash is busy
-        if(flash_is_busy())
-        {
-            _fill_buffer_get_status(outBuffer);
-            return;
-        }
+//        //Only allowed if flash is not busy, return normal status if flash is busy
+//        if(flash_is_busy())
+//        {
+//            _fill_buffer_get_status(outBuffer);
+//            return;
+//        }
         
         
         switch(command)
@@ -81,6 +82,10 @@ void api_prepare(uint8_t *inBuffer, uint8_t *outBuffer)
                 //Read file
                 _fill_buffer_read_file(inBuffer, outBuffer);
                 break;
+                
+            default:
+                outBuffer[0] = 0x99;
+                outBuffer[1] = 0x99;
         }
     }
     else
@@ -117,6 +122,10 @@ void api_prepare(uint8_t *inBuffer, uint8_t *outBuffer)
                 //Copy received data to outBuffer
                 memcpy(outBuffer, inBuffer, 64);
                 break;
+                
+            default:
+                outBuffer[0] = 0x99;
+                outBuffer[1] = 0x99;
         }
     }
 }
@@ -131,6 +140,13 @@ void api_parse(uint8_t *inBuffer, uint8_t receivedDataLength)
     {
         //Extended data request. May not be followed by commands.
         //Nothing for us to do here
+        return;
+    }
+    
+    if(inBuffer[0]==DATAREQUEST_GET_ECHO)
+    {
+        //Connectivity is beeing tested. Just echo back whatever we've received
+        //Do not try to interpret any of the following bytes as commands
         return;
     }
     
@@ -156,7 +172,7 @@ void api_parse(uint8_t *inBuffer, uint8_t receivedDataLength)
                 break;
                 
             case 0x50:
-                idx += _parse_command_long(inBuffer[idx]);
+                idx += _parse_command_long(&inBuffer[idx]);
                 break;
                 
             default:
@@ -462,8 +478,8 @@ static uint8_t _parse_command_long(uint8_t *data)
     
     switch(data[0])
     {
-        case COMMAND_FILE_TRUNCATE:
-            length = _parse_file_truncate(data);
+        case COMMAND_FILE_RESIZE:
+            length = _parse_file_resize(data);
             break;
             
         case COMMAND_FILE_DELETE:
@@ -485,16 +501,37 @@ static uint8_t _parse_command_long(uint8_t *data)
         case COMMAND_FILE_MODIFY:
             length = _parse_file_modify(data);
             break;
+            
+        case COMMAND_FORMAT_DRIVE:
+            length = _parse_format_drive(data);
+            break;
     }    
     
     return length;
 }
 
-static uint8_t _parse_file_truncate(uint8_t *data)
+static uint8_t _parse_file_resize(uint8_t *data)
 {
-    //0x50: Truncate file. Parameters: uint8_t FileNumber, uint32_t newFileSize, 0x4CEA
-    //Not yet implemented in fat16.h
-    return 65;
+    //0x50: Resize file. Parameters: uint8_t FileNumber, uint32_t newFileSize, 0x4CEA
+    uint32_t file_size;
+    if((data[0]!=COMMAND_FILE_RESIZE) || (data[6]!=0x4C) || (data[7]!=0xEA))
+    {
+        return 8;
+    }
+    
+    //Calculate file size
+    file_size = data[2];
+    file_size <<= 8;
+    file_size |= data[3];
+    file_size <<= 8;
+    file_size |= data[4];
+    file_size <<= 8;
+    file_size |= data[5];
+    
+    //Resize file
+    fat_resize_file(data[1], file_size);
+    return 8;
+
 }
 
 static uint8_t _parse_file_delete(uint8_t *data)
@@ -512,15 +549,26 @@ static uint8_t _parse_file_delete(uint8_t *data)
 
 static uint8_t _parse_file_create(uint8_t *data)
 {
-    //0x52: Create file. Parameters: char[8] FileName, char[3] FileExtention, 0xBD4F
-    if((data[0]!=COMMAND_FILE_CREATE) || (data[12]!=0xBD) || (data[13]!=0x4F))
+    //0x52: Create file. Parameters: char[8] FileName, char[3] FileExtention, uint32_t FileSize, 0xBD4F
+    uint32_t file_size;
+    if((data[0]!=COMMAND_FILE_CREATE) || (data[16]!=0xBD) || (data[17]!=0x4F))
     {
-        return 14;
+        return 18;
     }
     
+    //Calculate file size
+    file_size = data[12];
+    file_size <<= 8;
+    file_size |= data[13];
+    file_size <<= 8;
+    file_size |= data[14];
+    file_size <<= 8;
+    file_size |= data[15];
+    
     //Create file
-    fat_create_file(&data[1], &data[9], 0);
-    return 14;
+    fat_create_file(&data[1], &data[9], file_size);
+    
+    return 18;
 }
 
 static uint8_t _parse_file_rename(uint8_t *data)
@@ -541,7 +589,8 @@ static uint8_t _parse_file_append(uint8_t *data)
     //0x54: Append to file. Parameters: uint8_t FileNumber, uint8_t NumberOfBytes, 0xFE4B, DATA
     if((data[0]!=COMMAND_FILE_APPEND) || (data[3]!=0xFE) || (data[4]!=0x4B))
     {
-        return 15;
+        //Can't trust the number of bytes in this case
+        return 65;
     }
     
     //Append to file
@@ -551,10 +600,42 @@ static uint8_t _parse_file_append(uint8_t *data)
 
 static uint8_t _parse_file_modify(uint8_t *data)
 {
+    uint16_t number_of_bytes;
+    uint32_t start_byte;
+    
     //0x55: Modify file. Parameters: uint8_t FileNumber, uint32_t StartByte, uint8_t NumerOfBytes, 0x0F9B, DATA
-    //Not yet implemented in fat16.h
-    return 65;
+    if((data[0]!=COMMAND_FILE_MODIFY) || (data[7]!=0x0F) || (data[8]!=0x9B))
+    {
+        //Can't trust the number of bytes in this case
+        return 65;
+    }
+    
+    //Get number_of_bytes
+    number_of_bytes = data[6];
+    
+    //Calculate start byte
+    start_byte = data[2];
+    start_byte <<= 8;
+    start_byte |= data[3];
+    start_byte <<= 8;
+    start_byte |= data[4];
+    start_byte <<= 8;
+    start_byte |= data[5];
+    
+    fat_modify_file(data[1], start_byte, number_of_bytes, &data[9]);
+    return number_of_bytes + 9;
 }
+
+static uint8_t _parse_format_drive(uint8_t *data)
+{
+    //0x56: Format drive. Parameters: none, 0xDA22
+    if((data[0]!=COMMAND_FORMAT_DRIVE) || (data[1]!=0xDA) || (data[2]!=0x22))
+    {
+        return 3;
+    }
+    fat_format();
+    return 3;
+} 
 
 static uint8_t _parse_settings_spi_mode(uint8_t *data)
 {

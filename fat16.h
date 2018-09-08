@@ -105,6 +105,8 @@ uint8_t fat_append_to_file(uint8_t file_number, uint16_t number_of_bytes, uint8_
 void fat_rename_file(uint8_t file_number, char *name, char *extension);
 uint8_t fat_read_from_file(uint8_t file_number, uint32_t start_byte, uint32_t length, uint8_t *data);
 uint8_t fat_read_from_file_fast(uint32_t start_byte, uint32_t length, uint8_t *data, uint16_t *cluster, uint16_t *cluster_number);
+uint8_t fat_resize_file(uint8_t file_number, uint32_t new_file_size);
+void fat_modify_file(uint8_t file_number, uint32_t start_byte, uint16_t length, uint8_t *data);
 
 #endif	/* FAT16_H */
 

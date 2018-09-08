@@ -112,13 +112,18 @@ static uint16_t _get_empty_cluster(uint16_t first_cluster)
     uint16_t value;
     
     //Start at 2, first two positions are reserved
+    if(first_cluster<2)
+    {
+        first_cluster = 2;
+    }
+    
     for(cluster=first_cluster; cluster<(DATA_NUMBER_OF_SECTORS+2); ++cluster)
     {
         fat_sector = cluster>>8; 
         fat_sector += FAT_FIRST_SECTOR;
         offset = cluster & 0xFF;
         offset <<= 1;
-        flash_partial_read(fat_sector, offset, 2, &value);
+        flash_partial_read(fat_sector, offset, 2, (uint8_t*) &value);
         if(value==0x0000)
         {
             return cluster;
@@ -416,13 +421,10 @@ void fat_delete_file(uint8_t file_number)
         //Read value of current cluster
         //The value points to the next cluster
         next_cluster = _read_fat(first_cluster);
-        //An extra checks just in case
-//        if(next_cluster<2)
-//        {
-//            break;
-//        }
+        
         //Mark the current cluster as re-usable
         _write_fat(first_cluster, 0x0000);
+        
         //If that cluster contained 0xFFFF (or similar) before, we're done
         if(next_cluster>0xFFF0)
         {
@@ -642,6 +644,198 @@ uint8_t fat_read_from_file_fast(uint32_t start_byte, uint32_t length, uint8_t *d
     //Indicate success
     return 0x00;
 }
+
+uint8_t fat_resize_file(uint8_t file_number, uint32_t new_file_size)
+{
+    rootEntry_t root;
+    uint32_t old_file_size;
+    uint16_t cluster;
+    uint16_t next_cluster;
+    uint16_t old_number_of_clusters;
+    uint16_t new_number_of_clusters;
+    uint16_t cntr;
+    
+    //Make sure we have a valid file number
+    if(file_number>=FBR_ROOT_ENTRIES)
+    {
+        //Return an error
+        return 0xFF;
+    }
+    
+    //Check if file is in use
+    if(_root_is_available(file_number))
+    {
+        //Return an error
+        return 0xFE;
+    }
+
+    //Collect data from the root entry
+    fat_get_file_information(file_number, &root);
+    old_file_size = root.fileSize;
+    
+    if(new_file_size==old_file_size)
+    {
+        //Nothing to to, indicate success
+        return 0x00;
+    }
+    
+    //Get first cluster
+    cluster = root.firstCluster;
+    if(cluster==0)
+    {
+        //There is not a single cluster assigned to this file yet
+        cluster = _get_empty_cluster(0x0000);
+        root.firstCluster = cluster;
+    }
+
+    //Calculate number of clusters necessary
+    old_number_of_clusters = (old_file_size+511)>>9;
+    new_number_of_clusters = (new_file_size+511)>>9;
+    
+    //old_number_of_clusters = 1;
+    //new_number_of_clusters = 11;
+    
+    //Reserve clusters if necessary
+    if(old_number_of_clusters<new_number_of_clusters)
+    {
+        for(cntr=1; cntr<=new_number_of_clusters; ++cntr)
+        {
+            next_cluster = _read_fat(cluster);
+            
+            if(cntr==new_number_of_clusters)
+            {
+                //This is the last cluster
+                _write_fat(cluster, 0xFFFF);
+            }
+            else
+            {
+                //This is not the last cluster
+                if((next_cluster>=0xFFF0) || (next_cluster==0))
+                {
+                    //We need to find another cluster
+                    next_cluster = _get_empty_cluster(cluster+1);
+                    //Update current cluster with link to next cluster
+                    _write_fat(cluster, next_cluster);
+                    //Prepare for the next step
+                    cluster = next_cluster;
+                }
+                else
+                {
+                    //This entry contains a link to the next cluster.
+                    //Nothing to do, just prepare for the next step
+                    cluster = next_cluster;
+                }
+            }
+        }
+    }
+    
+    //Free clusters if necessary
+    else if(old_number_of_clusters>new_number_of_clusters)
+    {
+        for(cntr=1; cntr<=old_number_of_clusters; ++cntr)
+        {
+            next_cluster = _read_fat(cluster);
+            
+            if(cntr<new_number_of_clusters)
+            {
+                //Nothing to do, just prepare for the next cluster
+                cluster = next_cluster;
+            }
+            else if(cntr==new_number_of_clusters)
+            {
+                //This is now the last cluster, mark it accordingly
+                _write_fat(cluster, 0xFFFF);
+                //Prepare for the next cluster
+                cluster = next_cluster;
+            }
+            else
+            {
+                //Mark this cluster as free
+                _write_fat(cluster, 0x0000);
+                //Prepare for the next cluster
+                cluster = next_cluster;
+            }
+        }
+    }
+    
+    //Clusters are freed / reserved
+    //Only need to update root entry
+    root.fileSize = new_file_size;
+    _write_root(file_number, &root);
+    
+    //Indicate success
+    return 0x00;
+}
+
+void fat_modify_file(uint8_t file_number, uint32_t start_byte, uint16_t length, uint8_t *data)
+{
+    rootEntry_t root;
+    uint16_t cluster;
+    uint32_t position;
+    uint16_t offset;
+    uint16_t sector;
+    uint16_t number_of_bytes;
+    
+    //Read root entry
+    fat_get_file_information(file_number, &root);
+    cluster = root.firstCluster;
+    
+    //Make sure we do not write past file end
+    if(start_byte>root.fileSize)
+    {
+        //User wants to write at a position beyond end of file
+        return;
+    }
+    
+    if((start_byte+length) > root.fileSize)
+    {
+        //User wants to write past end of file. Only write until end of file.
+        length = root.fileSize - start_byte;
+    }
+    
+    //Find first relevant cluster
+    position = 0;
+    while((start_byte-position) >= 512)
+    {
+        cluster = _read_fat(cluster);
+        position += 512;
+    }
+    
+    //Calculate offset
+    offset = (uint16_t) (start_byte-position);
+    
+    //Now we know where to start writing data
+    position = 0;
+    while(position < length)
+    {
+        //Do we need another cluster first?
+        if(offset==512)
+        {
+            //Find the next cluster
+            cluster = _read_fat(cluster);
+            //Reset offset
+            offset = 0;
+        }
+        
+        //Get physical flash sector from logical cluster address
+        sector = _sector_from_cluster(cluster);
+        
+        //How much data can we/should we write to the current cluster?
+        number_of_bytes = 512 - offset;
+        if(number_of_bytes > (length-position))
+        {
+            number_of_bytes = length - position;
+        }
+        
+        //Write that data
+        flash_partial_write(sector, offset, number_of_bytes, &data[position]);
+        
+        //Update position and offset
+        position += number_of_bytes;
+        offset += number_of_bytes;
+    }
+}
+
 
 static uint8_t _get_mbr(uint16_t idx)
 {

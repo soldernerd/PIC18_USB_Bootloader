@@ -273,14 +273,75 @@ def read_display():
     print('| ' + line_3 + ' |')
     print('| ' + line_4 + ' |')
     print('+----------------------+\n')
-              
+
+def resize_file(file_number, new_file_size):
+    #0x50: Resize file. Parameters: uint8_t FileNumber, uint32_t newFileSize, 0x4CEA
+    size = [new_file_size>>24, (new_file_size>>16)&0xFF, (new_file_size>>8)&0xFF, new_file_size&0xFF]
+    tx_data = [0x10, 0x50, file_number] + size + [0x4C, 0xEA]
+    spi_send_receive(tx_data)
+    print('File number {0} resized to {1} bytes'.format(file_number, new_file_size))
+
+def delete_file(file_number):
+    #0x51: Delete file. Parameters: uint8_t FileNumber, 0x66A0
+    tx_data = [0x10, 0x51, file_number, 0x66, 0xA0, 0x99]
+    spi_send_receive(tx_data)
+    print('File {0} deleted'.format(file_number))
+
+def create_file(file_name, extention, file_size):
+    #0x52: Create file. Parameters: char[8] FileName, char[3] FileExtention, uint32_t FileSize, 0xBD4F
+    size = [file_size>>24, (file_size>>16)&0xFF, (file_size>>8)&0xFF, file_size&0xFF]
+    tx_data = [0x10, 0x52]
+    tx_data += [ord(c.upper()) for c in file_name[:8]]
+    while len(tx_data) < 10:
+        tx_data.append(ord(' '))
+    tx_data += [ord(c.upper()) for c in extention[:3]]
+    while len(tx_data) < 13:
+        tx_data.append(ord(' '))
+    tx_data += size
+    tx_data += [0xBD, 0x4F]
+    spi_send_receive(tx_data)
+    print('File {0}.{1} created ({2} bytes)'.format(file_name, extention, file_size))
+
+def rename_file(file_number, file_name, extention):
+    #0x53: Rename file. Parameters: uint8_t FileNumber, char[8] NewFileName, char[3] NewFileExtention, 0x7E18
+    tx_data = [0x10, 0x53, file_number]
+    tx_data += [ord(c.upper()) for c in file_name[:8]]
+    while len(tx_data) < 11:
+        tx_data.append(ord(' '))
+    tx_data += [ord(c.upper()) for c in extention[:3]]
+    while len(tx_data) < 14:
+        tx_data.append(ord(' '))
+    tx_data += [0x7E, 0x18]
+    spi_send_receive(tx_data)
+    print('File number {0} renamed to {1}.{2}'.format(file_number, file_name, extention))
+
+def append_to_file(file_number, data):
+    #0x54: Append to file. Parameters: uint8_t FileNumber, uint8_t NumberOfBytes, 0xFE4B, DATA
+    data = data[:58]
+    number_of_bytes = len(data)
+    tx_data = [0x10, 0x54, file_number, number_of_bytes, 0xFE, 0x4B]
+    tx_data += [ord(c) for c in data]
+    spi_send_receive(tx_data)
+    print('{0} bytes appended to file number {1}'.format(number_of_bytes, file_number))
+     
+def modify_file(file_number, start_byte, data):
+    #0x55: Modify file. Parameters: uint8_t FileNumber, uint32_t StartByte, uint8_t NumerOfBytes, 0x0F9B, DATA
+    data = data[:54]
+    number_of_bytes = len(data)
+    start_bytes = [start_byte>>24, (start_byte>>16)&0xFF, (start_byte>>8)&0xFF, start_byte&0xFF]
+    tx_data = [0x10, 0x55, file_number] + start_bytes + [number_of_bytes, 0x0F, 0x9B]
+    tx_data += [ord(c) for c in data]
+    print(tx_data)
+    spi_send_receive(tx_data)
+    print('Modified file number {0} starting from byte {1}'.format(file_number, start_byte))
+
 
 init()
 
 #test_spi_communication(64,5)
 #get_status()
 
-read_display()
+#read_display()
 #press_pushbutton()
 #get_bootloader_details()
 #reboot()
@@ -288,8 +349,16 @@ read_display()
 #reboot_normal_mode()
 
 #get_file_info(1);
-list_files();
-
+#list_files()
+#delay_ms(50)
+#delete_file(1)
+#create_file('hello', 'txt', 9825)
+#rename_file(1, 'HELLOWLD', 'CSV')
+#append_to_file(1, 'This is just a test')
+#modify_file(1, 3, 'xoxoxo')
+resize_file(1, 5500);
+delay_ms(100)
+list_files()
 #test_spi_communication(64,100)
 #spi_send_receive([1,2,,4,5,6,7,8])
 #finish()
