@@ -62,6 +62,12 @@ static compareResult_t _bootloader_verify_program_memory(uint32_t addressOffset,
 
 void bootloader_run(uint8_t timeslot)
 {
+    //Do nothing while bootloader is in startup phase
+    if(os.display_mode==DISPLAY_MODE_BOOTLOADER_START)
+    {
+        return;
+    }
+    
     switch(os.bootloader_mode)
     {
         case BOOTLOADER_MODE_SEARCH:
@@ -169,10 +175,7 @@ static void _bootloader_find_file(void)
         hex_file_size = 0;
         //Return to (or remain in) search state
         os.bootloader_mode = BOOTLOADER_MODE_SEARCH;
-        if(os.display_mode != DISPLAY_MODE_BOOTLOADER_START)
-        {
-            os.display_mode = DISPLAY_MODE_BOOTLOADER_SEARCH;
-        }
+        os.display_mode = DISPLAY_MODE_BOOTLOADER_SEARCH;
     }
 }
 

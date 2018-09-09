@@ -70,7 +70,8 @@ def spi_init():
     io.bcm2835_spi_setBitOrder(io.BCM2835_SPI_BIT_ORDER_MSBFIRST);
     io.bcm2835_spi_setDataMode(io.BCM2835_SPI_MODE0);
     #io.bcm2835_spi_setClockDivider(io.BCM2835_SPI_CLOCK_DIVIDER_65536);
-    io.bcm2835_spi_setClockDivider(io.BCM2835_SPI_CLOCK_DIVIDER_256);
+    #SPI_CLOCK_DIVIDER_128=128: about 2.0MHz
+    io.bcm2835_spi_setClockDivider(io.BCM2835_SPI_CLOCK_DIVIDER_128);
     io.bcm2835_spi_chipSelect(io.BCM2835_SPI_CS0);
     io.bcm2835_spi_setChipSelectPolarity(io.BCM2835_SPI_CS0, io.LOW);
     
@@ -103,7 +104,6 @@ def spi_send_receive(data_to_send, number_of_bytes=None):
         if count == 50:
             break
         
-    
     io.bcm2835_spi_begin()
     io.bcm2835_spi_transfern(receive_data, number_of_bytes)
     io.bcm2835_spi_end()
@@ -196,6 +196,8 @@ def test_spi_communication(buffer_size, trials):
             print(t, 'Status: Success')
         else:
             print(t, 'Status: FAILED')
+            print('TX:', last_tx_data)
+            print('RX:', rx_data)
             fails += 1
         delay_ms(50)  
     print('Statistics: {0} trials, {1} successful, {2} failed\n'.format(trials, trials-fails, fails))
@@ -257,9 +259,11 @@ def read_display():
     send_data = [0x11]
     spi_send_receive(send_data)
     send_data = [0x12]
+    delay_ms(20)
     received_data_1 = spi_send_receive(send_data, 44)
     if not received_data_1[:3] == [0x11, 0xC1, 0x25]:
         print('Signature of first data package is incorrect:', received_data_1[:3])
+    delay_ms(20)
     received_data_2 = spi_send_receive(send_data, 44)
     if not received_data_2[:3] == [0x12, 0xC1, 0x25]:
         print('Signature of second data package is incorrect:', received_data_2[:3])    
@@ -283,7 +287,7 @@ def resize_file(file_number, new_file_size):
 
 def delete_file(file_number):
     #0x51: Delete file. Parameters: uint8_t FileNumber, 0x66A0
-    tx_data = [0x10, 0x51, file_number, 0x66, 0xA0, 0x99]
+    tx_data = [0x10, 0x51, file_number, 0x66, 0xA0]
     spi_send_receive(tx_data)
     print('File {0} deleted'.format(file_number))
 
@@ -331,16 +335,72 @@ def modify_file(file_number, start_byte, data):
     start_bytes = [start_byte>>24, (start_byte>>16)&0xFF, (start_byte>>8)&0xFF, start_byte&0xFF]
     tx_data = [0x10, 0x55, file_number] + start_bytes + [number_of_bytes, 0x0F, 0x9B]
     tx_data += [ord(c) for c in data]
-    print(tx_data)
     spi_send_receive(tx_data)
     print('Modified file number {0} starting from byte {1}'.format(file_number, start_byte))
 
+def format_drive():
+    tx_data = [0x10, 0x56, 0xDA, 0x22]
+    spi_send_receive(tx_data)
+    print('Drive formated')
+
+def write_file(local_file_name, remote_file_name):
+    file_name, extention = remote_file_name.split('.')
+    file_name = file_name[:8].upper()
+    extention = extention[:3].upper()
+    print(local_file_name, file_name, extention)
+    with open(local_file_name, 'r') as f:
+        char_array = []
+        for line in f:
+            char_array += [c for c in line]
+            char_array += ['\r', '\n']
+        size = len(char_array)
+    #Create file of correct size
+    create_file(file_name, extention, size)
+    #Get number of that file
+    delay_ms(50)
+    file_number = find_file(remote_file_name)
+    if file_number == 0:
+        print('File not found')
+        return
+    #Modify content of file
+    position = 0
+    while position < size:
+        bytes_to_send = size - position
+        if bytes_to_send > 54:
+            bytes_to_send = 54
+        modify_file(file_number, position, char_array[position:position+bytes_to_send])
+        position += bytes_to_send
+        delay_ms(20)
+
+
+def find_file(file_name):
+    #0x81: Find file. Parameter: char[8] FileName, char[3] FileExtention
+    name, extention = file_name.split('.')
+    tx_data = [0x81]
+    tx_data += [ord(c.upper()) for c in name[:8]]
+    while len(tx_data) < 9:
+        tx_data.append(ord(' '))
+    tx_data += [ord(c.upper()) for c in extention[:3]]
+    while len(tx_data) < 12:
+        tx_data.append(ord(' '))
+    received_data = spi_send_receive(tx_data)
+    #print('TX:', tx_data)
+    #print('RX:', received_data)
+    #delay_ms(5)
+    tx_data = [0x20]
+    received_data = spi_send_receive(tx_data, 4)
+    #print('RX:', received_data)
+    if not received_data[:3] == [0x81, 0xC1, 0x25]:
+        print('Signature of first data package is incorrect:', received_data[:3])
+        return 0
+    else:
+        print('File number of file {0}: {1}'.format(file_name, received_data[3]))
+        return received_data[3]
 
 init()
-
-#test_spi_communication(64,5)
+spi_init()
+#test_spi_communication(64,100)
 #get_status()
-
 #read_display()
 #press_pushbutton()
 #get_bootloader_details()
@@ -353,12 +413,22 @@ init()
 #delay_ms(50)
 #delete_file(1)
 #create_file('hello', 'txt', 9825)
-#rename_file(1, 'HELLOWLD', 'CSV')
+#rename_file(2, 'FIRMWARE', 'HEX')
 #append_to_file(1, 'This is just a test')
-#modify_file(1, 3, 'xoxoxo')
-resize_file(1, 5500);
-delay_ms(100)
-list_files()
+#modify_file(1, 500, 'This is the way the world ends. not with a bang but a whimper.')
+#format_drive()
+#resize_file(1, 1625);
+#delay_ms(500)
+
+#delay_ms(100)
+
+fw_hex = find_file('firmware.hex')
+if not fw_hex == 255:
+    delete_file(fw_hex)
+
+write_file('SolarCharger_RevE.hex', 'firmware.hex')
+
+#list_files()
 #test_spi_communication(64,100)
 #spi_send_receive([1,2,,4,5,6,7,8])
 #finish()

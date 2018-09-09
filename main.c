@@ -59,6 +59,9 @@ void main(void)
     uint8_t *rx_buffer;
     uint8_t *tx_buffer;
     
+    //Clear watchdog timer
+    ClrWdt();
+    
     rx_buffer = spi_get_external_rx_buffer();
     tx_buffer = spi_get_external_tx_buffer();
     tx_start_addr = (uint16_t) tx_buffer;

@@ -148,6 +148,9 @@ void system_minimal_init(void)
     
     //Initialize I2C
     i2c_init();
+    
+    //Wait for voltages to have settled, also on display unit
+    system_delay_ms(50);
 }
 
 //Undo everything the system_minimal_init() did)
