@@ -416,7 +416,7 @@ void flash_set_power_state(flashPowerState_t new_power_state)
 }
 
 //Reads one full 512byte page from flash
-void flash_page_read(uint16_t page, uint8_t *data)
+void flash_sector_read(uint16_t page, uint8_t *data)
 {
     //Set configuration
     spi_set_configuration(SPI_CONFIGURATION_INTERNAL);
@@ -430,7 +430,7 @@ void flash_page_read(uint16_t page, uint8_t *data)
 
 //Writes one full 512 byte page to flash
 //This function is smart enough to only write if the data does not already match
-void flash_page_write(uint16_t page, uint8_t *data)
+void flash_sector_write(uint16_t page, uint8_t *data)
 {
     flashMatchResult_t match;
     

@@ -48,7 +48,7 @@ uint8_t ExternalFlash_SectorRead(void* config, uint32_t sector_addr, uint8_t* bu
     } 
     
     //Read the data
-    flash_page_read(page, buffer);
+    flash_sector_read(page, buffer);
 
 	return true;
 }
@@ -64,7 +64,7 @@ uint8_t ExternalFlash_SectorWrite(void* config, uint32_t sector_addr, uint8_t* b
     }  
     
     //Write new data to flash
-    flash_page_write(page, buffer);
+    flash_sector_write(page, buffer);
 
     return true;
 }

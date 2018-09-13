@@ -37,8 +37,8 @@ flashPowerState_t flash_get_power_state(void);
 void flash_set_power_state(flashPowerState_t new_power_state);
 
 //Read or write an entire page
-void flash_page_read(uint16_t page, uint8_t *data);
-void flash_page_write(uint16_t page, uint8_t *data);
+void flash_sector_read(uint16_t page, uint8_t *data);
+void flash_sector_write(uint16_t page, uint8_t *data);
 
 //Read or write only part of a page
 void flash_partial_read(uint16_t page, uint16_t start, uint16_t length, uint8_t *data);

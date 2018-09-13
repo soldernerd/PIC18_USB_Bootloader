@@ -29,6 +29,8 @@
 #define DATA_FIRST_SECTOR 38
 #define DATA_LAST_SECTOR 8191
 #define DATA_NUMBER_OF_SECTORS 8154
+#define BYTES_PER_SECTOR 512
+#define CLUSTERS_PER_FAT_SECTOR 256
 
 //MBR specifics
 #define MRB_PARTITION_STATUS 0x80
@@ -100,13 +102,15 @@ uint8_t fat_get_file_information(uint8_t file_number, rootEntry_t *data);
 uint32_t fat_get_file_size(uint8_t file_number);
 uint8_t fat_create_file(char *name, char *extension, uint32_t size);
 void fat_delete_file(uint8_t file_number);
-uint16_t fat_get_empty_clusters(uint16_t maximum);
+uint8_t fat_resize_file(uint8_t file_number, uint32_t new_file_size);
+//uint16_t fat_get_empty_clusters(uint16_t maximum);
+void fat_modify_file(uint8_t file_number, uint32_t start_byte, uint16_t length, uint8_t *data);
 uint8_t fat_append_to_file(uint8_t file_number, uint16_t number_of_bytes, uint8_t *data);
 void fat_rename_file(uint8_t file_number, char *name, char *extension);
 uint8_t fat_read_from_file(uint8_t file_number, uint32_t start_byte, uint32_t length, uint8_t *data);
 uint8_t fat_read_from_file_fast(uint32_t start_byte, uint32_t length, uint8_t *data, uint16_t *cluster, uint16_t *cluster_number);
-uint8_t fat_resize_file(uint8_t file_number, uint32_t new_file_size);
-void fat_modify_file(uint8_t file_number, uint32_t start_byte, uint16_t length, uint8_t *data);
+
+
 
 #endif	/* FAT16_H */
 

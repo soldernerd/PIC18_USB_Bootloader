@@ -539,7 +539,7 @@ I2C_FREQUENCY_100kHz 0
 I2C_FREQUENCY_200kHz 1
 I2C_FREQUENCY_400kHz 2
 ]
-"1100 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+"1218 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 [e E6872 . `uc
 DRIVE_NOT_FORMATED 0
 DRIVE_FORMATED 1
@@ -618,7 +618,7 @@ ShortRecordErrorAddressRange 11
 ShortRecordErrorNoError 0
 ]
 "110
-[e E6951 . `uc
+[e E6949 . `uc
 ADDRESS_CHECK_RESULT_OK 0
 ADDRESS_CHECK_RESULT_CONFIGURATION_BITS 1
 ADDRESS_CHECK_RESULT_ERROR 255
@@ -632,7 +632,7 @@ RecordErrorDataTooLong -4
 RecordErrorNoError -16
 ]
 "437
-[e E6947 . `uc
+[e E6945 . `uc
 COMPARE_RESULT_DATA_MATCHES 0
 COMPARE_RESULT_DATA_DOES_NOT_MATCH 1
 ]
@@ -826,7 +826,7 @@ SPI_CONFIGURATION_EXTERNAL 1
 "63 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\bootloader.c
 [v _bootloader_run bootloader_run `(v  1 e 1 0 ]
 "109
-[v __bootloader_check_address _bootloader_check_address `(E6951  1 s 1 _bootloader_check_address ]
+[v __bootloader_check_address _bootloader_check_address `(E6949  1 s 1 _bootloader_check_address ]
 "152
 [v __bootloader_find_file _bootloader_find_file `(v  1 s 1 _bootloader_find_file ]
 "182
@@ -951,69 +951,83 @@ SPI_CONFIGURATION_EXTERNAL 1
 [v _ExternalFlash_SectorRead ExternalFlash_SectorRead `(uc  1 e 1 0 ]
 "56
 [v _ExternalFlash_SectorWrite ExternalFlash_SectorWrite `(uc  1 e 1 0 ]
-"29 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+"52 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+[v __sector_from_file_number _sector_from_file_number `(ui  1 s 2 _sector_from_file_number ]
+"61
+[v __offset_from_file_number _offset_from_file_number `(ui  1 s 2 _offset_from_file_number ]
+"70
+[v __data_sector_from_cluster _data_sector_from_cluster `(ui  1 s 2 _data_sector_from_cluster ]
+"75
+[v __fat_sector_from_cluster _fat_sector_from_cluster `(ui  1 s 2 _fat_sector_from_cluster ]
+"82
+[v __fat_offset_from_cluster _fat_offset_from_cluster `(ui  1 s 2 _fat_offset_from_cluster ]
+"89
+[v __cluster_from_sector_and_offset _cluster_from_sector_and_offset `(ui  1 s 2 _cluster_from_sector_and_offset ]
+"98
+[v __get_available_offset_from_buffer _get_available_offset_from_buffer `(ui  1 s 2 _get_available_offset_from_buffer ]
+"114
+[v __read_value_from_offset _read_value_from_offset `(ui  1 s 2 _read_value_from_offset ]
+"123
+[v __write_value_to_offset _write_value_to_offset `(v  1 s 1 _write_value_to_offset ]
+"130
+[v __get_available_cluster _get_available_cluster `(ui  1 s 2 _get_available_cluster ]
+"182
+[v __find_nth_cluster _find_nth_cluster `(ui  1 s 2 _find_nth_cluster ]
+"213
+[v __make_cluster_chain _make_cluster_chain `(ui  1 s 2 _make_cluster_chain ]
+"362
 [v __get_time _get_time `(ui  1 s 2 _get_time ]
-"41
+"378
 [v __get_date _get_date `(ui  1 s 2 _get_date ]
-"53
-[v __update_modified_time _update_modified_time `(v  1 s 1 _update_modified_time ]
-"59
+"394
 [v __root_is_available _root_is_available `(uc  1 s 1 _root_is_available ]
-"94
+"428
 [v __get_available_root_entry _get_available_root_entry `(uc  1 s 1 _get_available_root_entry ]
-"107
-[v __get_empty_cluster _get_empty_cluster `(ui  1 s 2 _get_empty_cluster ]
-"135
-[v _fat_get_empty_clusters fat_get_empty_clusters `(ui  1 e 2 0 ]
-"163
-[v __write_fat _write_fat `(v  1 s 1 _write_fat ]
-"174
+"442
 [v __read_fat _read_fat `(ui  1 s 2 _read_fat ]
-"187
+"459
 [v __write_root _write_root `(v  1 s 1 _write_root ]
-"197
+"472
 [v __delete_root _delete_root `(v  1 s 1 _delete_root ]
-"210
+"487
 [v __get_first_cluster _get_first_cluster `(ui  1 s 2 _get_first_cluster ]
-"255
+"502
 [v _fat_find_file fat_find_file `(uc  1 e 1 0 ]
-"299
+"547
 [v _fat_get_file_size fat_get_file_size `(ul  1 e 4 0 ]
-"314
+"571
 [v _fat_create_file fat_create_file `(uc  1 e 1 0 ]
-"396
+"632
 [v _fat_delete_file fat_delete_file `(v  1 e 1 0 ]
-"445
-[v __sector_from_cluster _sector_from_cluster `(ui  1 s 2 _sector_from_cluster ]
-"450
+"661
 [v _fat_append_to_file fat_append_to_file `(uc  1 e 1 0 ]
-"538
+"702
 [v _fat_rename_file fat_rename_file `(v  1 e 1 0 ]
-"561
+"732
 [v _fat_read_from_file fat_read_from_file `(uc  1 e 1 0 ]
-"583
+"768
 [v _fat_read_from_file_fast fat_read_from_file_fast `(uc  1 e 1 0 ]
-"648
+"835
 [v _fat_resize_file fat_resize_file `(uc  1 e 1 0 ]
-"770
+"889
 [v _fat_modify_file fat_modify_file `(v  1 e 1 0 ]
-"840
+"962
 [v __get_mbr _get_mbr `(uc  1 s 1 _get_mbr ]
-"885
+"1007
 [v __get_fbr _get_fbr `(uc  1 s 1 _get_fbr ]
-"990
+"1112
 [v __get_fat _get_fat `(uc  1 s 1 _get_fat ]
-"1013
+"1135
 [v __get_root _get_root `(uc  1 s 1 _get_root ]
-"1090
+"1208
 [v __get_data _get_data `(uc  1 s 1 _get_data ]
-"1099
+"1217
 [v _fat_get_format_status fat_get_format_status `(E6872  1 e 1 0 ]
-"1127
+"1245
 [v _fat_format fat_format `(v  1 e 1 0 ]
-"1187
+"1305
 [v _fat_init fat_init `(v  1 e 1 0 ]
-"1196
+"1314
 [v _fat_get_file_information fat_get_file_information `(uc  1 e 1 0 ]
 "95 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
 [v __flash_set_page_size _flash_set_page_size `(v  1 s 1 _flash_set_page_size ]
@@ -1038,9 +1052,9 @@ SPI_CONFIGURATION_EXTERNAL 1
 "354
 [v _flash_is_busy flash_is_busy `(uc  1 e 1 0 ]
 "419
-[v _flash_page_read flash_page_read `(v  1 e 1 0 ]
+[v _flash_sector_read flash_sector_read `(v  1 e 1 0 ]
 "433
-[v _flash_page_write flash_page_write `(v  1 e 1 0 ]
+[v _flash_sector_write flash_sector_write `(v  1 e 1 0 ]
 "457
 [v _flash_partial_read flash_partial_read `(v  1 e 1 0 ]
 "471
@@ -1278,9 +1292,9 @@ SPI_CONFIGURATION_EXTERNAL 1
 [v _hex_file_offset hex_file_offset `ul  1 e 4 0 ]
 "22
 [v _hex_file_size hex_file_size `ul  1 e 4 0 ]
-[s S5600 HexFileEntry 23 `ui 1 dataLength 2 0 `ui 1 address 2 2 `E29 1 recordType 1 4 `[16]uc 1 data 16 5 `uc 1 checksum 1 21 `uc 1 checksumCheck 1 22 ]
+[s S5621 HexFileEntry 23 `ui 1 dataLength 2 0 `ui 1 address 2 2 `E29 1 recordType 1 4 `[16]uc 1 data 16 5 `uc 1 checksum 1 21 `uc 1 checksumCheck 1 22 ]
 "23
-[v _hex_file_entry hex_file_entry `S5600  1 e 23 0 ]
+[v _hex_file_entry hex_file_entry `S5621  1 e 23 0 ]
 "24
 [v _last_error last_error `E6803  1 e 1 0 ]
 "25
@@ -1364,12 +1378,12 @@ SPI_CONFIGURATION_EXTERNAL 1
 [v _UADDR UADDR `VEuc  1 e 1 @3896 ]
 "4760
 [v _UCFG UCFG `VEuc  1 e 1 @3897 ]
-[s S6677 . 1 `uc 1 SPI1OD 1 0 :1:0 
+[s S6695 . 1 `uc 1 SPI1OD 1 0 :1:0 
 `uc 1 SPI2OD 1 0 :1:1 
 ]
 "5156
-[u S6680 . 1 `S6677 1 . 1 0 ]
-[v _ODCON3bits ODCON3bits `VES6680  1 e 1 @3904 ]
+[u S6698 . 1 `S6695 1 . 1 0 ]
+[v _ODCON3bits ODCON3bits `VES6698  1 e 1 @3904 ]
 [s S3728 . 1 `uc 1 PCFG0 1 0 :1:0 
 `uc 1 PCFG1 1 0 :1:1 
 `uc 1 PCFG2 1 0 :1:2 
@@ -1436,7 +1450,7 @@ SPI_CONFIGURATION_EXTERNAL 1
 `uc 1 SSPM2 1 0 :1:2 
 `uc 1 SSPM3 1 0 :1:3 
 ]
-[s S6559 . 1 `uc 1 SSPM02 1 0 :1:0 
+[s S6577 . 1 `uc 1 SSPM02 1 0 :1:0 
 `uc 1 SSPM12 1 0 :1:1 
 `uc 1 SSPM22 1 0 :1:2 
 `uc 1 SSPM32 1 0 :1:3 
@@ -1445,8 +1459,8 @@ SPI_CONFIGURATION_EXTERNAL 1
 `uc 1 SSPOV2 1 0 :1:6 
 `uc 1 WCOL2 1 0 :1:7 
 ]
-[u S6568 . 1 `S4297 1 . 1 0 `S4303 1 . 1 0 `S6559 1 . 1 0 ]
-[v _SSP2CON1bits SSP2CON1bits `VES6568  1 e 1 @3954 ]
+[u S6586 . 1 `S4297 1 . 1 0 `S4303 1 . 1 0 `S6577 1 . 1 0 ]
+[v _SSP2CON1bits SSP2CON1bits `VES6586  1 e 1 @3954 ]
 [s S4133 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_NOT_W 1 0 :1:2 
 ]
@@ -1463,7 +1477,7 @@ SPI_CONFIGURATION_EXTERNAL 1
 `uc 1 CKE 1 0 :1:6 
 `uc 1 SMP 1 0 :1:7 
 ]
-[s S6397 . 1 `uc 1 BF2 1 0 :1:0 
+[s S6415 . 1 `uc 1 BF2 1 0 :1:0 
 `uc 1 UA2 1 0 :1:1 
 `uc 1 I2C_READ2 1 0 :1:2 
 `uc 1 I2C_START2 1 0 :1:3 
@@ -1472,58 +1486,58 @@ SPI_CONFIGURATION_EXTERNAL 1
 `uc 1 CKE2 1 0 :1:6 
 `uc 1 SMP2 1 0 :1:7 
 ]
-[s S6406 . 1 `uc 1 . 1 0 :2:0 
+[s S6424 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 READ_WRITE2 1 0 :1:2 
 `uc 1 S2 1 0 :1:3 
 `uc 1 P2 1 0 :1:4 
 `uc 1 DATA_ADDRESS2 1 0 :1:5 
 ]
-[s S6412 . 1 `uc 1 . 1 0 :2:0 
+[s S6430 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 RW2 1 0 :1:2 
 `uc 1 START2 1 0 :1:3 
 `uc 1 STOP2 1 0 :1:4 
 `uc 1 D_A2 1 0 :1:5 
 ]
-[s S6418 . 1 `uc 1 . 1 0 :5:0 
+[s S6436 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 D_NOT_A2 1 0 :1:5 
 ]
-[s S6421 . 1 `uc 1 . 1 0 :2:0 
+[s S6439 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_W2 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 D_nA2 1 0 :1:5 
 ]
-[s S6426 . 1 `uc 1 . 1 0 :2:0 
+[s S6444 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_NOT_W2 1 0 :1:2 
 ]
-[s S6429 . 1 `uc 1 . 1 0 :2:0 
+[s S6447 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_nW2 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 I2C_DAT2 1 0 :1:5 
 ]
-[s S6434 . 1 `uc 1 . 1 0 :2:0 
+[s S6452 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_W2 1 0 :1:2 
 ]
-[s S6437 . 1 `uc 1 . 1 0 :5:0 
+[s S6455 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 NOT_A2 1 0 :1:5 
 ]
-[s S6440 . 1 `uc 1 . 1 0 :2:0 
+[s S6458 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nW2 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nA2 1 0 :1:5 
 ]
-[s S6445 . 1 `uc 1 . 1 0 :2:0 
+[s S6463 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_WRITE2 1 0 :1:2 
 ]
-[s S6448 . 1 `uc 1 . 1 0 :5:0 
+[s S6466 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 NOT_ADDRESS2 1 0 :1:5 
 ]
-[s S6451 . 1 `uc 1 . 1 0 :2:0 
+[s S6469 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nWRITE2 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nADDRESS2 1 0 :1:5 
 ]
-[u S6456 . 1 `S4133 1 . 1 0 `S4136 1 . 1 0 `S4139 1 . 1 0 `S6397 1 . 1 0 `S6406 1 . 1 0 `S6412 1 . 1 0 `S6418 1 . 1 0 `S6421 1 . 1 0 `S6426 1 . 1 0 `S6429 1 . 1 0 `S6434 1 . 1 0 `S6437 1 . 1 0 `S6440 1 . 1 0 `S6445 1 . 1 0 `S6448 1 . 1 0 `S6451 1 . 1 0 ]
-[v _SSP2STATbits SSP2STATbits `VES6456  1 e 1 @3955 ]
+[u S6474 . 1 `S4133 1 . 1 0 `S4136 1 . 1 0 `S4139 1 . 1 0 `S6415 1 . 1 0 `S6424 1 . 1 0 `S6430 1 . 1 0 `S6436 1 . 1 0 `S6439 1 . 1 0 `S6444 1 . 1 0 `S6447 1 . 1 0 `S6452 1 . 1 0 `S6455 1 . 1 0 `S6458 1 . 1 0 `S6463 1 . 1 0 `S6466 1 . 1 0 `S6469 1 . 1 0 ]
+[v _SSP2STATbits SSP2STATbits `VES6474  1 e 1 @3955 ]
 [s S2869 . 1 `uc 1 RA0 1 0 :1:0 
 `uc 1 RA1 1 0 :1:1 
 `uc 1 RA2 1 0 :1:2 
@@ -1688,11 +1702,11 @@ SPI_CONFIGURATION_EXTERNAL 1
 ]
 [u S2661 . 1 `S2631 1 . 1 0 `S2640 1 . 1 0 `S2649 1 . 1 0 `S2658 1 . 1 0 ]
 [v _PORTDbits PORTDbits `VES2661  1 e 1 @3971 ]
-[s S6704 . 1 `uc 1 INTLVL 1 0 :4:0 
+[s S6722 . 1 `uc 1 INTLVL 1 0 :4:0 
 `uc 1 DLYCYC 1 0 :4:4 
 ]
 "10267
-[s S6707 . 1 `uc 1 INTLVL0 1 0 :1:0 
+[s S6725 . 1 `uc 1 INTLVL0 1 0 :1:0 
 `uc 1 INTLVL1 1 0 :1:1 
 `uc 1 INTLVL2 1 0 :1:2 
 `uc 1 INTLVL3 1 0 :1:3 
@@ -1701,8 +1715,8 @@ SPI_CONFIGURATION_EXTERNAL 1
 `uc 1 DLYCYC2 1 0 :1:6 
 `uc 1 DLYCYC3 1 0 :1:7 
 ]
-[u S6716 . 1 `S6704 1 . 1 0 `S6707 1 . 1 0 ]
-[v _DMACON2bits DMACON2bits `VES6716  1 e 1 @3974 ]
+[u S6734 . 1 `S6722 1 . 1 0 `S6725 1 . 1 0 ]
+[v _DMACON2bits DMACON2bits `VES6734  1 e 1 @3974 ]
 [s S2699 . 1 `uc 1 DMAEN 1 0 :1:0 
 `uc 1 DLYINTEN 1 0 :1:1 
 `uc 1 DUPLEX0 1 0 :1:2 
@@ -1933,7 +1947,7 @@ SPI_CONFIGURATION_EXTERNAL 1
 [v _PIR3bits PIR3bits `VES2750  1 e 1 @4004 ]
 "12724
 [v _EECON1 EECON1 `VEuc  1 e 1 @4006 ]
-[s S5896 . 1 `uc 1 . 1 0 :1:0 
+[s S5916 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 WR 1 0 :1:1 
 `uc 1 WREN 1 0 :1:2 
 `uc 1 WRERR 1 0 :1:3 
@@ -1941,8 +1955,8 @@ SPI_CONFIGURATION_EXTERNAL 1
 `uc 1 WPROG 1 0 :1:5 
 ]
 "12739
-[u S5903 . 1 `S5896 1 . 1 0 ]
-[v _EECON1bits EECON1bits `VES5903  1 e 1 @4006 ]
+[u S5923 . 1 `S5916 1 . 1 0 ]
+[v _EECON1bits EECON1bits `VES5923  1 e 1 @4006 ]
 "12769
 [v _EECON2 EECON2 `VEuc  1 e 1 @4007 ]
 [s S4342 . 1 `uc 1 SEN 1 0 :1:0 
@@ -2230,7 +2244,7 @@ SPI_CONFIGURATION_EXTERNAL 1
 [v _display_content display_content `[4][20]uc  1 e 80 0 ]
 "8 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\external_flash.c
 [v _mediaInformation mediaInformation `S1959  1 s 5 mediaInformation ]
-"27 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+"17 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 [v _buffer buffer `[512]uc  1 e 512 0 ]
 "80 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
 [v _power_state power_state `E6857  1 e 1 0 ]
@@ -2248,11 +2262,11 @@ SPI_CONFIGURATION_EXTERNAL 1
 [s S2576 . 7 `E7890 1 spiMode 1 0 `E7821 1 spiFrequency 1 1 `E7824 1 spiPolarity 1 2 `E7890 1 i2cMode 1 3 `E7771 1 i2cFrequency 1 4 `uc 1 i2cSlaveModeSlaveAddress 1 5 `uc 1 i2cMasterModeSlaveAddress 1 6 ]
 "229
 [v _communicationSettings communicationSettings `S2576  1 e 7 0 ]
-[s S6365 . 3 `E6753 1 mode 1 0 `E6757 1 frequency 1 1 `E6760 1 polarity 1 2 ]
+[s S6383 . 3 `E6753 1 mode 1 0 `E6757 1 frequency 1 1 `E6760 1 polarity 1 2 ]
 "11 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\spi.c
-[v _config_internal config_internal `S6365  1 e 3 0 ]
+[v _config_internal config_internal `S6383  1 e 3 0 ]
 "12
-[v _config_external config_external `S6365  1 e 3 0 ]
+[v _config_external config_external `S6383  1 e 3 0 ]
 "13
 [v _active_configuration active_configuration `E6749  1 e 1 0 ]
 "15
@@ -2527,13 +2541,13 @@ SPI_CONFIGURATION_EXTERNAL 1
 [v _main main `(v  1 e 1 0 ]
 {
 "60
-[v main@tx_buffer tx_buffer `*.39uc  1 a 2 87 ]
+[v main@tx_buffer tx_buffer `*.39uc  1 a 2 99 ]
 "59
-[v main@rx_buffer rx_buffer `*.39uc  1 a 2 85 ]
+[v main@rx_buffer rx_buffer `*.39uc  1 a 2 97 ]
 "56
-[v main@bytes_transmitted bytes_transmitted `ui  1 a 2 83 ]
+[v main@bytes_transmitted bytes_transmitted `ui  1 a 2 95 ]
 "57
-[v main@tx_start_addr tx_start_addr `ui  1 a 2 81 ]
+[v main@tx_start_addr tx_start_addr `ui  1 a 2 93 ]
 "199
 } 0
 "110 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\ui.c
@@ -2642,8 +2656,8 @@ SPI_CONFIGURATION_EXTERNAL 1
 "25
 [v __spi_init _spi_init `(v  1 s 1 _spi_init ]
 {
-[s S6365 . 3 `E6753 1 mode 1 0 `E6757 1 frequency 1 1 `E6760 1 polarity 1 2 ]
-[v __spi_init@details details `S6365  1 p 3 0 ]
+[s S6383 . 3 `E6753 1 mode 1 0 `E6757 1 frequency 1 1 `E6760 1 polarity 1 2 ]
+[v __spi_init@details details `S6383  1 p 3 0 ]
 "45
 } 0
 "95 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
@@ -2657,17 +2671,17 @@ SPI_CONFIGURATION_EXTERNAL 1
 [v __flash_set_page_size@size size `E6886  1 a 1 23 ]
 "110
 } 0
-"1187 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+"1305 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 [v _fat_init fat_init `(v  1 e 1 0 ]
 {
-"1194
+"1312
 } 0
-"1099
+"1217
 [v _fat_get_format_status fat_get_format_status `(E6872  1 e 1 0 ]
 {
-"1101
+"1219
 [v fat_get_format_status@cntr cntr `ui  1 a 2 45 ]
-"1125
+"1243
 } 0
 "112 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.c
 [v __system_timer0_init _system_timer0_init `(v  1 s 1 _system_timer0_init ]
@@ -2700,45 +2714,45 @@ SPI_CONFIGURATION_EXTERNAL 1
 [v bootloader_run@timeslot timeslot `uc  1 a 1 wreg ]
 [v bootloader_run@timeslot timeslot `uc  1 a 1 wreg ]
 "66
-[v bootloader_run@timeslot timeslot `uc  1 a 1 93 ]
+[v bootloader_run@timeslot timeslot `uc  1 a 1 91 ]
 "107
 } 0
 "182
 [v __bootloader_verify_file _bootloader_verify_file `(v  1 s 1 _bootloader_verify_file ]
 {
-[s S5253 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
+[s S5261 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
 "187
-[v __bootloader_verify_file@root root `S5253  1 a 32 8 ]
+[v __bootloader_verify_file@root root `S5261  1 a 32 22 ]
 "186
-[v __bootloader_verify_file@address32 address32 `ul  1 a 4 45 ]
+[v __bootloader_verify_file@address32 address32 `ul  1 a 4 59 ]
 "185
-[v __bootloader_verify_file@return_value return_value `ul  1 a 4 41 ]
+[v __bootloader_verify_file@return_value return_value `ul  1 a 4 55 ]
 "184
-[v __bootloader_verify_file@rec_counter rec_counter `uc  1 a 1 40 ]
+[v __bootloader_verify_file@rec_counter rec_counter `uc  1 a 1 54 ]
 "289
 } 0
 "291
 [v __bootloader_program _bootloader_program `(v  1 s 1 _bootloader_program ]
 {
-[s S5253 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
+[s S5261 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
 "301
-[v __bootloader_program@root root `S5253  1 a 32 14 ]
+[v __bootloader_program@root root `S5261  1 a 32 28 ]
 "298
-[v __bootloader_program@address32 address32 `ul  1 a 4 50 ]
+[v __bootloader_program@address32 address32 `ul  1 a 4 64 ]
 "299
-[v __bootloader_program@return_value return_value `ul  1 a 4 46 ]
+[v __bootloader_program@return_value return_value `ul  1 a 4 60 ]
 "296
-[v __bootloader_program@page_to_write page_to_write `ui  1 a 2 57 ]
+[v __bootloader_program@page_to_write page_to_write `ui  1 a 2 71 ]
 "293
-[v __bootloader_program@cntr cntr `ui  1 a 2 55 ]
+[v __bootloader_program@cntr cntr `ui  1 a 2 69 ]
 "300
-[v __bootloader_program@address_within_page address_within_page `ui  1 a 2 12 ]
+[v __bootloader_program@address_within_page address_within_page `ui  1 a 2 26 ]
 "295
-[v __bootloader_program@entry_page entry_page `ui  1 a 2 10 ]
+[v __bootloader_program@entry_page entry_page `ui  1 a 2 24 ]
 "294
-[v __bootloader_program@buffer buffer `*.39uc  1 a 2 8 ]
+[v __bootloader_program@buffer buffer `*.39uc  1 a 2 22 ]
 "297
-[v __bootloader_program@start_from_byte start_from_byte `uc  1 a 1 54 ]
+[v __bootloader_program@start_from_byte start_from_byte `uc  1 a 1 68 ]
 "434
 } 0
 "59 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\hex.c
@@ -2749,8 +2763,8 @@ SPI_CONFIGURATION_EXTERNAL 1
 "59
 [v parseHexFileEntry@data data `*.39uc  1 p 2 11 ]
 [v parseHexFileEntry@offset offset `ul  1 p 4 13 ]
-[s S5600 HexFileEntry 23 `ui 1 dataLength 2 0 `ui 1 address 2 2 `E29 1 recordType 1 4 `[16]uc 1 data 16 5 `uc 1 checksum 1 21 `uc 1 checksumCheck 1 22 ]
-[v parseHexFileEntry@hexEntry hexEntry `*.39S5600  1 p 2 17 ]
+[s S5621 HexFileEntry 23 `ui 1 dataLength 2 0 `ui 1 address 2 2 `E29 1 recordType 1 4 `[16]uc 1 data 16 5 `uc 1 checksum 1 21 `uc 1 checksumCheck 1 22 ]
+[v parseHexFileEntry@hexEntry hexEntry `*.39S5621  1 p 2 17 ]
 "135
 } 0
 "42
@@ -2877,14 +2891,14 @@ SPI_CONFIGURATION_EXTERNAL 1
 "320
 } 0
 "109 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\bootloader.c
-[v __bootloader_check_address _bootloader_check_address `(E6951  1 s 1 _bootloader_check_address ]
+[v __bootloader_check_address _bootloader_check_address `(E6949  1 s 1 _bootloader_check_address ]
 {
 "113
 [v __bootloader_check_address@cntr cntr `uc  1 a 1 11 ]
 "111
-[v __bootloader_check_address@byte_status byte_status `E6951  1 a 1 10 ]
+[v __bootloader_check_address@byte_status byte_status `E6949  1 a 1 10 ]
 "112
-[v __bootloader_check_address@worst_case worst_case `E6951  1 a 1 9 ]
+[v __bootloader_check_address@worst_case worst_case `E6949  1 a 1 9 ]
 "109
 [v __bootloader_check_address@address address `ul  1 p 4 0 ]
 [v __bootloader_check_address@dataLength dataLength `uc  1 p 1 4 ]
@@ -3377,13 +3391,6 @@ SPI_CONFIGURATION_EXTERNAL 1
 [v ExternalFlash_SectorRead@buffer buffer `*.39uc  1 p 2 49 ]
 "54
 } 0
-"419 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
-[v _flash_page_read flash_page_read `(v  1 e 1 0 ]
-{
-[v flash_page_read@page page `ui  1 p 2 39 ]
-[v flash_page_read@data data `*.39uc  1 p 2 41 ]
-"429
-} 0
 "993 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\usb_device_msd.c
 [v _MSDComputeDeviceInAndResidue MSDComputeDeviceInAndResidue `(v  1 s 1 MSDComputeDeviceInAndResidue ]
 {
@@ -3431,82 +3438,70 @@ SPI_CONFIGURATION_EXTERNAL 1
 [v _api_prepare api_prepare `(v  1 e 1 0 ]
 {
 "55
-[v api_prepare@command command `E6715  1 a 1 93 ]
+[v api_prepare@command command `E6715  1 a 1 86 ]
 "53
-[v api_prepare@inBuffer inBuffer `*.39uc  1 p 2 71 ]
-[v api_prepare@outBuffer outBuffer `*.39uc  1 p 2 73 ]
+[v api_prepare@inBuffer inBuffer `*.39uc  1 p 2 82 ]
+[v api_prepare@outBuffer outBuffer `*.39uc  1 p 2 84 ]
 "131
 } 0
 "384
 [v __fill_buffer_read_file _fill_buffer_read_file `(v  1 s 1 _fill_buffer_read_file ]
 {
 "386
-[v __fill_buffer_read_file@start start `ul  1 a 4 67 ]
+[v __fill_buffer_read_file@start start `ul  1 a 4 78 ]
 "388
-[v __fill_buffer_read_file@data_length data_length `ul  1 a 4 63 ]
+[v __fill_buffer_read_file@data_length data_length `ul  1 a 4 74 ]
 "387
-[v __fill_buffer_read_file@file_size file_size `ul  1 a 4 59 ]
+[v __fill_buffer_read_file@file_size file_size `ul  1 a 4 70 ]
 "384
-[v __fill_buffer_read_file@inBuffer inBuffer `*.39uc  1 p 2 51 ]
-[v __fill_buffer_read_file@outBuffer outBuffer `*.39uc  1 p 2 53 ]
+[v __fill_buffer_read_file@inBuffer inBuffer `*.39uc  1 p 2 62 ]
+[v __fill_buffer_read_file@outBuffer outBuffer `*.39uc  1 p 2 64 ]
 "429
 } 0
-"561 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+"732 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 [v _fat_read_from_file fat_read_from_file `(uc  1 e 1 0 ]
 {
 [v fat_read_from_file@file_number file_number `uc  1 a 1 wreg ]
-[s S5253 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
-"563
-[v fat_read_from_file@root root `S5253  1 a 32 19 ]
-"564
-[v fat_read_from_file@cluster cluster `ui  1 a 2 17 ]
-"565
-[v fat_read_from_file@cluster_number cluster_number `ui  1 a 2 15 ]
-"561
+[s S5261 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
+"734
+[v fat_read_from_file@root root `S5261  1 a 32 30 ]
+"736
+[v fat_read_from_file@cluster_number cluster_number `ui  1 a 2 27 ]
+"735
+[v fat_read_from_file@cluster cluster `ui  1 a 2 25 ]
+"737
+[v fat_read_from_file@return_code return_code `uc  1 a 1 29 ]
+"732
 [v fat_read_from_file@file_number file_number `uc  1 a 1 wreg ]
-[v fat_read_from_file@start_byte start_byte `ul  1 p 4 0 ]
-[v fat_read_from_file@length length `ul  1 p 4 4 ]
-[v fat_read_from_file@data data `*.39uc  1 p 2 8 ]
-"568
-[v fat_read_from_file@file_number file_number `uc  1 a 1 14 ]
-"581
+[v fat_read_from_file@start_byte start_byte `ul  1 p 4 14 ]
+[v fat_read_from_file@length length `ul  1 p 4 18 ]
+[v fat_read_from_file@data data `*.39uc  1 p 2 22 ]
+"740
+[v fat_read_from_file@file_number file_number `uc  1 a 1 24 ]
+"766
 } 0
-"583
+"768
 [v _fat_read_from_file_fast fat_read_from_file_fast `(uc  1 e 1 0 ]
 {
-"585
-[v fat_read_from_file_fast@position position `ul  1 a 4 89 ]
-"588
-[v fat_read_from_file_fast@read_length read_length `ui  1 a 2 87 ]
-"586
-[v fat_read_from_file_fast@offset offset `ui  1 a 2 85 ]
-"589
-[v fat_read_from_file_fast@working_cluster working_cluster `ui  1 a 2 83 ]
-"587
-[v fat_read_from_file_fast@sector sector `ui  1 a 2 81 ]
-"583
-[v fat_read_from_file_fast@start_byte start_byte `ul  1 p 4 55 ]
-[v fat_read_from_file_fast@length length `ul  1 p 4 59 ]
-[v fat_read_from_file_fast@data data `*.39uc  1 p 2 63 ]
-[v fat_read_from_file_fast@cluster cluster `*.39ui  1 p 2 65 ]
-[v fat_read_from_file_fast@cluster_number cluster_number `*.39ui  1 p 2 67 ]
-"646
-} 0
-"299
-[v _fat_get_file_size fat_get_file_size `(ul  1 e 4 0 ]
-{
-[v fat_get_file_size@file_number file_number `uc  1 a 1 wreg ]
-"303
-[v fat_get_file_size@file_size file_size `ul  1 a 4 54 ]
-"302
-[v fat_get_file_size@offset offset `ui  1 a 2 58 ]
-"301
-[v fat_get_file_size@sector sector `ui  1 a 2 52 ]
-"299
-[v fat_get_file_size@file_number file_number `uc  1 a 1 wreg ]
-"304
-[v fat_get_file_size@file_number file_number `uc  1 a 1 60 ]
-"312
+"770
+[v fat_read_from_file_fast@position position `ul  1 a 4 10 ]
+"773
+[v fat_read_from_file_fast@read_length read_length `ui  1 a 2 8 ]
+"775
+[v fat_read_from_file_fast@needed_cluster needed_cluster `ui  1 a 2 6 ]
+"771
+[v fat_read_from_file_fast@offset offset `ui  1 a 2 4 ]
+"774
+[v fat_read_from_file_fast@working_cluster working_cluster `ui  1 a 2 2 ]
+"772
+[v fat_read_from_file_fast@sector sector `ui  1 a 2 0 ]
+"768
+[v fat_read_from_file_fast@start_byte start_byte `ul  1 p 4 65 ]
+[v fat_read_from_file_fast@length length `ul  1 p 4 69 ]
+[v fat_read_from_file_fast@data data `*.39uc  1 p 2 73 ]
+[v fat_read_from_file_fast@cluster cluster `*.39ui  1 p 2 75 ]
+[v fat_read_from_file_fast@cluster_number cluster_number `*.39ui  1 p 2 77 ]
+"833
 } 0
 "192 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 [v __fill_buffer_get_status _fill_buffer_get_status `(v  1 s 1 _fill_buffer_get_status ]
@@ -3525,10 +3520,10 @@ SPI_CONFIGURATION_EXTERNAL 1
 [v __fill_buffer_get_file_details _fill_buffer_get_file_details `(v  1 s 1 _fill_buffer_get_file_details ]
 {
 "347
-[v __fill_buffer_get_file_details@file_number file_number `uc  1 a 1 66 ]
+[v __fill_buffer_get_file_details@file_number file_number `uc  1 a 1 60 ]
 "345
-[v __fill_buffer_get_file_details@inBuffer inBuffer `*.39uc  1 p 2 62 ]
-[v __fill_buffer_get_file_details@outBuffer outBuffer `*.39uc  1 p 2 64 ]
+[v __fill_buffer_get_file_details@inBuffer inBuffer `*.39uc  1 p 2 55 ]
+[v __fill_buffer_get_file_details@outBuffer outBuffer `*.39uc  1 p 2 57 ]
 "361
 } 0
 "223
@@ -3611,20 +3606,20 @@ SPI_CONFIGURATION_EXTERNAL 1
 [v __fill_buffer_find_file _fill_buffer_find_file `(v  1 s 1 _fill_buffer_find_file ]
 {
 "365
-[v __fill_buffer_find_file@cntr cntr `uc  1 a 1 75 ]
+[v __fill_buffer_find_file@cntr cntr `uc  1 a 1 62 ]
 "363
-[v __fill_buffer_find_file@inBuffer inBuffer `*.39uc  1 p 2 67 ]
-[v __fill_buffer_find_file@outBuffer outBuffer `*.39uc  1 p 2 69 ]
+[v __fill_buffer_find_file@inBuffer inBuffer `*.39uc  1 p 2 54 ]
+[v __fill_buffer_find_file@outBuffer outBuffer `*.39uc  1 p 2 56 ]
 "382
 } 0
 "133
 [v _api_parse api_parse `(v  1 e 1 0 ]
 {
 "137
-[v api_parse@idx idx `uc  1 a 1 94 ]
+[v api_parse@idx idx `uc  1 a 1 64 ]
 "133
-[v api_parse@inBuffer inBuffer `*.39uc  1 p 2 51 ]
-[v api_parse@receivedDataLength receivedDataLength `uc  1 p 1 53 ]
+[v api_parse@inBuffer inBuffer `*.39uc  1 p 2 59 ]
+[v api_parse@receivedDataLength receivedDataLength `uc  1 p 1 61 ]
 "184
 } 0
 "432
@@ -3956,9 +3951,9 @@ SPI_CONFIGURATION_EXTERNAL 1
 [v __parse_command_long _parse_command_long `(uc  1 s 1 _parse_command_long ]
 {
 "477
-[v __parse_command_long@length length `uc  1 a 1 93 ]
+[v __parse_command_long@length length `uc  1 a 1 58 ]
 "475
-[v __parse_command_long@data data `*.39uc  1 p 2 91 ]
+[v __parse_command_long@data data `*.39uc  1 p 2 56 ]
 "511
 } 0
 "629
@@ -3967,230 +3962,164 @@ SPI_CONFIGURATION_EXTERNAL 1
 [v __parse_format_drive@data data `*.39uc  1 p 2 38 ]
 "638
 } 0
-"1127 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+"1245 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 [v _fat_format fat_format `(v  1 e 1 0 ]
 {
-"1129
+"1247
 [v fat_format@cntr cntr `ui  1 a 2 36 ]
-"1185
+"1303
 } 0
-"433 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
-[v _flash_page_write flash_page_write `(v  1 e 1 0 ]
-{
-"435
-[v flash_page_write@match match `E6894  1 a 1 35 ]
-"433
-[v flash_page_write@page page `ui  1 p 2 31 ]
-[v flash_page_write@data data `*.39uc  1 p 2 33 ]
-"454
-} 0
-"1013 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+"1135
 [v __get_root _get_root `(uc  1 s 1 _get_root ]
 {
 [v __get_root@idx idx `ui  1 p 2 0 ]
-"1088
+"1206
 } 0
-"840
+"962
 [v __get_mbr _get_mbr `(uc  1 s 1 _get_mbr ]
 {
 [v __get_mbr@idx idx `ui  1 p 2 0 ]
-"883
+"1005
 } 0
-"885
+"1007
 [v __get_fbr _get_fbr `(uc  1 s 1 _get_fbr ]
 {
 [v __get_fbr@idx idx `ui  1 p 2 0 ]
-"988
+"1110
 } 0
-"990
+"1112
 [v __get_fat _get_fat `(uc  1 s 1 _get_fat ]
 {
 [v __get_fat@idx idx `ui  1 p 2 0 ]
-"1011
+"1133
 } 0
-"1090
+"1208
 [v __get_data _get_data `(uc  1 s 1 _get_data ]
 {
 [v __get_data@idx idx `ui  1 p 2 0 ]
-"1097
+"1215
 } 0
 "513 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 [v __parse_file_resize _parse_file_resize `(uc  1 s 1 _parse_file_resize ]
 {
 "516
-[v __parse_file_resize@file_size file_size `ul  1 a 4 73 ]
+[v __parse_file_resize@file_size file_size `ul  1 a 4 83 ]
 "513
-[v __parse_file_resize@data data `*.39uc  1 p 2 70 ]
+[v __parse_file_resize@data data `*.39uc  1 p 2 80 ]
 "535
 } 0
-"648 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-[v _fat_resize_file fat_resize_file `(uc  1 e 1 0 ]
-{
-[v fat_resize_file@file_number file_number `uc  1 a 1 wreg ]
-[s S5253 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
-"650
-[v fat_resize_file@root root `S5253  1 a 32 11 ]
-"651
-[v fat_resize_file@old_file_size old_file_size `ul  1 a 4 0 ]
-"652
-[v fat_resize_file@cluster cluster `ui  1 a 2 45 ]
-"653
-[v fat_resize_file@next_cluster next_cluster `ui  1 a 2 43 ]
-"655
-[v fat_resize_file@new_number_of_clusters new_number_of_clusters `ui  1 a 2 9 ]
-"656
-[v fat_resize_file@cntr cntr `ui  1 a 2 7 ]
-"654
-[v fat_resize_file@old_number_of_clusters old_number_of_clusters `ui  1 a 2 4 ]
-"648
-[v fat_resize_file@file_number file_number `uc  1 a 1 wreg ]
-[v fat_resize_file@new_file_size new_file_size `ul  1 p 4 62 ]
-"659
-[v fat_resize_file@file_number file_number `uc  1 a 1 6 ]
-"768
-} 0
-"574 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
+"574
 [v __parse_file_rename _parse_file_rename `(uc  1 s 1 _parse_file_rename ]
 {
-[v __parse_file_rename@data data `*.39uc  1 p 2 66 ]
+[v __parse_file_rename@data data `*.39uc  1 p 2 0 ]
 "585
 } 0
-"538 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+"702 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 [v _fat_rename_file fat_rename_file `(v  1 e 1 0 ]
 {
 [v fat_rename_file@file_number file_number `uc  1 a 1 wreg ]
-[s S5253 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
-"540
-[v fat_rename_file@root root `S5253  1 a 32 1 ]
-"541
-[v fat_rename_file@cntr cntr `uc  1 a 1 33 ]
-"538
+[s S5261 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
+"704
+[v fat_rename_file@root root `S5261  1 a 32 61 ]
+"705
+[v fat_rename_file@cntr cntr `uc  1 a 1 93 ]
+"706
+[v fat_rename_file@return_code return_code `uc  1 a 1 59 ]
+"702
 [v fat_rename_file@file_number file_number `uc  1 a 1 wreg ]
-[v fat_rename_file@name name `*.39uc  1 p 2 62 ]
-[v fat_rename_file@extension extension `*.39uc  1 p 2 64 ]
-"544
-[v fat_rename_file@file_number file_number `uc  1 a 1 0 ]
-"559
+[v fat_rename_file@name name `*.39uc  1 p 2 55 ]
+[v fat_rename_file@extension extension `*.39uc  1 p 2 57 ]
+"709
+[v fat_rename_file@file_number file_number `uc  1 a 1 60 ]
+"730
 } 0
 "601 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 [v __parse_file_modify _parse_file_modify `(uc  1 s 1 _parse_file_modify ]
 {
 "604
-[v __parse_file_modify@start_byte start_byte `ul  1 a 4 87 ]
+[v __parse_file_modify@start_byte start_byte `ul  1 a 4 90 ]
 "603
-[v __parse_file_modify@number_of_bytes number_of_bytes `ui  1 a 2 85 ]
+[v __parse_file_modify@number_of_bytes number_of_bytes `ui  1 a 2 88 ]
 "601
-[v __parse_file_modify@data data `*.39uc  1 p 2 82 ]
+[v __parse_file_modify@data data `*.39uc  1 p 2 85 ]
 "627
 } 0
-"770 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-[v _fat_modify_file fat_modify_file `(v  1 e 1 0 ]
-{
-[v fat_modify_file@file_number file_number `uc  1 a 1 wreg ]
-[s S5253 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
-"772
-[v fat_modify_file@root root `S5253  1 a 32 9 ]
-"774
-[v fat_modify_file@position position `ul  1 a 4 41 ]
-"777
-[v fat_modify_file@number_of_bytes number_of_bytes `ui  1 a 2 7 ]
-"775
-[v fat_modify_file@offset offset `ui  1 a 2 5 ]
-"773
-[v fat_modify_file@cluster cluster `ui  1 a 2 3 ]
-"776
-[v fat_modify_file@sector sector `ui  1 a 2 0 ]
-"770
-[v fat_modify_file@file_number file_number `uc  1 a 1 wreg ]
-[v fat_modify_file@start_byte start_byte `ul  1 p 4 62 ]
-[v fat_modify_file@length length `ui  1 p 2 66 ]
-[v fat_modify_file@data data `*.39uc  1 p 2 68 ]
-"780
-[v fat_modify_file@file_number file_number `uc  1 a 1 2 ]
-"837
-} 0
-"537 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
+"537
 [v __parse_file_delete _parse_file_delete `(uc  1 s 1 _parse_file_delete ]
 {
-[v __parse_file_delete@data data `*.39uc  1 p 2 62 ]
+[v __parse_file_delete@data data `*.39uc  1 p 2 75 ]
 "548
 } 0
-"396 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+"632 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 [v _fat_delete_file fat_delete_file `(v  1 e 1 0 ]
 {
 [v fat_delete_file@file_number file_number `uc  1 a 1 wreg ]
-"398
-[v fat_delete_file@first_cluster first_cluster `ui  1 a 2 59 ]
-"399
-[v fat_delete_file@next_cluster next_cluster `ui  1 a 2 57 ]
-"396
+"634
+[v fat_delete_file@first_cluster first_cluster `ui  1 a 2 72 ]
+"632
 [v fat_delete_file@file_number file_number `uc  1 a 1 wreg ]
-"402
-[v fat_delete_file@file_number file_number `uc  1 a 1 61 ]
-"443
+"637
+[v fat_delete_file@file_number file_number `uc  1 a 1 74 ]
+"659
 } 0
-"210
+"487
 [v __get_first_cluster _get_first_cluster `(ui  1 s 2 _get_first_cluster ]
 {
-[v __get_first_cluster@slot slot `uc  1 a 1 wreg ]
-"214
-[v __get_first_cluster@first_cluster first_cluster `ui  1 a 2 54 ]
-"213
-[v __get_first_cluster@offset offset `ui  1 a 2 52 ]
-"212
-[v __get_first_cluster@sector sector `ui  1 a 2 50 ]
-"210
-[v __get_first_cluster@slot slot `uc  1 a 1 wreg ]
-"215
-[v __get_first_cluster@slot slot `uc  1 a 1 56 ]
-"222
+[v __get_first_cluster@file_number file_number `uc  1 a 1 wreg ]
+"489
+[v __get_first_cluster@first_cluster first_cluster `ui  1 a 2 53 ]
+"491
+[v __get_first_cluster@offset offset `ui  1 a 2 51 ]
+"490
+[v __get_first_cluster@sector sector `ui  1 a 2 49 ]
+"487
+[v __get_first_cluster@file_number file_number `uc  1 a 1 wreg ]
+"494
+[v __get_first_cluster@file_number file_number `uc  1 a 1 55 ]
+"500
 } 0
-"197
+"472
 [v __delete_root _delete_root `(v  1 s 1 _delete_root ]
 {
-[v __delete_root@slot slot `uc  1 a 1 wreg ]
-"200
-[v __delete_root@offset offset `ui  1 a 2 43 ]
-"199
-[v __delete_root@root_sector root_sector `ui  1 a 2 41 ]
-"201
-[v __delete_root@deleted_value deleted_value `uc  1 a 1 45 ]
-"197
-[v __delete_root@slot slot `uc  1 a 1 wreg ]
-"203
-[v __delete_root@slot slot `uc  1 a 1 46 ]
-"208
+[v __delete_root@file_number file_number `uc  1 a 1 wreg ]
+"475
+[v __delete_root@offset offset `ui  1 a 2 42 ]
+"474
+[v __delete_root@sector sector `ui  1 a 2 40 ]
+"476
+[v __delete_root@deleted_value deleted_value `uc  1 a 1 44 ]
+"472
+[v __delete_root@file_number file_number `uc  1 a 1 wreg ]
+"479
+[v __delete_root@file_number file_number `uc  1 a 1 45 ]
+"485
 } 0
 "550 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 [v __parse_file_create _parse_file_create `(uc  1 s 1 _parse_file_create ]
 {
 "553
-[v __parse_file_create@file_size file_size `ul  1 a 4 82 ]
+[v __parse_file_create@file_size file_size `ul  1 a 4 87 ]
 "550
-[v __parse_file_create@data data `*.39uc  1 p 2 79 ]
+[v __parse_file_create@data data `*.39uc  1 p 2 84 ]
 "572
 } 0
-"314 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+"571 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 [v _fat_create_file fat_create_file `(uc  1 e 1 0 ]
 {
-[s S5253 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
-"317
-[v fat_create_file@root_entry root_entry `S5253  1 a 32 9 ]
-"318
-[v fat_create_file@cluster cluster `ui  1 a 2 7 ]
-"320
-[v fat_create_file@number_of_clusters number_of_clusters `ui  1 a 2 5 ]
-"321
-[v fat_create_file@cluster_count cluster_count `ui  1 a 2 2 ]
-"319
-[v fat_create_file@next_cluster next_cluster `ui  1 a 2 0 ]
-"316
-[v fat_create_file@root_slot root_slot `uc  1 a 1 4 ]
-"314
-[v fat_create_file@name name `*.39uc  1 p 2 67 ]
-[v fat_create_file@extension extension `*.39uc  1 p 2 69 ]
-[v fat_create_file@size size `ul  1 p 4 71 ]
-"394
+[s S5261 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
+"573
+[v fat_create_file@root_entry root_entry `S5261  1 a 32 5 ]
+"576
+[v fat_create_file@first_cluster first_cluster `ui  1 a 2 2 ]
+"575
+[v fat_create_file@number_of_clusters number_of_clusters `ui  1 a 2 0 ]
+"574
+[v fat_create_file@file_number file_number `uc  1 a 1 4 ]
+"571
+[v fat_create_file@name name `*.39uc  1 p 2 72 ]
+[v fat_create_file@extension extension `*.39uc  1 p 2 74 ]
+[v fat_create_file@size size `ul  1 p 4 76 ]
+"630
 } 0
 "27 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\memcpy.c
 [v _memcpy memcpy `(*.39v  1 e 2 0 ]
@@ -4207,37 +4136,19 @@ SPI_CONFIGURATION_EXTERNAL 1
 [v memcpy@n n `ui  1 p 2 5 ]
 "41
 } 0
-"135 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-[v _fat_get_empty_clusters fat_get_empty_clusters `(ui  1 e 2 0 ]
-{
-"138
-[v fat_get_empty_clusters@cluster cluster `ui  1 a 2 57 ]
-"137
-[v fat_get_empty_clusters@empty_clusters empty_clusters `ui  1 a 2 55 ]
-"141
-[v fat_get_empty_clusters@value value `ui  1 a 2 53 ]
-"140
-[v fat_get_empty_clusters@offset offset `ui  1 a 2 51 ]
-"139
-[v fat_get_empty_clusters@fat_sector fat_sector `ui  1 a 2 49 ]
-"135
-[v fat_get_empty_clusters@maximum maximum `ui  1 p 2 47 ]
-"161
-} 0
-"255
+"502 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 [v _fat_find_file fat_find_file `(uc  1 e 1 0 ]
 {
-"259
-[v fat_find_file@buffer buffer `[11]uc  1 a 11 51 ]
-[v fat_find_file@offset offset `ui  1 a 2 65 ]
-"258
-[v fat_find_file@sector sector `ui  1 a 2 63 ]
-"257
-[v fat_find_file@slot slot `uc  1 a 1 62 ]
-"255
-[v fat_find_file@name name `*.34uc  1 p 2 47 ]
-[v fat_find_file@extension extension `*.34uc  1 p 2 49 ]
-"297
+"506
+[v fat_find_file@offset offset `ui  1 a 2 52 ]
+"505
+[v fat_find_file@sector sector `ui  1 a 2 50 ]
+"504
+[v fat_find_file@file_number file_number `uc  1 a 1 49 ]
+"502
+[v fat_find_file@name name `*.34uc  1 p 2 43 ]
+[v fat_find_file@extension extension `*.34uc  1 p 2 45 ]
+"545
 } 0
 "4 C:\Program Files (x86)\Microchip\xc8\v2.00\pic\sources\c90\common\strncmp.c
 [v _strncmp strncmp `(i  1 e 2 0 ]
@@ -4247,107 +4158,183 @@ SPI_CONFIGURATION_EXTERNAL 1
 [v strncmp@len len `ui  1 p 2 4 ]
 "14
 } 0
-"94 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+"362 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+[v __get_time _get_time `(ui  1 s 2 _get_time ]
+{
+"376
+} 0
+"378
+[v __get_date _get_date `(ui  1 s 2 _get_date ]
+{
+"392
+} 0
+"428
 [v __get_available_root_entry _get_available_root_entry `(uc  1 s 1 _get_available_root_entry ]
 {
-"96
-[v __get_available_root_entry@file_number file_number `uc  1 a 1 54 ]
-"105
+"430
+[v __get_available_root_entry@file_number file_number `uc  1 a 1 53 ]
+"440
 } 0
 "587 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 [v __parse_file_append _parse_file_append `(uc  1 s 1 _parse_file_append ]
 {
-[v __parse_file_append@data data `*.39uc  1 p 2 74 ]
+[v __parse_file_append@data data `*.39uc  1 p 2 89 ]
 "599
 } 0
-"450 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+"661 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 [v _fat_append_to_file fat_append_to_file `(uc  1 e 1 0 ]
 {
 [v fat_append_to_file@file_number file_number `uc  1 a 1 wreg ]
-[s S5253 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
-"452
-[v fat_append_to_file@root root `S5253  1 a 32 19 ]
-"456
-[v fat_append_to_file@position position `ul  1 a 4 15 ]
-"453
-[v fat_append_to_file@file_size file_size `ul  1 a 4 2 ]
-"459
-[v fat_append_to_file@length length `ui  1 a 2 13 ]
-"457
-[v fat_append_to_file@offset offset `ui  1 a 2 10 ]
-"454
-[v fat_append_to_file@fat_cluster fat_cluster `ui  1 a 2 8 ]
-"455
-[v fat_append_to_file@new_cluster new_cluster `ui  1 a 2 6 ]
-"458
-[v fat_append_to_file@sector sector `ui  1 a 2 0 ]
-"450
+"663
+[v fat_append_to_file@old_file_size old_file_size `ul  1 a 4 51 ]
+"664
+[v fat_append_to_file@new_file_size new_file_size `ul  1 a 4 46 ]
+"665
+[v fat_append_to_file@return_code return_code `uc  1 a 1 50 ]
+"661
 [v fat_append_to_file@file_number file_number `uc  1 a 1 wreg ]
-[v fat_append_to_file@number_of_bytes number_of_bytes `ui  1 p 2 62 ]
-[v fat_append_to_file@data data `*.39uc  1 p 2 64 ]
-"462
-[v fat_append_to_file@file_number file_number `uc  1 a 1 12 ]
-"536
+[v fat_append_to_file@number_of_bytes number_of_bytes `ui  1 p 2 85 ]
+[v fat_append_to_file@data data `*.39uc  1 p 2 87 ]
+"668
+[v fat_append_to_file@file_number file_number `uc  1 a 1 55 ]
+"700
 } 0
-"1196
-[v _fat_get_file_information fat_get_file_information `(uc  1 e 1 0 ]
+"835
+[v _fat_resize_file fat_resize_file `(uc  1 e 1 0 ]
 {
-[v fat_get_file_information@file_number file_number `uc  1 a 1 wreg ]
-"1199
-[v fat_get_file_information@offset offset `ui  1 a 2 59 ]
-"1198
-[v fat_get_file_information@root_sector root_sector `ui  1 a 2 57 ]
-"1196
-[v fat_get_file_information@file_number file_number `uc  1 a 1 wreg ]
-[s S5253 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
-[v fat_get_file_information@data data `*.39S5253  1 p 2 54 ]
-"1201
-[v fat_get_file_information@file_number file_number `uc  1 a 1 61 ]
-"1219
+[v fat_resize_file@file_number file_number `uc  1 a 1 wreg ]
+[s S5261 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
+"837
+[v fat_resize_file@root root `S5261  1 a 32 7 ]
+"840
+[v fat_resize_file@first_cluster first_cluster `ui  1 a 2 4 ]
+"839
+[v fat_resize_file@new_number_of_clusters new_number_of_clusters `ui  1 a 2 2 ]
+"838
+[v fat_resize_file@old_number_of_clusters old_number_of_clusters `ui  1 a 2 0 ]
+"835
+[v fat_resize_file@file_number file_number `uc  1 a 1 wreg ]
+[v fat_resize_file@new_file_size new_file_size `ul  1 p 4 72 ]
+"843
+[v fat_resize_file@file_number file_number `uc  1 a 1 6 ]
+"887
 } 0
-"59
-[v __root_is_available _root_is_available `(uc  1 s 1 _root_is_available ]
-{
-[v __root_is_available@file_number file_number `uc  1 a 1 wreg ]
-"62
-[v __root_is_available@offset offset `ui  1 a 2 50 ]
-"61
-[v __root_is_available@root_sector root_sector `ui  1 a 2 48 ]
-"63
-[v __root_is_available@first_byte first_byte `uc  1 a 1 53 ]
-"59
-[v __root_is_available@file_number file_number `uc  1 a 1 wreg ]
-"67
-[v __root_is_available@file_number file_number `uc  1 a 1 52 ]
-"92
-} 0
-"187
+"459
 [v __write_root _write_root `(v  1 s 1 _write_root ]
 {
-[v __write_root@slot slot `uc  1 a 1 wreg ]
-"190
-[v __write_root@offset offset `ui  1 a 2 45 ]
-"189
-[v __write_root@root_sector root_sector `ui  1 a 2 43 ]
-"187
-[v __write_root@slot slot `uc  1 a 1 wreg ]
-[s S5253 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
-[v __write_root@data data `*.39S5253  1 p 2 40 ]
-"191
-[v __write_root@slot slot `uc  1 a 1 47 ]
-"195
+[v __write_root@file_number file_number `uc  1 a 1 wreg ]
+"462
+[v __write_root@offset offset `ui  1 a 2 44 ]
+"461
+[v __write_root@sector sector `ui  1 a 2 42 ]
+"459
+[v __write_root@file_number file_number `uc  1 a 1 wreg ]
+[s S5261 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
+[v __write_root@data data `*.39S5261  1 p 2 40 ]
+"465
+[v __write_root@file_number file_number `uc  1 a 1 46 ]
+"470
 } 0
-"163
-[v __write_fat _write_fat `(v  1 s 1 _write_fat ]
+"213
+[v __make_cluster_chain _make_cluster_chain `(ui  1 s 2 _make_cluster_chain ]
 {
-"166
-[v __write_fat@offset offset `ui  1 a 2 46 ]
-"165
-[v __write_fat@fat_sector fat_sector `ui  1 a 2 44 ]
-"163
-[v __write_fat@cluster cluster `ui  1 p 2 40 ]
-[v __write_fat@value value `ui  1 p 2 42 ]
-"172
+"220
+[v __make_cluster_chain@next_cluster next_cluster `ui  1 a 2 70 ]
+"218
+[v __make_cluster_chain@offset offset `ui  1 a 2 68 ]
+"217
+[v __make_cluster_chain@sector sector `ui  1 a 2 66 ]
+"215
+[v __make_cluster_chain@remaining_clusters remaining_clusters `ui  1 a 2 64 ]
+"221
+[v __make_cluster_chain@different_sector_cluster different_sector_cluster `ui  1 a 2 61 ]
+"219
+[v __make_cluster_chain@sector_in_buffer sector_in_buffer `ui  1 a 2 59 ]
+"216
+[v __make_cluster_chain@minimum_sector minimum_sector `ui  1 a 2 57 ]
+"222
+[v __make_cluster_chain@data_changed data_changed `uc  1 a 1 63 ]
+"213
+[v __make_cluster_chain@first_cluster first_cluster `ui  1 p 2 53 ]
+[v __make_cluster_chain@number_of_clusters number_of_clusters `ui  1 p 2 55 ]
+"359
+} 0
+"433 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
+[v _flash_sector_write flash_sector_write `(v  1 e 1 0 ]
+{
+"435
+[v flash_sector_write@match match `E6894  1 a 1 35 ]
+"433
+[v flash_sector_write@page page `ui  1 p 2 31 ]
+[v flash_sector_write@data data `*.39uc  1 p 2 33 ]
+"454
+} 0
+"123 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+[v __write_value_to_offset _write_value_to_offset `(v  1 s 1 _write_value_to_offset ]
+{
+[v __write_value_to_offset@offset offset `ui  1 p 2 0 ]
+[v __write_value_to_offset@buffer buffer `*.39uc  1 p 2 2 ]
+[v __write_value_to_offset@value value `ui  1 p 2 4 ]
+"128
+} 0
+"130
+[v __get_available_cluster _get_available_cluster `(ui  1 s 2 _get_available_cluster ]
+{
+"133
+[v __get_available_cluster@sector sector `ui  1 a 2 51 ]
+"134
+[v __get_available_cluster@offset offset `ui  1 a 2 49 ]
+"132
+[v __get_available_cluster@cluster cluster `ui  1 a 2 47 ]
+"130
+[v __get_available_cluster@first_sector first_sector `ui  1 p 2 43 ]
+[v __get_available_cluster@skip_sector skip_sector `ui  1 p 2 45 ]
+"180
+} 0
+"98
+[v __get_available_offset_from_buffer _get_available_offset_from_buffer `(ui  1 s 2 _get_available_offset_from_buffer ]
+{
+"100
+[v __get_available_offset_from_buffer@offset offset `ui  1 a 2 6 ]
+"98
+[v __get_available_offset_from_buffer@minimum_offset minimum_offset `ui  1 p 2 0 ]
+[v __get_available_offset_from_buffer@buffer buffer `*.39uc  1 p 2 2 ]
+"112
+} 0
+"89
+[v __cluster_from_sector_and_offset _cluster_from_sector_and_offset `(ui  1 s 2 _cluster_from_sector_and_offset ]
+{
+[v __cluster_from_sector_and_offset@sector sector `ui  1 p 2 0 ]
+[v __cluster_from_sector_and_offset@offset offset `ui  1 p 2 2 ]
+"96
+} 0
+"889
+[v _fat_modify_file fat_modify_file `(v  1 e 1 0 ]
+{
+[v fat_modify_file@file_number file_number `uc  1 a 1 wreg ]
+[s S5261 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
+"891
+[v fat_modify_file@root root `S5261  1 a 32 14 ]
+"893
+[v fat_modify_file@position position `ul  1 a 4 10 ]
+"896
+[v fat_modify_file@number_of_bytes number_of_bytes `ui  1 a 2 8 ]
+"894
+[v fat_modify_file@offset offset `ui  1 a 2 6 ]
+"892
+[v fat_modify_file@cluster cluster `ui  1 a 2 4 ]
+"895
+[v fat_modify_file@sector sector `ui  1 a 2 0 ]
+"897
+[v fat_modify_file@return_code return_code `uc  1 a 1 3 ]
+"889
+[v fat_modify_file@file_number file_number `uc  1 a 1 wreg ]
+[v fat_modify_file@start_byte start_byte `ul  1 p 4 65 ]
+[v fat_modify_file@length length `ui  1 p 2 69 ]
+[v fat_modify_file@data data `*.39uc  1 p 2 71 ]
+"900
+[v fat_modify_file@file_number file_number `uc  1 a 1 2 ]
+"959
 } 0
 "471 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
 [v _flash_partial_write flash_partial_write `(v  1 e 1 0 ]
@@ -4414,60 +4401,115 @@ SPI_CONFIGURATION_EXTERNAL 1
 [v __flash_compare_page_to_buffer@buffer buffer `E6890  1 p 1 21 ]
 "210
 } 0
-"53 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-[v __update_modified_time _update_modified_time `(v  1 s 1 _update_modified_time ]
+"1314 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+[v _fat_get_file_information fat_get_file_information `(uc  1 e 1 0 ]
 {
-[s S5253 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
-[v __update_modified_time@root root `*.39S5253  1 p 2 4 ]
-"57
+[v fat_get_file_information@file_number file_number `uc  1 a 1 wreg ]
+"1317
+[v fat_get_file_information@offset offset `ui  1 a 2 52 ]
+"1316
+[v fat_get_file_information@root_sector root_sector `ui  1 a 2 50 ]
+"1314
+[v fat_get_file_information@file_number file_number `uc  1 a 1 wreg ]
+[s S5261 . 32 `[8]uc 1 fileName 8 0 `[3]uc 1 fileExtension 3 8 `uc 1 attributes 1 11 `uc 1 reserved1 1 12 `uc 1 secondFractions 1 13 `ui 1 createdTime 2 14 `ui 1 createdDate 2 16 `ui 1 lastAccessDate 2 18 `ui 1 reserved2 2 20 `ui 1 modifiedTime 2 22 `ui 1 modifiedDate 2 24 `ui 1 firstCluster 2 26 `ul 1 fileSize 4 28 ]
+[v fat_get_file_information@data data `*.39S5261  1 p 2 47 ]
+"1319
+[v fat_get_file_information@file_number file_number `uc  1 a 1 54 ]
+"1341
 } 0
-"29
-[v __get_time _get_time `(ui  1 s 2 _get_time ]
+"182
+[v __find_nth_cluster _find_nth_cluster `(ui  1 s 2 _find_nth_cluster ]
 {
-"31
-[v __get_time@time time `ui  1 a 2 2 ]
-"39
+"184
+[v __find_nth_cluster@sector sector `ui  1 a 2 63 ]
+"186
+[v __find_nth_cluster@sector_in_buffer sector_in_buffer `ui  1 a 2 61 ]
+"185
+[v __find_nth_cluster@offset offset `ui  1 a 2 59 ]
+"182
+[v __find_nth_cluster@cluster cluster `ui  1 p 2 55 ]
+[v __find_nth_cluster@n n `ui  1 p 2 57 ]
+"211
 } 0
-"41
-[v __get_date _get_date `(ui  1 s 2 _get_date ]
+"419 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
+[v _flash_sector_read flash_sector_read `(v  1 e 1 0 ]
 {
-"43
-[v __get_date@date date `ui  1 a 2 2 ]
-"51
+[v flash_sector_read@page page `ui  1 p 2 39 ]
+[v flash_sector_read@data data `*.39uc  1 p 2 41 ]
+"429
 } 0
-"445
-[v __sector_from_cluster _sector_from_cluster `(ui  1 s 2 _sector_from_cluster ]
+"114 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+[v __read_value_from_offset _read_value_from_offset `(ui  1 s 2 _read_value_from_offset ]
 {
-[v __sector_from_cluster@fat_cluster fat_cluster `ui  1 p 2 0 ]
-"448
+"116
+[v __read_value_from_offset@value value `ui  1 a 2 7 ]
+"114
+[v __read_value_from_offset@offset offset `ui  1 p 2 0 ]
+[v __read_value_from_offset@buffer buffer `*.39uc  1 p 2 2 ]
+"121
 } 0
-"174
+"442
 [v __read_fat _read_fat `(ui  1 s 2 _read_fat ]
 {
-"178
+"446
 [v __read_fat@value value `ui  1 a 2 53 ]
-"177
+"445
 [v __read_fat@offset offset `ui  1 a 2 51 ]
-"176
-[v __read_fat@fat_sector fat_sector `ui  1 a 2 49 ]
-"174
+"444
+[v __read_fat@sector sector `ui  1 a 2 49 ]
+"442
 [v __read_fat@cluster cluster `ui  1 p 2 47 ]
-"185
+"457
 } 0
-"107
-[v __get_empty_cluster _get_empty_cluster `(ui  1 s 2 _get_empty_cluster ]
+"75
+[v __fat_sector_from_cluster _fat_sector_from_cluster `(ui  1 s 2 _fat_sector_from_cluster ]
 {
-"109
-[v __get_empty_cluster@cluster cluster `ui  1 a 2 55 ]
-"112
-[v __get_empty_cluster@value value `ui  1 a 2 53 ]
-"111
-[v __get_empty_cluster@offset offset `ui  1 a 2 51 ]
-"110
-[v __get_empty_cluster@fat_sector fat_sector `ui  1 a 2 49 ]
-"107
-[v __get_empty_cluster@first_cluster first_cluster `ui  1 p 2 47 ]
-"133
+[v __fat_sector_from_cluster@cluster cluster `ui  1 p 2 0 ]
+"80
+} 0
+"82
+[v __fat_offset_from_cluster _fat_offset_from_cluster `(ui  1 s 2 _fat_offset_from_cluster ]
+{
+[v __fat_offset_from_cluster@cluster cluster `ui  1 p 2 0 ]
+"87
+} 0
+"70
+[v __data_sector_from_cluster _data_sector_from_cluster `(ui  1 s 2 _data_sector_from_cluster ]
+{
+[v __data_sector_from_cluster@fat_cluster fat_cluster `ui  1 p 2 0 ]
+"73
+} 0
+"547
+[v _fat_get_file_size fat_get_file_size `(ul  1 e 4 0 ]
+{
+[v fat_get_file_size@file_number file_number `uc  1 a 1 wreg ]
+"549
+[v fat_get_file_size@file_size file_size `ul  1 a 4 61 ]
+"551
+[v fat_get_file_size@offset offset `ui  1 a 2 59 ]
+"550
+[v fat_get_file_size@sector sector `ui  1 a 2 57 ]
+"547
+[v fat_get_file_size@file_number file_number `uc  1 a 1 wreg ]
+"554
+[v fat_get_file_size@file_number file_number `uc  1 a 1 65 ]
+"569
+} 0
+"394
+[v __root_is_available _root_is_available `(uc  1 s 1 _root_is_available ]
+{
+[v __root_is_available@file_number file_number `uc  1 a 1 wreg ]
+"397
+[v __root_is_available@offset offset `ui  1 a 2 49 ]
+"396
+[v __root_is_available@root_sector root_sector `ui  1 a 2 47 ]
+"398
+[v __root_is_available@first_byte first_byte `uc  1 a 1 52 ]
+"394
+[v __root_is_available@file_number file_number `uc  1 a 1 wreg ]
+"402
+[v __root_is_available@file_number file_number `uc  1 a 1 51 ]
+"426
 } 0
 "457 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
 [v _flash_partial_read flash_partial_read `(v  1 e 1 0 ]
@@ -4538,6 +4580,30 @@ SPI_CONFIGURATION_EXTERNAL 1
 [v spi_tx_rx@data data `*.39uc  1 p 2 4 ]
 [v spi_tx_rx@data_length data_length `ui  1 p 2 6 ]
 "495
+} 0
+"52 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+[v __sector_from_file_number _sector_from_file_number `(ui  1 s 2 _sector_from_file_number ]
+{
+[v __sector_from_file_number@file_number file_number `uc  1 a 1 wreg ]
+"54
+[v __sector_from_file_number@sector sector `ui  1 a 2 3 ]
+"52
+[v __sector_from_file_number@file_number file_number `uc  1 a 1 wreg ]
+"55
+[v __sector_from_file_number@file_number file_number `uc  1 a 1 2 ]
+"59
+} 0
+"61
+[v __offset_from_file_number _offset_from_file_number `(ui  1 s 2 _offset_from_file_number ]
+{
+[v __offset_from_file_number@file_number file_number `uc  1 a 1 wreg ]
+"63
+[v __offset_from_file_number@offset offset `ui  1 a 2 3 ]
+"61
+[v __offset_from_file_number@file_number file_number `uc  1 a 1 wreg ]
+"64
+[v __offset_from_file_number@file_number file_number `uc  1 a 1 2 ]
+"68
 } 0
 "995 C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\usb_device.c
 [v _USBTransferOnePacket USBTransferOnePacket `(*.39v  1 e 2 0 ]
