@@ -24,6 +24,7 @@
  *  0x80: Get information for a specific file. Parameter: uint8_t FileNumber
  *  0x81: Find file. Parameter: char[8] FileName, char[3] FileExtention
  *  0x82: Read file. Parameters: uint8_t FileNumber, uint32_t StartByte
+ *  0x83: Read buffer. Parameters: uint16_t StartByte
  * 
  * Single byte commands
  *  0x20: Reboot
@@ -43,6 +44,9 @@
  *  0x54: Append to file. Parameters: uint8_t FileNumber, uint8_t NumberOfBytes, 0xFE4B, DATA
  *  0x55: Modify file. Parameters: uint8_t FileNumber, uint32_t StartByte, uint8_t NumerOfBytes, 0x0F9B, DATA
  *  0x56: Format drive. Parameters: none, 0xDA22
+ *  0x57: Read file sector to buffer. Parameters: uint8_t file_number, uint16_t sector, 0x1B35
+ *  0x58: Write buffer to file sector. Parameters: uint8_t file_number, uint16_t sector, 0x6A6D
+ *  0x59: Modify buffer. Parameters: uint16_t StartByte, uint8_t NumerOfBytes, 0xE230, DATA
  *  0x60: Change SPI mode. Parameters: uint8_t NewMode, 0x88E2
  *  0x61: Change SPI frequency. Parameters: uint8_t NewFrequency, 0xAEA8
  *  0x62: Change SPI polarity. Parameters: uint8_t NewPolarity, 0x0DBB
@@ -67,7 +71,8 @@ typedef enum
     DATAREQUEST_GET_ECHO = 0x20,
     DATAREQUEST_GET_FILE_DETAILS = 0x80,
     DATAREQUEST_FIND_FILE = 0x81,
-    DATAREQUEST_READ_FILE = 0x82
+    DATAREQUEST_READ_FILE = 0x82,
+    DATAREQUEST_READ_BUFFER = 0x83
 } apiDataRequest_t;
 
 typedef enum
@@ -86,7 +91,10 @@ typedef enum
     COMMAND_FILE_RENAME = 0x53,
     COMMAND_FILE_APPEND = 0x54,
     COMMAND_FILE_MODIFY = 0x55,
-    COMMAND_FORMAT_DRIVE = 0x56
+    COMMAND_FORMAT_DRIVE = 0x56,
+    COMMAND_SECTOR_TO_BUFFER = 0x57,
+    COMMAND_BUFFER_TO_SECTOR = 0x58,
+    COMMAND_WRITE_BUFFER = 0x59
 } apiCommand_t;
 
 

@@ -25,6 +25,7 @@ static void _fill_buffer_get_configuration(uint8_t *outBuffer);
 static void _fill_buffer_get_file_details(uint8_t *inBuffer, uint8_t *outBuffer);
 static void _fill_buffer_find_file(uint8_t *inBuffer, uint8_t *outBuffer);
 static void _fill_buffer_read_file(uint8_t *inBuffer, uint8_t *outBuffer);
+static void _fill_buffer_read_buffer(uint8_t *inBuffer, uint8_t *outBuffer);
 
 static void _parse_command_short(uint8_t cmd);
 static uint8_t _parse_command_long(uint8_t *data);
@@ -36,6 +37,9 @@ static uint8_t _parse_file_rename(uint8_t *data);
 static uint8_t _parse_file_append(uint8_t *data);
 static uint8_t _parse_file_modify(uint8_t *data);
 static uint8_t _parse_format_drive(uint8_t *data);
+static uint8_t _parse_sector_to_buffer(uint8_t *data);
+static uint8_t _parse_buffer_to_sector(uint8_t *data);
+static uint8_t _parse_write_buffer(uint8_t *data);
 
 static uint8_t _parse_settings_spi_mode(uint8_t *data);
 static uint8_t _parse_settings_spi_frequency(uint8_t *data);
@@ -83,6 +87,11 @@ void api_prepare(uint8_t *inBuffer, uint8_t *outBuffer)
                 _fill_buffer_read_file(inBuffer, outBuffer);
                 break;
                 
+            case DATAREQUEST_READ_BUFFER:
+                //Read file
+                _fill_buffer_read_buffer(inBuffer, outBuffer);
+                break;
+                
             default:
                 outBuffer[0] = 0x99;
                 outBuffer[1] = 0x99;
@@ -121,7 +130,7 @@ void api_prepare(uint8_t *inBuffer, uint8_t *outBuffer)
             case DATAREQUEST_GET_ECHO:
                 //Copy received data to outBuffer
                 memcpy(outBuffer, inBuffer, 64);
-                break;
+                break;                
                 
             default:
                 outBuffer[0] = 0x99;
@@ -368,8 +377,8 @@ static void _fill_buffer_find_file(uint8_t *inBuffer, uint8_t *outBuffer)
     outBuffer[0] = DATAREQUEST_FIND_FILE;
    
     //Bootloader signature
-    outBuffer[1] = BOOTLOADER_SIGNATURE >> 8; //MSB
-    outBuffer[2] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
+    outBuffer[1] = HIGH_BYTE(BOOTLOADER_SIGNATURE); //MSB
+    outBuffer[2] = LOW_BYTE(BOOTLOADER_SIGNATURE); //LSB
     
     //Find and return file number
     outBuffer[3] = fat_find_file(&inBuffer[1], &inBuffer[9]);
@@ -388,29 +397,29 @@ static void _fill_buffer_read_file(uint8_t *inBuffer, uint8_t *outBuffer)
     uint32_t data_length;
     
     //Echo command
-    outBuffer[0] = DATAREQUEST_FIND_FILE;
+    outBuffer[0] = DATAREQUEST_READ_FILE;
    
     //Bootloader signature
-    outBuffer[1] = BOOTLOADER_SIGNATURE >> 8; //MSB
-    outBuffer[2] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
+    outBuffer[1] = HIGH_BYTE(BOOTLOADER_SIGNATURE); //MSB
+    outBuffer[2] = LOW_BYTE(BOOTLOADER_SIGNATURE); //LSB
     
     //Echo file number
     outBuffer[3] = inBuffer[1];
     
     //Echo start
-    outBuffer[4] = inBuffer[1];
-    outBuffer[5] = inBuffer[2];
-    outBuffer[6] = inBuffer[3];
-    outBuffer[7] = inBuffer[4];
+    outBuffer[4] = inBuffer[2];
+    outBuffer[5] = inBuffer[3];
+    outBuffer[6] = inBuffer[4];
+    outBuffer[7] = inBuffer[5];
     
     //Calculate start
-    start = inBuffer[4];
+    start = inBuffer[2];
     start <<= 8;
     start |= inBuffer[3];
     start <<= 8;
-    start |= inBuffer[2];
+    start |= inBuffer[4];
     start <<= 8;
-    start |= inBuffer[1];
+    start |= inBuffer[5];
     
     //Get file size and calculate number of bytes to get
     file_size = fat_get_file_size(inBuffer[1]);
@@ -426,6 +435,42 @@ static void _fill_buffer_read_file(uint8_t *inBuffer, uint8_t *outBuffer)
     
     //Read data from file
     outBuffer[9] = fat_read_from_file(inBuffer[1], start, data_length, &outBuffer[10]);
+}
+
+static void _fill_buffer_read_buffer(uint8_t *inBuffer, uint8_t *outBuffer)
+{
+    uint16_t start;
+    uint16_t data_length;
+    
+    //Echo command
+    outBuffer[0] = DATAREQUEST_READ_BUFFER;
+   
+    //Bootloader signature
+    outBuffer[1] = HIGH_BYTE(BOOTLOADER_SIGNATURE); //MSB
+    outBuffer[2] = LOW_BYTE(BOOTLOADER_SIGNATURE); //LSB
+
+    //Echo start
+    outBuffer[3] = inBuffer[1];
+    outBuffer[4] = inBuffer[2];
+    
+    //Calculate start
+    start = inBuffer[1];
+    start <<= 8;
+    start |= inBuffer[2];
+    
+    //Get file size and calculate number of bytes to get
+    data_length = 512 - start;
+    if(data_length>54)
+    {
+        //More will not fit into our 64 byte buffer
+        data_length = 58;
+    }
+    
+    //Echo data length
+    outBuffer[5] = (uint8_t) data_length;
+    
+    //Read data from file
+    fat_read_from_buffer(start, data_length, &outBuffer[6]);
 }
 
 
@@ -504,6 +549,18 @@ static uint8_t _parse_command_long(uint8_t *data)
             
         case COMMAND_FORMAT_DRIVE:
             length = _parse_format_drive(data);
+            break;
+            
+        case COMMAND_SECTOR_TO_BUFFER:
+            length = _parse_sector_to_buffer(data);
+            break;
+            
+        case COMMAND_BUFFER_TO_SECTOR:
+            length = _parse_buffer_to_sector(data);
+            break;
+            
+        case COMMAND_WRITE_BUFFER:
+            length = _parse_write_buffer(data);
             break;
     }    
     
@@ -636,6 +693,75 @@ static uint8_t _parse_format_drive(uint8_t *data)
     fat_format();
     return 3;
 } 
+
+static uint8_t _parse_sector_to_buffer(uint8_t *data)
+{
+    //0x57: Read file sector to buffer. Parameters: uint8_t file_number, uint16_t sector, 0x1B35
+    uint16_t sector;
+    
+    if((data[0]!=COMMAND_SECTOR_TO_BUFFER) || (data[4]!=0x1B) || (data[5]!=0x35))
+    {
+        return 6;
+    }
+    
+    //Calculate sector
+    sector |= data[2];
+    sector <<= 8;
+    sector |= data[3];
+
+    //Read desired sector from flash into buffer 2
+    fat_copy_sector_to_buffer(data[1], sector);
+    
+    return 6;
+}
+
+static uint8_t _parse_buffer_to_sector(uint8_t *data)
+{
+    //0x58: Write buffer to file sector. Parameters: uint8_t file_number, uint16_t sector, 0x6A6D
+    uint16_t sector;
+    
+    if((data[0]!=COMMAND_BUFFER_TO_SECTOR) || (data[4]!=0x6A) || (data[5]!=0x6D))
+    {
+        return 6;
+    }
+    
+    //Calculate sector
+    sector |= data[2];
+    sector <<= 8;
+    sector |= data[3];
+
+    //Write content of buffer 2 to desired flash location
+    fat_write_sector_from_buffer(data[1], sector);
+    
+    return 6;
+}
+
+static uint8_t _parse_write_buffer(uint8_t *data)
+{
+    uint16_t start_byte;
+    uint16_t number_of_bytes;
+    
+    //0x59: Modify buffer. Parameters: uint16_t StartByte, uint8_t NumerOfBytes, 0xE230, DATA
+    if((data[0]!=COMMAND_FILE_APPEND) || (data[4]!=0xE2) || (data[5]!=0x30))
+    {
+        //Can't trust the number of bytes in this case
+        return 65;
+    }
+    
+    //Calculate sector
+    start_byte |= data[1];
+    start_byte <<= 8;
+    start_byte |= data[2];
+    
+    //Get number of bytes
+    number_of_bytes = data[3];
+    
+    //Modify content of buffer 2, i.e. write to buffer
+    fat_write_to_buffer(start_byte, number_of_bytes, &data[6]);
+    
+    //Return actual command length
+    return 6 + number_of_bytes;
+}
 
 static uint8_t _parse_settings_spi_mode(uint8_t *data)
 {

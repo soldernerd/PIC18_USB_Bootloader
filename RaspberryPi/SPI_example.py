@@ -408,25 +408,29 @@ spi_init()
 #reboot_bootloader_mode()
 #reboot_normal_mode()
 
+#format_drive()
+
 #get_file_info(1);
 #list_files()
 #delay_ms(50)
 #delete_file(1)
-#create_file('hello', 'txt', 9825)
-#rename_file(2, 'FIRMWARE', 'HEX')
+#create_file('zero', 'txt', 0)
+delay_ms(50)
+zero = find_file('zero.txt')
+#rename_file(zero, 'BETA', 'HEX')
 #append_to_file(1, 'This is just a test')
 #modify_file(1, 500, 'This is the way the world ends. not with a bang but a whimper.')
-#format_drive()
-#resize_file(1, 1625);
+resize_file(zero, 0);
 #delay_ms(500)
 
 #delay_ms(100)
-
+"""
 fw_hex = find_file('firmware.hex')
 if not fw_hex == 255:
     delete_file(fw_hex)
+"""
 
-write_file('SolarCharger_RevE.hex', 'firmware.hex')
+#write_file('SolarCharger_RevE.hex', 'firmware.hex')
 
 #list_files()
 #test_spi_communication(64,100)

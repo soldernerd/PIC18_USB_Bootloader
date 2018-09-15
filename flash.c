@@ -47,8 +47,8 @@ typedef enum
 
 typedef enum 
 { 
-    FLASH_BUFFER_1,
-    FLASH_BUFFER_2
+    FLASH_BUFFER_1, //Buffer 1 is reserved for internal use
+    FLASH_BUFFER_2  //Buffer 2 is used for external access
 } flashBuffer_t;
 
 typedef enum 
@@ -495,4 +495,24 @@ void flash_partial_write(uint16_t page, uint16_t start, uint16_t length, uint8_t
     
     //Reset configuration
     spi_set_configuration(SPI_CONFIGURATION_EXTERNAL);
+}
+
+void flash_copy_page_to_buffer(uint16_t page)
+{
+    _flash_copy_page_to_buffer(page, FLASH_BUFFER_2);
+}
+
+void flash_write_page_from_buffer(uint16_t page)
+{
+    _flash_write_page_from_buffer(page, FLASH_BUFFER_2);
+}
+
+void flash_read_from_buffer(uint16_t start, uint16_t length, uint8_t *data)
+{
+    //To be implemented
+}
+
+void flash_write_to_buffer(uint16_t start, uint16_t length, uint8_t *data)
+{
+    _flash_write_to_buffer(start, data, length, FLASH_BUFFER_2);
 }

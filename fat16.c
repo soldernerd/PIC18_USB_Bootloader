@@ -220,15 +220,6 @@ static uint16_t _make_cluster_chain(uint16_t first_cluster, uint16_t number_of_c
     uint16_t next_cluster;
     uint16_t different_sector_cluster;
     uint8_t data_changed;  
-    
-    //Return immediately if both first_cluster and number_of_clusters is zero
-    //This is the case when trying to create a new cluster chain of length zero
-    //Typically, this happens when a new file of size zero is created
-    if((first_cluster==0) && (number_of_clusters==0))
-    {
-        //Return 0x0000, indicating that there is no first cluster
-        return 0x0000;
-    }
 
     //Initialize variables
     remaining_clusters = number_of_clusters;
@@ -1338,4 +1329,90 @@ uint8_t fat_get_file_information(uint8_t file_number, rootEntry_t *data)
     
     //Indicate success
     return 0x00;
+}
+
+uint8_t fat_copy_sector_to_buffer(uint8_t file_number, uint16_t sector)
+{
+    uint32_t file_size;
+    uint16_t number_of_clusters;
+    uint16_t cluster;
+    
+    //Check if we have a valid file
+    if(_root_is_available(file_number))
+    {
+        //Return an error
+        return 0xFF;
+    }
+    
+    //Get file size
+    file_size = fat_get_file_size(file_number);
+    
+    //Check if sector is valid
+    number_of_clusters = (file_size + BYTES_PER_SECTOR - 1) >> 9;
+    if(sector > number_of_clusters)
+    {
+        //Return an error
+        return 0xFE;
+    }
+    
+    //Get the right cluster
+    cluster = _get_first_cluster(file_number);
+    cluster = _find_nth_cluster(cluster, sector);
+    
+    //Find physical sector
+    cluster = _data_sector_from_cluster(cluster);
+    
+    //Copy that sector to buffer 2
+    flash_copy_page_to_buffer(cluster);
+    
+    //Return success
+    return 0x00;
+}
+
+uint8_t fat_write_sector_from_buffer(uint8_t file_number, uint16_t sector)
+{
+    uint32_t file_size;
+    uint16_t number_of_clusters;
+    uint16_t cluster;
+    
+    //Check if we have a valid file
+    if(_root_is_available(file_number))
+    {
+        //Return an error
+        return 0xFF;
+    }
+    
+    //Get file size
+    file_size = fat_get_file_size(file_number);
+    
+    //Check if sector is valid
+    number_of_clusters = (file_size + BYTES_PER_SECTOR - 1) >> 9;
+    if(sector > number_of_clusters)
+    {
+        //Return an error
+        return 0xFE;
+    }
+    
+    //Get the right cluster
+    cluster = _get_first_cluster(file_number);
+    cluster = _find_nth_cluster(cluster, sector);
+    
+    //Find physical sector
+    cluster = _data_sector_from_cluster(cluster);
+    
+    //Write buffer to that sector
+    flash_write_page_from_buffer(cluster);
+    
+    //Return success
+    return 0x00;
+}
+
+void fat_read_from_buffer(uint16_t start, uint16_t length, uint8_t *data)
+{
+    flash_read_from_buffer(start, length, data);
+}
+
+void fat_write_to_buffer(uint16_t start, uint16_t length, uint8_t *data)
+{
+    flash_write_to_buffer(start, length, data);
 }

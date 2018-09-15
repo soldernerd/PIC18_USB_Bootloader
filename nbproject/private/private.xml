@@ -4,21 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/fat16.h</file>
-            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/display.h</file>
-            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/system.c</file>
-            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/os.h</file>
-            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/flash.h</file>
-            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/spi.h</file>
-            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/ui.h</file>
-            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/external_flash.c</file>
             <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/flash.c</file>
-            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/bootloader.c</file>
-            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/spi.c</file>
             <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/api.c</file>
             <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/fat16.c</file>
-            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/system.h</file>
-            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/display.c</file>
-            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/main.c</file>
+            <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/flash.h</file>
             <file>file:/C:/Users/luke/OneDrive/EmbeddedSystems/MPLAB/USB_Bootloader/api.h</file>
         </group>
     </open-files>

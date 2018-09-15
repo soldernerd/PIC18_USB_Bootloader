@@ -103,14 +103,17 @@ uint32_t fat_get_file_size(uint8_t file_number);
 uint8_t fat_create_file(char *name, char *extension, uint32_t size);
 void fat_delete_file(uint8_t file_number);
 uint8_t fat_resize_file(uint8_t file_number, uint32_t new_file_size);
-//uint16_t fat_get_empty_clusters(uint16_t maximum);
 void fat_modify_file(uint8_t file_number, uint32_t start_byte, uint16_t length, uint8_t *data);
 uint8_t fat_append_to_file(uint8_t file_number, uint16_t number_of_bytes, uint8_t *data);
 void fat_rename_file(uint8_t file_number, char *name, char *extension);
 uint8_t fat_read_from_file(uint8_t file_number, uint32_t start_byte, uint32_t length, uint8_t *data);
 uint8_t fat_read_from_file_fast(uint32_t start_byte, uint32_t length, uint8_t *data, uint16_t *cluster, uint16_t *cluster_number);
 
-
+//Read or write access via FLASH_BUFFER_2
+uint8_t fat_copy_sector_to_buffer(uint8_t file_number, uint16_t sector);
+uint8_t fat_write_sector_from_buffer(uint8_t file_number, uint16_t sector);
+void fat_read_from_buffer(uint16_t start, uint16_t length, uint8_t *data);
+void fat_write_to_buffer(uint16_t start, uint16_t length, uint8_t *data);
 
 #endif	/* FAT16_H */
 

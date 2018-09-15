@@ -3,9 +3,9 @@
   <executable name="dist/default/production\USB_Bootloader.production.hex">
     <memory name="program">
       <units>bytes</units>
-      <length>36864</length>
-      <used>36344</used>
-      <free>520</free>
+      <length>40960</length>
+      <used>37570</used>
+      <free>3390</free>
     </memory>
     <memory name="data">
       <units>bytes</units>

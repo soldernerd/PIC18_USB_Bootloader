@@ -44,5 +44,11 @@ void flash_sector_write(uint16_t page, uint8_t *data);
 void flash_partial_read(uint16_t page, uint16_t start, uint16_t length, uint8_t *data);
 void flash_partial_write(uint16_t page, uint16_t start, uint16_t length, uint8_t *data);
 
+//Read or write access via FLASH_BUFFER_2
+void flash_copy_page_to_buffer(uint16_t page);
+void flash_write_page_from_buffer(uint16_t page);
+void flash_read_from_buffer(uint16_t start, uint16_t length, uint8_t *data);
+void flash_write_to_buffer(uint16_t start, uint16_t length, uint8_t *data);
+
 #endif	/* FLASH_H */
 
