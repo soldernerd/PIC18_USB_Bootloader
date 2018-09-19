@@ -99,7 +99,7 @@ static uint16_t _get_available_offset_from_buffer(uint16_t minimum_offset, uint8
 {
     uint16_t offset;
 
-    for(offset = minimum_offset; offset<CLUSTERS_PER_FAT_SECTOR; offset += 2)
+    for(offset = minimum_offset; offset<BYTES_PER_SECTOR; offset += 2)
     {
         if((buffer[offset] == 0x00) && (buffer[offset + 1] == 0x00))
         {
@@ -114,7 +114,7 @@ static uint16_t _get_available_offset_from_buffer(uint16_t minimum_offset, uint8
 static uint16_t _read_value_from_offset(uint16_t offset, uint8_t *buffer)
 {
     uint16_t value;
-    value = buffer[offset + 1];
+    value = buffer[offset+1];
     value <<= 8;
     value |= buffer[offset];
     return value;
@@ -134,7 +134,7 @@ static uint16_t _get_available_cluster(uint16_t first_sector, uint16_t skip_sect
     uint16_t offset;
 
     //Loop through FAT sectors
-    for (sector = first_sector; sector <= FAT_LAST_SECTOR; ++sector)
+    for (sector=first_sector; sector<=FAT_LAST_SECTOR; ++sector)
     {
         //Skip a specific sector
         if(sector == skip_sector)
@@ -216,12 +216,14 @@ static uint16_t _make_cluster_chain(uint16_t first_cluster, uint16_t number_of_c
     uint16_t minimum_sector;
     uint16_t sector;
     uint16_t offset;
+    uint16_t next_offset;
     uint16_t sector_in_buffer;
     uint16_t next_cluster;
     uint16_t different_sector_cluster;
     uint8_t data_changed;  
 
     //Initialize variables
+    sector_in_buffer = 0;
     remaining_clusters = number_of_clusters;
     minimum_sector = FAT_FIRST_SECTOR;
     data_changed = 0;
@@ -239,8 +241,21 @@ static uint16_t _make_cluster_chain(uint16_t first_cluster, uint16_t number_of_c
     }
     next_cluster = first_cluster;
 
-    while ((remaining_clusters > 0) || next_cluster < 0xFFF0)
+    //Continue while we need more clusters or as long as an existing cluster chain continues
+    while ((remaining_clusters > 0) || ((next_cluster>=FAT_MINIMUM_VALUE) && (next_cluster<=FAT_MAXIMUM_VALUE)))
     {
+        
+//        if(remaining_clusters==0)
+//        {
+//            ++cntr;
+//            //flash_sector_write(sector_in_buffer, buffer);
+//            if(cntr>100)
+//            {
+//                return first_cluster;
+//            }
+//            
+//        }
+        
         sector = _fat_sector_from_cluster(next_cluster);
         offset = _fat_offset_from_cluster(next_cluster);
 
@@ -272,11 +287,19 @@ static uint16_t _make_cluster_chain(uint16_t first_cluster, uint16_t number_of_c
             next_cluster = _read_value_from_offset(offset, buffer);
 
             //Is the current buffer already pointing to the next one?
-            if((next_cluster < DATA_FIRST_SECTOR) || (next_cluster > DATA_LAST_SECTOR))
+            if((next_cluster < FAT_MINIMUM_VALUE) || (next_cluster > FAT_MAXIMUM_VALUE))
             {
                 //Find a new cluster
-                next_cluster = _get_available_offset_from_buffer(offset, buffer);
-                if(next_cluster == 0x0000)
+                next_offset = _get_available_offset_from_buffer(offset+2, buffer);
+                
+                if(next_offset != 0xFFFF) //We found a cluster on this FAT sector
+                {
+                    //Calculate cluster value from offset
+                    next_cluster = sector_in_buffer - FAT_FIRST_SECTOR;
+                    next_cluster <<= 8;
+                    next_cluster |= (next_offset>>1);
+                }
+                else //We need to use a cluster located on a different FAT sector
                 {
                     if(different_sector_cluster == 0x0000)
                     {
@@ -862,8 +885,6 @@ uint8_t fat_resize_file(uint8_t file_number, uint32_t new_file_size)
         }
         
         //Update root
-        //If the previous file size was 0, this is necessary.
-        //Otherwise it doesn't hurt
         root.firstCluster = first_cluster;
     }
     
