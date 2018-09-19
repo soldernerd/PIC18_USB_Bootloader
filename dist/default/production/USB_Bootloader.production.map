@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files (x86)\Microchip\xc8\v2.00\pic\dat\en_msgs.txt \
   -cs -h+dist/default/production\USB_Bootloader.production.sym \
   --cmf=dist/default/production\USB_Bootloader.production.cmf -z -Q18F47J53 \
-  -oC:\Users\luke\AppData\Local\Temp\s1q8o.2 --defsym=__MPLAB_BUILD=1 \
+  -oC:\Users\luke\AppData\Local\Temp\s1spc.2 --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/USB_Bootloader.production.map -E1 -ver=XC8 \
   -ASTACK=0D8Dh-0eafh -pstack=STACK -ACODE=00h-09FFFh -ACONST=00h-09FFFh \
   -ASMALLCONST=0F00h-0FFFhx145 -AMEDIUMCONST=0F00h-09FFFh -ACOMRAM=01h-05Fh \
@@ -25,7 +25,7 @@ Linker command line:
   -pfarbss=FARRAM,fardata=FARRAM,nvFARRAM=FARRAM \
   -pintsave_regs=BIGRAM,bigbss=BIGRAM,bigdata=BIGRAM -pbss=RAM \
   -pidata=CODE,irdata=CODE,ibigdata=CODE,ifardata=CODE -prparam=COMRAM \
-  C:\Users\luke\AppData\Local\Temp\s1q8o.o \
+  C:\Users\luke\AppData\Local\Temp\s1spc.o \
   dist/default/production\USB_Bootloader.production.o 
 
 Object code version is 3.11
@@ -38,7 +38,7 @@ Call graph: (short form)
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\luke\AppData\Local\Temp\s1q8o.o
+C:\Users\luke\AppData\Local\Temp\s1spc.o
                 init                                 1C       1C        4        C       0
                 reset_vec                             0        0        4        0       0
                 config                            1FFF8    1FFF8        8    1FFF8       0
@@ -3724,7 +3724,7 @@ Total ram usage:        5 bytes
 
  *************** function _fat_init *****************
  Defined at:
-		line 1319 in file "fat16.c"
+		line 1317 in file "fat16.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -3755,7 +3755,7 @@ Total ram usage:        0 bytes
 
  *************** function _fat_get_format_status *****************
  Defined at:
-		line 1231 in file "fat16.c"
+		line 1229 in file "fat16.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -6560,7 +6560,7 @@ Total ram usage:       10 bytes
 
  *************** function _fat_read_from_buffer *****************
  Defined at:
-		line 1433 in file "fat16.c"
+		line 1431 in file "fat16.c"
  Parameters:    Size  Location     Type
   start           2    6[COMRAM] unsigned int 
   length          2    8[COMRAM] unsigned int 
@@ -8460,7 +8460,7 @@ Total ram usage:        7 bytes
 
  *************** function _fat_write_to_buffer *****************
  Defined at:
-		line 1438 in file "fat16.c"
+		line 1436 in file "fat16.c"
  Parameters:    Size  Location     Type
   start           2   36[COMRAM] unsigned int 
   length          2   38[COMRAM] unsigned int 
@@ -8557,7 +8557,7 @@ Total ram usage:        5 bytes
 
  *************** function _fat_copy_sector_to_buffer *****************
  Defined at:
-		line 1357 in file "fat16.c"
+		line 1355 in file "fat16.c"
  Parameters:    Size  Location     Type
   file_number     1    wreg     unsigned char 
   sector          2   66[COMRAM] unsigned int 
@@ -8657,7 +8657,7 @@ Total ram usage:        3 bytes
 
  *************** function _fat_format *****************
  Defined at:
-		line 1259 in file "fat16.c"
+		line 1257 in file "fat16.c"
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -8693,7 +8693,7 @@ Total ram usage:        2 bytes
 
  *************** function __get_root *****************
  Defined at:
-		line 1149 in file "fat16.c"
+		line 1147 in file "fat16.c"
  Parameters:    Size  Location     Type
   idx             2    0[COMRAM] unsigned int 
  Auto vars:     Size  Location     Type
@@ -8722,7 +8722,7 @@ Total ram usage:        6 bytes
 
  *************** function __get_mbr *****************
  Defined at:
-		line 976 in file "fat16.c"
+		line 974 in file "fat16.c"
  Parameters:    Size  Location     Type
   idx             2    0[COMRAM] unsigned int 
  Auto vars:     Size  Location     Type
@@ -8752,7 +8752,7 @@ Total ram usage:        4 bytes
 
  *************** function __get_fbr *****************
  Defined at:
-		line 1021 in file "fat16.c"
+		line 1019 in file "fat16.c"
  Parameters:    Size  Location     Type
   idx             2    0[COMRAM] unsigned int 
  Auto vars:     Size  Location     Type
@@ -8782,7 +8782,7 @@ Total ram usage:        4 bytes
 
  *************** function __get_fat *****************
  Defined at:
-		line 1126 in file "fat16.c"
+		line 1124 in file "fat16.c"
  Parameters:    Size  Location     Type
   idx             2    0[COMRAM] unsigned int 
  Auto vars:     Size  Location     Type
@@ -8811,7 +8811,7 @@ Total ram usage:        4 bytes
 
  *************** function __get_data *****************
  Defined at:
-		line 1222 in file "fat16.c"
+		line 1220 in file "fat16.c"
  Parameters:    Size  Location     Type
   idx             2    0[COMRAM] unsigned int 
  Auto vars:     Size  Location     Type
@@ -9715,7 +9715,7 @@ Total ram usage:        4 bytes
 
  *************** function _fat_modify_file *****************
  Defined at:
-		line 903 in file "fat16.c"
+		line 901 in file "fat16.c"
  Parameters:    Size  Location     Type
   file_number     1    wreg     unsigned char 
   start_byte      4   65[COMRAM] unsigned long 
@@ -9944,7 +9944,7 @@ Total ram usage:       12 bytes
 
  *************** function _fat_get_file_information *****************
  Defined at:
-		line 1328 in file "fat16.c"
+		line 1326 in file "fat16.c"
  Parameters:    Size  Location     Type
   file_number     1    wreg     unsigned char 
   data            2   47[COMRAM] PTR struct .
@@ -10018,7 +10018,7 @@ Total ram usage:        5 bytes
 
  *************** function _fat_write_sector_from_buffer *****************
  Defined at:
-		line 1395 in file "fat16.c"
+		line 1393 in file "fat16.c"
  Parameters:    Size  Location     Type
   file_number     1    wreg     unsigned char 
   sector          2   66[COMRAM] unsigned int 

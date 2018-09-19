@@ -1,7 +1,7 @@
 
 
 Microchip Technology PIC18 LITE Macro Assembler V2.00 build -1524193055 
-                                                                                               Wed Sep 19 23:14:07 2018
+                                                                                               Wed Sep 19 23:31:33 2018
 
 Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 20180527130849
      1                           	processor	18F47J53
@@ -6101,7 +6101,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
   5983                           
   5984 ;; *************** function _fat_init *****************
   5985 ;; Defined at:
-  5986 ;;		line 1319 in file "fat16.c"
+  5986 ;;		line 1317 in file "fat16.c"
   5987 ;; Parameters:    Size  Location     Type
   5988 ;;		None
   5989 ;; Auto vars:     Size  Location     Type
@@ -6141,7 +6141,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
   6018  008E96                     _fat_init:
   6019                           	opt stack 23
   6020                           
-  6021                           ;fat16.c: 1322: if(fat_get_format_status()==DRIVE_NOT_FORMATED)
+  6021                           ;fat16.c: 1320: if(fat_get_format_status()==DRIVE_NOT_FORMATED)
   6022                           
   6023                           ;incstack = 0
   6024  008E96  ECEA  F033         	call	_fat_get_format_status	;wreg free
@@ -6149,7 +6149,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
   6026  008E9C  A4D8               	btfss	status,2,c
   6027  008E9E  0012               	return	
   6028                           
-  6029                           ;fat16.c: 1323: {;fat16.c: 1324: fat_format();
+  6029                           ;fat16.c: 1321: {;fat16.c: 1322: fat_format();
   6030  008EA0  EC81  F014         	call	_fat_format	;wreg free
   6031  008EA4  0012               	return	
   6032  008EA6                     __end_of_fat_init:
@@ -6171,7 +6171,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
   6048                           
   6049 ;; *************** function _fat_get_format_status *****************
   6050 ;; Defined at:
-  6051 ;;		line 1231 in file "fat16.c"
+  6051 ;;		line 1229 in file "fat16.c"
   6052 ;; Parameters:    Size  Location     Type
   6053 ;;		None
   6054 ;; Auto vars:     Size  Location     Type
@@ -6212,7 +6212,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
   6084  0067D4                     _fat_get_format_status:
   6085                           	opt stack 23
   6086                           
-  6087                           ;fat16.c: 1233: uint16_t cntr;;fat16.c: 1236: flash_sector_read(0, buffer);
+  6087                           ;fat16.c: 1231: uint16_t cntr;;fat16.c: 1234: flash_sector_read(0, buffer);
   6088                           
   6089                           ;incstack = 0
   6090  0067D4  0E00               	movlw	0
@@ -6225,7 +6225,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
   6097  0067E2  6E2B               	movwf	flash_sector_read@data+1,c
   6098  0067E4  EC3F  F044         	call	_flash_sector_read	;wreg free
   6099                           
-  6100                           ;fat16.c: 1237: for(cntr=0; cntr<512; ++cntr)
+  6100                           ;fat16.c: 1235: for(cntr=0; cntr<512; ++cntr)
   6101  0067E8  0E00               	movlw	0
   6102  0067EA  6E2F               	movwf	fat_get_format_status@cntr+1,c
   6103  0067EC  0E00               	movlw	0
@@ -6236,7 +6236,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
   6108  0067F4  B0D8               	btfsc	status,0,c
   6109  0067F6  D016               	goto	u11290
   6110                           
-  6111                           ;fat16.c: 1238: {;fat16.c: 1239: if(buffer[cntr] != _get_mbr(cntr))
+  6111                           ;fat16.c: 1236: {;fat16.c: 1237: if(buffer[cntr] != _get_mbr(cntr))
   6112  0067F8  0EC0               	movlw	low _buffer
   6113  0067FA  242E               	addwf	fat_get_format_status@cntr,w,c
   6114  0067FC  6ED9               	movwf	fsr2l,c
@@ -6252,7 +6252,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
   6124  006816  B4D8               	btfsc	status,2,c
   6125  006818  D002               	goto	l2244
   6126                           
-  6127                           ;fat16.c: 1240: {;fat16.c: 1241: return DRIVE_NOT_FORMATED;
+  6127                           ;fat16.c: 1238: {;fat16.c: 1239: return DRIVE_NOT_FORMATED;
   6128  00681A  0E00               	movlw	0
   6129  00681C  0012               	return	
   6130  00681E                     l2244:
@@ -6261,7 +6261,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
   6133  006822  D7E6               	goto	l14239
   6134  006824                     u11290:
   6135                           
-  6136                           ;fat16.c: 1242: };fat16.c: 1243: };fat16.c: 1246: flash_sector_read(1, buffer);
+  6136                           ;fat16.c: 1240: };fat16.c: 1241: };fat16.c: 1244: flash_sector_read(1, buffer);
   6137  006824  0E00               	movlw	0
   6138  006826  6E29               	movwf	flash_sector_read@page+1,c
   6139  006828  0E01               	movlw	1
@@ -6272,7 +6272,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
   6144  006832  6E2B               	movwf	flash_sector_read@data+1,c
   6145  006834  EC3F  F044         	call	_flash_sector_read	;wreg free
   6146                           
-  6147                           ;fat16.c: 1247: for(cntr=0; cntr<512; ++cntr)
+  6147                           ;fat16.c: 1245: for(cntr=0; cntr<512; ++cntr)
   6148  006838  0E00               	movlw	0
   6149  00683A  6E2F               	movwf	fat_get_format_status@cntr+1,c
   6150  00683C  0E00               	movlw	0
@@ -6283,7 +6283,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
   6155  006844  B0D8               	btfsc	status,0,c
   6156  006846  D016               	goto	u11320
   6157                           
-  6158                           ;fat16.c: 1248: {;fat16.c: 1249: if(buffer[cntr] != _get_fbr(cntr))
+  6158                           ;fat16.c: 1246: {;fat16.c: 1247: if(buffer[cntr] != _get_fbr(cntr))
   6159  006848  0EC0               	movlw	low _buffer
   6160  00684A  242E               	addwf	fat_get_format_status@cntr,w,c
   6161  00684C  6ED9               	movwf	fsr2l,c
@@ -6299,7 +6299,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
   6171  006866  B4D8               	btfsc	status,2,c
   6172  006868  D002               	goto	l2248
   6173                           
-  6174                           ;fat16.c: 1250: {;fat16.c: 1251: return DRIVE_NOT_FORMATED;
+  6174                           ;fat16.c: 1248: {;fat16.c: 1249: return DRIVE_NOT_FORMATED;
   6175  00686A  0E00               	movlw	0
   6176  00686C  0012               	return	
   6177  00686E                     l2248:
@@ -6308,7 +6308,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
   6180  006872  D7E6               	goto	l14257
   6181  006874                     u11320:
   6182                           
-  6183                           ;fat16.c: 1252: };fat16.c: 1253: };fat16.c: 1256: return DRIVE_FORMATED;
+  6183                           ;fat16.c: 1250: };fat16.c: 1251: };fat16.c: 1254: return DRIVE_FORMATED;
   6184  006874  0E01               	movlw	1
   6185  006876  0012               	return	
   6186  006878                     __end_of_fat_get_format_status:
@@ -24494,7 +24494,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  23702                           
  23703 ;; *************** function _fat_read_from_buffer *****************
  23704 ;; Defined at:
- 23705 ;;		line 1433 in file "fat16.c"
+ 23705 ;;		line 1431 in file "fat16.c"
  23706 ;; Parameters:    Size  Location     Type
  23707 ;;  start           2    6[COMRAM] unsigned int 
  23708 ;;  length          2    8[COMRAM] unsigned int 
@@ -24536,7 +24536,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  23739  008CBA                     _fat_read_from_buffer:
  23740                           	opt stack 27
  23741                           
- 23742                           ;fat16.c: 1435: flash_read_from_buffer(start, length, data);
+ 23742                           ;fat16.c: 1433: flash_read_from_buffer(start, length, data);
  23743                           
  23744                           ;incstack = 0
  23745  008CBA  C007  F001         	movff	fat_read_from_buffer@start,flash_read_from_buffer@start
@@ -24754,13 +24754,13 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  23947  00559E  0E03               	movlw	3
  23948  0055A0  6EDF               	movwf	indf2,c
  23949                           
- 23950                           ;api.c: 217: outBuffer[6] = 0x01;
+ 23950                           ;api.c: 217: outBuffer[6] = 0x02;
  23951  0055A2  EE20 F006          	lfsr	2,6
  23952  0055A6  5015               	movf	__fill_buffer_get_status@outBuffer,w,c
  23953  0055A8  26D9               	addwf	fsr2l,f,c
  23954  0055AA  5016               	movf	__fill_buffer_get_status@outBuffer+1,w,c
  23955  0055AC  22DA               	addwfc	fsr2h,f,c
- 23956  0055AE  0E01               	movlw	1
+ 23956  0055AE  0E02               	movlw	2
  23957  0055B0  6EDF               	movwf	indf2,c
  23958                           
  23959                           ;api.c: 220: outBuffer[7] = ui_get_status();
@@ -28440,8 +28440,8 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  27495  002C1C  6EDF               	movwf	indf2,c
  27496  002C1E  2A25               	incf	__display_start@cntr,f,c
  27497                           
- 27498                           ;display.c: 364: cntr += _display_itoa_u32(0x01, &display_content[1][cntr]);
- 27499  002C20  0E01               	movlw	1
+ 27498                           ;display.c: 364: cntr += _display_itoa_u32(0x02, &display_content[1][cntr]);
+ 27499  002C20  0E02               	movlw	2
  27500  002C22  6E1F               	movwf	__display_itoa_u32@value,c
  27501  002C24  0E00               	movlw	0
  27502  002C26  6E20               	movwf	__display_itoa_u32@value+1,c
@@ -34104,7 +34104,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  32991                           
  32992 ;; *************** function _fat_write_to_buffer *****************
  32993 ;; Defined at:
- 32994 ;;		line 1438 in file "fat16.c"
+ 32994 ;;		line 1436 in file "fat16.c"
  32995 ;; Parameters:    Size  Location     Type
  32996 ;;  start           2   36[COMRAM] unsigned int 
  32997 ;;  length          2   38[COMRAM] unsigned int 
@@ -34146,7 +34146,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33028  008CD8                     _fat_write_to_buffer:
  33029                           	opt stack 22
  33030                           
- 33031                           ;fat16.c: 1440: flash_write_to_buffer(start, length, data);
+ 33031                           ;fat16.c: 1438: flash_write_to_buffer(start, length, data);
  33032                           
  33033                           ;incstack = 0
  33034  008CD8  C025  F01F         	movff	fat_write_to_buffer@start,flash_write_to_buffer@start
@@ -34433,7 +34433,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33304                           
  33305 ;; *************** function _fat_copy_sector_to_buffer *****************
  33306 ;; Defined at:
- 33307 ;;		line 1357 in file "fat16.c"
+ 33307 ;;		line 1355 in file "fat16.c"
  33308 ;; Parameters:    Size  Location     Type
  33309 ;;  file_number     1    wreg     unsigned char 
  33310 ;;  sector          2   66[COMRAM] unsigned int 
@@ -34485,17 +34485,17 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33351                           ;fat_copy_sector_to_buffer@file_number stored from wreg
  33352  0063D2  6E4F               	movwf	fat_copy_sector_to_buffer@file_number,c
  33353                           
- 33354                           ;fat16.c: 1359: uint32_t file_size;;fat16.c: 1360: uint16_t number_of_clusters;;fat16.c:
-      +                           1361: uint16_t cluster;;fat16.c: 1364: if(_root_is_available(file_number))
+ 33354                           ;fat16.c: 1357: uint32_t file_size;;fat16.c: 1358: uint16_t number_of_clusters;;fat16.c:
+      +                           1359: uint16_t cluster;;fat16.c: 1362: if(_root_is_available(file_number))
  33355  0063D4  504F               	movf	fat_copy_sector_to_buffer@file_number,w,c
  33356  0063D6  ECA7  F03D         	call	__root_is_available
  33357  0063DA  0900               	iorlw	0
  33358  0063DC  A4D8               	btfss	status,2,c
  33359  0063DE  0012               	return	
  33360                           
- 33361                           ;fat16.c: 1368: };fat16.c: 1371: file_size = fat_get_file_size(file_number);
+ 33361                           ;fat16.c: 1366: };fat16.c: 1369: file_size = fat_get_file_size(file_number);
  33362                           
- 33363                           ;fat16.c: 1365: {;fat16.c: 1367: return 0xFF;;	Return value of _fat_copy_sector_to_buffe
+ 33363                           ;fat16.c: 1363: {;fat16.c: 1365: return 0xFF;;	Return value of _fat_copy_sector_to_buffe
       +                          r is never used
  33364  0063E0  504F               	movf	fat_copy_sector_to_buffer@file_number,w,c
  33365  0063E2  EC0F  F03C         	call	_fat_get_file_size
@@ -34504,7 +34504,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33368  0063EE  C038  F04B         	movff	?_fat_get_file_size+2,fat_copy_sector_to_buffer@file_size+2
  33369  0063F2  C039  F04C         	movff	?_fat_get_file_size+3,fat_copy_sector_to_buffer@file_size+3
  33370                           
- 33371                           ;fat16.c: 1374: number_of_clusters = (file_size + 512 - 1) >> 9;
+ 33371                           ;fat16.c: 1372: number_of_clusters = (file_size + 512 - 1) >> 9;
  33372  0063F6  0EFF               	movlw	255
  33373  0063F8  2449               	addwf	fat_copy_sector_to_buffer@file_size,w,c
  33374  0063FA  6E45               	movwf	??_fat_copy_sector_to_buffer& (0+255),c
@@ -34531,7 +34531,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33395  006420  C045  F04D         	movff	??_fat_copy_sector_to_buffer,fat_copy_sector_to_buffer@number_of_clusters
  33396  006424  C046  F04E         	movff	??_fat_copy_sector_to_buffer+1,fat_copy_sector_to_buffer@number_of_clusters+1
  33397                           
- 33398                           ;fat16.c: 1375: if(sector > number_of_clusters)
+ 33398                           ;fat16.c: 1373: if(sector > number_of_clusters)
  33399  006428  5043               	movf	fat_copy_sector_to_buffer@sector,w,c
  33400  00642A  5C4D               	subwf	fat_copy_sector_to_buffer@number_of_clusters,w,c
  33401  00642C  5044               	movf	fat_copy_sector_to_buffer@sector+1,w,c
@@ -34539,16 +34539,16 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33403  006430  A0D8               	btfss	status,0,c
  33404  006432  0012               	return	
  33405                           
- 33406                           ;fat16.c: 1379: };fat16.c: 1382: cluster = _get_first_cluster(file_number);
+ 33406                           ;fat16.c: 1377: };fat16.c: 1380: cluster = _get_first_cluster(file_number);
  33407                           
- 33408                           ;fat16.c: 1376: {;fat16.c: 1378: return 0xFE;;	Return value of _fat_copy_sector_to_buffe
+ 33408                           ;fat16.c: 1374: {;fat16.c: 1376: return 0xFE;;	Return value of _fat_copy_sector_to_buffe
       +                          r is never used
  33409  006434  504F               	movf	fat_copy_sector_to_buffer@file_number,w,c
  33410  006436  EC3B  F041         	call	__get_first_cluster
  33411  00643A  C030  F050         	movff	?__get_first_cluster,fat_copy_sector_to_buffer@cluster
  33412  00643E  C031  F051         	movff	?__get_first_cluster+1,fat_copy_sector_to_buffer@cluster+1
  33413                           
- 33414                           ;fat16.c: 1383: cluster = _find_nth_cluster(cluster, sector);
+ 33414                           ;fat16.c: 1381: cluster = _find_nth_cluster(cluster, sector);
  33415  006442  C050  F038         	movff	fat_copy_sector_to_buffer@cluster,__find_nth_cluster@cluster
  33416  006446  C051  F039         	movff	fat_copy_sector_to_buffer@cluster+1,__find_nth_cluster@cluster+1
  33417  00644A  C043  F03A         	movff	fat_copy_sector_to_buffer@sector,__find_nth_cluster@n
@@ -34557,14 +34557,14 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33420  006456  C038  F050         	movff	?__find_nth_cluster,fat_copy_sector_to_buffer@cluster
  33421  00645A  C039  F051         	movff	?__find_nth_cluster+1,fat_copy_sector_to_buffer@cluster+1
  33422                           
- 33423                           ;fat16.c: 1386: cluster = _data_sector_from_cluster(cluster);
+ 33423                           ;fat16.c: 1384: cluster = _data_sector_from_cluster(cluster);
  33424  00645E  C050  F001         	movff	fat_copy_sector_to_buffer@cluster,__data_sector_from_cluster@fat_cluster
  33425  006462  C051  F002         	movff	fat_copy_sector_to_buffer@cluster+1,__data_sector_from_cluster@fat_cluster+1
  33426  006466  EC62  F047         	call	__data_sector_from_cluster	;wreg free
  33427  00646A  C001  F050         	movff	?__data_sector_from_cluster,fat_copy_sector_to_buffer@cluster
  33428  00646E  C002  F051         	movff	?__data_sector_from_cluster+1,fat_copy_sector_to_buffer@cluster+1
  33429                           
- 33430                           ;fat16.c: 1389: flash_copy_page_to_buffer(cluster);
+ 33430                           ;fat16.c: 1387: flash_copy_page_to_buffer(cluster);
  33431  006472  C050  F01E         	movff	fat_copy_sector_to_buffer@cluster,flash_copy_page_to_buffer@page
  33432  006476  C051  F01F         	movff	fat_copy_sector_to_buffer@cluster+1,flash_copy_page_to_buffer@page+1
  33433  00647A  EC29  F047         	call	_flash_copy_page_to_buffer	;wreg free
@@ -34802,7 +34802,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33655                           
  33656 ;; *************** function _fat_format *****************
  33657 ;; Defined at:
- 33658 ;;		line 1259 in file "fat16.c"
+ 33658 ;;		line 1257 in file "fat16.c"
  33659 ;; Parameters:    Size  Location     Type
  33660 ;;		None
  33661 ;; Auto vars:     Size  Location     Type
@@ -34847,7 +34847,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33695  002902                     _fat_format:
  33696                           	opt stack 23
  33697                           
- 33698                           ;fat16.c: 1261: uint16_t cntr;;fat16.c: 1264: for(cntr=0; cntr<512; ++cntr)
+ 33698                           ;fat16.c: 1259: uint16_t cntr;;fat16.c: 1262: for(cntr=0; cntr<512; ++cntr)
  33699                           
  33700                           ;incstack = 0
  33701  002902  0E00               	movlw	0
@@ -34860,7 +34860,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33708  00290E  B0D8               	btfsc	status,0,c
  33709  002910  D010               	goto	u10230
  33710                           
- 33711                           ;fat16.c: 1265: {;fat16.c: 1266: buffer[cntr] = _get_mbr(cntr);
+ 33711                           ;fat16.c: 1263: {;fat16.c: 1264: buffer[cntr] = _get_mbr(cntr);
  33712  002912  0EC0               	movlw	low _buffer
  33713  002914  2425               	addwf	fat_format@cntr,w,c
  33714  002916  6ED9               	movwf	fsr2l,c
@@ -34876,7 +34876,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33724  002930  D7EC               	goto	l13361
  33725  002932                     u10230:
  33726                           
- 33727                           ;fat16.c: 1267: };fat16.c: 1268: flash_sector_write(0, buffer);
+ 33727                           ;fat16.c: 1265: };fat16.c: 1266: flash_sector_write(0, buffer);
  33728  002932  0E00               	movlw	0
  33729  002934  6E21               	movwf	flash_sector_write@page+1,c
  33730  002936  0E00               	movlw	0
@@ -34887,7 +34887,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33735  002940  6E23               	movwf	flash_sector_write@data+1,c
  33736  002942  ECEE  F03F         	call	_flash_sector_write	;wreg free
  33737                           
- 33738                           ;fat16.c: 1271: for(cntr=0; cntr<512; ++cntr)
+ 33738                           ;fat16.c: 1269: for(cntr=0; cntr<512; ++cntr)
  33739  002946  0E00               	movlw	0
  33740  002948  6E26               	movwf	fat_format@cntr+1,c
  33741  00294A  0E00               	movlw	0
@@ -34898,7 +34898,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33746  002952  B0D8               	btfsc	status,0,c
  33747  002954  D010               	goto	u10250
  33748                           
- 33749                           ;fat16.c: 1272: {;fat16.c: 1273: buffer[cntr] = _get_fbr(cntr);
+ 33749                           ;fat16.c: 1270: {;fat16.c: 1271: buffer[cntr] = _get_fbr(cntr);
  33750  002956  0EC0               	movlw	low _buffer
  33751  002958  2425               	addwf	fat_format@cntr,w,c
  33752  00295A  6ED9               	movwf	fsr2l,c
@@ -34914,7 +34914,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33762  002974  D7EC               	goto	l13375
  33763  002976                     u10250:
  33764                           
- 33765                           ;fat16.c: 1274: };fat16.c: 1275: flash_sector_write(1, buffer);
+ 33765                           ;fat16.c: 1272: };fat16.c: 1273: flash_sector_write(1, buffer);
  33766  002976  0E00               	movlw	0
  33767  002978  6E21               	movwf	flash_sector_write@page+1,c
  33768  00297A  0E01               	movlw	1
@@ -34925,7 +34925,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33773  002984  6E23               	movwf	flash_sector_write@data+1,c
  33774  002986  ECEE  F03F         	call	_flash_sector_write	;wreg free
  33775                           
- 33776                           ;fat16.c: 1278: for(cntr=0; cntr<512; ++cntr)
+ 33776                           ;fat16.c: 1276: for(cntr=0; cntr<512; ++cntr)
  33777  00298A  0E00               	movlw	0
  33778  00298C  6E26               	movwf	fat_format@cntr+1,c
  33779  00298E  0E00               	movlw	0
@@ -34936,7 +34936,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33784  002996  B0D8               	btfsc	status,0,c
  33785  002998  D010               	goto	u10270
  33786                           
- 33787                           ;fat16.c: 1279: {;fat16.c: 1280: buffer[cntr] = _get_fat(cntr);
+ 33787                           ;fat16.c: 1277: {;fat16.c: 1278: buffer[cntr] = _get_fat(cntr);
  33788  00299A  0EC0               	movlw	low _buffer
  33789  00299C  2425               	addwf	fat_format@cntr,w,c
  33790  00299E  6ED9               	movwf	fsr2l,c
@@ -34952,7 +34952,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33800  0029B8  D7EC               	goto	l13389
  33801  0029BA                     u10270:
  33802                           
- 33803                           ;fat16.c: 1281: };fat16.c: 1282: flash_sector_write(2, buffer);
+ 33803                           ;fat16.c: 1279: };fat16.c: 1280: flash_sector_write(2, buffer);
  33804  0029BA  0E00               	movlw	0
  33805  0029BC  6E21               	movwf	flash_sector_write@page+1,c
  33806  0029BE  0E02               	movlw	2
@@ -34963,7 +34963,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33811  0029C8  6E23               	movwf	flash_sector_write@data+1,c
  33812  0029CA  ECEE  F03F         	call	_flash_sector_write	;wreg free
  33813                           
- 33814                           ;fat16.c: 1285: for(cntr=0; cntr<512; ++cntr)
+ 33814                           ;fat16.c: 1283: for(cntr=0; cntr<512; ++cntr)
  33815  0029CE  0E00               	movlw	0
  33816  0029D0  6E26               	movwf	fat_format@cntr+1,c
  33817  0029D2  0E00               	movlw	0
@@ -34974,7 +34974,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33822  0029DA  B0D8               	btfsc	status,0,c
  33823  0029DC  D00B               	goto	u10290
  33824                           
- 33825                           ;fat16.c: 1286: {;fat16.c: 1287: buffer[cntr] = 0x00;
+ 33825                           ;fat16.c: 1284: {;fat16.c: 1285: buffer[cntr] = 0x00;
  33826  0029DE  0EC0               	movlw	low _buffer
  33827  0029E0  2425               	addwf	fat_format@cntr,w,c
  33828  0029E2  6ED9               	movwf	fsr2l,c
@@ -34988,7 +34988,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33836  0029F2  D7F1               	goto	l13403
  33837  0029F4                     u10290:
  33838                           
- 33839                           ;fat16.c: 1288: };fat16.c: 1289: for(cntr=2+1; cntr<=33; ++cntr)
+ 33839                           ;fat16.c: 1286: };fat16.c: 1287: for(cntr=2+1; cntr<=33; ++cntr)
  33840  0029F4  0E00               	movlw	0
  33841  0029F6  6E26               	movwf	fat_format@cntr+1,c
  33842  0029F8  0E03               	movlw	3
@@ -35001,7 +35001,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33849  002A04  B0D8               	btfsc	status,0,c
  33850  002A06  D00D               	goto	u10310
  33851                           
- 33852                           ;fat16.c: 1290: {;fat16.c: 1291: flash_sector_write(cntr, buffer);
+ 33852                           ;fat16.c: 1288: {;fat16.c: 1289: flash_sector_write(cntr, buffer);
  33853  002A08  C025  F020         	movff	fat_format@cntr,flash_sector_write@page
  33854  002A0C  C026  F021         	movff	fat_format@cntr+1,flash_sector_write@page+1
  33855  002A10  0EC0               	movlw	low _buffer
@@ -35015,7 +35015,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33863  002A22                     u10310:
  33864  002A22                     l13425:
  33865                           
- 33866                           ;fat16.c: 1292: };fat16.c: 1295: for(cntr=0; cntr<512; ++cntr)
+ 33866                           ;fat16.c: 1290: };fat16.c: 1293: for(cntr=0; cntr<512; ++cntr)
  33867  002A22  0E00               	movlw	0
  33868  002A24  6E26               	movwf	fat_format@cntr+1,c
  33869  002A26  0E00               	movlw	0
@@ -35026,7 +35026,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33874  002A2E  B0D8               	btfsc	status,0,c
  33875  002A30  D010               	goto	u10330
  33876                           
- 33877                           ;fat16.c: 1296: {;fat16.c: 1297: buffer[cntr] = _get_root(cntr);
+ 33877                           ;fat16.c: 1294: {;fat16.c: 1295: buffer[cntr] = _get_root(cntr);
  33878  002A32  0EC0               	movlw	low _buffer
  33879  002A34  2425               	addwf	fat_format@cntr,w,c
  33880  002A36  6ED9               	movwf	fsr2l,c
@@ -35042,7 +35042,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33890  002A50  D7EC               	goto	l13427
  33891  002A52                     u10330:
  33892                           
- 33893                           ;fat16.c: 1298: };fat16.c: 1299: flash_sector_write(34, buffer);
+ 33893                           ;fat16.c: 1296: };fat16.c: 1297: flash_sector_write(34, buffer);
  33894  002A52  0E00               	movlw	0
  33895  002A54  6E21               	movwf	flash_sector_write@page+1,c
  33896  002A56  0E22               	movlw	34
@@ -35053,7 +35053,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33901  002A60  6E23               	movwf	flash_sector_write@data+1,c
  33902  002A62  ECEE  F03F         	call	_flash_sector_write	;wreg free
  33903                           
- 33904                           ;fat16.c: 1302: for(cntr=0; cntr<512; ++cntr)
+ 33904                           ;fat16.c: 1300: for(cntr=0; cntr<512; ++cntr)
  33905  002A66  0E00               	movlw	0
  33906  002A68  6E26               	movwf	fat_format@cntr+1,c
  33907  002A6A  0E00               	movlw	0
@@ -35064,7 +35064,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33912  002A72  B0D8               	btfsc	status,0,c
  33913  002A74  D00B               	goto	u10350
  33914                           
- 33915                           ;fat16.c: 1303: {;fat16.c: 1304: buffer[cntr] = 0x00;
+ 33915                           ;fat16.c: 1301: {;fat16.c: 1302: buffer[cntr] = 0x00;
  33916  002A76  0EC0               	movlw	low _buffer
  33917  002A78  2425               	addwf	fat_format@cntr,w,c
  33918  002A7A  6ED9               	movwf	fsr2l,c
@@ -35078,7 +35078,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33926  002A8A  D7F1               	goto	l13441
  33927  002A8C                     u10350:
  33928                           
- 33929                           ;fat16.c: 1305: };fat16.c: 1306: for(cntr=34+1; cntr<=37; ++cntr)
+ 33929                           ;fat16.c: 1303: };fat16.c: 1304: for(cntr=34+1; cntr<=37; ++cntr)
  33930  002A8C  0E00               	movlw	0
  33931  002A8E  6E26               	movwf	fat_format@cntr+1,c
  33932  002A90  0E23               	movlw	35
@@ -35091,7 +35091,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33939  002A9C  B0D8               	btfsc	status,0,c
  33940  002A9E  D00D               	goto	u10370
  33941                           
- 33942                           ;fat16.c: 1307: {;fat16.c: 1308: flash_sector_write(cntr, buffer);
+ 33942                           ;fat16.c: 1305: {;fat16.c: 1306: flash_sector_write(cntr, buffer);
  33943  002AA0  C025  F020         	movff	fat_format@cntr,flash_sector_write@page
  33944  002AA4  C026  F021         	movff	fat_format@cntr+1,flash_sector_write@page+1
  33945  002AA8  0EC0               	movlw	low _buffer
@@ -35105,7 +35105,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33953  002ABA                     u10370:
  33954  002ABA                     l13463:
  33955                           
- 33956                           ;fat16.c: 1309: };fat16.c: 1312: for(cntr=0; cntr<512; ++cntr)
+ 33956                           ;fat16.c: 1307: };fat16.c: 1310: for(cntr=0; cntr<512; ++cntr)
  33957  002ABA  0E00               	movlw	0
  33958  002ABC  6E26               	movwf	fat_format@cntr+1,c
  33959  002ABE  0E00               	movlw	0
@@ -35116,7 +35116,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33964  002AC6  B0D8               	btfsc	status,0,c
  33965  002AC8  D010               	goto	u10390
  33966                           
- 33967                           ;fat16.c: 1313: {;fat16.c: 1314: buffer[cntr] = _get_data(cntr);
+ 33967                           ;fat16.c: 1311: {;fat16.c: 1312: buffer[cntr] = _get_data(cntr);
  33968  002ACA  0EC0               	movlw	low _buffer
  33969  002ACC  2425               	addwf	fat_format@cntr,w,c
  33970  002ACE  6ED9               	movwf	fsr2l,c
@@ -35132,7 +35132,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  33980  002AE8  D7EC               	goto	l13465
  33981  002AEA                     u10390:
  33982                           
- 33983                           ;fat16.c: 1315: };fat16.c: 1316: flash_sector_write(38, buffer);
+ 33983                           ;fat16.c: 1313: };fat16.c: 1314: flash_sector_write(38, buffer);
  33984  002AEA  0E00               	movlw	0
  33985  002AEC  6E21               	movwf	flash_sector_write@page+1,c
  33986  002AEE  0E26               	movlw	38
@@ -35178,7 +35178,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34026                           
  34027 ;; *************** function __get_root *****************
  34028 ;; Defined at:
- 34029 ;;		line 1149 in file "fat16.c"
+ 34029 ;;		line 1147 in file "fat16.c"
  34030 ;; Parameters:    Size  Location     Type
  34031 ;;  idx             2    0[COMRAM] unsigned int 
  34032 ;; Auto vars:     Size  Location     Type
@@ -35216,7 +35216,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34059  00346C                     __get_root:
  34060                           	opt stack 27
  34061                           
- 34062                           ;fat16.c: 1151: if(idx < 0x20)
+ 34062                           ;fat16.c: 1149: if(idx < 0x20)
  34063                           
  34064                           ;incstack = 0
  34065  00346C  5002               	movf	__get_root@idx+1,w,c
@@ -35226,7 +35226,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34069  003474  B0D8               	btfsc	status,0,c
  34070  003476  D019               	goto	l2209
  34071                           
- 34072                           ;fat16.c: 1152: {;fat16.c: 1153: if(idx < 11)
+ 34072                           ;fat16.c: 1150: {;fat16.c: 1151: if(idx < 11)
  34073  003478  5002               	movf	__get_root@idx+1,w,c
  34074  00347A  E110               	bnz	l12641
  34075  00347C  0E0B               	movlw	11
@@ -35234,7 +35234,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34077  003480  B0D8               	btfsc	status,0,c
  34078  003482  D00C               	goto	l2207
  34079                           
- 34080                           ;fat16.c: 1154: {;fat16.c: 1155: return "SolarChargr"[idx];
+ 34080                           ;fat16.c: 1152: {;fat16.c: 1153: return "SolarChargr"[idx];
  34081  003484  0EDD               	movlw	low STR_9
  34082  003486  2401               	addwf	__get_root@idx,w,c
  34083  003488  6EF6               	movwf	tblptrl,c
@@ -35252,20 +35252,20 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34095  00349C                     l2207:
  34096  00349C                     l12641:
  34097                           
- 34098                           ;fat16.c: 1156: };fat16.c: 1157: if(idx==11)
+ 34098                           ;fat16.c: 1154: };fat16.c: 1155: if(idx==11)
  34099  00349C  0E0B               	movlw	11
  34100  00349E  1801               	xorwf	__get_root@idx,w,c
  34101  0034A0  1002               	iorwf	__get_root@idx+1,w,c
  34102  0034A2  A4D8               	btfss	status,2,c
  34103  0034A4  D002               	goto	l2209
  34104                           
- 34105                           ;fat16.c: 1158: {;fat16.c: 1159: return 0x08;
+ 34105                           ;fat16.c: 1156: {;fat16.c: 1157: return 0x08;
  34106  0034A6  0E08               	movlw	8
  34107  0034A8  0012               	return	
  34108  0034AA                     l2209:
  34109  0034AA                     l12647:
  34110                           
- 34111                           ;fat16.c: 1160: };fat16.c: 1161: };fat16.c: 1162: if(idx < 0x40)
+ 34111                           ;fat16.c: 1158: };fat16.c: 1159: };fat16.c: 1160: if(idx < 0x40)
  34112  0034AA  5002               	movf	__get_root@idx+1,w,c
  34113  0034AC  E103               	bnz	u9381
  34114  0034AE  0E40               	movlw	64
@@ -35274,13 +35274,13 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34117  0034B4                     u9381:
  34118  0034B4  D0A4               	goto	l2235
  34119                           
- 34120                           ;fat16.c: 1163: {;fat16.c: 1164: idx -= 0x20;
+ 34120                           ;fat16.c: 1161: {;fat16.c: 1162: idx -= 0x20;
  34121  0034B6  0E20               	movlw	32
  34122  0034B8  5E01               	subwf	__get_root@idx,f,c
  34123  0034BA  0E00               	movlw	0
  34124  0034BC  5A02               	subwfb	__get_root@idx+1,f,c
  34125                           
- 34126                           ;fat16.c: 1165: if(idx < 0+8)
+ 34126                           ;fat16.c: 1163: if(idx < 0+8)
  34127  0034BE  5002               	movf	__get_root@idx+1,w,c
  34128  0034C0  E110               	bnz	l12655
  34129  0034C2  0E08               	movlw	8
@@ -35288,7 +35288,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34131  0034C6  B0D8               	btfsc	status,0,c
  34132  0034C8  D00C               	goto	l2211
  34133                           
- 34134                           ;fat16.c: 1166: {;fat16.c: 1167: return "FILE    "[idx];
+ 34134                           ;fat16.c: 1164: {;fat16.c: 1165: return "FILE    "[idx];
  34135  0034CA  0EE9               	movlw	low STR_10
  34136  0034CC  2401               	addwf	__get_root@idx,w,c
  34137  0034CE  6EF6               	movwf	tblptrl,c
@@ -35306,7 +35306,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34149  0034E2                     l2211:
  34150  0034E2                     l12655:
  34151                           
- 34152                           ;fat16.c: 1168: };fat16.c: 1169: if(idx < 11)
+ 34152                           ;fat16.c: 1166: };fat16.c: 1167: if(idx < 11)
  34153  0034E2  5002               	movf	__get_root@idx+1,w,c
  34154  0034E4  E146               	bnz	l12747
  34155  0034E6  0E0B               	movlw	11
@@ -35314,7 +35314,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34157  0034EA  B0D8               	btfsc	status,0,c
  34158  0034EC  D042               	goto	l2213
  34159                           
- 34160                           ;fat16.c: 1170: {;fat16.c: 1171: return "TXT"[idx-8];
+ 34160                           ;fat16.c: 1168: {;fat16.c: 1169: return "TXT"[idx-8];
  34161  0034EE  0EF8               	movlw	248
  34162  0034F0  6E03               	movwf	??__get_root& (0+255),c
  34163  0034F2  0EFF               	movlw	255
@@ -35340,91 +35340,91 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34183  00351A  50F5               	movf	tablat,w,c
  34184  00351C  0012               	return	
  34185  00351E                     
- 34186                           ;fat16.c: 1176: return 0x20;
+ 34186                           ;fat16.c: 1174: return 0x20;
  34187  00351E  0E20               	movlw	32
  34188  003520  0012               	return	
  34189  003522                     
- 34190                           ;fat16.c: 1178: return 0x06;
+ 34190                           ;fat16.c: 1176: return 0x06;
  34191  003522  0E06               	movlw	6
  34192  003524  0012               	return	
  34193  003526                     
- 34194                           ;fat16.c: 1180: return 0x28;
+ 34194                           ;fat16.c: 1178: return 0x28;
  34195  003526  0E28               	movlw	40
  34196  003528  0012               	return	
  34197  00352A                     
- 34198                           ;fat16.c: 1182: return 0x78;
+ 34198                           ;fat16.c: 1180: return 0x78;
  34199  00352A  0E78               	movlw	120
  34200  00352C  0012               	return	
  34201  00352E                     
- 34202                           ;fat16.c: 1184: return 0xDE;
+ 34202                           ;fat16.c: 1182: return 0xDE;
  34203  00352E  0EDE               	movlw	222
  34204  003530  0012               	return	
  34205  003532                     
- 34206                           ;fat16.c: 1186: return 0x38;
+ 34206                           ;fat16.c: 1184: return 0x38;
  34207  003532  0E38               	movlw	56
  34208  003534  0012               	return	
  34209  003536                     
- 34210                           ;fat16.c: 1188: return 0x5F;
+ 34210                           ;fat16.c: 1186: return 0x5F;
  34211  003536  0E5F               	movlw	95
  34212  003538  0012               	return	
  34213  00353A                     
- 34214                           ;fat16.c: 1190: return 0x4B;
+ 34214                           ;fat16.c: 1188: return 0x4B;
  34215  00353A  0E4B               	movlw	75
  34216  00353C  0012               	return	
  34217  00353E                     
- 34218                           ;fat16.c: 1192: return 0x00;
+ 34218                           ;fat16.c: 1190: return 0x00;
  34219  00353E  0E00               	movlw	0
  34220  003540  0012               	return	
  34221  003542                     
- 34222                           ;fat16.c: 1194: return 0x00;
+ 34222                           ;fat16.c: 1192: return 0x00;
  34223  003542  0E00               	movlw	0
  34224  003544  0012               	return	
  34225  003546                     
- 34226                           ;fat16.c: 1196: return 0x04;
+ 34226                           ;fat16.c: 1194: return 0x04;
  34227  003546  0E04               	movlw	4
  34228  003548  0012               	return	
  34229  00354A                     
- 34230                           ;fat16.c: 1198: return 0x77;
+ 34230                           ;fat16.c: 1196: return 0x77;
  34231  00354A  0E77               	movlw	119
  34232  00354C  0012               	return	
  34233  00354E                     
- 34234                           ;fat16.c: 1200: return 0xDE;
+ 34234                           ;fat16.c: 1198: return 0xDE;
  34235  00354E  0EDE               	movlw	222
  34236  003550  0012               	return	
  34237  003552                     
- 34238                           ;fat16.c: 1202: return 0x38;
+ 34238                           ;fat16.c: 1200: return 0x38;
  34239  003552  0E38               	movlw	56
  34240  003554  0012               	return	
  34241  003556                     
- 34242                           ;fat16.c: 1204: return ((unsigned char)((((uint16_t)2))&0xFF));
+ 34242                           ;fat16.c: 1202: return ((unsigned char)((((uint16_t)2))&0xFF));
  34243  003556  0E02               	movlw	2
  34244  003558  0012               	return	
  34245  00355A                     
- 34246                           ;fat16.c: 1206: return ((unsigned char)(((((uint16_t)2))>>8)&0xFF));
+ 34246                           ;fat16.c: 1204: return ((unsigned char)(((((uint16_t)2))>>8)&0xFF));
  34247  00355A  0E00               	movlw	0
  34248  00355C  0012               	return	
  34249  00355E                     
- 34250                           ;fat16.c: 1208: return ((unsigned char)((((unsigned short)((((uint32_t)12))&0xFFFF)))&0x
+ 34250                           ;fat16.c: 1206: return ((unsigned char)((((unsigned short)((((uint32_t)12))&0xFFFF)))&0x
       +                          FF));
  34251  00355E  0E0C               	movlw	12
  34252  003560  0012               	return	
  34253  003562                     
- 34254                           ;fat16.c: 1210: return ((unsigned char)(((((unsigned short)((((uint32_t)12))&0xFFFF)))>>
+ 34254                           ;fat16.c: 1208: return ((unsigned char)(((((unsigned short)((((uint32_t)12))&0xFFFF)))>>
       +                          8)&0xFF));
  34255  003562  0E00               	movlw	0
  34256  003564  0012               	return	
  34257  003566                     
- 34258                           ;fat16.c: 1212: return ((unsigned char)((((unsigned short)(((((uint32_t)12))>>16)&0xFFFF
+ 34258                           ;fat16.c: 1210: return ((unsigned char)((((unsigned short)(((((uint32_t)12))>>16)&0xFFFF
       +                          )))&0xFF));
  34259  003566  0E00               	movlw	0
  34260  003568  0012               	return	
  34261  00356A                     
- 34262                           ;fat16.c: 1214: return ((unsigned char)(((((unsigned short)(((((uint32_t)12))>>16)&0xFFF
+ 34262                           ;fat16.c: 1212: return ((unsigned char)(((((unsigned short)(((((uint32_t)12))>>16)&0xFFF
       +                          F)))>>8)&0xFF));
  34263  00356A  0E00               	movlw	0
  34264  00356C  0012               	return	
  34265  00356E                     
- 34266                           ;fat16.c: 1216: return 0x00;
+ 34266                           ;fat16.c: 1214: return 0x00;
  34267  00356E  0E00               	movlw	0
  34268  003570  0012               	return	
  34269  003572                     l2213:
@@ -35515,7 +35515,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34353  0035FC  D7B8               	goto	l2234
  34354  0035FE                     l2235:
  34355                           
- 34356                           ;fat16.c: 1218: };fat16.c: 1219: return 0X00;
+ 34356                           ;fat16.c: 1216: };fat16.c: 1217: return 0X00;
  34357  0035FE  0E00               	movlw	0
  34358  003600  0012               	return	
  34359  003602                     __end_of__get_root:
@@ -35553,7 +35553,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34391                           
  34392 ;; *************** function __get_mbr *****************
  34393 ;; Defined at:
- 34394 ;;		line 976 in file "fat16.c"
+ 34394 ;;		line 974 in file "fat16.c"
  34395 ;; Parameters:    Size  Location     Type
  34396 ;;  idx             2    0[COMRAM] unsigned int 
  34397 ;; Auto vars:     Size  Location     Type
@@ -35592,95 +35592,95 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34425  005CFA                     __get_mbr:
  34426                           	opt stack 27
  34427                           
- 34428                           ;fat16.c: 978: switch (idx)
+ 34428                           ;fat16.c: 976: switch (idx)
  34429                           
  34430                           ;incstack = 0
  34431  005CFA  D026               	goto	l2116
  34432  005CFC                     
- 34433                           ;fat16.c: 981: return 0x80;
+ 34433                           ;fat16.c: 979: return 0x80;
  34434  005CFC  0E80               	movlw	128
  34435  005CFE  0012               	return	
  34436  005D00                     
- 34437                           ;fat16.c: 983: return 0;
+ 34437                           ;fat16.c: 981: return 0;
  34438  005D00  0E00               	movlw	0
  34439  005D02  0012               	return	
  34440  005D04                     
- 34441                           ;fat16.c: 985: return 2;
+ 34441                           ;fat16.c: 983: return 2;
  34442  005D04  0E02               	movlw	2
  34443  005D06  0012               	return	
  34444  005D08                     
- 34445                           ;fat16.c: 987: return 0;
+ 34445                           ;fat16.c: 985: return 0;
  34446  005D08  0E00               	movlw	0
  34447  005D0A  0012               	return	
  34448  005D0C                     
- 34449                           ;fat16.c: 989: return 0x04;
+ 34449                           ;fat16.c: 987: return 0x04;
  34450  005D0C  0E04               	movlw	4
  34451  005D0E  0012               	return	
  34452  005D10                     
- 34453                           ;fat16.c: 991: return 2;
+ 34453                           ;fat16.c: 989: return 2;
  34454  005D10  0E02               	movlw	2
  34455  005D12  0012               	return	
  34456  005D14                     
- 34457                           ;fat16.c: 993: return 3;
+ 34457                           ;fat16.c: 991: return 3;
  34458  005D14  0E03               	movlw	3
  34459  005D16  0012               	return	
  34460  005D18                     
- 34461                           ;fat16.c: 995: return 8;
+ 34461                           ;fat16.c: 993: return 8;
  34462  005D18  0E08               	movlw	8
  34463  005D1A  0012               	return	
  34464  005D1C                     
- 34465                           ;fat16.c: 997: return ((unsigned char)((((unsigned short)((((uint32_t)1))&0xFFFF)))&0xFF
+ 34465                           ;fat16.c: 995: return ((unsigned char)((((unsigned short)((((uint32_t)1))&0xFFFF)))&0xFF
       +                          ));
  34466  005D1C  0E01               	movlw	1
  34467  005D1E  0012               	return	
  34468  005D20                     
- 34469                           ;fat16.c: 999: return ((unsigned char)(((((unsigned short)((((uint32_t)1))&0xFFFF)))>>8)
+ 34469                           ;fat16.c: 997: return ((unsigned char)(((((unsigned short)((((uint32_t)1))&0xFFFF)))>>8)
       +                          &0xFF));
  34470  005D20  0E00               	movlw	0
  34471  005D22  0012               	return	
  34472  005D24                     
- 34473                           ;fat16.c: 1001: return ((unsigned char)((((unsigned short)(((((uint32_t)1))>>16)&0xFFFF)
-      +                          ))&0xFF));
+ 34473                           ;fat16.c: 999: return ((unsigned char)((((unsigned short)(((((uint32_t)1))>>16)&0xFFFF))
+      +                          )&0xFF));
  34474  005D24  0E00               	movlw	0
  34475  005D26  0012               	return	
  34476  005D28                     
- 34477                           ;fat16.c: 1003: return ((unsigned char)(((((unsigned short)(((((uint32_t)1))>>16)&0xFFFF
+ 34477                           ;fat16.c: 1001: return ((unsigned char)(((((unsigned short)(((((uint32_t)1))>>16)&0xFFFF
       +                          )))>>8)&0xFF));
  34478  005D28  0E00               	movlw	0
  34479  005D2A  0012               	return	
  34480  005D2C                     
- 34481                           ;fat16.c: 1005: return ((unsigned char)((((unsigned short)((((uint32_t)8191))&0xFFFF)))&
+ 34481                           ;fat16.c: 1003: return ((unsigned char)((((unsigned short)((((uint32_t)8191))&0xFFFF)))&
       +                          0xFF));
  34482  005D2C  0EFF               	movlw	255
  34483  005D2E  0012               	return	
  34484  005D30                     
- 34485                           ;fat16.c: 1007: return ((unsigned char)(((((unsigned short)((((uint32_t)8191))&0xFFFF)))
+ 34485                           ;fat16.c: 1005: return ((unsigned char)(((((unsigned short)((((uint32_t)8191))&0xFFFF)))
       +                          >>8)&0xFF));
  34486  005D30  0E1F               	movlw	31
  34487  005D32  0012               	return	
  34488  005D34                     
- 34489                           ;fat16.c: 1009: return ((unsigned char)((((unsigned short)(((((uint32_t)8191))>>16)&0xFF
+ 34489                           ;fat16.c: 1007: return ((unsigned char)((((unsigned short)(((((uint32_t)8191))>>16)&0xFF
       +                          FF)))&0xFF));
  34490  005D34  0E00               	movlw	0
  34491  005D36  0012               	return	
  34492  005D38                     
- 34493                           ;fat16.c: 1011: return ((unsigned char)(((((unsigned short)(((((uint32_t)8191))>>16)&0xF
+ 34493                           ;fat16.c: 1009: return ((unsigned char)(((((unsigned short)(((((uint32_t)8191))>>16)&0xF
       +                          FFF)))>>8)&0xFF));
  34494  005D38  0E00               	movlw	0
  34495  005D3A  0012               	return	
  34496  005D3C                     
- 34497                           ;fat16.c: 1013: return ((unsigned char)((((uint16_t)0X55AA)>>8)&0xFF));
+ 34497                           ;fat16.c: 1011: return ((unsigned char)((((uint16_t)0X55AA)>>8)&0xFF));
  34498  005D3C  0E55               	movlw	85
  34499  005D3E  0012               	return	
  34500  005D40                     
- 34501                           ;fat16.c: 1015: return ((unsigned char)(((uint16_t)0X55AA)&0xFF));
+ 34501                           ;fat16.c: 1013: return ((unsigned char)(((uint16_t)0X55AA)&0xFF));
  34502  005D40  0EAA               	movlw	170
  34503  005D42  0012               	return	
  34504  005D44                     
- 34505                           ;fat16.c: 1017: return 0X00;
+ 34505                           ;fat16.c: 1015: return 0X00;
  34506  005D44  0E00               	movlw	0
  34507                           
- 34508                           ;fat16.c: 1018: }
+ 34508                           ;fat16.c: 1016: }
  34509  005D46  0012               	return	
  34510  005D48                     l2116:
  34511  005D48  C001  F003         	movff	__get_mbr@idx,??__get_mbr
@@ -35796,7 +35796,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34620                           
  34621 ;; *************** function __get_fbr *****************
  34622 ;; Defined at:
- 34623 ;;		line 1021 in file "fat16.c"
+ 34623 ;;		line 1019 in file "fat16.c"
  34624 ;; Parameters:    Size  Location     Type
  34625 ;;  idx             2    0[COMRAM] unsigned int 
  34626 ;; Auto vars:     Size  Location     Type
@@ -35835,24 +35835,24 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34654  001DCC                     __get_fbr:
  34655                           	opt stack 27
  34656                           
- 34657                           ;fat16.c: 1023: switch (idx)
+ 34657                           ;fat16.c: 1021: switch (idx)
  34658                           
  34659                           ;incstack = 0
  34660  001DCC  D091               	goto	l2140
  34661  001DCE                     
- 34662                           ;fat16.c: 1026: return 0xEB;
+ 34662                           ;fat16.c: 1024: return 0xEB;
  34663  001DCE  0EEB               	movlw	235
  34664  001DD0  0012               	return	
  34665  001DD2                     
- 34666                           ;fat16.c: 1028: return 0x3C;
+ 34666                           ;fat16.c: 1026: return 0x3C;
  34667  001DD2  0E3C               	movlw	60
  34668  001DD4  0012               	return	
  34669  001DD6                     
- 34670                           ;fat16.c: 1030: return 0x90;
+ 34670                           ;fat16.c: 1028: return 0x90;
  34671  001DD6  0E90               	movlw	144
  34672  001DD8  0012               	return	
  34673  001DDA                     
- 34674                           ;fat16.c: 1032: return "MSDOS5.0"[0];
+ 34674                           ;fat16.c: 1030: return "MSDOS5.0"[0];
  34675  001DDA  0EF2               	movlw	low STR_1
  34676  001DDC  6EF6               	movwf	tblptrl,c
  34677  001DDE                     	if	1	;There is more than 1 active tblptr byte
@@ -35867,7 +35867,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34686  001DE8  50F5               	movf	tablat,w,c
  34687  001DEA  0012               	return	
  34688  001DEC                     
- 34689                           ;fat16.c: 1034: return "MSDOS5.0"[1];
+ 34689                           ;fat16.c: 1032: return "MSDOS5.0"[1];
  34690  001DEC  0EF3               	movlw	low (STR_1+1)
  34691  001DEE  6EF6               	movwf	tblptrl,c
  34692  001DF0  0E9F               	movlw	high (STR_1+1)
@@ -35881,7 +35881,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34700  001DF8  50F5               	movf	tablat,w,c
  34701  001DFA  0012               	return	
  34702  001DFC                     
- 34703                           ;fat16.c: 1036: return "MSDOS5.0"[2];
+ 34703                           ;fat16.c: 1034: return "MSDOS5.0"[2];
  34704  001DFC  0EF4               	movlw	low (STR_1+2)
  34705  001DFE  6EF6               	movwf	tblptrl,c
  34706  001E00  0E9F               	movlw	high (STR_1+2)
@@ -35895,7 +35895,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34714  001E08  50F5               	movf	tablat,w,c
  34715  001E0A  0012               	return	
  34716  001E0C                     
- 34717                           ;fat16.c: 1038: return "MSDOS5.0"[3];
+ 34717                           ;fat16.c: 1036: return "MSDOS5.0"[3];
  34718  001E0C  0EF5               	movlw	low (STR_1+3)
  34719  001E0E  6EF6               	movwf	tblptrl,c
  34720  001E10  0E9F               	movlw	high (STR_1+3)
@@ -35909,7 +35909,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34728  001E18  50F5               	movf	tablat,w,c
  34729  001E1A  0012               	return	
  34730  001E1C                     
- 34731                           ;fat16.c: 1040: return "MSDOS5.0"[4];
+ 34731                           ;fat16.c: 1038: return "MSDOS5.0"[4];
  34732  001E1C  0EF6               	movlw	low (STR_1+4)
  34733  001E1E  6EF6               	movwf	tblptrl,c
  34734  001E20  0E9F               	movlw	high (STR_1+4)
@@ -35923,7 +35923,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34742  001E28  50F5               	movf	tablat,w,c
  34743  001E2A  0012               	return	
  34744  001E2C                     
- 34745                           ;fat16.c: 1042: return "MSDOS5.0"[5];
+ 34745                           ;fat16.c: 1040: return "MSDOS5.0"[5];
  34746  001E2C  0EF7               	movlw	low (STR_1+5)
  34747  001E2E  6EF6               	movwf	tblptrl,c
  34748  001E30  0E9F               	movlw	high (STR_1+5)
@@ -35937,7 +35937,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34756  001E38  50F5               	movf	tablat,w,c
  34757  001E3A  0012               	return	
  34758  001E3C                     
- 34759                           ;fat16.c: 1044: return "MSDOS5.0"[6];
+ 34759                           ;fat16.c: 1042: return "MSDOS5.0"[6];
  34760  001E3C  0EF8               	movlw	low (STR_1+6)
  34761  001E3E  6EF6               	movwf	tblptrl,c
  34762  001E40  0E9F               	movlw	high (STR_1+6)
@@ -35951,7 +35951,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34770  001E48  50F5               	movf	tablat,w,c
  34771  001E4A  0012               	return	
  34772  001E4C                     
- 34773                           ;fat16.c: 1046: return "MSDOS5.0"[7];
+ 34773                           ;fat16.c: 1044: return "MSDOS5.0"[7];
  34774  001E4C  0EF9               	movlw	low (STR_1+7)
  34775  001E4E  6EF6               	movwf	tblptrl,c
  34776  001E50  0E9F               	movlw	high (STR_1+7)
@@ -35965,163 +35965,163 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  34784  001E58  50F5               	movf	tablat,w,c
  34785  001E5A  0012               	return	
  34786  001E5C                     
- 34787                           ;fat16.c: 1048: return ((unsigned char)((((uint16_t)512))&0xFF));
+ 34787                           ;fat16.c: 1046: return ((unsigned char)((((uint16_t)512))&0xFF));
  34788  001E5C  0E00               	movlw	0
  34789  001E5E  0012               	return	
  34790  001E60                     
- 34791                           ;fat16.c: 1050: return ((unsigned char)(((((uint16_t)512))>>8)&0xFF));
+ 34791                           ;fat16.c: 1048: return ((unsigned char)(((((uint16_t)512))>>8)&0xFF));
  34792  001E60  0E02               	movlw	2
  34793  001E62  0012               	return	
  34794  001E64                     
- 34795                           ;fat16.c: 1052: return 1;
+ 34795                           ;fat16.c: 1050: return 1;
  34796  001E64  0E01               	movlw	1
  34797  001E66  0012               	return	
  34798  001E68                     
- 34799                           ;fat16.c: 1054: return ((unsigned char)((((uint16_t)1))&0xFF));
+ 34799                           ;fat16.c: 1052: return ((unsigned char)((((uint16_t)1))&0xFF));
  34800  001E68  0E01               	movlw	1
  34801  001E6A  0012               	return	
  34802  001E6C                     
- 34803                           ;fat16.c: 1056: return ((unsigned char)(((((uint16_t)1))>>8)&0xFF));
+ 34803                           ;fat16.c: 1054: return ((unsigned char)(((((uint16_t)1))>>8)&0xFF));
  34804  001E6C  0E00               	movlw	0
  34805  001E6E  0012               	return	
  34806  001E70                     
- 34807                           ;fat16.c: 1058: return 1;
+ 34807                           ;fat16.c: 1056: return 1;
  34808  001E70  0E01               	movlw	1
  34809  001E72  0012               	return	
  34810  001E74                     
- 34811                           ;fat16.c: 1060: return ((unsigned char)((((uint16_t)64))&0xFF));
+ 34811                           ;fat16.c: 1058: return ((unsigned char)((((uint16_t)64))&0xFF));
  34812  001E74  0E40               	movlw	64
  34813  001E76  0012               	return	
  34814  001E78                     
- 34815                           ;fat16.c: 1062: return ((unsigned char)(((((uint16_t)64))>>8)&0xFF));
+ 34815                           ;fat16.c: 1060: return ((unsigned char)(((((uint16_t)64))>>8)&0xFF));
  34816  001E78  0E00               	movlw	0
  34817  001E7A  0012               	return	
  34818  001E7C                     
- 34819                           ;fat16.c: 1064: return ((unsigned char)((((uint16_t)8191))&0xFF));
+ 34819                           ;fat16.c: 1062: return ((unsigned char)((((uint16_t)8191))&0xFF));
  34820  001E7C  0EFF               	movlw	255
  34821  001E7E  0012               	return	
  34822  001E80                     
- 34823                           ;fat16.c: 1066: return ((unsigned char)(((((uint16_t)8191))>>8)&0xFF));
+ 34823                           ;fat16.c: 1064: return ((unsigned char)(((((uint16_t)8191))>>8)&0xFF));
  34824  001E80  0E1F               	movlw	31
  34825  001E82  0012               	return	
  34826  001E84                     
- 34827                           ;fat16.c: 1068: return 0XF8;
+ 34827                           ;fat16.c: 1066: return 0XF8;
  34828  001E84  0EF8               	movlw	248
  34829  001E86  0012               	return	
  34830  001E88                     
- 34831                           ;fat16.c: 1070: return ((unsigned char)((((uint16_t)32))&0xFF));
+ 34831                           ;fat16.c: 1068: return ((unsigned char)((((uint16_t)32))&0xFF));
  34832  001E88  0E20               	movlw	32
  34833  001E8A  0012               	return	
  34834  001E8C                     
- 34835                           ;fat16.c: 1072: return ((unsigned char)(((((uint16_t)32))>>8)&0xFF));
+ 34835                           ;fat16.c: 1070: return ((unsigned char)(((((uint16_t)32))>>8)&0xFF));
  34836  001E8C  0E00               	movlw	0
  34837  001E8E  0012               	return	
  34838  001E90                     
- 34839                           ;fat16.c: 1074: return ((unsigned char)((((uint16_t)63))&0xFF));
+ 34839                           ;fat16.c: 1072: return ((unsigned char)((((uint16_t)63))&0xFF));
  34840  001E90  0E3F               	movlw	63
  34841  001E92  0012               	return	
  34842  001E94                     
- 34843                           ;fat16.c: 1076: return ((unsigned char)(((((uint16_t)63))>>8)&0xFF));
+ 34843                           ;fat16.c: 1074: return ((unsigned char)(((((uint16_t)63))>>8)&0xFF));
  34844  001E94  0E00               	movlw	0
  34845  001E96  0012               	return	
  34846  001E98                     
- 34847                           ;fat16.c: 1078: return ((unsigned char)((((uint16_t)16))&0xFF));
+ 34847                           ;fat16.c: 1076: return ((unsigned char)((((uint16_t)16))&0xFF));
  34848  001E98  0E10               	movlw	16
  34849  001E9A  0012               	return	
  34850  001E9C                     
- 34851                           ;fat16.c: 1080: return ((unsigned char)(((((uint16_t)16))>>8)&0xFF));
+ 34851                           ;fat16.c: 1078: return ((unsigned char)(((((uint16_t)16))>>8)&0xFF));
  34852  001E9C  0E00               	movlw	0
  34853  001E9E  0012               	return	
  34854  001EA0                     
- 34855                           ;fat16.c: 1082: return ((unsigned char)((((unsigned short)((((uint32_t)0))&0xFFFF)))&0xF
+ 34855                           ;fat16.c: 1080: return ((unsigned char)((((unsigned short)((((uint32_t)0))&0xFFFF)))&0xF
       +                          F));
  34856  001EA0  0E00               	movlw	0
  34857  001EA2  0012               	return	
  34858  001EA4                     
- 34859                           ;fat16.c: 1084: return ((unsigned char)(((((unsigned short)((((uint32_t)0))&0xFFFF)))>>8
+ 34859                           ;fat16.c: 1082: return ((unsigned char)(((((unsigned short)((((uint32_t)0))&0xFFFF)))>>8
       +                          )&0xFF));
  34860  001EA4  0E00               	movlw	0
  34861  001EA6  0012               	return	
  34862  001EA8                     
- 34863                           ;fat16.c: 1086: return ((unsigned char)((((unsigned short)(((((uint32_t)0))>>16)&0xFFFF)
+ 34863                           ;fat16.c: 1084: return ((unsigned char)((((unsigned short)(((((uint32_t)0))>>16)&0xFFFF)
       +                          ))&0xFF));
  34864  001EA8  0E00               	movlw	0
  34865  001EAA  0012               	return	
  34866  001EAC                     
- 34867                           ;fat16.c: 1088: return ((unsigned char)(((((unsigned short)(((((uint32_t)0))>>16)&0xFFFF
+ 34867                           ;fat16.c: 1086: return ((unsigned char)(((((unsigned short)(((((uint32_t)0))>>16)&0xFFFF
       +                          )))>>8)&0xFF));
  34868  001EAC  0E00               	movlw	0
  34869  001EAE  0012               	return	
  34870  001EB0                     
- 34871                           ;fat16.c: 1090: return ((unsigned char)((((uint16_t)0b00000001))&0xFF));
+ 34871                           ;fat16.c: 1088: return ((unsigned char)((((uint16_t)0b00000001))&0xFF));
  34872  001EB0  0E01               	movlw	1
  34873  001EB2  0012               	return	
  34874  001EB4                     
- 34875                           ;fat16.c: 1092: return ((unsigned char)(((((uint16_t)0b00000001))>>8)&0xFF));
+ 34875                           ;fat16.c: 1090: return ((unsigned char)(((((uint16_t)0b00000001))>>8)&0xFF));
  34876  001EB4  0E00               	movlw	0
  34877  001EB6  0012               	return	
  34878  001EB8                     
- 34879                           ;fat16.c: 1094: return ((unsigned char)((((unsigned short)((((uint32_t)34))&0xFFFF)))&0x
+ 34879                           ;fat16.c: 1092: return ((unsigned char)((((unsigned short)((((uint32_t)34))&0xFFFF)))&0x
       +                          FF));
  34880  001EB8  0E22               	movlw	34
  34881  001EBA  0012               	return	
  34882  001EBC                     
- 34883                           ;fat16.c: 1096: return ((unsigned char)(((((unsigned short)((((uint32_t)34))&0xFFFF)))>>
+ 34883                           ;fat16.c: 1094: return ((unsigned char)(((((unsigned short)((((uint32_t)34))&0xFFFF)))>>
       +                          8)&0xFF));
  34884  001EBC  0E00               	movlw	0
  34885  001EBE  0012               	return	
  34886  001EC0                     
- 34887                           ;fat16.c: 1100: return ((unsigned char)(((((unsigned short)(((((uint32_t)34))>>16)&0xFFF
+ 34887                           ;fat16.c: 1098: return ((unsigned char)(((((unsigned short)(((((uint32_t)34))>>16)&0xFFF
       +                          F)))>>8)&0xFF));
  34888                           
- 34889                           ;fat16.c: 1099: case 0x2F:
+ 34889                           ;fat16.c: 1097: case 0x2F:
  34890  001EC0  0E00               	movlw	0
  34891  001EC2  0012               	return	
  34892  001EC4                     
- 34893                           ;fat16.c: 1102: return 'F';
+ 34893                           ;fat16.c: 1100: return 'F';
  34894  001EC4  0E46               	movlw	70
  34895  001EC6  0012               	return	
  34896  001EC8                     
- 34897                           ;fat16.c: 1104: return 'A';
+ 34897                           ;fat16.c: 1102: return 'A';
  34898  001EC8  0E41               	movlw	65
  34899  001ECA  0012               	return	
  34900  001ECC                     
- 34901                           ;fat16.c: 1106: return 'T';
+ 34901                           ;fat16.c: 1104: return 'T';
  34902  001ECC  0E54               	movlw	84
  34903  001ECE  0012               	return	
  34904  001ED0                     
- 34905                           ;fat16.c: 1108: return '1';
+ 34905                           ;fat16.c: 1106: return '1';
  34906  001ED0  0E31               	movlw	49
  34907  001ED2  0012               	return	
  34908  001ED4                     
- 34909                           ;fat16.c: 1110: return '6';
+ 34909                           ;fat16.c: 1108: return '6';
  34910  001ED4  0E36               	movlw	54
  34911  001ED6  0012               	return	
  34912  001ED8                     
- 34913                           ;fat16.c: 1112: return ' ';
+ 34913                           ;fat16.c: 1110: return ' ';
  34914  001ED8  0E20               	movlw	32
  34915  001EDA  0012               	return	
  34916  001EDC                     
- 34917                           ;fat16.c: 1114: return ' ';
+ 34917                           ;fat16.c: 1112: return ' ';
  34918  001EDC  0E20               	movlw	32
  34919  001EDE  0012               	return	
  34920  001EE0                     
- 34921                           ;fat16.c: 1116: return ' ';
+ 34921                           ;fat16.c: 1114: return ' ';
  34922  001EE0  0E20               	movlw	32
  34923  001EE2  0012               	return	
  34924  001EE4                     
- 34925                           ;fat16.c: 1118: return ((unsigned char)(((((uint16_t)0X55AA))>>8)&0xFF));
+ 34925                           ;fat16.c: 1116: return ((unsigned char)(((((uint16_t)0X55AA))>>8)&0xFF));
  34926  001EE4  0E55               	movlw	85
  34927  001EE6  0012               	return	
  34928  001EE8                     
- 34929                           ;fat16.c: 1120: return ((unsigned char)((((uint16_t)0X55AA))&0xFF));
+ 34929                           ;fat16.c: 1118: return ((unsigned char)((((uint16_t)0X55AA))&0xFF));
  34930  001EE8  0EAA               	movlw	170
  34931  001EEA  0012               	return	
  34932  001EEC                     
- 34933                           ;fat16.c: 1122: return 0X00;
+ 34933                           ;fat16.c: 1120: return 0X00;
  34934  001EEC  0E00               	movlw	0
  34935                           
- 34936                           ;fat16.c: 1123: }
+ 34936                           ;fat16.c: 1121: }
  34937  001EEE  0012               	return	
  34938  001EF0                     l2140:
  34939  001EF0  C001  F003         	movff	__get_fbr@idx,??__get_fbr
@@ -36342,7 +36342,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  35153                           
  35154 ;; *************** function __get_fat *****************
  35155 ;; Defined at:
- 35156 ;;		line 1126 in file "fat16.c"
+ 35156 ;;		line 1124 in file "fat16.c"
  35157 ;; Parameters:    Size  Location     Type
  35158 ;;  idx             2    0[COMRAM] unsigned int 
  35159 ;; Auto vars:     Size  Location     Type
@@ -36380,39 +36380,39 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  35186  007F86                     __get_fat:
  35187                           	opt stack 27
  35188                           
- 35189                           ;fat16.c: 1128: switch (idx)
+ 35189                           ;fat16.c: 1126: switch (idx)
  35190                           
  35191                           ;incstack = 0
  35192  007F86  D00E               	goto	l2194
  35193  007F88                     
- 35194                           ;fat16.c: 1132: return 0xF8;
+ 35194                           ;fat16.c: 1130: return 0xF8;
  35195  007F88  0EF8               	movlw	248
  35196  007F8A  0012               	return	
  35197  007F8C                     
- 35198                           ;fat16.c: 1134: return 0xFF;
+ 35198                           ;fat16.c: 1132: return 0xFF;
  35199  007F8C  0EFF               	movlw	255
  35200  007F8E  0012               	return	
  35201  007F90                     
- 35202                           ;fat16.c: 1136: return 0xFF;
+ 35202                           ;fat16.c: 1134: return 0xFF;
  35203  007F90  0EFF               	movlw	255
  35204  007F92  0012               	return	
  35205  007F94                     
- 35206                           ;fat16.c: 1138: return 0xFF;
+ 35206                           ;fat16.c: 1136: return 0xFF;
  35207  007F94  0EFF               	movlw	255
  35208  007F96  0012               	return	
  35209  007F98                     
- 35210                           ;fat16.c: 1141: return 0xFF;
+ 35210                           ;fat16.c: 1139: return 0xFF;
  35211  007F98  0EFF               	movlw	255
  35212  007F9A  0012               	return	
  35213  007F9C                     
- 35214                           ;fat16.c: 1143: return 0xFF;
+ 35214                           ;fat16.c: 1141: return 0xFF;
  35215  007F9C  0EFF               	movlw	255
  35216  007F9E  0012               	return	
  35217  007FA0                     
- 35218                           ;fat16.c: 1145: return 0X00;
+ 35218                           ;fat16.c: 1143: return 0X00;
  35219  007FA0  0E00               	movlw	0
  35220                           
- 35221                           ;fat16.c: 1146: }
+ 35221                           ;fat16.c: 1144: }
  35222  007FA2  0012               	return	
  35223  007FA4                     l2194:
  35224  007FA4  C001  F003         	movff	__get_fat@idx,??__get_fat
@@ -36492,7 +36492,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  35297                           
  35298 ;; *************** function __get_data *****************
  35299 ;; Defined at:
- 35300 ;;		line 1222 in file "fat16.c"
+ 35300 ;;		line 1220 in file "fat16.c"
  35301 ;; Parameters:    Size  Location     Type
  35302 ;;  idx             2    0[COMRAM] unsigned int 
  35303 ;; Auto vars:     Size  Location     Type
@@ -36530,7 +36530,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  35330  008AA0                     __get_data:
  35331                           	opt stack 27
  35332                           
- 35333                           ;fat16.c: 1224: if(idx < 12)
+ 35333                           ;fat16.c: 1222: if(idx < 12)
  35334                           
  35335                           ;incstack = 0
  35336  008AA0  5002               	movf	__get_data@idx+1,w,c
@@ -36540,7 +36540,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  35340  008AA8  B0D8               	btfsc	status,0,c
  35341  008AAA  D00C               	goto	l2238
  35342                           
- 35343                           ;fat16.c: 1225: {;fat16.c: 1226: return "hello world!"[idx];
+ 35343                           ;fat16.c: 1223: {;fat16.c: 1224: return "hello world!"[idx];
  35344  008AAC  0ED0               	movlw	low STR_12
  35345  008AAE  2401               	addwf	__get_data@idx,w,c
  35346  008AB0  6EF6               	movwf	tblptrl,c
@@ -36558,7 +36558,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  35358  008AC4                     l2238:
  35359  008AC4                     l12763:
  35360                           
- 35361                           ;fat16.c: 1227: };fat16.c: 1228: return 0X00;
+ 35361                           ;fat16.c: 1225: };fat16.c: 1226: return 0X00;
  35362  008AC4  0E00               	movlw	0
  35363  008AC6  0012               	return	
  35364  008AC8                     __end_of__get_data:
@@ -39440,20 +39440,20 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  38128  004EC2                     l2102:
  38129                           
  38130                           ; BSR set to: 0
- 38131                           ;fat16.c: 885: };fat16.c: 890: root.firstCluster = first_cluster;
+ 38131                           ;fat16.c: 885: };fat16.c: 888: root.firstCluster = first_cluster;
  38132  004EC2  C064  F081         	movff	fat_resize_file@first_cluster,fat_resize_file@root+26
  38133  004EC6  C065  F082         	movff	fat_resize_file@first_cluster+1,fat_resize_file@root+27
  38134  004ECA                     l2101:
  38135                           
  38136                           ; BSR set to: 0
- 38137                           ;fat16.c: 891: };fat16.c: 894: root.fileSize = new_file_size;
+ 38137                           ;fat16.c: 889: };fat16.c: 892: root.fileSize = new_file_size;
  38138  004ECA  C04D  F083         	movff	fat_resize_file@new_file_size,fat_resize_file@root+28
  38139  004ECE  C04E  F084         	movff	fat_resize_file@new_file_size+1,fat_resize_file@root+29
  38140  004ED2  C04F  F085         	movff	fat_resize_file@new_file_size+2,fat_resize_file@root+30
  38141  004ED6  C050  F086         	movff	fat_resize_file@new_file_size+3,fat_resize_file@root+31
  38142                           
  38143                           ; BSR set to: 0
- 38144                           ;fat16.c: 897: _write_root(file_number, &root);
+ 38144                           ;fat16.c: 895: _write_root(file_number, &root);
  38145  004EDA  0E67               	movlw	low fat_resize_file@root
  38146  004EDC  6E29               	movwf	__write_root@data,c
  38147  004EDE  0E00               	movlw	high fat_resize_file@root
@@ -39461,7 +39461,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  38149  004EE2  5166               	movf	fat_resize_file@file_number& (0+255),w,b
  38150  004EE4  EC34  F042         	call	__write_root
  38151                           
- 38152                           ;fat16.c: 900: return 0x00;
+ 38152                           ;fat16.c: 898: return 0x00;
  38153  004EE8  0E00               	movlw	0
  38154  004EEA  0012               	return	
  38155  004EEC                     __end_of_fat_resize_file:
@@ -40775,7 +40775,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  39405                           
  39406 ;; *************** function _fat_modify_file *****************
  39407 ;; Defined at:
- 39408 ;;		line 903 in file "fat16.c"
+ 39408 ;;		line 901 in file "fat16.c"
  39409 ;; Parameters:    Size  Location     Type
  39410 ;;  file_number     1    wreg     unsigned char 
  39411 ;;  start_byte      4   65[COMRAM] unsigned long 
@@ -40835,9 +40835,9 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  39460  002284  0100               	movlb	0	; () banked
  39461  002286  6F62               	movwf	fat_modify_file@file_number& (0+255),b
  39462                           
- 39463                           ;fat16.c: 905: rootEntry_t root;;fat16.c: 906: uint16_t cluster;;fat16.c: 907: uint32_t 
-      +                          position;;fat16.c: 908: uint16_t offset;;fat16.c: 909: uint16_t sector;;fat16.c: 910: ui
-      +                          nt16_t number_of_bytes;;fat16.c: 911: uint8_t return_code;;fat16.c: 914: return_code = f
+ 39463                           ;fat16.c: 903: rootEntry_t root;;fat16.c: 904: uint16_t cluster;;fat16.c: 905: uint32_t 
+      +                          position;;fat16.c: 906: uint16_t offset;;fat16.c: 907: uint16_t sector;;fat16.c: 908: ui
+      +                          nt16_t number_of_bytes;;fat16.c: 909: uint8_t return_code;;fat16.c: 912: return_code = f
       +                          at_get_file_information(file_number, &root);
  39464  002288  0E6E               	movlw	low fat_modify_file@root
  39465  00228A  6E30               	movwf	fat_get_file_information@data,c
@@ -40850,18 +40850,18 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  39472  00229A  6F63               	movwf	fat_modify_file@return_code& (0+255),b
  39473                           
  39474                           ; BSR set to: 0
- 39475                           ;fat16.c: 915: if(return_code!=0x00)
+ 39475                           ;fat16.c: 913: if(return_code!=0x00)
  39476  00229C  5163               	movf	fat_modify_file@return_code& (0+255),w,b
  39477  00229E  A4D8               	btfss	status,2,c
  39478  0022A0  0012               	return	
  39479                           
  39480                           ; BSR set to: 0
- 39481                           ;fat16.c: 919: };fat16.c: 922: if(start_byte>root.fileSize)
+ 39481                           ;fat16.c: 917: };fat16.c: 920: if(start_byte>root.fileSize)
  39482                           
  39483                           ; BSR set to: 0
  39484                           
  39485                           ; BSR set to: 0
- 39486                           ;fat16.c: 916: {;fat16.c: 918: return;
+ 39486                           ;fat16.c: 914: {;fat16.c: 916: return;
  39487  0022A2  5042               	movf	fat_modify_file@start_byte,w,c
  39488  0022A4  5D8A               	subwf	(fat_modify_file@root+28)& (0+255),w,b
  39489  0022A6  5043               	movf	fat_modify_file@start_byte+1,w,c
@@ -40874,12 +40874,12 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  39496  0022B4  0012               	return	
  39497                           
  39498                           ; BSR set to: 0
- 39499                           ;fat16.c: 926: };fat16.c: 928: if((start_byte+length) > root.fileSize)
+ 39499                           ;fat16.c: 924: };fat16.c: 926: if((start_byte+length) > root.fileSize)
  39500                           
  39501                           ; BSR set to: 0
  39502                           
  39503                           ; BSR set to: 0
- 39504                           ;fat16.c: 923: {;fat16.c: 925: return;
+ 39504                           ;fat16.c: 921: {;fat16.c: 923: return;
  39505  0022B6  5046               	movf	fat_modify_file@length,w,c
  39506  0022B8  2442               	addwf	fat_modify_file@start_byte,w,c
  39507  0022BA  6E4A               	movwf	??_fat_modify_file& (0+255),c
@@ -40904,7 +40904,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  39526  0022E0  D00E               	goto	l2108
  39527                           
  39528                           ; BSR set to: 0
- 39529                           ;fat16.c: 929: {;fat16.c: 931: length = root.fileSize - start_byte;
+ 39529                           ;fat16.c: 927: {;fat16.c: 929: length = root.fileSize - start_byte;
  39530  0022E2  C042  F04A         	movff	fat_modify_file@start_byte,??_fat_modify_file
  39531  0022E6  C043  F04B         	movff	fat_modify_file@start_byte+1,??_fat_modify_file+1
  39532  0022EA  1E4A               	comf	??_fat_modify_file,f,c
@@ -40920,7 +40920,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  39542  0022FE                     l2108:
  39543                           
  39544                           ; BSR set to: 0
- 39545                           ;fat16.c: 932: };fat16.c: 935: cluster = _find_nth_cluster(root.firstCluster, (start_byt
+ 39545                           ;fat16.c: 930: };fat16.c: 933: cluster = _find_nth_cluster(root.firstCluster, (start_byt
       +                          e>>9));
  39546                           
  39547                           ; BSR set to: 0
@@ -40947,7 +40947,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  39568  002334  C038  F064         	movff	?__find_nth_cluster,fat_modify_file@cluster
  39569  002338  C039  F065         	movff	?__find_nth_cluster+1,fat_modify_file@cluster+1
  39570                           
- 39571                           ;fat16.c: 938: position = start_byte &= 0xFFFFFE00;
+ 39571                           ;fat16.c: 936: position = start_byte &= 0xFFFFFE00;
  39572  00233C  0E00               	movlw	0
  39573  00233E  1642               	andwf	fat_modify_file@start_byte,f,c
  39574  002340  0EFE               	movlw	254
@@ -40961,7 +40961,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  39582  002354  C044  F06C         	movff	fat_modify_file@start_byte+2,fat_modify_file@position+2
  39583  002358  C045  F06D         	movff	fat_modify_file@start_byte+3,fat_modify_file@position+3
  39584                           
- 39585                           ;fat16.c: 941: offset = (uint16_t) (start_byte-position);
+ 39585                           ;fat16.c: 939: offset = (uint16_t) (start_byte-position);
  39586  00235C  C06A  F04A         	movff	fat_modify_file@position,??_fat_modify_file
  39587  002360  C06B  F04B         	movff	fat_modify_file@position+1,??_fat_modify_file+1
  39588  002364  1E4A               	comf	??_fat_modify_file,f,c
@@ -40977,7 +40977,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  39598  002378  6F67               	movwf	(fat_modify_file@offset+1)& (0+255),b
  39599                           
  39600                           ; BSR set to: 0
- 39601                           ;fat16.c: 944: position = 0;
+ 39601                           ;fat16.c: 942: position = 0;
  39602  00237A  0E00               	movlw	0
  39603  00237C  6F6A               	movwf	fat_modify_file@position& (0+255),b
  39604  00237E  0E00               	movlw	0
@@ -40987,11 +40987,11 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  39608  002386  0E00               	movlw	0
  39609  002388  6F6D               	movwf	(fat_modify_file@position+3)& (0+255),b
  39610                           
- 39611                           ;fat16.c: 945: while(position < length)
+ 39611                           ;fat16.c: 943: while(position < length)
  39612  00238A  D089               	goto	l2109
  39613  00238C                     
  39614                           ; BSR set to: 0
- 39615                           ;fat16.c: 946: {;fat16.c: 948: if(offset==512)
+ 39615                           ;fat16.c: 944: {;fat16.c: 946: if(offset==512)
  39616                           
  39617                           ; BSR set to: 0
  39618  00238C  0E02               	movlw	2
@@ -41001,14 +41001,14 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  39622  002394  D00F               	goto	l2111
  39623                           
  39624                           ; BSR set to: 0
- 39625                           ;fat16.c: 949: {;fat16.c: 951: cluster = _read_fat(cluster);
+ 39625                           ;fat16.c: 947: {;fat16.c: 949: cluster = _read_fat(cluster);
  39626  002396  C064  F030         	movff	fat_modify_file@cluster,__read_fat@cluster
  39627  00239A  C065  F031         	movff	fat_modify_file@cluster+1,__read_fat@cluster+1
  39628  00239E  EC19  F040         	call	__read_fat	;wreg free
  39629  0023A2  C030  F064         	movff	?__read_fat,fat_modify_file@cluster
  39630  0023A6  C031  F065         	movff	?__read_fat+1,fat_modify_file@cluster+1
  39631                           
- 39632                           ;fat16.c: 953: offset = 0;
+ 39632                           ;fat16.c: 951: offset = 0;
  39633  0023AA  0E00               	movlw	0
  39634  0023AC  0100               	movlb	0	; () banked
  39635  0023AE  6F67               	movwf	(fat_modify_file@offset+1)& (0+255),b
@@ -41017,7 +41017,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  39638  0023B4                     l2111:
  39639                           
  39640                           ; BSR set to: 0
- 39641                           ;fat16.c: 954: };fat16.c: 957: sector = _data_sector_from_cluster(cluster);
+ 39641                           ;fat16.c: 952: };fat16.c: 955: sector = _data_sector_from_cluster(cluster);
  39642                           
  39643                           ; BSR set to: 0
  39644  0023B4  C064  F001         	movff	fat_modify_file@cluster,__data_sector_from_cluster@fat_cluster
@@ -41026,7 +41026,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  39647  0023C0  C001  F060         	movff	?__data_sector_from_cluster,fat_modify_file@sector
  39648  0023C4  C002  F061         	movff	?__data_sector_from_cluster+1,fat_modify_file@sector+1
  39649                           
- 39650                           ;fat16.c: 960: number_of_bytes = 512 - offset;
+ 39650                           ;fat16.c: 958: number_of_bytes = 512 - offset;
  39651  0023C8  C066  F04A         	movff	fat_modify_file@offset,??_fat_modify_file
  39652  0023CC  C067  F04B         	movff	fat_modify_file@offset+1,??_fat_modify_file+1
  39653  0023D0  1E4A               	comf	??_fat_modify_file,f,c
@@ -41042,7 +41042,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  39663  0023E4  6F69               	movwf	(fat_modify_file@number_of_bytes+1)& (0+255),b
  39664                           
  39665                           ; BSR set to: 0
- 39666                           ;fat16.c: 961: if(number_of_bytes > (length-position))
+ 39666                           ;fat16.c: 959: if(number_of_bytes > (length-position))
  39667  0023E6  5168               	movf	fat_modify_file@number_of_bytes& (0+255),w,b
  39668  0023E8  6E4A               	movwf	??_fat_modify_file& (0+255),c
  39669  0023EA  5169               	movf	(fat_modify_file@number_of_bytes+1)& (0+255),w,b
@@ -41086,7 +41086,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  39707  00243E  D00E               	goto	l2112
  39708                           
  39709                           ; BSR set to: 0
- 39710                           ;fat16.c: 962: {;fat16.c: 963: number_of_bytes = length - position;
+ 39710                           ;fat16.c: 960: {;fat16.c: 961: number_of_bytes = length - position;
  39711  002440  C06A  F04A         	movff	fat_modify_file@position,??_fat_modify_file
  39712  002444  C06B  F04B         	movff	fat_modify_file@position+1,??_fat_modify_file+1
  39713  002448  1E4A               	comf	??_fat_modify_file,f,c
@@ -41102,7 +41102,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  39723  00245C                     l2112:
  39724                           
  39725                           ; BSR set to: 0
- 39726                           ;fat16.c: 964: };fat16.c: 967: flash_partial_write(sector, offset, number_of_bytes, &dat
+ 39726                           ;fat16.c: 962: };fat16.c: 965: flash_partial_write(sector, offset, number_of_bytes, &dat
       +                          a[position]);
  39727                           
  39728                           ; BSR set to: 0
@@ -41120,7 +41120,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  39740  00247E  6E27               	movwf	flash_partial_write@data+1,c
  39741  002480  ECA0  F03B         	call	_flash_partial_write	;wreg free
  39742                           
- 39743                           ;fat16.c: 970: position += number_of_bytes;
+ 39743                           ;fat16.c: 968: position += number_of_bytes;
  39744  002484  0100               	movlb	0	; () banked
  39745  002486  5168               	movf	fat_modify_file@number_of_bytes& (0+255),w,b
  39746  002488  276A               	addwf	fat_modify_file@position& (0+255),f,b
@@ -41132,7 +41132,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  39752  002494  236D               	addwfc	(fat_modify_file@position+3)& (0+255),f,b
  39753                           
  39754                           ; BSR set to: 0
- 39755                           ;fat16.c: 971: offset += number_of_bytes;
+ 39755                           ;fat16.c: 969: offset += number_of_bytes;
  39756  002496  5168               	movf	fat_modify_file@number_of_bytes& (0+255),w,b
  39757  002498  2766               	addwf	fat_modify_file@offset& (0+255),f,b
  39758  00249A  5169               	movf	(fat_modify_file@number_of_bytes+1)& (0+255),w,b
@@ -41962,7 +41962,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  40552                           
  40553 ;; *************** function _fat_get_file_information *****************
  40554 ;; Defined at:
- 40555 ;;		line 1328 in file "fat16.c"
+ 40555 ;;		line 1326 in file "fat16.c"
  40556 ;; Parameters:    Size  Location     Type
  40557 ;;  file_number     1    wreg     unsigned char 
  40558 ;;  data            2   47[COMRAM] PTR struct .
@@ -42019,30 +42019,30 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  40603                           ;fat_get_file_information@file_number stored from wreg
  40604  00765E  6E37               	movwf	fat_get_file_information@file_number,c
  40605                           
- 40606                           ;fat16.c: 1330: uint16_t root_sector;;fat16.c: 1331: uint16_t offset;;fat16.c: 1333: if(
+ 40606                           ;fat16.c: 1328: uint16_t root_sector;;fat16.c: 1329: uint16_t offset;;fat16.c: 1331: if(
       +                          file_number>=64)
  40607  007660  0E3F               	movlw	63
  40608  007662  6437               	cpfsgt	fat_get_file_information@file_number,c
  40609  007664  D002               	goto	l2276
  40610                           
- 40611                           ;fat16.c: 1334: {;fat16.c: 1336: return 0x01;
+ 40611                           ;fat16.c: 1332: {;fat16.c: 1334: return 0x01;
  40612  007666  0E01               	movlw	1
  40613  007668  0012               	return	
  40614  00766A                     l2276:
  40615                           
- 40616                           ;fat16.c: 1337: };fat16.c: 1340: root_sector = _sector_from_file_number(file_number);
+ 40616                           ;fat16.c: 1335: };fat16.c: 1338: root_sector = _sector_from_file_number(file_number);
  40617  00766A  5037               	movf	fat_get_file_information@file_number,w,c
  40618  00766C  EC11  F045         	call	__sector_from_file_number
  40619  007670  C001  F033         	movff	?__sector_from_file_number,fat_get_file_information@root_sector
  40620  007674  C002  F034         	movff	?__sector_from_file_number+1,fat_get_file_information@root_sector+1
  40621                           
- 40622                           ;fat16.c: 1341: offset = _offset_from_file_number(file_number);
+ 40622                           ;fat16.c: 1339: offset = _offset_from_file_number(file_number);
  40623  007678  5037               	movf	fat_get_file_information@file_number,w,c
  40624  00767A  EC9D  F045         	call	__offset_from_file_number
  40625  00767E  C001  F035         	movff	?__offset_from_file_number,fat_get_file_information@offset
  40626  007682  C002  F036         	movff	?__offset_from_file_number+1,fat_get_file_information@offset+1
  40627                           
- 40628                           ;fat16.c: 1344: flash_partial_read(root_sector, offset, 32, (uint8_t*) data);
+ 40628                           ;fat16.c: 1342: flash_partial_read(root_sector, offset, 32, (uint8_t*) data);
  40629  007686  C033  F028         	movff	fat_get_file_information@root_sector,flash_partial_read@page
  40630  00768A  C034  F029         	movff	fat_get_file_information@root_sector+1,flash_partial_read@page+1
  40631  00768E  C035  F02A         	movff	fat_get_file_information@offset,flash_partial_read@start
@@ -42055,7 +42055,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  40638  0076A2  C031  F02F         	movff	fat_get_file_information@data+1,flash_partial_read@data+1
  40639  0076A6  EC58  F044         	call	_flash_partial_read	;wreg free
  40640                           
- 40641                           ;fat16.c: 1347: if((data->fileName[0]==0x00) || (data->fileName[0]==0xE5))
+ 40641                           ;fat16.c: 1345: if((data->fileName[0]==0x00) || (data->fileName[0]==0xE5))
  40642  0076AA  C030  FFD9         	movff	fat_get_file_information@data,fsr2l
  40643  0076AE  C031  FFDA         	movff	fat_get_file_information@data+1,fsr2h
  40644  0076B2  50DF               	movf	indf2,w,c
@@ -42069,12 +42069,12 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  40652  0076C6  D002               	goto	l2278
  40653  0076C8                     u8250:
  40654                           
- 40655                           ;fat16.c: 1348: {;fat16.c: 1350: return 0x02;
+ 40655                           ;fat16.c: 1346: {;fat16.c: 1348: return 0x02;
  40656  0076C8  0E02               	movlw	2
  40657  0076CA  0012               	return	
  40658  0076CC                     l2278:
  40659                           
- 40660                           ;fat16.c: 1351: };fat16.c: 1354: return 0x00;
+ 40660                           ;fat16.c: 1349: };fat16.c: 1352: return 0x00;
  40661  0076CC  0E00               	movlw	0
  40662  0076CE  0012               	return	
  40663  0076D0                     __end_of_fat_get_file_information:
@@ -42263,7 +42263,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  40840                           
  40841 ;; *************** function _fat_write_sector_from_buffer *****************
  40842 ;; Defined at:
- 40843 ;;		line 1395 in file "fat16.c"
+ 40843 ;;		line 1393 in file "fat16.c"
  40844 ;; Parameters:    Size  Location     Type
  40845 ;;  file_number     1    wreg     unsigned char 
  40846 ;;  sector          2   66[COMRAM] unsigned int 
@@ -42315,17 +42315,17 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  40887                           ;fat_write_sector_from_buffer@file_number stored from wreg
  40888  006480  6E4F               	movwf	fat_write_sector_from_buffer@file_number,c
  40889                           
- 40890                           ;fat16.c: 1397: uint32_t file_size;;fat16.c: 1398: uint16_t number_of_clusters;;fat16.c:
-      +                           1399: uint16_t cluster;;fat16.c: 1402: if(_root_is_available(file_number))
+ 40890                           ;fat16.c: 1395: uint32_t file_size;;fat16.c: 1396: uint16_t number_of_clusters;;fat16.c:
+      +                           1397: uint16_t cluster;;fat16.c: 1400: if(_root_is_available(file_number))
  40891  006482  504F               	movf	fat_write_sector_from_buffer@file_number,w,c
  40892  006484  ECA7  F03D         	call	__root_is_available
  40893  006488  0900               	iorlw	0
  40894  00648A  A4D8               	btfss	status,2,c
  40895  00648C  0012               	return	
  40896                           
- 40897                           ;fat16.c: 1406: };fat16.c: 1409: file_size = fat_get_file_size(file_number);
+ 40897                           ;fat16.c: 1404: };fat16.c: 1407: file_size = fat_get_file_size(file_number);
  40898                           
- 40899                           ;fat16.c: 1403: {;fat16.c: 1405: return 0xFF;;	Return value of _fat_write_sector_from_bu
+ 40899                           ;fat16.c: 1401: {;fat16.c: 1403: return 0xFF;;	Return value of _fat_write_sector_from_bu
       +                          ffer is never used
  40900  00648E  504F               	movf	fat_write_sector_from_buffer@file_number,w,c
  40901  006490  EC0F  F03C         	call	_fat_get_file_size
@@ -42334,7 +42334,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  40904  00649C  C038  F04B         	movff	?_fat_get_file_size+2,fat_write_sector_from_buffer@file_size+2
  40905  0064A0  C039  F04C         	movff	?_fat_get_file_size+3,fat_write_sector_from_buffer@file_size+3
  40906                           
- 40907                           ;fat16.c: 1412: number_of_clusters = (file_size + 512 - 1) >> 9;
+ 40907                           ;fat16.c: 1410: number_of_clusters = (file_size + 512 - 1) >> 9;
  40908  0064A4  0EFF               	movlw	255
  40909  0064A6  2449               	addwf	fat_write_sector_from_buffer@file_size,w,c
  40910  0064A8  6E45               	movwf	??_fat_write_sector_from_buffer& (0+255),c
@@ -42362,7 +42362,7 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  40932  0064D2  C046  F04E         	movff	??_fat_write_sector_from_buffer+1,fat_write_sector_from_buffer@number_of_clusters
       +                          +1
  40933                           
- 40934                           ;fat16.c: 1413: if(sector > number_of_clusters)
+ 40934                           ;fat16.c: 1411: if(sector > number_of_clusters)
  40935  0064D6  5043               	movf	fat_write_sector_from_buffer@sector,w,c
  40936  0064D8  5C4D               	subwf	fat_write_sector_from_buffer@number_of_clusters,w,c
  40937  0064DA  5044               	movf	fat_write_sector_from_buffer@sector+1,w,c
@@ -42370,16 +42370,16 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  40939  0064DE  A0D8               	btfss	status,0,c
  40940  0064E0  0012               	return	
  40941                           
- 40942                           ;fat16.c: 1417: };fat16.c: 1420: cluster = _get_first_cluster(file_number);
+ 40942                           ;fat16.c: 1415: };fat16.c: 1418: cluster = _get_first_cluster(file_number);
  40943                           
- 40944                           ;fat16.c: 1414: {;fat16.c: 1416: return 0xFE;;	Return value of _fat_write_sector_from_bu
+ 40944                           ;fat16.c: 1412: {;fat16.c: 1414: return 0xFE;;	Return value of _fat_write_sector_from_bu
       +                          ffer is never used
  40945  0064E2  504F               	movf	fat_write_sector_from_buffer@file_number,w,c
  40946  0064E4  EC3B  F041         	call	__get_first_cluster
  40947  0064E8  C030  F050         	movff	?__get_first_cluster,fat_write_sector_from_buffer@cluster
  40948  0064EC  C031  F051         	movff	?__get_first_cluster+1,fat_write_sector_from_buffer@cluster+1
  40949                           
- 40950                           ;fat16.c: 1421: cluster = _find_nth_cluster(cluster, sector);
+ 40950                           ;fat16.c: 1419: cluster = _find_nth_cluster(cluster, sector);
  40951  0064F0  C050  F038         	movff	fat_write_sector_from_buffer@cluster,__find_nth_cluster@cluster
  40952  0064F4  C051  F039         	movff	fat_write_sector_from_buffer@cluster+1,__find_nth_cluster@cluster+1
  40953  0064F8  C043  F03A         	movff	fat_write_sector_from_buffer@sector,__find_nth_cluster@n
@@ -42388,14 +42388,14 @@ Microchip Technology Omniscient Code Generator v2.00 (Free mode) build 201805271
  40956  006504  C038  F050         	movff	?__find_nth_cluster,fat_write_sector_from_buffer@cluster
  40957  006508  C039  F051         	movff	?__find_nth_cluster+1,fat_write_sector_from_buffer@cluster+1
  40958                           
- 40959                           ;fat16.c: 1424: cluster = _data_sector_from_cluster(cluster);
+ 40959                           ;fat16.c: 1422: cluster = _data_sector_from_cluster(cluster);
  40960  00650C  C050  F001         	movff	fat_write_sector_from_buffer@cluster,__data_sector_from_cluster@fat_cluster
  40961  006510  C051  F002         	movff	fat_write_sector_from_buffer@cluster+1,__data_sector_from_cluster@fat_cluster+1
  40962  006514  EC62  F047         	call	__data_sector_from_cluster	;wreg free
  40963  006518  C001  F050         	movff	?__data_sector_from_cluster,fat_write_sector_from_buffer@cluster
  40964  00651C  C002  F051         	movff	?__data_sector_from_cluster+1,fat_write_sector_from_buffer@cluster+1
  40965                           
- 40966                           ;fat16.c: 1427: flash_write_page_from_buffer(cluster);
+ 40966                           ;fat16.c: 1425: flash_write_page_from_buffer(cluster);
  40967  006520  C050  F01E         	movff	fat_write_sector_from_buffer@cluster,flash_write_page_from_buffer@page
  40968  006524  C051  F01F         	movff	fat_write_sector_from_buffer@cluster+1,flash_write_page_from_buffer@page+1
  40969  006528  EC32  F047         	call	_flash_write_page_from_buffer	;wreg free
@@ -51184,7 +51184,7 @@ CODE                 0      0       0       0        0.0%
 
 
 Microchip Technology PIC18 Macro Assembler V2.00 build -1524193055 
-Symbol Table                                                                                   Wed Sep 19 23:14:07 2018
+Symbol Table                                                                                   Wed Sep 19 23:31:33 2018
 
                           __end_of_fat_read_from_file 50D0  
                            ??_internalFlash_getBuffer 0003  

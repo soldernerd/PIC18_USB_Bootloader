@@ -262,7 +262,7 @@ text231 CODE 0 8DAC 8DAC 18 1
 text232 CODE 0 8EC4 8EC4 E 1
 text233 CODE 0 4BEC 4BEC 102 1
 mediumconst MEDIUMCONST 0 9C98 9C98 368 1
-$C:\Users\luke\AppData\Local\Temp\s1q8o.o
+$C:\Users\luke\AppData\Local\Temp\s1spc.o
 init CODE 0 1C 1C 4 1
 reset_vec CODE 0 0 0 4 1
 config CONFIG 0 1FFF8 1FFF8 8 1
@@ -596,15 +596,15 @@ $dist/default/production\USB_Bootloader.production.o
 8E64 text211 CODE >505:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
 8E64 text211 CODE >507:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
 8E74 text211 CODE >508:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
-6480 text210 CODE >1395:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-6482 text210 CODE >1402:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-648E text210 CODE >1409:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-64A4 text210 CODE >1412:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-64D6 text210 CODE >1413:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-64E2 text210 CODE >1420:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-64F0 text210 CODE >1421:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-650C text210 CODE >1424:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-6520 text210 CODE >1427:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+6480 text210 CODE >1393:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+6482 text210 CODE >1400:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+648E text210 CODE >1407:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+64A4 text210 CODE >1410:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+64D6 text210 CODE >1411:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+64E2 text210 CODE >1418:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+64F0 text210 CODE >1419:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+650C text210 CODE >1422:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+6520 text210 CODE >1425:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 71F2 text209 CODE >718:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 71F2 text209 CODE >723:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 722A text209 CODE >725:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
@@ -614,17 +614,17 @@ $dist/default/production\USB_Bootloader.production.o
 7248 text209 CODE >731:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 725C text209 CODE >734:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 7276 text209 CODE >736:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
-765E text208 CODE >1328:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7660 text208 CODE >1333:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7666 text208 CODE >1336:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-766A text208 CODE >1337:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-766A text208 CODE >1340:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7678 text208 CODE >1341:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7686 text208 CODE >1344:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-76AA text208 CODE >1347:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-76C8 text208 CODE >1350:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-76CC text208 CODE >1351:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-76CC text208 CODE >1354:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+765E text208 CODE >1326:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7660 text208 CODE >1331:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7666 text208 CODE >1334:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+766A text208 CODE >1335:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+766A text208 CODE >1338:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7678 text208 CODE >1339:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7686 text208 CODE >1342:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+76AA text208 CODE >1345:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+76C8 text208 CODE >1348:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+76CC text208 CODE >1349:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+76CC text208 CODE >1352:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 74FC text207 CODE >172:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
 74FC text207 CODE >178:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
 7506 text207 CODE >181:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
@@ -700,32 +700,32 @@ $dist/default/production\USB_Bootloader.production.o
 77A8 text203 CODE >494:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
 77A8 text203 CODE >497:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
 77AE text203 CODE >498:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
-2284 text202 CODE >903:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2288 text202 CODE >914:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-229C text202 CODE >915:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-22A2 text202 CODE >922:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-22B6 text202 CODE >928:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-22E2 text202 CODE >931:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-22FE text202 CODE >932:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-22FE text202 CODE >935:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-233C text202 CODE >938:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-235C text202 CODE >941:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-237A text202 CODE >944:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-238A text202 CODE >945:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-238C text202 CODE >948:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2396 text202 CODE >951:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-23AA text202 CODE >953:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-23B4 text202 CODE >954:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-23B4 text202 CODE >957:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-23C8 text202 CODE >960:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-23E6 text202 CODE >961:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2440 text202 CODE >963:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-245C text202 CODE >964:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-245C text202 CODE >967:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2484 text202 CODE >970:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2496 text202 CODE >971:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-249E text202 CODE >945:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-249E text202 CODE >972:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2284 text202 CODE >901:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2288 text202 CODE >912:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+229C text202 CODE >913:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+22A2 text202 CODE >920:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+22B6 text202 CODE >926:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+22E2 text202 CODE >929:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+22FE text202 CODE >930:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+22FE text202 CODE >933:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+233C text202 CODE >936:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+235C text202 CODE >939:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+237A text202 CODE >942:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+238A text202 CODE >943:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+238C text202 CODE >946:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2396 text202 CODE >949:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+23AA text202 CODE >951:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+23B4 text202 CODE >952:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+23B4 text202 CODE >955:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+23C8 text202 CODE >958:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+23E6 text202 CODE >959:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2440 text202 CODE >961:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+245C text202 CODE >962:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+245C text202 CODE >965:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2484 text202 CODE >968:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2496 text202 CODE >969:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+249E text202 CODE >943:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+249E text202 CODE >970:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 8B14 text201 CODE >89:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 8B14 text201 CODE >91:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 8B1A text201 CODE >92:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
@@ -855,11 +855,11 @@ $dist/default/production\USB_Bootloader.production.o
 4EB2 text194 CODE >881:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 4EBE text194 CODE >884:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 4EC2 text194 CODE >885:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-4EC2 text194 CODE >890:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-4ECA text194 CODE >891:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-4ECA text194 CODE >894:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-4EDA text194 CODE >897:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-4EE8 text194 CODE >900:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+4EC2 text194 CODE >888:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+4ECA text194 CODE >889:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+4ECA text194 CODE >892:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+4EDA text194 CODE >895:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+4EE8 text194 CODE >898:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 6E9A text193 CODE >675:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 6E9E text193 CODE >682:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 6EA8 text193 CODE >686:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
@@ -1020,265 +1020,265 @@ $dist/default/production\USB_Bootloader.production.o
 57B0 text177 CODE >586:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 57C4 text177 CODE >589:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 57E6 text177 CODE >590:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
+8AA0 text176 CODE >1220:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 8AA0 text176 CODE >1222:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-8AA0 text176 CODE >1224:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-8AAC text176 CODE >1226:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-8AC4 text176 CODE >1227:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-8AC4 text176 CODE >1228:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+8AAC text176 CODE >1224:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+8AC4 text176 CODE >1225:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+8AC4 text176 CODE >1226:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7F86 text175 CODE >1124:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 7F86 text175 CODE >1126:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7F86 text175 CODE >1128:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7F88 text175 CODE >1131:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7F88 text175 CODE >1132:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7F8C text175 CODE >1133:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7F8C text175 CODE >1134:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7F90 text175 CODE >1135:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7F90 text175 CODE >1136:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7F94 text175 CODE >1137:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7F94 text175 CODE >1138:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7F98 text175 CODE >1140:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7F98 text175 CODE >1141:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7F9C text175 CODE >1142:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7F9C text175 CODE >1143:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7FA0 text175 CODE >1144:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7FA0 text175 CODE >1145:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7FA2 text175 CODE >1146:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-7FA4 text175 CODE >1128:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7F88 text175 CODE >1129:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7F88 text175 CODE >1130:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7F8C text175 CODE >1131:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7F8C text175 CODE >1132:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7F90 text175 CODE >1133:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7F90 text175 CODE >1134:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7F94 text175 CODE >1135:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7F94 text175 CODE >1136:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7F98 text175 CODE >1138:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7F98 text175 CODE >1139:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7F9C text175 CODE >1140:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7F9C text175 CODE >1141:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7FA0 text175 CODE >1142:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7FA0 text175 CODE >1143:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7FA2 text175 CODE >1144:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+7FA4 text175 CODE >1126:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1DCC text174 CODE >1019:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 1DCC text174 CODE >1021:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1DCC text174 CODE >1023:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1DCE text174 CODE >1025:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1DCE text174 CODE >1026:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1DD2 text174 CODE >1027:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1DD2 text174 CODE >1028:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1DD6 text174 CODE >1029:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1DD6 text174 CODE >1030:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1DDA text174 CODE >1031:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1DDA text174 CODE >1032:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1DEC text174 CODE >1033:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1DEC text174 CODE >1034:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1DFC text174 CODE >1035:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1DFC text174 CODE >1036:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E0C text174 CODE >1037:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E0C text174 CODE >1038:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E1C text174 CODE >1039:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E1C text174 CODE >1040:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E2C text174 CODE >1041:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E2C text174 CODE >1042:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E3C text174 CODE >1043:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E3C text174 CODE >1044:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E4C text174 CODE >1045:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E4C text174 CODE >1046:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E5C text174 CODE >1047:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E5C text174 CODE >1048:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E60 text174 CODE >1049:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E60 text174 CODE >1050:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E64 text174 CODE >1051:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E64 text174 CODE >1052:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E68 text174 CODE >1053:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E68 text174 CODE >1054:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E6C text174 CODE >1055:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E6C text174 CODE >1056:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E70 text174 CODE >1057:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E70 text174 CODE >1058:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E74 text174 CODE >1059:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E74 text174 CODE >1060:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E78 text174 CODE >1061:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E78 text174 CODE >1062:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E7C text174 CODE >1063:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E7C text174 CODE >1064:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E80 text174 CODE >1065:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E80 text174 CODE >1066:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E84 text174 CODE >1067:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E84 text174 CODE >1068:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E88 text174 CODE >1069:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E88 text174 CODE >1070:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E8C text174 CODE >1071:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E8C text174 CODE >1072:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E90 text174 CODE >1073:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E90 text174 CODE >1074:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E94 text174 CODE >1075:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E94 text174 CODE >1076:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E98 text174 CODE >1077:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E98 text174 CODE >1078:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E9C text174 CODE >1079:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1E9C text174 CODE >1080:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EA0 text174 CODE >1081:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EA0 text174 CODE >1082:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EA4 text174 CODE >1083:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EA4 text174 CODE >1084:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EA8 text174 CODE >1085:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EA8 text174 CODE >1086:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EAC text174 CODE >1087:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EAC text174 CODE >1088:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EB0 text174 CODE >1089:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EB0 text174 CODE >1090:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EB4 text174 CODE >1091:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EB4 text174 CODE >1092:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EB8 text174 CODE >1093:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EB8 text174 CODE >1094:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EBC text174 CODE >1095:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EBC text174 CODE >1096:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EC0 text174 CODE >1097:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EC0 text174 CODE >1100:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EC4 text174 CODE >1101:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EC4 text174 CODE >1102:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EC8 text174 CODE >1103:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EC8 text174 CODE >1104:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1ECC text174 CODE >1105:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1ECC text174 CODE >1106:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1ED0 text174 CODE >1107:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1ED0 text174 CODE >1108:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1ED4 text174 CODE >1109:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1ED4 text174 CODE >1110:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1ED8 text174 CODE >1111:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1ED8 text174 CODE >1112:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EDC text174 CODE >1113:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EDC text174 CODE >1114:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EE0 text174 CODE >1115:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EE0 text174 CODE >1116:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EE4 text174 CODE >1117:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EE4 text174 CODE >1118:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EE8 text174 CODE >1119:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EE8 text174 CODE >1120:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EEC text174 CODE >1121:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EEC text174 CODE >1122:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EEE text174 CODE >1123:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-1EF0 text174 CODE >1023:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1DCE text174 CODE >1023:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1DCE text174 CODE >1024:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1DD2 text174 CODE >1025:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1DD2 text174 CODE >1026:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1DD6 text174 CODE >1027:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1DD6 text174 CODE >1028:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1DDA text174 CODE >1029:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1DDA text174 CODE >1030:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1DEC text174 CODE >1031:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1DEC text174 CODE >1032:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1DFC text174 CODE >1033:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1DFC text174 CODE >1034:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E0C text174 CODE >1035:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E0C text174 CODE >1036:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E1C text174 CODE >1037:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E1C text174 CODE >1038:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E2C text174 CODE >1039:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E2C text174 CODE >1040:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E3C text174 CODE >1041:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E3C text174 CODE >1042:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E4C text174 CODE >1043:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E4C text174 CODE >1044:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E5C text174 CODE >1045:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E5C text174 CODE >1046:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E60 text174 CODE >1047:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E60 text174 CODE >1048:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E64 text174 CODE >1049:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E64 text174 CODE >1050:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E68 text174 CODE >1051:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E68 text174 CODE >1052:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E6C text174 CODE >1053:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E6C text174 CODE >1054:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E70 text174 CODE >1055:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E70 text174 CODE >1056:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E74 text174 CODE >1057:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E74 text174 CODE >1058:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E78 text174 CODE >1059:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E78 text174 CODE >1060:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E7C text174 CODE >1061:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E7C text174 CODE >1062:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E80 text174 CODE >1063:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E80 text174 CODE >1064:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E84 text174 CODE >1065:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E84 text174 CODE >1066:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E88 text174 CODE >1067:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E88 text174 CODE >1068:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E8C text174 CODE >1069:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E8C text174 CODE >1070:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E90 text174 CODE >1071:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E90 text174 CODE >1072:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E94 text174 CODE >1073:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E94 text174 CODE >1074:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E98 text174 CODE >1075:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E98 text174 CODE >1076:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E9C text174 CODE >1077:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1E9C text174 CODE >1078:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EA0 text174 CODE >1079:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EA0 text174 CODE >1080:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EA4 text174 CODE >1081:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EA4 text174 CODE >1082:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EA8 text174 CODE >1083:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EA8 text174 CODE >1084:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EAC text174 CODE >1085:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EAC text174 CODE >1086:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EB0 text174 CODE >1087:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EB0 text174 CODE >1088:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EB4 text174 CODE >1089:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EB4 text174 CODE >1090:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EB8 text174 CODE >1091:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EB8 text174 CODE >1092:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EBC text174 CODE >1093:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EBC text174 CODE >1094:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EC0 text174 CODE >1095:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EC0 text174 CODE >1098:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EC4 text174 CODE >1099:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EC4 text174 CODE >1100:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EC8 text174 CODE >1101:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EC8 text174 CODE >1102:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1ECC text174 CODE >1103:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1ECC text174 CODE >1104:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1ED0 text174 CODE >1105:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1ED0 text174 CODE >1106:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1ED4 text174 CODE >1107:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1ED4 text174 CODE >1108:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1ED8 text174 CODE >1109:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1ED8 text174 CODE >1110:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EDC text174 CODE >1111:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EDC text174 CODE >1112:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EE0 text174 CODE >1113:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EE0 text174 CODE >1114:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EE4 text174 CODE >1115:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EE4 text174 CODE >1116:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EE8 text174 CODE >1117:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EE8 text174 CODE >1118:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EEC text174 CODE >1119:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EEC text174 CODE >1120:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EEE text174 CODE >1121:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+1EF0 text174 CODE >1021:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5CFA text173 CODE >974:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 5CFA text173 CODE >976:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5CFA text173 CODE >978:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5CFC text173 CODE >980:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5CFC text173 CODE >981:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D00 text173 CODE >982:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D00 text173 CODE >983:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D04 text173 CODE >984:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D04 text173 CODE >985:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D08 text173 CODE >986:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D08 text173 CODE >987:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D0C text173 CODE >988:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D0C text173 CODE >989:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D10 text173 CODE >990:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D10 text173 CODE >991:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D14 text173 CODE >992:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D14 text173 CODE >993:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D18 text173 CODE >994:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D18 text173 CODE >995:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D1C text173 CODE >996:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D1C text173 CODE >997:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D20 text173 CODE >998:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D20 text173 CODE >999:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D24 text173 CODE >1000:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D24 text173 CODE >1001:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D28 text173 CODE >1002:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D28 text173 CODE >1003:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D2C text173 CODE >1004:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D2C text173 CODE >1005:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D30 text173 CODE >1006:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D30 text173 CODE >1007:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D34 text173 CODE >1008:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D34 text173 CODE >1009:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D38 text173 CODE >1010:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D38 text173 CODE >1011:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D3C text173 CODE >1012:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D3C text173 CODE >1013:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D40 text173 CODE >1014:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D40 text173 CODE >1015:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D44 text173 CODE >1016:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D44 text173 CODE >1017:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D46 text173 CODE >1018:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-5D48 text173 CODE >978:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5CFC text173 CODE >978:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5CFC text173 CODE >979:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D00 text173 CODE >980:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D00 text173 CODE >981:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D04 text173 CODE >982:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D04 text173 CODE >983:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D08 text173 CODE >984:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D08 text173 CODE >985:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D0C text173 CODE >986:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D0C text173 CODE >987:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D10 text173 CODE >988:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D10 text173 CODE >989:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D14 text173 CODE >990:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D14 text173 CODE >991:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D18 text173 CODE >992:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D18 text173 CODE >993:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D1C text173 CODE >994:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D1C text173 CODE >995:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D20 text173 CODE >996:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D20 text173 CODE >997:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D24 text173 CODE >998:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D24 text173 CODE >999:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D28 text173 CODE >1000:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D28 text173 CODE >1001:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D2C text173 CODE >1002:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D2C text173 CODE >1003:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D30 text173 CODE >1004:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D30 text173 CODE >1005:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D34 text173 CODE >1006:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D34 text173 CODE >1007:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D38 text173 CODE >1008:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D38 text173 CODE >1009:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D3C text173 CODE >1010:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D3C text173 CODE >1011:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D40 text173 CODE >1012:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D40 text173 CODE >1013:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D44 text173 CODE >1014:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D44 text173 CODE >1015:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D46 text173 CODE >1016:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+5D48 text173 CODE >976:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+346C text172 CODE >1147:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 346C text172 CODE >1149:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-346C text172 CODE >1151:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3478 text172 CODE >1153:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3484 text172 CODE >1155:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-349C text172 CODE >1156:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-349C text172 CODE >1157:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-34A6 text172 CODE >1159:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3478 text172 CODE >1151:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3484 text172 CODE >1153:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+349C text172 CODE >1154:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+349C text172 CODE >1155:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+34A6 text172 CODE >1157:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+34AA text172 CODE >1158:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 34AA text172 CODE >1160:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-34AA text172 CODE >1162:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-34B6 text172 CODE >1164:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-34BE text172 CODE >1165:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-34CA text172 CODE >1167:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-34E2 text172 CODE >1168:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-34E2 text172 CODE >1169:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-34EE text172 CODE >1171:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-351E text172 CODE >1175:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-351E text172 CODE >1176:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3522 text172 CODE >1177:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3522 text172 CODE >1178:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3526 text172 CODE >1179:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3526 text172 CODE >1180:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-352A text172 CODE >1181:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-352A text172 CODE >1182:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-352E text172 CODE >1183:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-352E text172 CODE >1184:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3532 text172 CODE >1185:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3532 text172 CODE >1186:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3536 text172 CODE >1187:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3536 text172 CODE >1188:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-353A text172 CODE >1189:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-353A text172 CODE >1190:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-353E text172 CODE >1191:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-353E text172 CODE >1192:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3542 text172 CODE >1193:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3542 text172 CODE >1194:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3546 text172 CODE >1195:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3546 text172 CODE >1196:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-354A text172 CODE >1197:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-354A text172 CODE >1198:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-354E text172 CODE >1199:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-354E text172 CODE >1200:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3552 text172 CODE >1201:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3552 text172 CODE >1202:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3556 text172 CODE >1203:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3556 text172 CODE >1204:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-355A text172 CODE >1205:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-355A text172 CODE >1206:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-355E text172 CODE >1207:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-355E text172 CODE >1208:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3562 text172 CODE >1209:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3562 text172 CODE >1210:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3566 text172 CODE >1211:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3566 text172 CODE >1212:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-356A text172 CODE >1213:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-356A text172 CODE >1214:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-356E text172 CODE >1215:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-356E text172 CODE >1216:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-3572 text172 CODE >1173:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+34B6 text172 CODE >1162:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+34BE text172 CODE >1163:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+34CA text172 CODE >1165:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+34E2 text172 CODE >1166:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+34E2 text172 CODE >1167:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+34EE text172 CODE >1169:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+351E text172 CODE >1173:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+351E text172 CODE >1174:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3522 text172 CODE >1175:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3522 text172 CODE >1176:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3526 text172 CODE >1177:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3526 text172 CODE >1178:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+352A text172 CODE >1179:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+352A text172 CODE >1180:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+352E text172 CODE >1181:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+352E text172 CODE >1182:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3532 text172 CODE >1183:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3532 text172 CODE >1184:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3536 text172 CODE >1185:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3536 text172 CODE >1186:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+353A text172 CODE >1187:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+353A text172 CODE >1188:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+353E text172 CODE >1189:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+353E text172 CODE >1190:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3542 text172 CODE >1191:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3542 text172 CODE >1192:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3546 text172 CODE >1193:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3546 text172 CODE >1194:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+354A text172 CODE >1195:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+354A text172 CODE >1196:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+354E text172 CODE >1197:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+354E text172 CODE >1198:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3552 text172 CODE >1199:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3552 text172 CODE >1200:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3556 text172 CODE >1201:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3556 text172 CODE >1202:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+355A text172 CODE >1203:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+355A text172 CODE >1204:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+355E text172 CODE >1205:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+355E text172 CODE >1206:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3562 text172 CODE >1207:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3562 text172 CODE >1208:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3566 text172 CODE >1209:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3566 text172 CODE >1210:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+356A text172 CODE >1211:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+356A text172 CODE >1212:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+356E text172 CODE >1213:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+356E text172 CODE >1214:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+3572 text172 CODE >1171:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+35FE text172 CODE >1215:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 35FE text172 CODE >1217:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-35FE text172 CODE >1219:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2902 text171 CODE >1259:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2902 text171 CODE >1264:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2912 text171 CODE >1266:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-292C text171 CODE >1264:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2932 text171 CODE >1268:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2946 text171 CODE >1271:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2956 text171 CODE >1273:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2970 text171 CODE >1271:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2976 text171 CODE >1275:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-298A text171 CODE >1278:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-299A text171 CODE >1280:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-29B4 text171 CODE >1278:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-29BA text171 CODE >1282:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-29CE text171 CODE >1285:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-29DE text171 CODE >1287:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-29EE text171 CODE >1285:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-29F4 text171 CODE >1289:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2A08 text171 CODE >1291:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2A1C text171 CODE >1289:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2A22 text171 CODE >1295:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2A32 text171 CODE >1297:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2A4C text171 CODE >1295:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2A52 text171 CODE >1299:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2A66 text171 CODE >1302:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2A76 text171 CODE >1304:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2A86 text171 CODE >1302:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2A8C text171 CODE >1306:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2AA0 text171 CODE >1308:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2AB4 text171 CODE >1306:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2ABA text171 CODE >1312:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2ACA text171 CODE >1314:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2AE4 text171 CODE >1312:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2AEA text171 CODE >1316:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-2AFE text171 CODE >1317:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2902 text171 CODE >1257:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2902 text171 CODE >1262:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2912 text171 CODE >1264:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+292C text171 CODE >1262:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2932 text171 CODE >1266:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2946 text171 CODE >1269:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2956 text171 CODE >1271:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2970 text171 CODE >1269:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2976 text171 CODE >1273:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+298A text171 CODE >1276:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+299A text171 CODE >1278:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+29B4 text171 CODE >1276:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+29BA text171 CODE >1280:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+29CE text171 CODE >1283:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+29DE text171 CODE >1285:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+29EE text171 CODE >1283:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+29F4 text171 CODE >1287:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2A08 text171 CODE >1289:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2A1C text171 CODE >1287:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2A22 text171 CODE >1293:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2A32 text171 CODE >1295:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2A4C text171 CODE >1293:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2A52 text171 CODE >1297:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2A66 text171 CODE >1300:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2A76 text171 CODE >1302:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2A86 text171 CODE >1300:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2A8C text171 CODE >1304:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2AA0 text171 CODE >1306:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2AB4 text171 CODE >1304:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2ABA text171 CODE >1310:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2ACA text171 CODE >1312:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2AE4 text171 CODE >1310:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2AEA text171 CODE >1314:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+2AFE text171 CODE >1315:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 8424 text170 CODE >686:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 8424 text170 CODE >689:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 845C text170 CODE >691:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
@@ -1288,15 +1288,15 @@ $dist/default/production\USB_Bootloader.production.o
 8E52 text169 CODE >500:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
 8E52 text169 CODE >502:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
 8E62 text169 CODE >503:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
-63D2 text168 CODE >1357:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-63D4 text168 CODE >1364:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-63E0 text168 CODE >1371:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-63F6 text168 CODE >1374:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-6428 text168 CODE >1375:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-6434 text168 CODE >1382:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-6442 text168 CODE >1383:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-645E text168 CODE >1386:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-6472 text168 CODE >1389:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+63D2 text168 CODE >1355:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+63D4 text168 CODE >1362:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+63E0 text168 CODE >1369:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+63F6 text168 CODE >1372:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+6428 text168 CODE >1373:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+6434 text168 CODE >1380:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+6442 text168 CODE >1381:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+645E text168 CODE >1384:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+6472 text168 CODE >1387:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 716A text167 CODE >697:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 716A text167 CODE >702:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 71A2 text167 CODE >704:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
@@ -1309,9 +1309,9 @@ $dist/default/production\USB_Bootloader.production.o
 8C36 text166 CODE >515:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
 8C36 text166 CODE >517:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
 8C56 text166 CODE >518:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
+8CD8 text165 CODE >1436:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 8CD8 text165 CODE >1438:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-8CD8 text165 CODE >1440:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-8CF4 text165 CODE >1441:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+8CF4 text165 CODE >1439:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 672E text164 CODE >739:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 672E text164 CODE >745:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 6766 text164 CODE >748:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
@@ -2008,9 +2008,9 @@ F96 text143 CODE >215:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloade
 5624 text109 CODE >229:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 8FAE text108 CODE >510:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
 8FAE text108 CODE >513:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
+8CBA text107 CODE >1431:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 8CBA text107 CODE >1433:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-8CBA text107 CODE >1435:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-8CD6 text107 CODE >1436:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+8CD6 text107 CODE >1434:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 4EEC text106 CODE >440:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 4EEC text106 CODE >446:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
 4EF8 text106 CODE >449:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\api.c
@@ -3735,23 +3735,23 @@ FFA text28 CODE >204:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader
 8C90 text22 CODE >132:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.c
 8C92 text22 CODE >135:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.c
 8C98 text22 CODE >136:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\os.c
-67D4 text21 CODE >1231:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-67D4 text21 CODE >1236:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-67E8 text21 CODE >1237:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-67F8 text21 CODE >1239:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-681A text21 CODE >1241:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-681E text21 CODE >1237:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-681E text21 CODE >1242:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-6824 text21 CODE >1246:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-6838 text21 CODE >1247:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-6848 text21 CODE >1249:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-686A text21 CODE >1251:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-686E text21 CODE >1247:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-686E text21 CODE >1252:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-6874 text21 CODE >1256:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-8E96 text20 CODE >1319:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-8E96 text20 CODE >1322:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
-8EA0 text20 CODE >1324:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+67D4 text21 CODE >1229:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+67D4 text21 CODE >1234:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+67E8 text21 CODE >1235:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+67F8 text21 CODE >1237:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+681A text21 CODE >1239:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+681E text21 CODE >1235:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+681E text21 CODE >1240:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+6824 text21 CODE >1244:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+6838 text21 CODE >1245:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+6848 text21 CODE >1247:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+686A text21 CODE >1249:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+686E text21 CODE >1245:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+686E text21 CODE >1250:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+6874 text21 CODE >1254:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+8E96 text20 CODE >1317:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+8E96 text20 CODE >1320:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
+8EA0 text20 CODE >1322:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\fat16.c
 7482 text19 CODE >95:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
 7484 text19 CODE >100:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
 748E text19 CODE >103:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\flash.c
@@ -4077,76 +4077,76 @@ FFA text28 CODE >204:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader
 3BDE text0 CODE >195:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\main.c
 3BDE text0 CODE >196:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\main.c
 3BE4 text0 CODE >93:C:\Users\luke\OneDrive\EmbeddedSystems\MPLAB\USB_Bootloader\main.c
-6FC2 cinit CODE >15914:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FC2 cinit CODE >15916:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FC2 cinit CODE >15919:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FC2 cinit CODE >16219:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FC4 cinit CODE >16220:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FC6 cinit CODE >16221:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FC8 cinit CODE >16222:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FCA cinit CODE >16223:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FCC cinit CODE >16224:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FCE cinit CODE >16225:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FD2 cinit CODE >16226:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FD6 cinit CODE >16227:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FD6 cinit CODE >16228:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FD8 cinit CODE >16229:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FDC cinit CODE >16230:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FDE cinit CODE >16231:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FE0 cinit CODE >16232:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FE2 cinit CODE >16236:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FE4 cinit CODE >16237:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FE6 cinit CODE >16238:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FE8 cinit CODE >16239:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FEA cinit CODE >16240:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FEC cinit CODE >16241:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FEE cinit CODE >16242:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FF0 cinit CODE >16243:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FF4 cinit CODE >16247:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FF8 cinit CODE >16248:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FFC cinit CODE >16249:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FFC cinit CODE >16250:C:\Users\luke\AppData\Local\Temp\s1q8o.
-6FFE cinit CODE >16251:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7000 cinit CODE >16252:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7002 cinit CODE >16253:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7004 cinit CODE >16254:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7006 cinit CODE >16255:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7008 cinit CODE >16258:C:\Users\luke\AppData\Local\Temp\s1q8o.
-700C cinit CODE >16259:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7010 cinit CODE >16260:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7010 cinit CODE >16261:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7012 cinit CODE >16262:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7014 cinit CODE >16263:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7016 cinit CODE >16264:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7018 cinit CODE >16265:C:\Users\luke\AppData\Local\Temp\s1q8o.
-701A cinit CODE >16266:C:\Users\luke\AppData\Local\Temp\s1q8o.
-701C cinit CODE >16269:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7020 cinit CODE >16270:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7022 cinit CODE >16271:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7022 cinit CODE >16272:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7024 cinit CODE >16273:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7026 cinit CODE >16274:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7028 cinit CODE >16277:C:\Users\luke\AppData\Local\Temp\s1q8o.
-702C cinit CODE >16278:C:\Users\luke\AppData\Local\Temp\s1q8o.
-702E cinit CODE >16279:C:\Users\luke\AppData\Local\Temp\s1q8o.
-702E cinit CODE >16280:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7030 cinit CODE >16281:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7032 cinit CODE >16282:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7034 cinit CODE >16285:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7038 cinit CODE >16286:C:\Users\luke\AppData\Local\Temp\s1q8o.
-703A cinit CODE >16287:C:\Users\luke\AppData\Local\Temp\s1q8o.
-703A cinit CODE >16288:C:\Users\luke\AppData\Local\Temp\s1q8o.
-703C cinit CODE >16289:C:\Users\luke\AppData\Local\Temp\s1q8o.
-703E cinit CODE >16290:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7040 cinit CODE >16293:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7044 cinit CODE >16294:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7046 cinit CODE >16295:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7046 cinit CODE >16296:C:\Users\luke\AppData\Local\Temp\s1q8o.
-7048 cinit CODE >16297:C:\Users\luke\AppData\Local\Temp\s1q8o.
-704A cinit CODE >16298:C:\Users\luke\AppData\Local\Temp\s1q8o.
-704C cinit CODE >16304:C:\Users\luke\AppData\Local\Temp\s1q8o.
-704C cinit CODE >16306:C:\Users\luke\AppData\Local\Temp\s1q8o.
-704E cinit CODE >16307:C:\Users\luke\AppData\Local\Temp\s1q8o.
+6FC2 cinit CODE >15914:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FC2 cinit CODE >15916:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FC2 cinit CODE >15919:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FC2 cinit CODE >16219:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FC4 cinit CODE >16220:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FC6 cinit CODE >16221:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FC8 cinit CODE >16222:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FCA cinit CODE >16223:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FCC cinit CODE >16224:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FCE cinit CODE >16225:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FD2 cinit CODE >16226:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FD6 cinit CODE >16227:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FD6 cinit CODE >16228:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FD8 cinit CODE >16229:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FDC cinit CODE >16230:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FDE cinit CODE >16231:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FE0 cinit CODE >16232:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FE2 cinit CODE >16236:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FE4 cinit CODE >16237:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FE6 cinit CODE >16238:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FE8 cinit CODE >16239:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FEA cinit CODE >16240:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FEC cinit CODE >16241:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FEE cinit CODE >16242:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FF0 cinit CODE >16243:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FF4 cinit CODE >16247:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FF8 cinit CODE >16248:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FFC cinit CODE >16249:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FFC cinit CODE >16250:C:\Users\luke\AppData\Local\Temp\s1spc.
+6FFE cinit CODE >16251:C:\Users\luke\AppData\Local\Temp\s1spc.
+7000 cinit CODE >16252:C:\Users\luke\AppData\Local\Temp\s1spc.
+7002 cinit CODE >16253:C:\Users\luke\AppData\Local\Temp\s1spc.
+7004 cinit CODE >16254:C:\Users\luke\AppData\Local\Temp\s1spc.
+7006 cinit CODE >16255:C:\Users\luke\AppData\Local\Temp\s1spc.
+7008 cinit CODE >16258:C:\Users\luke\AppData\Local\Temp\s1spc.
+700C cinit CODE >16259:C:\Users\luke\AppData\Local\Temp\s1spc.
+7010 cinit CODE >16260:C:\Users\luke\AppData\Local\Temp\s1spc.
+7010 cinit CODE >16261:C:\Users\luke\AppData\Local\Temp\s1spc.
+7012 cinit CODE >16262:C:\Users\luke\AppData\Local\Temp\s1spc.
+7014 cinit CODE >16263:C:\Users\luke\AppData\Local\Temp\s1spc.
+7016 cinit CODE >16264:C:\Users\luke\AppData\Local\Temp\s1spc.
+7018 cinit CODE >16265:C:\Users\luke\AppData\Local\Temp\s1spc.
+701A cinit CODE >16266:C:\Users\luke\AppData\Local\Temp\s1spc.
+701C cinit CODE >16269:C:\Users\luke\AppData\Local\Temp\s1spc.
+7020 cinit CODE >16270:C:\Users\luke\AppData\Local\Temp\s1spc.
+7022 cinit CODE >16271:C:\Users\luke\AppData\Local\Temp\s1spc.
+7022 cinit CODE >16272:C:\Users\luke\AppData\Local\Temp\s1spc.
+7024 cinit CODE >16273:C:\Users\luke\AppData\Local\Temp\s1spc.
+7026 cinit CODE >16274:C:\Users\luke\AppData\Local\Temp\s1spc.
+7028 cinit CODE >16277:C:\Users\luke\AppData\Local\Temp\s1spc.
+702C cinit CODE >16278:C:\Users\luke\AppData\Local\Temp\s1spc.
+702E cinit CODE >16279:C:\Users\luke\AppData\Local\Temp\s1spc.
+702E cinit CODE >16280:C:\Users\luke\AppData\Local\Temp\s1spc.
+7030 cinit CODE >16281:C:\Users\luke\AppData\Local\Temp\s1spc.
+7032 cinit CODE >16282:C:\Users\luke\AppData\Local\Temp\s1spc.
+7034 cinit CODE >16285:C:\Users\luke\AppData\Local\Temp\s1spc.
+7038 cinit CODE >16286:C:\Users\luke\AppData\Local\Temp\s1spc.
+703A cinit CODE >16287:C:\Users\luke\AppData\Local\Temp\s1spc.
+703A cinit CODE >16288:C:\Users\luke\AppData\Local\Temp\s1spc.
+703C cinit CODE >16289:C:\Users\luke\AppData\Local\Temp\s1spc.
+703E cinit CODE >16290:C:\Users\luke\AppData\Local\Temp\s1spc.
+7040 cinit CODE >16293:C:\Users\luke\AppData\Local\Temp\s1spc.
+7044 cinit CODE >16294:C:\Users\luke\AppData\Local\Temp\s1spc.
+7046 cinit CODE >16295:C:\Users\luke\AppData\Local\Temp\s1spc.
+7046 cinit CODE >16296:C:\Users\luke\AppData\Local\Temp\s1spc.
+7048 cinit CODE >16297:C:\Users\luke\AppData\Local\Temp\s1spc.
+704A cinit CODE >16298:C:\Users\luke\AppData\Local\Temp\s1spc.
+704C cinit CODE >16304:C:\Users\luke\AppData\Local\Temp\s1spc.
+704C cinit CODE >16306:C:\Users\luke\AppData\Local\Temp\s1spc.
+704E cinit CODE >16307:C:\Users\luke\AppData\Local\Temp\s1spc.
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -4207,7 +4207,7 @@ strncmp@s2 3 0 COMRAM 1 cstackCOMRAM dist/default/production\USB_Bootloader.prod
 __size_of__display_itoa_u16 0 0 ABS 0 - dist/default/production\USB_Bootloader.production.o
 __size_of__display_itoa_u32 0 0 ABS 0 - dist/default/production\USB_Bootloader.production.o
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\USB_Bootloader.production.o
-__mediumconst 9C98 0 MEDIUMCONST 0 mediumconst C:\Users\luke\AppData\Local\Temp\s1q8o.o
+__mediumconst 9C98 0 MEDIUMCONST 0 mediumconst C:\Users\luke\AppData\Local\Temp\s1spc.o
 _MSDTasks$2372 4E 0 COMRAM 1 cstackCOMRAM dist/default/production\USB_Bootloader.production.o
 _MSDTasks$2373 50 0 COMRAM 1 cstackCOMRAM dist/default/production\USB_Bootloader.production.o
 __write_value_to_offset 87E6 0 CODE 0 text198 dist/default/production\USB_Bootloader.production.o
@@ -4261,7 +4261,7 @@ _UEIE F37 0 ABS 0 - dist/default/production\USB_Bootloader.production.o
 _UEIR F63 0 ABS 0 - dist/default/production\USB_Bootloader.production.o
 _UEP0 F26 0 ABS 0 - dist/default/production\USB_Bootloader.production.o
 _UEP1 F27 0 ABS 0 - dist/default/production\USB_Bootloader.production.o
-___sp 0 0 STACK 2 stack C:\Users\luke\AppData\Local\Temp\s1q8o.o
+___sp 0 0 STACK 2 stack C:\Users\luke\AppData\Local\Temp\s1spc.o
 _itoa 84EE 0 CODE 0 text152 dist/default/production\USB_Bootloader.production.o
 fat_read_from_file@start_byte 6E 0 BANK0 1 cstackBANK0 dist/default/production\USB_Bootloader.production.o
 _main 3A74 0 CODE 0 text0 dist/default/production\USB_Bootloader.production.o
@@ -4271,7 +4271,7 @@ __size_of_bootloader_get_rec_checksum 0 0 ABS 0 - dist/default/production\USB_Bo
 __get_available_offset_from_buffer 7CCA 0 CODE 0 text200 dist/default/production\USB_Bootloader.production.o
 fat_modify_file@position 6A 0 BANK0 1 cstackBANK0 dist/default/production\USB_Bootloader.production.o
 __size_of_USBCtrlTrfTxService 0 0 ABS 0 - dist/default/production\USB_Bootloader.production.o
-start 1C 0 CODE 0 init C:\Users\luke\AppData\Local\Temp\s1q8o.o
+start 1C 0 CODE 0 init C:\Users\luke\AppData\Local\Temp\s1spc.o
 __parse_command_long 5626 0 CODE 0 text163 dist/default/production\USB_Bootloader.production.o
 __end_of_internalFlash_writePage 7482 0 CODE 0 text34 dist/default/production\USB_Bootloader.production.o
 __end_of_USBCheckHIDRequest 5462 0 CODE 0 text69 dist/default/production\USB_Bootloader.production.o
@@ -4379,11 +4379,11 @@ utoa@v E 0 COMRAM 1 cstackCOMRAM dist/default/production\USB_Bootloader.producti
 __flash_write_page_from_buffer 7DD4 0 CODE 0 text212 dist/default/production\USB_Bootloader.production.o
 __display_checked@start 21 0 COMRAM 1 cstackCOMRAM dist/default/production\USB_Bootloader.production.o
 __fill_buffer_read_buffer 4EEC 0 CODE 0 text106 dist/default/production\USB_Bootloader.production.o
-__accesstop 60 0 ABS 0 - C:\Users\luke\AppData\Local\Temp\s1q8o.o
-intlevel0 0 0 CODE 0 text C:\Users\luke\AppData\Local\Temp\s1q8o.o
-intlevel1 0 0 CODE 0 text C:\Users\luke\AppData\Local\Temp\s1q8o.o
-intlevel2 0 0 CODE 0 text C:\Users\luke\AppData\Local\Temp\s1q8o.o
-intlevel3 0 0 CODE 0 text C:\Users\luke\AppData\Local\Temp\s1q8o.o
+__accesstop 60 0 ABS 0 - C:\Users\luke\AppData\Local\Temp\s1spc.o
+intlevel0 0 0 CODE 0 text C:\Users\luke\AppData\Local\Temp\s1spc.o
+intlevel1 0 0 CODE 0 text C:\Users\luke\AppData\Local\Temp\s1spc.o
+intlevel2 0 0 CODE 0 text C:\Users\luke\AppData\Local\Temp\s1spc.o
+intlevel3 0 0 CODE 0 text C:\Users\luke\AppData\Local\Temp\s1spc.o
 __read_fat@value 36 0 COMRAM 1 cstackCOMRAM dist/default/production\USB_Bootloader.production.o
 __ptext100 8FAA 0 CODE 0 text100 dist/default/production\USB_Bootloader.production.o
 __ptext101 6684 0 CODE 0 text101 dist/default/production\USB_Bootloader.production.o
@@ -4608,10 +4608,10 @@ ExternalFlash_SectorRead@buffer 32 0 COMRAM 1 cstackCOMRAM dist/default/producti
 internalFlash_addressWithinPage@address 9 0 COMRAM 1 cstackCOMRAM dist/default/production\USB_Bootloader.production.o
 fat_read_from_buffer@length 9 0 COMRAM 1 cstackCOMRAM dist/default/production\USB_Bootloader.production.o
 __system_encoder_init 866A 0 CODE 0 text23 dist/default/production\USB_Bootloader.production.o
-___inthi_sp 0 0 STACK 2 stack C:\Users\luke\AppData\Local\Temp\s1q8o.o
+___inthi_sp 0 0 STACK 2 stack C:\Users\luke\AppData\Local\Temp\s1spc.o
 __size_of__parse_sector_to_buffer 0 0 ABS 0 - dist/default/production\USB_Bootloader.production.o
 __write_root@sector 2B 0 COMRAM 1 cstackCOMRAM dist/default/production\USB_Bootloader.production.o
-___intlo_sp 0 0 STACK 2 stack C:\Users\luke\AppData\Local\Temp\s1q8o.o
+___intlo_sp 0 0 STACK 2 stack C:\Users\luke\AppData\Local\Temp\s1spc.o
 __get_first_cluster 8276 0 CODE 0 text215 dist/default/production\USB_Bootloader.production.o
 __end_of_MSDComputeDeviceInAndResidue 6CD8 0 CODE 0 text96 dist/default/production\USB_Bootloader.production.o
 __end_of_fat_write_to_buffer 8CF6 0 CODE 0 text165 dist/default/production\USB_Bootloader.production.o
@@ -5135,7 +5135,7 @@ __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\USB_Bootloader.production.
 __Hbigram 0 0 ABS 0 bigram dist/default/production\USB_Bootloader.production.o
 __size_of_USBStallEndpoint 0 0 ABS 0 - dist/default/production\USB_Bootloader.production.o
 _i2c_set_frequency 89F6 0 CODE 0 text157 dist/default/production\USB_Bootloader.production.o
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\luke\AppData\Local\Temp\s1q8o.o
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Users\luke\AppData\Local\Temp\s1spc.o
 _USBCheckStdRequest 51BC 0 CODE 0 text61 dist/default/production\USB_Bootloader.production.o
 _search_line1 9DE4 0 MEDIUMCONST 0 mediumconst dist/default/production\USB_Bootloader.production.o
 _search_line2 9D43 0 MEDIUMCONST 0 mediumconst dist/default/production\USB_Bootloader.production.o
@@ -5801,8 +5801,8 @@ __size_of__bootloader_verify_file 0 0 ABS 0 - dist/default/production\USB_Bootlo
 __size_of_api_prepare 0 0 ABS 0 - dist/default/production\USB_Bootloader.production.o
 __fill_buffer_find_file 69C0 0 CODE 0 text121 dist/default/production\USB_Bootloader.production.o
 _bootloader_filename 9FB7 0 MEDIUMCONST 0 mediumconst dist/default/production\USB_Bootloader.production.o
-stackhi EAF 0 ABS 0 - C:\Users\luke\AppData\Local\Temp\s1q8o.o
-stacklo D8D 0 ABS 0 - C:\Users\luke\AppData\Local\Temp\s1q8o.o
+stackhi EAF 0 ABS 0 - C:\Users\luke\AppData\Local\Temp\s1spc.o
+stacklo D8D 0 ABS 0 - C:\Users\luke\AppData\Local\Temp\s1spc.o
 __size_of_fat_read_from_file 0 0 ABS 0 - dist/default/production\USB_Bootloader.production.o
 _api_parse 5C2A 0 CODE 0 text122 dist/default/production\USB_Bootloader.production.o
 __end_of_USBConfigureEndpoint 6E9A 0 CODE 0 text76 dist/default/production\USB_Bootloader.production.o
@@ -6102,7 +6102,7 @@ __data_sector_from_cluster@fat_cluster 1 0 COMRAM 1 cstackCOMRAM dist/default/pr
 fat_read_from_file@length 72 0 BANK0 1 cstackBANK0 dist/default/production\USB_Bootloader.production.o
 __end_of_USBCtrlTrfInHandler 5F5C 0 CODE 0 text80 dist/default/production\USB_Bootloader.production.o
 __fill_buffer_get_display@outBuffer 5 0 COMRAM 1 cstackCOMRAM dist/default/production\USB_Bootloader.production.o
-__ramtop F00 0 RAM 0 ramtop C:\Users\luke\AppData\Local\Temp\s1q8o.o
+__ramtop F00 0 RAM 0 ramtop C:\Users\luke\AppData\Local\Temp\s1spc.o
 _ExternalFlash_MediaInitialize 8D48 0 CODE 0 text99 dist/default/production\USB_Bootloader.production.o
 ?_bootloader_get_entries 1 0 COMRAM 1 cstackCOMRAM dist/default/production\USB_Bootloader.production.o
 __parse_file_resize@file_size 58 0 COMRAM 1 cstackCOMRAM dist/default/production\USB_Bootloader.production.o
