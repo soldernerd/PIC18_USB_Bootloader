@@ -742,7 +742,7 @@ static uint8_t _parse_write_buffer(uint8_t *data)
     uint16_t number_of_bytes;
     
     //0x59: Modify buffer. Parameters: uint16_t StartByte, uint8_t NumerOfBytes, 0xE230, DATA
-    if((data[0]!=COMMAND_FILE_APPEND) || (data[4]!=0xE2) || (data[5]!=0x30))
+    if((data[0]!=COMMAND_WRITE_BUFFER) || (data[4]!=0xE2) || (data[5]!=0x30))
     {
         //Can't trust the number of bytes in this case
         return 65;

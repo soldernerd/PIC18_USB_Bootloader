@@ -499,12 +499,24 @@ void flash_partial_write(uint16_t page, uint16_t start, uint16_t length, uint8_t
 
 void flash_copy_page_to_buffer(uint16_t page)
 {
+    //Set configuration
+    spi_set_configuration(SPI_CONFIGURATION_INTERNAL);
+    
     _flash_copy_page_to_buffer(page, FLASH_BUFFER_2);
+    
+    //Reset configuration
+    spi_set_configuration(SPI_CONFIGURATION_EXTERNAL);
 }
 
 void flash_write_page_from_buffer(uint16_t page)
 {
+    //Set configuration
+    spi_set_configuration(SPI_CONFIGURATION_INTERNAL);
+    
     _flash_write_page_from_buffer(page, FLASH_BUFFER_2);
+    
+    //Reset configuration
+    spi_set_configuration(SPI_CONFIGURATION_EXTERNAL);
 }
 
 void flash_read_from_buffer(uint16_t start, uint16_t length, uint8_t *data)
@@ -514,5 +526,11 @@ void flash_read_from_buffer(uint16_t start, uint16_t length, uint8_t *data)
 
 void flash_write_to_buffer(uint16_t start, uint16_t length, uint8_t *data)
 {
+    //Set configuration
+    spi_set_configuration(SPI_CONFIGURATION_INTERNAL);
+    
     _flash_write_to_buffer(start, data, length, FLASH_BUFFER_2);
+    
+    //Reset configuration
+    spi_set_configuration(SPI_CONFIGURATION_EXTERNAL);
 }

@@ -347,12 +347,10 @@ def write_file(local_file_name, remote_file_name):
     file_name, extention = remote_file_name.split('.')
     file_name = file_name[:8].upper()
     extention = extention[:3].upper()
-    print(local_file_name, file_name, extention)
     with open(local_file_name, 'r') as f:
         char_array = []
         for line in f:
             char_array += [c for c in line]
-            char_array += ['\r', '\n']
         size = len(char_array)
     #Create file of correct size
     create_file(file_name, extention, size)
@@ -364,14 +362,33 @@ def write_file(local_file_name, remote_file_name):
         return
     #Modify content of file
     position = 0
-    while position < size:
-        bytes_to_send = size - position
-        if bytes_to_send > 54:
-            bytes_to_send = 54
-        modify_file(file_number, position, char_array[position:position+bytes_to_send])
-        position += bytes_to_send
-        delay_ms(20)
+    number_of_sectors = (size+511) // 512 
+    for sector in range(number_of_sectors):
+        for modify in range(9):
+            offset = 57 * modify
+            length = min(57, size-position, 512-offset)
+            if length > 0:
+                modify_buffer(offset, char_array[position:position+length])
+                delay_ms(20)
+                position += length
+        buffer_to_file_sector(file_number, sector)
+        delay_ms(50)
 
+def print_file(local_file_name, remote_file_name):
+    file_name, extention = remote_file_name.split('.')
+    file_name = file_name[:8].upper()
+    extention = extention[:3].upper()
+    with open(local_file_name, 'r') as f:
+        lines = [[c for c in x] for x in f]
+        print(lines)
+        """
+        char_array = []
+        for line in f:
+            char_array += [c for c in line]
+            #char_array += ['\r', '\n']
+            #char_array += ['\n']
+        size = len(char_array)
+        """
 
 def find_file(file_name):
     #0x81: Find file. Parameter: char[8] FileName, char[3] FileExtention
@@ -397,6 +414,31 @@ def find_file(file_name):
         print('File number of file {0}: {1}'.format(file_name, received_data[3]))
         return received_data[3]
 
+def file_sector_to_buffer(file_number, sector_number):
+    #0x57: Read file sector to buffer. Parameters: uint8_t file_number, uint16_t sector, 0x1B35
+    sector_numbers = [(sector_number>>8)&0xFF, sector_number&0xFF]
+    tx_data = [0x10, 0x57, file_number] + sector_numbers + [0x1B, 0x35]
+    spi_send_receive(tx_data)
+    print('Sector {0} of file {1} copied to buffer'.format(sector_number, file_number))
+
+def buffer_to_file_sector(file_number, sector_number):
+    #0x58: Write buffer to file sector. Parameters: uint8_t file_number, uint16_t sector, 0x6A6D
+    sector_numbers = [(sector_number>>8)&0xFF, sector_number&0xFF]
+    tx_data = [0x10, 0x58, file_number] + sector_numbers + [0x6A, 0x6D]
+    spi_send_receive(tx_data)
+    print('Buffer copied to sector {0} of file {1}'.format(sector_number, file_number))
+
+def modify_buffer(start_byte, data):
+    #0x59: Modify buffer. Parameters: uint16_t StartByte, uint8_t NumerOfBytes, 0xE230, DATA
+    data = data[:57]
+    start_bytes = [(start_byte>>8)&0xFF, start_byte&0xFF]
+    number_of_bytes = len(data)
+    tx_data = [0x10, 0x59] + start_bytes + [number_of_bytes, 0xE2, 0x30]
+    tx_data += [ord(c) for c in data]
+    spi_send_receive(tx_data)
+    print('Buffer modified starting from byte {0}'.format(start_byte))
+
+
 init()
 spi_init()
 #test_spi_communication(64,100)
@@ -409,18 +451,30 @@ spi_init()
 #reboot_normal_mode()
 
 #format_drive()
+delay_ms(200)
 
 #get_file_info(1);
 #list_files()
-#delay_ms(50)
-#delete_file(1)
-#create_file('zero', 'txt', 0)
 delay_ms(50)
-zero = find_file('zero.txt')
+#delete_file(1)
+#create_file('larger', 'txt', 766000)
+#create_file('test', 'txt', 0)
+delay_ms(50)
+file_txt = find_file('file.txt')
+test_txt = find_file('test.txt')
+#modify_file(file_txt, 0, 'Just modified')
+delay_ms(50)
+#file_sector_to_buffer(test_txt, 0)
+delay_ms(50)
+#modify_buffer(2, 'Welcome to buffered file access')
+delay_ms(50)
+#buffer_to_file_sector(test_txt, 0)
+#delete_file(filenbr)
+#resize_file(filenbr, 0);
 #rename_file(zero, 'BETA', 'HEX')
-#append_to_file(1, 'This is just a test')
-#modify_file(1, 500, 'This is the way the world ends. not with a bang but a whimper.')
-resize_file(zero, 0);
+#append_to_file(filenbr, 'This is just a test')
+#modify_file(filenbr, 5, 'This is more than just a stupid test')
+#resize_file(zero, 5999);
 #delay_ms(500)
 
 #delay_ms(100)
@@ -430,6 +484,7 @@ if not fw_hex == 255:
     delete_file(fw_hex)
 """
 
+write_file('BootloaderTest.hex', 'bootldr.hex')
 #write_file('SolarCharger_RevE.hex', 'firmware.hex')
 
 #list_files()

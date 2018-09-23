@@ -507,6 +507,7 @@ static uint16_t _get_first_cluster(uint8_t file_number)
     //Get position
     sector = _sector_from_file_number(file_number);
     offset = _offset_from_file_number(file_number);
+    offset += 26;
     
     //Read data and return first cluster
     flash_partial_read(sector, offset, 2, &first_cluster);
@@ -933,7 +934,7 @@ void fat_modify_file(uint8_t file_number, uint32_t start_byte, uint16_t length, 
     cluster = _find_nth_cluster(root.firstCluster, (start_byte>>9));
     
     //Calculate position. Just blank out the last 9 bits
-    position = start_byte &= 0xFFFFFE00;
+    position = start_byte & 0xFFFFFE00;
     
     //Calculate offset
     offset = (uint16_t) (start_byte-position);
@@ -1357,7 +1358,8 @@ uint8_t fat_copy_sector_to_buffer(uint8_t file_number, uint16_t sector)
     uint32_t file_size;
     uint16_t number_of_clusters;
     uint16_t cluster;
-    
+    uint16_t physical_sector;
+
     //Check if we have a valid file
     if(_root_is_available(file_number))
     {
@@ -1369,7 +1371,7 @@ uint8_t fat_copy_sector_to_buffer(uint8_t file_number, uint16_t sector)
     file_size = fat_get_file_size(file_number);
     
     //Check if sector is valid
-    number_of_clusters = (file_size + BYTES_PER_SECTOR - 1) >> 9;
+    number_of_clusters = (uint16_t) ((file_size + BYTES_PER_SECTOR - 1) >> 9);
     if(sector > number_of_clusters)
     {
         //Return an error
@@ -1381,10 +1383,10 @@ uint8_t fat_copy_sector_to_buffer(uint8_t file_number, uint16_t sector)
     cluster = _find_nth_cluster(cluster, sector);
     
     //Find physical sector
-    cluster = _data_sector_from_cluster(cluster);
+    physical_sector = _data_sector_from_cluster(cluster);
     
     //Copy that sector to buffer 2
-    flash_copy_page_to_buffer(cluster);
+    flash_copy_page_to_buffer(physical_sector);
     
     //Return success
     return 0x00;
@@ -1395,6 +1397,7 @@ uint8_t fat_write_sector_from_buffer(uint8_t file_number, uint16_t sector)
     uint32_t file_size;
     uint16_t number_of_clusters;
     uint16_t cluster;
+    uint16_t physical_sector;
     
     //Check if we have a valid file
     if(_root_is_available(file_number))
@@ -1419,10 +1422,10 @@ uint8_t fat_write_sector_from_buffer(uint8_t file_number, uint16_t sector)
     cluster = _find_nth_cluster(cluster, sector);
     
     //Find physical sector
-    cluster = _data_sector_from_cluster(cluster);
+    physical_sector = _data_sector_from_cluster(cluster);
     
     //Write buffer to that sector
-    flash_write_page_from_buffer(cluster);
+    flash_write_page_from_buffer(physical_sector);
     
     //Return success
     return 0x00;
