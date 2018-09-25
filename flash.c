@@ -27,6 +27,8 @@
 #define FLASH_COMMAND_ENTER_ULTRA_DEEP_POWER_DOWN 0x79
 #define FLASH_COMMAND_PAGE_PROGRAM 0x82
 #define FLASH_COMMAND_DATA_READ 0x03
+#define FLASH_COMMAND_BUFFER1_READ 0xD1
+#define FLASH_COMMAND_BUFFER2_READ 0xD3
 
 #define FLASH_STATUS_FLAG_BUSY 0b0000000010000000
 #define FLASH_STATUS_FLAG_COMPARE 0b0000000001000000
@@ -71,6 +73,7 @@ static void _flash_write_to_buffer(uint16_t start, uint8_t *data, uint16_t data_
 static void _flash_write_page_from_buffer(uint16_t page, flashBuffer_t buffer);
 static uint8_t _flash_is_busy(void);
 void _flash_partial_read(uint16_t page, uint16_t start, uint16_t length, uint8_t *data);
+void _flash_buffer_read(uint16_t start, uint16_t length, uint8_t *data, flashBuffer_t buffer);
 
 
 /*****************************************************************************
@@ -325,6 +328,26 @@ void _flash_partial_read(uint16_t page, uint16_t start, uint16_t length, uint8_t
     spi_tx_rx(command, 4, data, length);
 }
 
+void _flash_buffer_read(uint16_t start, uint16_t length, uint8_t *data, flashBuffer_t buffer)
+{
+    uint8_t command[4];
+
+    //Wait for flash to be ready
+    while(_flash_is_busy());
+    
+    //Prepare data to send
+    if(buffer==FLASH_BUFFER_1)
+        command[0] = FLASH_COMMAND_BUFFER1_READ;
+    if(buffer==FLASH_BUFFER_2)
+        command[0] = FLASH_COMMAND_BUFFER2_READ;
+    command[1] = 0x00; //Not used
+    command[2] = HIGH_BYTE(start); //Most significant bit only
+    command[3] = LOW_BYTE(start); //Least significant 8 bits
+    
+    //Transmit command and receive data
+    spi_tx_rx(command, 4, data, length);
+}
+
 /*****************************************************************************
  * Public functions                                                          *
  * Only these functions are made accessible via flash.h                      *  
@@ -521,7 +544,13 @@ void flash_write_page_from_buffer(uint16_t page)
 
 void flash_read_from_buffer(uint16_t start, uint16_t length, uint8_t *data)
 {
-    //To be implemented
+    //Set configuration
+    spi_set_configuration(SPI_CONFIGURATION_INTERNAL);
+    
+    _flash_buffer_read(start, length, data, FLASH_BUFFER_2);
+    
+    //Reset configuration
+    spi_set_configuration(SPI_CONFIGURATION_EXTERNAL);
 }
 
 void flash_write_to_buffer(uint16_t start, uint16_t length, uint8_t *data)

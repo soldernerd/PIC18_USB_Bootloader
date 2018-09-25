@@ -343,14 +343,37 @@ def format_drive():
     spi_send_receive(tx_data)
     print('Drive formated')
 
+def write_sector(file_number, sector_number, data):
+    data = data[:512]
+    length = len(data)
+    #We have to write a sector (512 bytes) in chunks not exceeding 57 bytes
+    offset = 0
+    while offset < length:
+        chunk_length = min(57, length-offset)
+        if chunk_length > 0:
+            chunk_data = data[offset:offset+chunk_length]
+            modify_buffer(offset, chunk_data)
+            delay_ms(5)
+            #Check result and correct if neccessary
+            read_result = read_buffer(offset, chunk_length)
+            #read_result = [chr(x) for x in read_result]
+            while not read_result == chunk_data:
+                modify_buffer(offset, chunk_data)
+                delay_ms(5)
+                read_result = read_buffer(offset, chunk_length)
+                #read_result = [chr(x) for x in read_result]
+        #Keep track of where we are
+        offset += chunk_length
+    #Write buffer to file sector
+    buffer_to_file_sector(file_number, sector_number)
+
+
 def write_file(local_file_name, remote_file_name):
     file_name, extention = remote_file_name.split('.')
     file_name = file_name[:8].upper()
     extention = extention[:3].upper()
-    with open(local_file_name, 'r') as f:
-        char_array = []
-        for line in f:
-            char_array += [c for c in line]
+    with open(local_file_name, 'rb') as f:
+        char_array = list(f.read())
         size = len(char_array)
     #Create file of correct size
     create_file(file_name, extention, size)
@@ -361,18 +384,13 @@ def write_file(local_file_name, remote_file_name):
         print('File not found')
         return
     #Modify content of file
-    position = 0
-    number_of_sectors = (size+511) // 512 
-    for sector in range(number_of_sectors):
-        for modify in range(9):
-            offset = 57 * modify
-            length = min(57, size-position, 512-offset)
-            if length > 0:
-                modify_buffer(offset, char_array[position:position+length])
-                delay_ms(20)
-                position += length
-        buffer_to_file_sector(file_number, sector)
-        delay_ms(50)
+    sector_number = 0
+    while char_array:
+        write_sector(file_number, sector_number, char_array[:512])
+        delay_ms(20)
+        char_array = char_array[512:]
+        sector_number += 1
+
 
 def print_file(local_file_name, remote_file_name):
     file_name, extention = remote_file_name.split('.')
@@ -434,9 +452,25 @@ def modify_buffer(start_byte, data):
     start_bytes = [(start_byte>>8)&0xFF, start_byte&0xFF]
     number_of_bytes = len(data)
     tx_data = [0x10, 0x59] + start_bytes + [number_of_bytes, 0xE2, 0x30]
-    tx_data += [ord(c) for c in data]
+    #tx_data += [ord(c) for c in data]
+    tx_data += data
     spi_send_receive(tx_data)
     print('Buffer modified starting from byte {0}'.format(start_byte))
+
+def read_buffer(start_byte, length):
+    #0x83: Read buffer. Parameters: uint16_t StartByte
+    length = min([length, 58])
+    send_data = [0x83, (start_byte>>8)&0xFF, start_byte&0xFF]
+    spi_send_receive(send_data)
+    received_data = spi_send_receive(send_data, length+6)
+    if not received_data[:3] == [0x83, 0xC1, 0x25]:
+        print('Signature of data package is incorrect:', received_data[:3])
+        return []
+    echoed_start = 256*received_data[3] + received_data[4]
+    echoed_length = received_data[5]
+    #print('Read {0} bytes starting from byte {1}'.format(echoed_length, echoed_start))
+    #print([chr(x) for x in received_data[6:]])
+    return received_data[6:]
 
 
 init()
@@ -460,14 +494,15 @@ delay_ms(50)
 #create_file('larger', 'txt', 766000)
 #create_file('test', 'txt', 0)
 delay_ms(50)
-file_txt = find_file('file.txt')
-test_txt = find_file('test.txt')
+#file_txt = find_file('file.txt')
+#test_txt = find_file('test.txt')
 #modify_file(file_txt, 0, 'Just modified')
 delay_ms(50)
-#file_sector_to_buffer(test_txt, 0)
+#file_sector_to_buffer(file_txt, 0)
 delay_ms(50)
-#modify_buffer(2, 'Welcome to buffered file access')
+#modify_buffer(0, '123456789012')
 delay_ms(50)
+#read_buffer(0, 12)
 #buffer_to_file_sector(test_txt, 0)
 #delete_file(filenbr)
 #resize_file(filenbr, 0);
@@ -484,8 +519,9 @@ if not fw_hex == 255:
     delete_file(fw_hex)
 """
 
-write_file('BootloaderTest.hex', 'bootldr.hex')
+#write_file('BootloaderTest.hex', 'bootldr.hex')
 #write_file('SolarCharger_RevE.hex', 'firmware.hex')
+write_file('short.hex', 'short.hex')
 
 #list_files()
 #test_spi_communication(64,100)
