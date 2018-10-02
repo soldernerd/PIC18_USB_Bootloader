@@ -108,7 +108,7 @@ void APP_DeviceCustomHIDTasks()
         }
         
         //Perform any other tasks the host may want us to do
-        api_parse(ReceivedDataBuffer, 64);
+        api_parse(ReceivedDataBuffer, 64, ToSendDataBuffer);
 
         //Re-arm the OUT endpoint, so we can receive the next OUT data packet 
         //that the host may try to send us.

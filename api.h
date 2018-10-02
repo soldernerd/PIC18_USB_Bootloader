@@ -31,6 +31,7 @@
  *  0x21: Reboot in bootloader mode
  *  0x22: Reboot in normal mode
  *  0x23: Jump to main program
+ *  0x24: Suspend bootloader
  *  0x3C: Turn encoder CCW
  *  0x3D: Turn encoder CW
  *  0x3E: Press push button
@@ -47,6 +48,7 @@
  *  0x57: Read file sector to buffer. Parameters: uint8_t file_number, uint16_t sector, 0x1B35
  *  0x58: Write buffer to file sector. Parameters: uint8_t file_number, uint16_t sector, 0x6A6D
  *  0x59: Modify buffer. Parameters: uint16_t StartByte, uint8_t NumerOfBytes, 0xE230, DATA
+ *  0x5A: Copy file. PParameters: uint8_t FileNumber, char[8] NewFileName, char[3] NewFileExtention, 0x54D9
  *  0x60: Change SPI mode. Parameters: uint8_t NewMode, 0x88E2
  *  0x61: Change SPI frequency. Parameters: uint8_t NewFrequency, 0xAEA8
  *  0x62: Change SPI polarity. Parameters: uint8_t NewPolarity, 0x0DBB
@@ -63,6 +65,7 @@
 
 typedef enum
 {
+    DATAREQUEST_GET_COMMAND_RESPONSE = 0x00,
     DATAREQUEST_GET_STATUS = 0x10,
     DATAREQUEST_GET_DISPLAY_1 = 0x11,
     DATAREQUEST_GET_DISPLAY_2 = 0x12,
@@ -81,6 +84,7 @@ typedef enum
     COMMAND_REBOT_BOOTLOADER_MODE = 0x21,
     COMMAND_REBOT_NORMAL_MODE = 0x22,
     COMMAND_JUMP_TO_MAIN_PROGRAM = 0x23,
+    COMMAND_SUSPEND_BOOTLOADER = 0x24,
     COMMAND_ENCODER_CCW = 0x3C,
     COMMAND_ENCODER_CW = 0x3D,
     COMMAND_ENCODER_PUSH = 0x3E,
@@ -94,7 +98,8 @@ typedef enum
     COMMAND_FORMAT_DRIVE = 0x56,
     COMMAND_SECTOR_TO_BUFFER = 0x57,
     COMMAND_BUFFER_TO_SECTOR = 0x58,
-    COMMAND_WRITE_BUFFER = 0x59
+    COMMAND_WRITE_BUFFER = 0x59,
+    COMMAND_FILE_COPY = 0x5A
 } apiCommand_t;
 
 
@@ -103,7 +108,7 @@ typedef enum
  ******************************************************************************/
 
 void api_prepare(uint8_t *inBuffer, uint8_t *outBuffer);
-void api_parse(uint8_t *inBuffer, uint8_t receivedDataLength);
+void api_parse(uint8_t *inBuffer, uint8_t receivedDataLength, uint8_t *outBuffer);
 
 
 #endif	/* API_H */

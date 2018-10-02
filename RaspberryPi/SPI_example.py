@@ -442,8 +442,13 @@ def file_sector_to_buffer(file_number, sector_number):
 def buffer_to_file_sector(file_number, sector_number):
     #0x58: Write buffer to file sector. Parameters: uint8_t file_number, uint16_t sector, 0x6A6D
     sector_numbers = [(sector_number>>8)&0xFF, sector_number&0xFF]
-    tx_data = [0x10, 0x58, file_number] + sector_numbers + [0x6A, 0x6D]
+    tx_data = [0x00, 0x58, file_number] + sector_numbers + [0x6A, 0x6D]
     spi_send_receive(tx_data)
+    delay_ms(10)
+    #Get response
+    tx_data = [0x00]
+    response = spi_send_receive(tx_data, 8)
+    print(list_to_string(response))
     print('Buffer copied to sector {0} of file {1}'.format(sector_number, file_number))
 
 def modify_buffer(start_byte, data):

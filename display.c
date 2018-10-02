@@ -53,6 +53,11 @@ const char done_line2[] = "Done!";
 const char done_line3[] = "Pages written: ";
 const char done_line4[] = "Press to reboot";
 
+const char suspended_line1[] = "Bootloader Mode";
+const char suspended_line2[] = "Suspended";
+const char suspended_line3[] = "";
+const char suspended_line4[] = "Press to resume";
+
 const char reboot_line1[] = "Rebooting...";
 
 char display_content[4][20];
@@ -66,6 +71,7 @@ static void _display_failed(void);
 static void _display_programming(void);
 static void _display_done(void);
 static void _display_rebooting(void);
+static void _display_suspended(void);
 
 uint8_t display_get_character(uint8_t line, uint8_t position)
 {
@@ -324,6 +330,10 @@ void display_prepare(uint8_t mode)
         case DISPLAY_MODE_BOOTLOADER_REBOOTING:
             _display_rebooting();
             break;
+            
+        case DISPLAY_MODE_BOOTLOADER_SUSPENDED:
+            _display_suspended();
+            break;
     }
     
     //Pulse
@@ -550,6 +560,28 @@ static void _display_rebooting(void)
     cntr = 0;
     while(reboot_line1[cntr])
         display_content[0][cntr] = reboot_line1[cntr++];
+}
+
+static void _display_suspended(void)
+{
+    uint8_t cntr;
+
+    //Line 1
+    cntr = 0;
+    while(suspended_line1[cntr])
+        display_content[0][cntr] = suspended_line1[cntr++];
+    //Line 2
+    cntr = 0;
+    while(suspended_line2[cntr])
+        display_content[1][cntr] = suspended_line2[cntr++]; 
+    //Line 3
+    cntr = 0;
+    while(suspended_line3[cntr])
+        display_content[2][cntr] = suspended_line3[cntr++]; 
+    //Line 4
+    cntr = 0;
+    while(suspended_line4[cntr])
+        display_content[3][cntr] = suspended_line4[cntr++]; 
 }
 
 void display_update(void)

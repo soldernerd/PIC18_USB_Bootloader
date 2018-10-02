@@ -103,6 +103,9 @@ void bootloader_run(uint8_t timeslot)
 
         case BOOTLOADER_MODE_DONE:
             break;
+            
+        case BOOTLOADER_MODE_SUSPENDED:
+            break;
     }
 }
 

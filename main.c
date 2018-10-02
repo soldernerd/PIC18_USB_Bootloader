@@ -125,7 +125,7 @@ void main(void)
 
                 //Process data
                 api_prepare(rx_buffer, tx_buffer);
-                api_parse(rx_buffer, (uint8_t) bytes_transmitted);
+                api_parse(rx_buffer, (uint8_t) bytes_transmitted, tx_buffer);
                 
                 //Set TX buffer address
                 TXADDRH =  HIGH_BYTE((uint16_t) tx_buffer);

@@ -83,7 +83,16 @@ static void _ui_encoder(void)
                 system_delay_ms(10); //ensure data has been written before rebooting
                 reboot();
             }
-            break;             
+            break;
+            
+        case DISPLAY_MODE_BOOTLOADER_SUSPENDED:
+            if(os.buttonCount>0)
+            {
+                os.bootloader_mode = BOOTLOADER_MODE_SEARCH;
+                os.display_mode = DISPLAY_MODE_BOOTLOADER_SEARCH;
+                os.buttonCount = 0;
+            }
+            break; 
     }    
 }
 

@@ -194,7 +194,7 @@ static uint16_t _find_nth_cluster(uint16_t cluster, uint16_t n)
     while (n > 0)
     {
         //Find sector and offset of next cluster
-        sector = _data_sector_from_cluster(cluster);
+        sector = _fat_sector_from_cluster(cluster);
         offset = _fat_offset_from_cluster(cluster);
 
         //Read new sector into buffer if necessary
@@ -644,7 +644,7 @@ uint8_t fat_create_file(char *name, char *extension, uint32_t size)
     return file_number;
 }
 
-void fat_delete_file(uint8_t file_number)
+uint8_t fat_delete_file(uint8_t file_number)
 {
     uint16_t first_cluster;
     
@@ -652,14 +652,14 @@ void fat_delete_file(uint8_t file_number)
     if(file_number>=FBR_ROOT_ENTRIES)
     {
         //Nothing to be done
-        return;
+        return 0xFF;
     }
     
     //Check if file is in use
     if(_root_is_available(file_number))
     {
         //Nothing to be done
-        return;
+        return 0xFE;
     }
     
     //Get number of first cluster, i.e where to start
@@ -671,6 +671,8 @@ void fat_delete_file(uint8_t file_number)
     //Now all the clusters are marked as re-usable
     //But the file entry in the root still exists
     _delete_root(file_number);
+    
+    return 0x00;
 }
 
 uint8_t fat_append_to_file(uint8_t file_number, uint16_t number_of_bytes, uint8_t *data)
@@ -714,7 +716,7 @@ uint8_t fat_append_to_file(uint8_t file_number, uint16_t number_of_bytes, uint8_
     return 0x00;
 }
 
-void fat_rename_file(uint8_t file_number, char *name, char *extension)
+uint8_t fat_rename_file(uint8_t file_number, char *name, char *extension)
 {
     rootEntry_t root;
     uint8_t cntr;
@@ -725,7 +727,7 @@ void fat_rename_file(uint8_t file_number, char *name, char *extension)
     if(return_code!=0x00)
     {
         //No valid file, return
-        return;
+        return return_code;
     }
     
     //Change file name
@@ -742,6 +744,8 @@ void fat_rename_file(uint8_t file_number, char *name, char *extension)
     
     //Write modified root entry to flash
     _write_root(file_number, &root);
+    
+    return 0x00;
 }
 
 uint8_t fat_read_from_file(uint8_t file_number, uint32_t start_byte, uint32_t length, uint8_t *data)
@@ -847,6 +851,62 @@ uint8_t fat_read_from_file_fast(uint32_t start_byte, uint32_t length, uint8_t *d
     return 0x00;
 }
 
+uint8_t fat_copy_file(uint8_t file_number, char *name, char *extension)
+{
+    uint32_t file_size;
+    uint8_t new_file_number;
+    uint16_t number_of_clusters;
+    uint16_t sector;
+    uint8_t return_value;
+    
+    //Make sure we have a valid file number
+    if(file_number>=FBR_ROOT_ENTRIES)
+    {
+        //Return an error
+        return 0xFF;
+    }
+    
+    //Check if file is in use
+    if(_root_is_available(file_number))
+    {
+        //Return an error
+        return 0xFE;
+    }
+    
+    //Get file size
+    file_size = fat_get_file_size(file_number);
+    
+    //Try to create a file
+    new_file_number = fat_create_file(name, extension, file_size);
+    
+    //Make sure we have a valid new file number
+    if(new_file_number>=FBR_ROOT_ENTRIES)
+    {
+        //Return an error
+        return 0xFD;
+    }
+    
+    //Calculate number of clusters
+    number_of_clusters = (file_size + BYTES_PER_SECTOR - 1) >> 9;
+    
+    //Copy sectors, one by one
+    for(sector=0; sector<number_of_clusters; ++sector)
+    {
+        return_value = fat_copy_sector_to_buffer(file_number, sector);
+        if(return_value!=0x00)
+        {
+            return 0xFC;
+        }
+        return_value = fat_write_sector_from_buffer(new_file_number, sector);
+        if(return_value!=0x00)
+        {
+            return 0xFB;
+        }
+    }
+    
+    return 0x00;
+}
+
 uint8_t fat_resize_file(uint8_t file_number, uint32_t new_file_size)
 {
     rootEntry_t root;
@@ -899,7 +959,7 @@ uint8_t fat_resize_file(uint8_t file_number, uint32_t new_file_size)
     return 0x00;
 }
 
-void fat_modify_file(uint8_t file_number, uint32_t start_byte, uint16_t length, uint8_t *data)
+uint8_t fat_modify_file(uint8_t file_number, uint32_t start_byte, uint16_t length, uint8_t *data)
 {
     rootEntry_t root;
     uint16_t cluster;
@@ -914,14 +974,14 @@ void fat_modify_file(uint8_t file_number, uint32_t start_byte, uint16_t length, 
     if(return_code!=0x00)
     {
         //No valid file, return
-        return;
+        return return_code;
     }
     
     //Make sure we do not write past file end
     if(start_byte>root.fileSize)
     {
         //User wants to write at a position beyond end of file
-        return;
+        return 0xF0;
     }
     
     if((start_byte+length) > root.fileSize)
@@ -969,6 +1029,8 @@ void fat_modify_file(uint8_t file_number, uint32_t start_byte, uint16_t length, 
         position += number_of_bytes;
         offset += number_of_bytes;
     }
+    
+    return 0x00;
 }
 
 
@@ -1255,7 +1317,7 @@ formatStatus_t fat_get_format_status(void)
     return DRIVE_FORMATED;
 }
 
-void fat_format(void)
+uint8_t fat_format(void)
 {
     uint16_t cntr;
     
@@ -1313,6 +1375,8 @@ void fat_format(void)
         buffer[cntr] = _get_data(cntr);
     }
     flash_sector_write(DATA_FIRST_SECTOR, buffer);
+    
+    return 0x00;
 }
 
 void fat_init(void)
@@ -1372,7 +1436,7 @@ uint8_t fat_copy_sector_to_buffer(uint8_t file_number, uint16_t sector)
     
     //Check if sector is valid
     number_of_clusters = (uint16_t) ((file_size + BYTES_PER_SECTOR - 1) >> 9);
-    if(sector > number_of_clusters)
+    if(sector >= number_of_clusters)
     {
         //Return an error
         return 0xFE;
@@ -1411,7 +1475,7 @@ uint8_t fat_write_sector_from_buffer(uint8_t file_number, uint16_t sector)
     
     //Check if sector is valid
     number_of_clusters = (file_size + BYTES_PER_SECTOR - 1) >> 9;
-    if(sector > number_of_clusters)
+    if(sector >= number_of_clusters)
     {
         //Return an error
         return 0xFE;
@@ -1419,13 +1483,13 @@ uint8_t fat_write_sector_from_buffer(uint8_t file_number, uint16_t sector)
     
     //Get the right cluster
     cluster = _get_first_cluster(file_number);
-    cluster = _find_nth_cluster(cluster, sector);
+    //cluster = _find_nth_cluster(cluster, sector);
     
     //Find physical sector
-    physical_sector = _data_sector_from_cluster(cluster);
+    //physical_sector = _data_sector_from_cluster(cluster);
     
     //Write buffer to that sector
-    flash_write_page_from_buffer(physical_sector);
+    //flash_write_page_from_buffer(physical_sector);
     
     //Return success
     return 0x00;

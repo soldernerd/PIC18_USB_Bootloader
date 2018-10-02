@@ -28,18 +28,19 @@ static void _fill_buffer_read_file(uint8_t *inBuffer, uint8_t *outBuffer);
 static void _fill_buffer_read_buffer(uint8_t *inBuffer, uint8_t *outBuffer);
 
 static void _parse_command_short(uint8_t cmd);
-static uint8_t _parse_command_long(uint8_t *data);
+static uint8_t _parse_command_long(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
 
-static uint8_t _parse_file_resize(uint8_t *data);
-static uint8_t _parse_file_delete(uint8_t *data);
-static uint8_t _parse_file_create(uint8_t *data);
-static uint8_t _parse_file_rename(uint8_t *data);
-static uint8_t _parse_file_append(uint8_t *data);
-static uint8_t _parse_file_modify(uint8_t *data);
-static uint8_t _parse_format_drive(uint8_t *data);
-static uint8_t _parse_sector_to_buffer(uint8_t *data);
-static uint8_t _parse_buffer_to_sector(uint8_t *data);
-static uint8_t _parse_write_buffer(uint8_t *data);
+static uint8_t _parse_file_resize(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
+static uint8_t _parse_file_delete(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
+static uint8_t _parse_file_create(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
+static uint8_t _parse_file_rename(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
+static uint8_t _parse_file_append(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
+static uint8_t _parse_file_modify(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
+static uint8_t _parse_format_drive(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
+static uint8_t _parse_sector_to_buffer(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
+static uint8_t _parse_buffer_to_sector(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
+static uint8_t _parse_write_buffer(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
+static uint8_t _parse_file_copy(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
 
 static uint8_t _parse_settings_spi_mode(uint8_t *data);
 static uint8_t _parse_settings_spi_frequency(uint8_t *data);
@@ -68,8 +69,7 @@ void api_prepare(uint8_t *inBuffer, uint8_t *outBuffer)
 //            _fill_buffer_get_status(outBuffer);
 //            return;
 //        }
-        
-        
+
         switch(command)
         {
             case DATAREQUEST_GET_FILE_DETAILS:
@@ -102,6 +102,10 @@ void api_prepare(uint8_t *inBuffer, uint8_t *outBuffer)
         //Normal data request, need no parameters, may be followed by commands
         switch(command)				
         {
+            case DATAREQUEST_GET_COMMAND_RESPONSE:
+                //nothing to do
+                break;
+            
             case DATAREQUEST_GET_STATUS:
                 //Call function to fill the buffer with general information
                 _fill_buffer_get_status(outBuffer);
@@ -139,11 +143,16 @@ void api_prepare(uint8_t *inBuffer, uint8_t *outBuffer)
     }
 }
 
-void api_parse(uint8_t *inBuffer, uint8_t receivedDataLength)
+void api_parse(uint8_t *inBuffer, uint8_t receivedDataLength, uint8_t *outBuffer)
 {
     //Check if the host expects us to do anything else
 
-    uint8_t idx;
+    uint8_t in_idx;
+    uint8_t out_idx;
+    uint8_t *out_idx_ptr;
+    
+    out_idx = 0;
+    out_idx_ptr = &out_idx;
     
     if(inBuffer[0]>0x7F)
     {
@@ -159,29 +168,42 @@ void api_parse(uint8_t *inBuffer, uint8_t receivedDataLength)
         return;
     }
     
-    idx = 1;
-    while(idx<receivedDataLength)
+    if(inBuffer[0]==DATAREQUEST_GET_COMMAND_RESPONSE)
+    {
+        //Echo back to the host PC the command we are fulfilling in the first uint8_t
+        outBuffer[0] = DATAREQUEST_GET_COMMAND_RESPONSE;
+    
+        //Bootloader signature
+        outBuffer[1] = BOOTLOADER_SIGNATURE >> 8; //MSB
+        outBuffer[2] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
+        
+        //Set out_idx, also indicating that we want to provide feedback on the command's execution
+        out_idx = 3;
+    }
+    
+    in_idx = 1;
+    while(in_idx<receivedDataLength)
     {
         //Check if there is anything more to parse
-        if(inBuffer[idx]==COMMAND_STOP_PARSING)
+        if(inBuffer[in_idx]==COMMAND_STOP_PARSING)
         {
             return;
         }
         
-        switch(inBuffer[idx] & 0xF0)
+        switch(inBuffer[in_idx] & 0xF0)
         {
             case 0x20:
-                _parse_command_short(inBuffer[idx]);
-                ++idx;
+                _parse_command_short(inBuffer[in_idx]);
+                ++in_idx;
                 break;
                 
             case 0x30:
-                _parse_command_short(inBuffer[idx]);
-                ++idx;
+                _parse_command_short(inBuffer[in_idx]);
+                ++in_idx;
                 break;
                 
             case 0x50:
-                idx += _parse_command_long(&inBuffer[idx]);
+                in_idx += _parse_command_long(&inBuffer[in_idx], outBuffer, out_idx_ptr);
                 break;
                 
             default:
@@ -206,7 +228,6 @@ static void _fill_buffer_get_status(uint8_t *outBuffer)
     //Bootloader signature
     outBuffer[1] = BOOTLOADER_SIGNATURE >> 8; //MSB
     outBuffer[2] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
-    
     
     //Flash busy or not
     outBuffer[3] = (uint8_t) flash_is_busy();
@@ -502,6 +523,11 @@ static void _parse_command_short(uint8_t cmd)
             system_delay_ms(10); //ensure data has been written before rebooting
             reboot();
             break;
+            
+        case COMMAND_SUSPEND_BOOTLOADER:
+            os.bootloader_mode = BOOTLOADER_MODE_SUSPENDED;
+            os.display_mode = DISPLAY_MODE_BOOTLOADER_SUSPENDED;
+            break;
                 
         case COMMAND_ENCODER_CCW:
             --os.encoderCount;
@@ -517,64 +543,74 @@ static void _parse_command_short(uint8_t cmd)
     }
 }
 
-static uint8_t _parse_command_long(uint8_t *data)
+static uint8_t _parse_command_long(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr)
 {
     uint8_t length = 65;
     
     switch(data[0])
     {
         case COMMAND_FILE_RESIZE:
-            length = _parse_file_resize(data);
+            length = _parse_file_resize(data, out_buffer, out_idx_ptr);
             break;
             
         case COMMAND_FILE_DELETE:
-            length = _parse_file_delete(data);
+            length = _parse_file_delete(data, out_buffer, out_idx_ptr);
             break;
             
         case COMMAND_FILE_CREATE:
-            length = _parse_file_create(data);
+            length = _parse_file_create(data, out_buffer, out_idx_ptr);
             break;
             
         case COMMAND_FILE_RENAME:
-            length = _parse_file_rename(data);
+            length = _parse_file_rename(data, out_buffer, out_idx_ptr);
             break;
             
         case COMMAND_FILE_APPEND:
-            length = _parse_file_append(data);
+            length = _parse_file_append(data, out_buffer, out_idx_ptr);
             break;
             
         case COMMAND_FILE_MODIFY:
-            length = _parse_file_modify(data);
+            length = _parse_file_modify(data, out_buffer, out_idx_ptr);
             break;
             
         case COMMAND_FORMAT_DRIVE:
-            length = _parse_format_drive(data);
+            length = _parse_format_drive(data, out_buffer, out_idx_ptr);
             break;
             
         case COMMAND_SECTOR_TO_BUFFER:
-            length = _parse_sector_to_buffer(data);
+            length = _parse_sector_to_buffer(data, out_buffer, out_idx_ptr);
             break;
             
         case COMMAND_BUFFER_TO_SECTOR:
-            length = _parse_buffer_to_sector(data);
+            length = _parse_buffer_to_sector(data, out_buffer, out_idx_ptr);
             break;
             
         case COMMAND_WRITE_BUFFER:
-            length = _parse_write_buffer(data);
+            length = _parse_write_buffer(data, out_buffer, out_idx_ptr);
+            break;
+            
+        case COMMAND_FILE_COPY:
+            length = _parse_file_copy(data, out_buffer, out_idx_ptr);
             break;
     }    
     
     return length;
 }
 
-static uint8_t _parse_file_resize(uint8_t *data)
+static uint8_t _parse_file_resize(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr)
 {
     //0x50: Resize file. Parameters: uint8_t FileNumber, uint32_t newFileSize, 0x4CEA
     uint32_t file_size;
+    uint8_t return_value;
+    uint8_t file_number;
+    
     if((data[0]!=COMMAND_FILE_RESIZE) || (data[6]!=0x4C) || (data[7]!=0xEA))
     {
         return 8;
     }
+    
+    //Get file number
+    file_number = data[1];
     
     //Calculate file size
     file_size = data[2];
@@ -586,27 +622,57 @@ static uint8_t _parse_file_resize(uint8_t *data)
     file_size |= data[5];
     
     //Resize file
-    fat_resize_file(data[1], file_size);
+    return_value = fat_resize_file(file_number, file_size);
+    
+    //Return confirmation if desired
+    if(((*out_idx_ptr)>0) && ((*out_idx_ptr)<58))
+    {
+        out_buffer[(*out_idx_ptr)++] = COMMAND_FILE_RESIZE;
+        out_buffer[(*out_idx_ptr)++] = file_number;
+        out_buffer[(*out_idx_ptr)++] = HIGH_BYTE(HIGH_WORD(file_size));
+        out_buffer[(*out_idx_ptr)++] = LOW_BYTE(HIGH_WORD(file_size));
+        out_buffer[(*out_idx_ptr)++] = HIGH_BYTE(LOW_WORD(file_size));
+        out_buffer[(*out_idx_ptr)++] = LOW_BYTE(LOW_WORD(file_size));
+        out_buffer[(*out_idx_ptr)++] = return_value;
+    }
+    
     return 8;
-
 }
 
-static uint8_t _parse_file_delete(uint8_t *data)
+static uint8_t _parse_file_delete(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr)
 {
     //0x51: Delete file. Parameters: uint8_t FileNumber, 0x66A0
+    
+    uint8_t return_value;
+    uint8_t file_number;
+    
     if((data[0]!=COMMAND_FILE_DELETE) || (data[2]!=0x66) || (data[3]!=0xA0))
     {
         return 4;
     }
     
+    //Save file number
+    file_number = data[1];
+    
     //Delete file
-    fat_delete_file(data[1]);
+    return_value = fat_delete_file(file_number);
+    
+    //Return confirmation if desired
+    if(((*out_idx_ptr)>0) && ((*out_idx_ptr)<62))
+    {
+        out_buffer[(*out_idx_ptr)++] = COMMAND_FILE_DELETE;
+        out_buffer[(*out_idx_ptr)++] = file_number;
+        out_buffer[(*out_idx_ptr)++] = return_value;
+    }
+    
     return 4;
 }
 
-static uint8_t _parse_file_create(uint8_t *data)
+static uint8_t _parse_file_create(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr)
 {
-    //0x52: Create file. Parameters: char[8] FileName, char[3] FileExtention, uint32_t FileSize, 0xBD4F
+    //0x52: Create file. Parameters: char[8] FileName, char[3] FileExtention, uint32_t FileSize, 0xBD4F 
+    uint8_t file_number;
+    
     uint32_t file_size;
     if((data[0]!=COMMAND_FILE_CREATE) || (data[16]!=0xBD) || (data[17]!=0x4F))
     {
@@ -623,42 +689,89 @@ static uint8_t _parse_file_create(uint8_t *data)
     file_size |= data[15];
     
     //Create file
-    fat_create_file(&data[1], &data[9], file_size);
+    file_number = fat_create_file(&data[1], &data[9], file_size);
+    
+    //Return confirmation if desired
+    if(((*out_idx_ptr)>0) && ((*out_idx_ptr)<63))
+    {
+        out_buffer[(*out_idx_ptr)++] = COMMAND_FILE_CREATE;
+        out_buffer[(*out_idx_ptr)++] = file_number;
+    }
     
     return 18;
 }
 
-static uint8_t _parse_file_rename(uint8_t *data)
+static uint8_t _parse_file_rename(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr)
 {
     //0x53: Rename file. Parameters: uint8_t FileNumber, char[8] NewFileName, char[3] NewFileExtention, 0x7E18
+    
+    uint8_t file_number;
+    uint8_t return_value;
+    
     if((data[0]!=COMMAND_FILE_RENAME) || (data[13]!=0x7E) || (data[14]!=0x18))
     {
         return 15;
     }
     
+    //Save file number
+    file_number = data[1];
+    
     //Rename file
-    fat_rename_file(data[1], &data[2], &data[10]);
+    return_value = fat_rename_file(file_number, &data[2], &data[10]);
+    
+    //Return confirmation if desired
+    if(((*out_idx_ptr)>0) && ((*out_idx_ptr)<62))
+    {
+        out_buffer[(*out_idx_ptr)++] = COMMAND_FILE_RENAME;
+        out_buffer[(*out_idx_ptr)++] = file_number;
+        out_buffer[(*out_idx_ptr)++] = return_value;
+    }
+    
     return 15;
 }
 
-static uint8_t _parse_file_append(uint8_t *data)
+static uint8_t _parse_file_append(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr)
 {
     //0x54: Append to file. Parameters: uint8_t FileNumber, uint8_t NumberOfBytes, 0xFE4B, DATA
+    
+    uint8_t file_number;
+    uint8_t return_value;
+    uint16_t number_of_bytes;
+    
     if((data[0]!=COMMAND_FILE_APPEND) || (data[3]!=0xFE) || (data[4]!=0x4B))
     {
         //Can't trust the number of bytes in this case
         return 65;
     }
     
+    //Save file number
+    file_number = data[1];
+    
+    //Get number of bytes
+    number_of_bytes = (uint16_t) data[2];
+    
     //Append to file
-    fat_append_to_file(data[1], (uint16_t) data[2], &data[5]);
+    return_value = fat_append_to_file(file_number, number_of_bytes, &data[5]);
+    
+    //Return confirmation if desired
+    if(((*out_idx_ptr)>0) && ((*out_idx_ptr)<60))
+    {
+        out_buffer[(*out_idx_ptr)++] = COMMAND_FILE_APPEND;
+        out_buffer[(*out_idx_ptr)++] = file_number;
+        out_buffer[(*out_idx_ptr)++] = HIGH_BYTE(number_of_bytes);
+        out_buffer[(*out_idx_ptr)++] = LOW_BYTE(number_of_bytes);
+        out_buffer[(*out_idx_ptr)++] = return_value;
+    }
+    
     return data[2] + 5;
 }
 
-static uint8_t _parse_file_modify(uint8_t *data)
+static uint8_t _parse_file_modify(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr)
 {
     uint16_t number_of_bytes;
     uint32_t start_byte;
+    uint8_t file_number;
+    uint8_t return_value;
     
     //0x55: Modify file. Parameters: uint8_t FileNumber, uint32_t StartByte, uint8_t NumerOfBytes, 0x0F9B, DATA
     if((data[0]!=COMMAND_FILE_MODIFY) || (data[7]!=0x0F) || (data[8]!=0x9B))
@@ -666,6 +779,9 @@ static uint8_t _parse_file_modify(uint8_t *data)
         //Can't trust the number of bytes in this case
         return 65;
     }
+    
+    //Save file number
+    file_number = data[1];
     
     //Get number_of_bytes
     number_of_bytes = data[6];
@@ -679,64 +795,121 @@ static uint8_t _parse_file_modify(uint8_t *data)
     start_byte <<= 8;
     start_byte |= data[5];
     
-    fat_modify_file(data[1], start_byte, number_of_bytes, &data[9]);
+    return_value = fat_modify_file(file_number, start_byte, number_of_bytes, &data[9]);
+    
+    //Return confirmation if desired
+    if(((*out_idx_ptr)>0) && ((*out_idx_ptr)<56))
+    {
+        out_buffer[(*out_idx_ptr)++] = COMMAND_FILE_MODIFY;
+        out_buffer[(*out_idx_ptr)++] = file_number;
+        out_buffer[(*out_idx_ptr)++] = HIGH_BYTE(HIGH_WORD(start_byte));
+        out_buffer[(*out_idx_ptr)++] = LOW_BYTE(HIGH_WORD(start_byte));
+        out_buffer[(*out_idx_ptr)++] = HIGH_BYTE(LOW_WORD(start_byte));
+        out_buffer[(*out_idx_ptr)++] = LOW_BYTE(LOW_WORD(start_byte));
+        out_buffer[(*out_idx_ptr)++] = HIGH_BYTE(number_of_bytes);
+        out_buffer[(*out_idx_ptr)++] = LOW_BYTE(number_of_bytes);
+        out_buffer[(*out_idx_ptr)++] = return_value;
+    }
+    
     return number_of_bytes + 9;
 }
 
-static uint8_t _parse_format_drive(uint8_t *data)
+static uint8_t _parse_format_drive(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr)
 {
     //0x56: Format drive. Parameters: none, 0xDA22
+    
+    uint8_t return_value;
+    
     if((data[0]!=COMMAND_FORMAT_DRIVE) || (data[1]!=0xDA) || (data[2]!=0x22))
     {
         return 3;
     }
-    fat_format();
+    
+    return_value = fat_format();
+    
+    //Return confirmation if desired
+    if(((*out_idx_ptr)>0) && ((*out_idx_ptr)<63))
+    {
+        out_buffer[(*out_idx_ptr)++] = COMMAND_FORMAT_DRIVE;
+        out_buffer[(*out_idx_ptr)++] = return_value;
+    }
+    
     return 3;
 } 
 
-static uint8_t _parse_sector_to_buffer(uint8_t *data)
+static uint8_t _parse_sector_to_buffer(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr)
 {
     //0x57: Read file sector to buffer. Parameters: uint8_t file_number, uint16_t sector, 0x1B35
+    uint8_t file_number;
     uint16_t sector;
+    uint8_t return_value;
     
     if((data[0]!=COMMAND_SECTOR_TO_BUFFER) || (data[4]!=0x1B) || (data[5]!=0x35))
     {
         return 6;
     }
     
+    //Get file number
+    file_number = data[1];
+    
     //Calculate sector
-    sector |= data[2];
+    sector = data[2];
     sector <<= 8;
     sector |= data[3];
 
     //Read desired sector from flash into buffer 2
-    fat_copy_sector_to_buffer(data[1], sector);
+    return_value = fat_copy_sector_to_buffer(data[1], sector);
+    
+    //Return result if desired
+    if(((*out_idx_ptr)>0) && ((*out_idx_ptr)<60))
+    {
+        out_buffer[(*out_idx_ptr)++] = COMMAND_SECTOR_TO_BUFFER;
+        out_buffer[(*out_idx_ptr)++] = file_number;
+        out_buffer[(*out_idx_ptr)++] = HIGH_BYTE(sector);
+        out_buffer[(*out_idx_ptr)++] = LOW_BYTE(sector);
+        out_buffer[(*out_idx_ptr)++] = return_value;
+    }
     
     return 6;
 }
 
-static uint8_t _parse_buffer_to_sector(uint8_t *data)
+static uint8_t _parse_buffer_to_sector(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr)
 {
     //0x58: Write buffer to file sector. Parameters: uint8_t file_number, uint16_t sector, 0x6A6D
+    uint8_t file_number;
     uint16_t sector;
+    uint8_t return_value;
     
     if((data[0]!=COMMAND_BUFFER_TO_SECTOR) || (data[4]!=0x6A) || (data[5]!=0x6D))
     {
         return 6;
     }
     
+    //Get file number
+    file_number = data[1];
+    
     //Calculate sector
-    sector |= data[2];
+    sector = data[2];
     sector <<= 8;
     sector |= data[3];
 
     //Write content of buffer 2 to desired flash location
-    fat_write_sector_from_buffer(data[1], sector);
+    return_value = fat_write_sector_from_buffer(file_number, sector);
+    
+    //Return result if desired
+    if(((*out_idx_ptr)>0) && ((*out_idx_ptr)<60))
+    {
+        out_buffer[(*out_idx_ptr)++] = COMMAND_BUFFER_TO_SECTOR;
+        out_buffer[(*out_idx_ptr)++] = file_number;
+        out_buffer[(*out_idx_ptr)++] = HIGH_BYTE(sector);
+        out_buffer[(*out_idx_ptr)++] = LOW_BYTE(sector);
+        out_buffer[(*out_idx_ptr)++] = return_value;
+    }
     
     return 6;
 }
 
-static uint8_t _parse_write_buffer(uint8_t *data)
+static uint8_t _parse_write_buffer(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr)
 {
     uint16_t start_byte;
     uint16_t number_of_bytes;
@@ -759,8 +932,46 @@ static uint8_t _parse_write_buffer(uint8_t *data)
     //Modify content of buffer 2, i.e. write to buffer
     fat_write_to_buffer(start_byte, number_of_bytes, &data[6]);
     
+    //Return confirmation if desired
+    if(((*out_idx_ptr)>0) && ((*out_idx_ptr)<61))
+    {
+        out_buffer[(*out_idx_ptr)++] = COMMAND_WRITE_BUFFER;
+        out_buffer[(*out_idx_ptr)++] = HIGH_BYTE(start_byte);
+        out_buffer[(*out_idx_ptr)++] = LOW_BYTE(start_byte);
+        out_buffer[(*out_idx_ptr)++] = number_of_bytes;
+    }
+    
     //Return actual command length
     return 6 + number_of_bytes;
+}
+
+static uint8_t _parse_file_copy(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr)
+{
+    //0x5A: Copy file. PParameters: uint8_t FileNumber, char[8] NewFileName, char[3] NewFileExtention, 0x54D9
+    
+    uint8_t file_number;
+    uint8_t return_value;
+    
+    if((data[0]!=COMMAND_FILE_COPY) || (data[13]!=0x54) || (data[14]!=0xD9))
+    {
+        return 15;
+    }
+    
+    //Save file number
+    file_number = data[1];
+    
+    //Rename file
+    return_value = fat_copy_file(file_number, &data[2], &data[10]);
+    
+    //Return confirmation if desired
+    if(((*out_idx_ptr)>0) && ((*out_idx_ptr)<62))
+    {
+        out_buffer[(*out_idx_ptr)++] = COMMAND_FILE_COPY;
+        out_buffer[(*out_idx_ptr)++] = file_number;
+        out_buffer[(*out_idx_ptr)++] = return_value;
+    }
+    
+    return 15;
 }
 
 static uint8_t _parse_settings_spi_mode(uint8_t *data)
