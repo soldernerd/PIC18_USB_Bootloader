@@ -91,7 +91,7 @@ static void _display_clear(void)
     }
 }
 
-static uint8_t _display_itoa_u16(uint32_t value,  char *text)
+static uint8_t _display_itoa_u16(uint16_t value,  char *text)
 {
     itoa(text, value, 10);
     if(value>9999)
@@ -367,11 +367,11 @@ static void _display_start(void)
     cntr = 0;
     while(start_line2[cntr])
         display_content[1][cntr] = start_line2[cntr++];
-    cntr += _display_itoa_u32(FIRMWARE_VERSION_MAJOR, &display_content[1][cntr]);
+    cntr += _display_itoa_u16(FIRMWARE_VERSION_MAJOR, &display_content[1][cntr]);
     display_content[1][cntr++] = '.';
-    cntr += _display_itoa_u32(FIRMWARE_VERSION_MINOR, &display_content[1][cntr]);
+    cntr += _display_itoa_u16(FIRMWARE_VERSION_MINOR, &display_content[1][cntr]);
     display_content[1][cntr++] = '.';
-    cntr += _display_itoa_u32(FIRMWARE_VERSION_FIX, &display_content[1][cntr]);
+    cntr += _display_itoa_u16(FIRMWARE_VERSION_FIX, &display_content[1][cntr]);
     cntr = 0;
     while(start_line3[cntr])
         display_content[2][cntr] = start_line3[cntr++];

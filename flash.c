@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <xc.h>
 #include "string.h"
+#include "hardware_config.h"
 #include "os.h"
 #include "flash.h"
 #include "spi.h"

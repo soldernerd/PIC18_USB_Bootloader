@@ -17,7 +17,7 @@
  *  0x11: First 2 lines of display content
  *  0x12: Last 2 lines of display content
  *  0x13: Bootloader details
- *  0x14: External communication configuration
+ *  0x15: External communication configuration
  *  0x20: Echo (i.e. send back) all data received. Used to test connection.
  * 
  * Extended data requests. Only parameters may follow
@@ -49,13 +49,13 @@
  *  0x58: Write buffer to file sector. Parameters: uint8_t file_number, uint16_t sector, 0x6A6D
  *  0x59: Modify buffer. Parameters: uint16_t StartByte, uint8_t NumerOfBytes, 0xE230, DATA
  *  0x5A: Copy file. PParameters: uint8_t FileNumber, char[8] NewFileName, char[3] NewFileExtention, 0x54D9
- *  0x60: Change SPI mode. Parameters: uint8_t NewMode, 0x88E2
- *  0x61: Change SPI frequency. Parameters: uint8_t NewFrequency, 0xAEA8
- *  0x62: Change SPI polarity. Parameters: uint8_t NewPolarity, 0x0DBB
- *  0x63: Change I2C mode. Parameters: uint8_t NewMode, 0xB6B9
- *  0x64: Change I2C frequency. Parameters: uint8_t NewFrequency, 0x4E03
- *  0x65: Change I2C slave mode slave address. Parameters: uint8_t NewAddress, 0x88E2
- *  0x66: Change I2C master mode slave address. Parameters: uint8_t NewAddress, 0x540D
+ *  0x70: Change SPI mode. Parameters: uint8_t NewMode, 0x88E2
+ *  0x71: Change SPI frequency. Parameters: uint8_t NewFrequency, 0xAEA8
+ *  0x72: Change SPI polarity. Parameters: uint8_t NewPolarity, 0x0DBB
+ *  0x73: Change I2C mode. Parameters: uint8_t NewMode, 0xB6B9
+ *  0x74: Change I2C frequency. Parameters: uint8_t NewFrequency, 0x4E03
+ *  0x75: Change I2C slave mode slave address. Parameters: uint8_t NewAddress, 0x88E2
+ *  0x76: Change I2C master mode slave address. Parameters: uint8_t NewAddress, 0x540D
  *  
  ******************************************************************************/
 
@@ -70,7 +70,7 @@ typedef enum
     DATAREQUEST_GET_DISPLAY_1 = 0x11,
     DATAREQUEST_GET_DISPLAY_2 = 0x12,
     DATAREQUEST_GET_BOOTLOADER_DETAILS = 0x13,
-    DATAREQUEST_GET_CONFIGURATION = 0x14,
+    DATAREQUEST_GET_CONFIGURATION = 0x15,
     DATAREQUEST_GET_ECHO = 0x20,
     DATAREQUEST_GET_FILE_DETAILS = 0x80,
     DATAREQUEST_FIND_FILE = 0x81,
@@ -99,7 +99,14 @@ typedef enum
     COMMAND_SECTOR_TO_BUFFER = 0x57,
     COMMAND_BUFFER_TO_SECTOR = 0x58,
     COMMAND_WRITE_BUFFER = 0x59,
-    COMMAND_FILE_COPY = 0x5A
+    COMMAND_FILE_COPY = 0x5A,    
+    COMMAND_SET_SPI_MODE = 0x70,
+    COMMAND_SET_SPI_FREQUENCY = 0x71,
+    COMMAND_SET_SPI_POLARITY = 0x72,
+    COMMAND_SET_I2C_MODE = 0x73,
+    COMMAND_SET_I2C_FREQUENCY = 0x74,
+    COMMAND_SET_I2C_SLAVE_MODE_ADDRESS = 0x75,
+    COMMAND_SET_I2C_MASTER_MODE_ADDRESS = 0x76       
 } apiCommand_t;
 
 

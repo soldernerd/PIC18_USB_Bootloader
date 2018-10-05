@@ -15,6 +15,8 @@
 #include "usb_device_msd.h"
 #include "app_device_custom_hid.h"
 #include "app_device_msd.h"
+
+#include "hardware_config.h"
 #include "os.h"
 #include "i2c.h"
 #include "display.h"

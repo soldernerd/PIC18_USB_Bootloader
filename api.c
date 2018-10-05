@@ -42,13 +42,13 @@ static uint8_t _parse_buffer_to_sector(uint8_t *data, uint8_t *out_buffer, uint8
 static uint8_t _parse_write_buffer(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
 static uint8_t _parse_file_copy(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
 
-static uint8_t _parse_settings_spi_mode(uint8_t *data);
-static uint8_t _parse_settings_spi_frequency(uint8_t *data);
-static uint8_t _parse_settings_spi_polarity(uint8_t *data);
-static uint8_t _parse_settings_i2c_mode(uint8_t *data);
-static uint8_t _parse_settings_i2c_frequency(uint8_t *data);
-static uint8_t _parse_settings_i2c_slaveModeSlaveAddress(uint8_t *data);
-static uint8_t _parse_settings_i2c_masterModeSlaveAddress(uint8_t *data);
+static uint8_t _parse_settings_spi_mode(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
+static uint8_t _parse_settings_spi_frequency(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
+static uint8_t _parse_settings_spi_polarity(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
+static uint8_t _parse_settings_i2c_mode(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
+static uint8_t _parse_settings_i2c_frequency(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
+static uint8_t _parse_settings_i2c_slaveModeSlaveAddress(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
+static uint8_t _parse_settings_i2c_masterModeSlaveAddress(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr);
 
 /******************************************************************************
  * Public functions implementation
@@ -354,22 +354,22 @@ static void _fill_buffer_get_bootloader_details(uint8_t *outBuffer)
 static void _fill_buffer_get_configuration(uint8_t *outBuffer)
 {
     //Echo back to the host PC the command we are fulfilling in the first uint8_t
-    outBuffer[0] = DATAREQUEST_GET_STATUS;
+    outBuffer[0] = DATAREQUEST_GET_CONFIGURATION;
     
     //Bootloader signature
     outBuffer[1] = BOOTLOADER_SIGNATURE >> 8; //MSB
     outBuffer[2] = (uint8_t) BOOTLOADER_SIGNATURE; //LSB
    
     //SPI settings
-    outBuffer[3] = communicationSettings.spiMode;
-    outBuffer[4] = communicationSettings.spiFrequency;
-    outBuffer[5] = communicationSettings.spiPolarity;
+    outBuffer[3] = os.communicationSettings.spiMode;
+    outBuffer[4] = os.communicationSettings.spiFrequency;
+    outBuffer[5] = os.communicationSettings.spiPolarity;
     
     //I2C settings
-    outBuffer[6] = communicationSettings.i2cMode;
-    outBuffer[7] = communicationSettings.i2cFrequency;
-    outBuffer[8] = communicationSettings.i2cSlaveModeSlaveAddress;
-    outBuffer[9] = communicationSettings.i2cMasterModeSlaveAddress;
+    outBuffer[6] = os.communicationSettings.i2cMode;
+    outBuffer[7] = os.communicationSettings.i2cFrequency;
+    outBuffer[8] = os.communicationSettings.i2cSlaveModeSlaveAddress;
+    outBuffer[9] = os.communicationSettings.i2cMasterModeSlaveAddress;
 }
 
 static void _fill_buffer_get_file_details(uint8_t *inBuffer, uint8_t *outBuffer)
@@ -592,6 +592,34 @@ static uint8_t _parse_command_long(uint8_t *data, uint8_t *out_buffer, uint8_t *
         case COMMAND_FILE_COPY:
             length = _parse_file_copy(data, out_buffer, out_idx_ptr);
             break;
+
+        case COMMAND_SET_SPI_MODE:
+            length = _parse_settings_spi_mode(data, out_buffer, out_idx_ptr);
+            break;
+            
+        case COMMAND_SET_SPI_FREQUENCY:
+            length = _parse_settings_spi_frequency(data, out_buffer, out_idx_ptr);
+            break;
+          
+        case COMMAND_SET_SPI_POLARITY:
+            length = _parse_settings_spi_polarity(data, out_buffer, out_idx_ptr);
+            break;
+          
+        case COMMAND_SET_I2C_MODE:
+            length = _parse_settings_i2c_mode(data, out_buffer, out_idx_ptr);
+            break;
+          
+        case COMMAND_SET_I2C_FREQUENCY:
+            length = _parse_settings_i2c_frequency(data, out_buffer, out_idx_ptr);
+            break;
+          
+        case COMMAND_SET_I2C_SLAVE_MODE_ADDRESS:
+            length = _parse_settings_i2c_slaveModeSlaveAddress(data, out_buffer, out_idx_ptr);
+            break;
+          
+        case COMMAND_SET_I2C_MASTER_MODE_ADDRESS:
+            length = _parse_settings_i2c_masterModeSlaveAddress(data, out_buffer, out_idx_ptr);
+            break; 
     }    
     
     return length;
@@ -922,7 +950,7 @@ static uint8_t _parse_write_buffer(uint8_t *data, uint8_t *out_buffer, uint8_t *
     }
     
     //Calculate sector
-    start_byte |= data[1];
+    start_byte = data[1];
     start_byte <<= 8;
     start_byte |= data[2];
     
@@ -974,45 +1002,158 @@ static uint8_t _parse_file_copy(uint8_t *data, uint8_t *out_buffer, uint8_t *out
     return 15;
 }
 
-static uint8_t _parse_settings_spi_mode(uint8_t *data)
+static uint8_t _parse_settings_spi_mode(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr)
 {
-    //0x60: Change SPI mode. Parameters: uint8_t NewMode, 0x88E2
+    //0x70: Change SPI mode. Parameters: uint8_t NewMode, 0x88E2
+    
+    if((data[0]!=COMMAND_SET_SPI_MODE) || (data[2]!=0x88) || (data[3]!=0xE2))
+    {
+        return 4;
+    }
+    
+    //Save new setting
+    os.communicationSettings.spiMode = (externalMode_t) data[1];
+    
+    //Return confirmation if desired
+    if(((*out_idx_ptr)>0) && ((*out_idx_ptr)<63))
+    {
+        out_buffer[(*out_idx_ptr)++] = COMMAND_SET_SPI_MODE;
+        out_buffer[(*out_idx_ptr)++] = data[1];
+    }
+    
     return 4;
 }
 
-static uint8_t _parse_settings_spi_frequency(uint8_t *data)
+static uint8_t _parse_settings_spi_frequency(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr)
 {
-    //0x61: Change SPI frequency. Parameters: uint8_t NewFrequency, 0xAEA8
+    //0x71: Change SPI frequency. Parameters: uint8_t NewFrequency, 0xAEA8
+    
+    
+    if((data[0]!=COMMAND_SET_SPI_FREQUENCY) || (data[2]!=0xAE) || (data[3]!=0xA8))
+    {
+        return 4;
+    }
+    
+    //Save new setting
+    os.communicationSettings.spiFrequency = (spiFrequency_t) data[1];
+    
+    //Return confirmation if desired
+    if(((*out_idx_ptr)>0) && ((*out_idx_ptr)<63))
+    {
+        out_buffer[(*out_idx_ptr)++] = COMMAND_SET_SPI_FREQUENCY;
+        out_buffer[(*out_idx_ptr)++] = data[1];
+    }
+    
     return 4;
 }
 
-static uint8_t _parse_settings_spi_polarity(uint8_t *data)
+static uint8_t _parse_settings_spi_polarity(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr)
 {
-    //0x62: Change SPI polarity. Parameters: uint8_t NewPolarity, 0x0DBB
+    //0x72: Change SPI polarity. Parameters: uint8_t NewPolarity, 0x0DBB
+    
+    if((data[0]!=COMMAND_SET_SPI_POLARITY) || (data[2]!=0x0D) || (data[3]!=0xBB))
+    {
+        return 4;
+    }
+    
+    //Save new setting
+    os.communicationSettings.spiFrequency = (spiFrequency_t) data[1];
+    
+    //Return confirmation if desired
+    if(((*out_idx_ptr)>0) && ((*out_idx_ptr)<63))
+    {
+        out_buffer[(*out_idx_ptr)++] = COMMAND_SET_SPI_POLARITY;
+        out_buffer[(*out_idx_ptr)++] = data[1];
+    }
+    
+    return 4;
+}
+            
+static uint8_t _parse_settings_i2c_mode(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr)
+{
+    //0x73: Change I2C mode. Parameters: uint8_t NewMode, 0xB6B9
+    
+    if((data[0]!=COMMAND_SET_I2C_MODE) || (data[2]!=0xB6) || (data[3]!=0xB9))
+    {
+        return 4;
+    }
+    
+    //Save new setting
+    os.communicationSettings.i2cMode = (externalMode_t) data[1];
+    
+    //Return confirmation if desired
+    if(((*out_idx_ptr)>0) && ((*out_idx_ptr)<63))
+    {
+        out_buffer[(*out_idx_ptr)++] = COMMAND_SET_I2C_MODE;
+        out_buffer[(*out_idx_ptr)++] = data[1];
+    }
+    
+    return 4;
+}
+    
+static uint8_t _parse_settings_i2c_frequency(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr)
+{
+    //0x74: Change I2C frequency. Parameters: uint8_t NewFrequency, 0x4E03
+    
+    if((data[0]!=COMMAND_SET_I2C_FREQUENCY) || (data[2]!=0x4E) || (data[3]!=0x03))
+    {
+        return 4;
+    }
+    
+    //Save new setting
+    os.communicationSettings.i2cFrequency = (i2cFrequency_t) data[1];
+    
+    //Return confirmation if desired
+    if(((*out_idx_ptr)>0) && ((*out_idx_ptr)<63))
+    {
+        out_buffer[(*out_idx_ptr)++] = COMMAND_SET_I2C_FREQUENCY;
+        out_buffer[(*out_idx_ptr)++] = data[1];
+    }
+    
     return 4;
 }
 
-static uint8_t _parse_settings_i2c_mode(uint8_t *data)
+static uint8_t _parse_settings_i2c_slaveModeSlaveAddress(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr)
 {
-    //0x63: Change I2C mode. Parameters: uint8_t NewMode, 0xB6B9
+    //0x75: Change I2C slave mode slave address. Parameters: uint8_t NewAddress, 0x88E2
+    
+    if((data[0]!=COMMAND_SET_I2C_SLAVE_MODE_ADDRESS) || (data[2]!=0x88) || (data[3]!=0xE2))
+    {
+        return 4;
+    }
+    
+    //Save new setting
+    os.communicationSettings.i2cSlaveModeSlaveAddress = data[1];
+    
+    //Return confirmation if desired
+    if(((*out_idx_ptr)>0) && ((*out_idx_ptr)<63))
+    {
+        out_buffer[(*out_idx_ptr)++] = COMMAND_SET_I2C_SLAVE_MODE_ADDRESS;
+        out_buffer[(*out_idx_ptr)++] = data[1];
+    }
+    
     return 4;
 }
 
-static uint8_t _parse_settings_i2c_frequency(uint8_t *data)
+static uint8_t _parse_settings_i2c_masterModeSlaveAddress(uint8_t *data, uint8_t *out_buffer, uint8_t *out_idx_ptr)
 {
-    //0x64: Change I2C frequency. Parameters: uint8_t NewFrequency, 0x4E03
-    return 4;
-}
-
-static uint8_t _parse_settings_i2c_slaveModeSlaveAddress(uint8_t *data)
-{
-    //0x65: Change I2C slave mode slave address. Parameters: uint8_t NewAddress, 0x88E2
-    return 4;
-}
-
-static uint8_t _parse_settings_i2c_masterModeSlaveAddress(uint8_t *data)
-{
-    //0x66: Change I2C master mode slave address. Parameters: uint8_t NewAddress, 0x540D
+    //0x76: Change I2C master mode slave address. Parameters: uint8_t NewAddress, 0x540D
+    
+    if((data[0]!=COMMAND_SET_I2C_MASTER_MODE_ADDRESS) || (data[2]!=0x54) || (data[3]!=0x0D))
+    {
+        return 4;
+    }
+    
+    //Save new setting
+    os.communicationSettings.i2cMasterModeSlaveAddress = data[1];
+    
+    //Return confirmation if desired
+    if(((*out_idx_ptr)>0) && ((*out_idx_ptr)<63))
+    {
+        out_buffer[(*out_idx_ptr)++] = COMMAND_SET_I2C_MASTER_MODE_ADDRESS;
+        out_buffer[(*out_idx_ptr)++] = data[1];
+    }
+    
     return 4;
 }
 

@@ -61,9 +61,12 @@
                    projectFiles="false">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <itemPath>application_config.h</itemPath>
+    <itemPath>hardware_config.h</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>.</Elem>
+    <Elem>../SolarCharger_RevE</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>

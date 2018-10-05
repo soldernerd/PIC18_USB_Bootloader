@@ -1,6 +1,7 @@
 #include <xc.h>
 #include <stdint.h>
 
+#include "hardware_config.h"
 #include "os.h"
 #include "i2c.h"
 #include "ui.h"
