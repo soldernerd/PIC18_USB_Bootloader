@@ -177,48 +177,28 @@ static void _display_itoa_u8(uint8_t value,  char *text)
 
 static uint8_t _display_itoa_u32(uint32_t value,  char *text)
 {
-    //Value can be handled by 16 bits
-    if(value<=0x7FFF) //32767
+    uint8_t number_of_digits;
+    int8_t cntr;
+    
+    //Find number of digits
+    if(value<10) {number_of_digits = 1;}
+    else if(value<100) {number_of_digits = 2;}
+    else if(value<1000) {number_of_digits = 3;}
+    else if(value<10000) {number_of_digits = 4;}
+    else if(value<100000) {number_of_digits = 5;}
+    else if(value<1000000) {number_of_digits = 6;}
+    else if(value<10000000) {number_of_digits = 7;}
+    else if(value<100000000) {number_of_digits = 8;}
+    else if(value<1000000000) {number_of_digits = 9;}
+    else {number_of_digits = 10;}
+    
+    for(cntr=number_of_digits-1; cntr>=0; --cntr)
     {
-        return _display_itoa_u16((uint16_t) value,  text);
+        text[cntr] = (value%10) + 0x30;
+        value /= 10;
     }
-        
-    //We really need 32 bits
-    if(value>100000000)
-    {
-        itoa(text, (uint16_t)(value/10000), 10);
-        itoa(text+5, (uint16_t)(value%10000), 10);
-        *(text+9) = ' ';
-        return 9;
-    }
-    else if(value>10000000)
-    {
-        itoa(text, (uint16_t)(value/10000), 10);
-        itoa(text+4, (uint16_t)(value%10000), 10);
-        *(text+8) = ' ';
-        return 8;
-    }
-    else if(value>1000000)
-    {
-        itoa(text, (uint16_t)(value/10000), 10);
-        itoa(text+3, (uint16_t)(value%10000), 10);
-        *(text+7) = ' ';
-        return 7;
-    }
-    else if(value>100000)
-    {
-        itoa(text, (uint16_t)(value/10000), 10);
-        itoa(text+2, (uint16_t)(value%10000), 10);
-        *(text+6) = ' ';
-        return 6;
-    }
-    else
-    {
-        itoa(text, (uint16_t)(value/10000), 10);
-        itoa(text+1, (uint16_t)(value%10000), 10);
-        *(text+5) = ' ';
-        return 5;
-    }
+ 
+    return number_of_digits;
 }
 
 static void _display_itoa(int16_t value, uint8_t decimals, char *text)

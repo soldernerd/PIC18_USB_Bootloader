@@ -1,7 +1,7 @@
 
 Memory Summary:
-    Program space        used  A662h ( 42594) of  C000h bytes   ( 86.7%)
-    Data space           used   BC5h (  3013) of   EB0h bytes   ( 80.1%)
+    Program space        used  A4C0h ( 42176) of  C000h bytes   ( 85.8%)
+    Data space           used   BC1h (  3009) of   EB0h bytes   ( 80.0%)
     Configuration bits   used     4h (     4) of     4h words   (100.0%)
     Data stack space     used     0h (     0) of   123h bytes   (  0.0%)
 

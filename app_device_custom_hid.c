@@ -24,7 +24,6 @@ please contact mla_licensing@microchip.com
 #include "system.h"
 #include "api.h"
 
-
 /** VARIABLES ******************************************************/
 unsigned char ReceivedDataBuffer[64];
 unsigned char ToSendDataBuffer[64];
@@ -102,7 +101,7 @@ void APP_DeviceCustomHIDTasks()
         if(!HIDTxHandleBusy(USBInHandle))
         {
             //Prepare the data
-            api_prepare((uint8_t) ReceivedDataBuffer, (uint8_t) ToSendDataBuffer);
+            api_prepare((uint8_t*) ReceivedDataBuffer, (uint8_t*) ToSendDataBuffer);
             //Prepare the USB module to send the data packet to the host
             USBInHandle = HIDTxPacket(CUSTOM_DEVICE_HID_EP, (uint8_t*)&ToSendDataBuffer[0], 64);
         }
